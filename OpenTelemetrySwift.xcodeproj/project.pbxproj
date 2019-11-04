@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6653AF95236044A4001B0948 /* AttributeValueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF94236044A4001B0948 /* AttributeValueTest.swift */; };
+		6653AF95236044A4001B0948 /* AttributeValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF94236044A4001B0948 /* AttributeValueTests.swift */; };
 		6653AF9723604953001B0948 /* SpanBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF9623604953001B0948 /* SpanBuilderTests.swift */; };
 		6653AF9823604953001B0948 /* SpanBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF9623604953001B0948 /* SpanBuilderTests.swift */; };
 		6653AF9923604953001B0948 /* SpanBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF9623604953001B0948 /* SpanBuilderTests.swift */; };
 		6653AF9A23604953001B0948 /* SpanBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF9623604953001B0948 /* SpanBuilderTests.swift */; };
-		6653AF9B23604956001B0948 /* AttributeValueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF94236044A4001B0948 /* AttributeValueTest.swift */; };
-		6653AF9C23604957001B0948 /* AttributeValueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF94236044A4001B0948 /* AttributeValueTest.swift */; };
-		6653AF9D23604958001B0948 /* AttributeValueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF94236044A4001B0948 /* AttributeValueTest.swift */; };
+		6653AF9B23604956001B0948 /* AttributeValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF94236044A4001B0948 /* AttributeValueTests.swift */; };
+		6653AF9C23604957001B0948 /* AttributeValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF94236044A4001B0948 /* AttributeValueTests.swift */; };
+		6653AF9D23604958001B0948 /* AttributeValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653AF94236044A4001B0948 /* AttributeValueTests.swift */; };
 		6653CF3C23700F4200D9EE42 /* HttpTraceContextFormatTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653CF3B23700F4200D9EE42 /* HttpTraceContextFormatTest.swift */; };
 		666B2891235F5DF100BEBCD1 /* OpenTelemetrySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666B2888235F5DF100BEBCD1 /* OpenTelemetrySwift.framework */; };
 		666B28AD235F5E0100BEBCD1 /* OpenTelemetrySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666B28A4235F5E0100BEBCD1 /* OpenTelemetrySwift.framework */; };
@@ -37,8 +37,8 @@
 		666B2901235F5E4B00BEBCD1 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D6235F5B6F0019D8B5 /* Link.swift */; };
 		666B2902235F5E4B00BEBCD1 /* Decision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D7235F5B6F0019D8B5 /* Decision.swift */; };
 		666B2903235F5E4B00BEBCD1 /* NoopScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D9235F5B6F0019D8B5 /* NoopScope.swift */; };
-		666B2904235F5E4B00BEBCD1 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DB235F5B6F0019D8B5 /* Links.swift */; };
-		666B2905235F5E4B00BEBCD1 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DC235F5B6F0019D8B5 /* Events.swift */; };
+		666B2904235F5E4B00BEBCD1 /* SimpleLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DB235F5B6F0019D8B5 /* SimpleLink.swift */; };
+		666B2905235F5E4B00BEBCD1 /* SimpleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DC235F5B6F0019D8B5 /* SimpleEvent.swift */; };
 		666B2906235F5E4B00BEBCD1 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DD235F5B6F0019D8B5 /* Timestamp.swift */; };
 		666B2907235F5E4B00BEBCD1 /* AlwaysSampleSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8E0235F5B6F0019D8B5 /* AlwaysSampleSampler.swift */; };
 		666B2908235F5E4B00BEBCD1 /* NeverSampleSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8E1235F5B6F0019D8B5 /* NeverSampleSampler.swift */; };
@@ -73,8 +73,8 @@
 		666B2926235F5E4B00BEBCD1 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D6235F5B6F0019D8B5 /* Link.swift */; };
 		666B2927235F5E4B00BEBCD1 /* Decision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D7235F5B6F0019D8B5 /* Decision.swift */; };
 		666B2928235F5E4B00BEBCD1 /* NoopScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D9235F5B6F0019D8B5 /* NoopScope.swift */; };
-		666B2929235F5E4B00BEBCD1 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DB235F5B6F0019D8B5 /* Links.swift */; };
-		666B292A235F5E4B00BEBCD1 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DC235F5B6F0019D8B5 /* Events.swift */; };
+		666B2929235F5E4B00BEBCD1 /* SimpleLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DB235F5B6F0019D8B5 /* SimpleLink.swift */; };
+		666B292A235F5E4B00BEBCD1 /* SimpleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DC235F5B6F0019D8B5 /* SimpleEvent.swift */; };
 		666B292B235F5E4B00BEBCD1 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DD235F5B6F0019D8B5 /* Timestamp.swift */; };
 		666B292C235F5E4B00BEBCD1 /* AlwaysSampleSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8E0235F5B6F0019D8B5 /* AlwaysSampleSampler.swift */; };
 		666B292D235F5E4B00BEBCD1 /* NeverSampleSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8E1235F5B6F0019D8B5 /* NeverSampleSampler.swift */; };
@@ -110,8 +110,8 @@
 		666B294B235F5E4C00BEBCD1 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D6235F5B6F0019D8B5 /* Link.swift */; };
 		666B294C235F5E4C00BEBCD1 /* Decision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D7235F5B6F0019D8B5 /* Decision.swift */; };
 		666B294D235F5E4C00BEBCD1 /* NoopScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D9235F5B6F0019D8B5 /* NoopScope.swift */; };
-		666B294E235F5E4C00BEBCD1 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DB235F5B6F0019D8B5 /* Links.swift */; };
-		666B294F235F5E4C00BEBCD1 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DC235F5B6F0019D8B5 /* Events.swift */; };
+		666B294E235F5E4C00BEBCD1 /* SimpleLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DB235F5B6F0019D8B5 /* SimpleLink.swift */; };
+		666B294F235F5E4C00BEBCD1 /* SimpleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DC235F5B6F0019D8B5 /* SimpleEvent.swift */; };
 		666B2950235F5E4C00BEBCD1 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DD235F5B6F0019D8B5 /* Timestamp.swift */; };
 		666B2951235F5E4C00BEBCD1 /* AlwaysSampleSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8E0235F5B6F0019D8B5 /* AlwaysSampleSampler.swift */; };
 		666B2952235F5E4C00BEBCD1 /* NeverSampleSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8E1235F5B6F0019D8B5 /* NeverSampleSampler.swift */; };
@@ -147,8 +147,8 @@
 		666B2970235F5E4D00BEBCD1 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D6235F5B6F0019D8B5 /* Link.swift */; };
 		666B2971235F5E4D00BEBCD1 /* Decision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D7235F5B6F0019D8B5 /* Decision.swift */; };
 		666B2972235F5E4D00BEBCD1 /* NoopScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8D9235F5B6F0019D8B5 /* NoopScope.swift */; };
-		666B2973235F5E4D00BEBCD1 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DB235F5B6F0019D8B5 /* Links.swift */; };
-		666B2974235F5E4D00BEBCD1 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DC235F5B6F0019D8B5 /* Events.swift */; };
+		666B2973235F5E4D00BEBCD1 /* SimpleLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DB235F5B6F0019D8B5 /* SimpleLink.swift */; };
+		666B2974235F5E4D00BEBCD1 /* SimpleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DC235F5B6F0019D8B5 /* SimpleEvent.swift */; };
 		666B2975235F5E4D00BEBCD1 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8DD235F5B6F0019D8B5 /* Timestamp.swift */; };
 		666B2976235F5E4D00BEBCD1 /* AlwaysSampleSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8E0235F5B6F0019D8B5 /* AlwaysSampleSampler.swift */; };
 		666B2977235F5E4D00BEBCD1 /* NeverSampleSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8E1235F5B6F0019D8B5 /* NeverSampleSampler.swift */; };
@@ -168,7 +168,7 @@
 		666B2985235F5E4D00BEBCD1 /* Sampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8F0235F5B6F0019D8B5 /* Sampler.swift */; };
 		666B2986235F5E4D00BEBCD1 /* Tracestate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D8F1235F5B6F0019D8B5 /* Tracestate.swift */; };
 		666B2987235F5E6600BEBCD1 /* SpanContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D990235F5B880019D8B5 /* SpanContextTests.swift */; };
-		666B2988235F5E6600BEBCD1 /* DefaultSpanTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D991235F5B880019D8B5 /* DefaultSpanTest.swift */; };
+		666B2988235F5E6600BEBCD1 /* DefaultSpanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D991235F5B880019D8B5 /* DefaultSpanTests.swift */; };
 		666B2989235F5E6600BEBCD1 /* TraceIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D992235F5B880019D8B5 /* TraceIdTests.swift */; };
 		666B298A235F5E6600BEBCD1 /* DefaultTracerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D993235F5B880019D8B5 /* DefaultTracerTests.swift */; };
 		666B298B235F5E6600BEBCD1 /* TracestateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D994235F5B880019D8B5 /* TracestateTests.swift */; };
@@ -176,7 +176,7 @@
 		666B298D235F5E6600BEBCD1 /* TraceFlagsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D996235F5B880019D8B5 /* TraceFlagsTests.swift */; };
 		666B298E235F5E6600BEBCD1 /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D997235F5B880019D8B5 /* StatusTests.swift */; };
 		666B298F235F5E6700BEBCD1 /* SpanContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D990235F5B880019D8B5 /* SpanContextTests.swift */; };
-		666B2990235F5E6700BEBCD1 /* DefaultSpanTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D991235F5B880019D8B5 /* DefaultSpanTest.swift */; };
+		666B2990235F5E6700BEBCD1 /* DefaultSpanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D991235F5B880019D8B5 /* DefaultSpanTests.swift */; };
 		666B2991235F5E6700BEBCD1 /* TraceIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D992235F5B880019D8B5 /* TraceIdTests.swift */; };
 		666B2992235F5E6700BEBCD1 /* DefaultTracerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D993235F5B880019D8B5 /* DefaultTracerTests.swift */; };
 		666B2993235F5E6700BEBCD1 /* TracestateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D994235F5B880019D8B5 /* TracestateTests.swift */; };
@@ -184,7 +184,7 @@
 		666B2995235F5E6700BEBCD1 /* TraceFlagsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D996235F5B880019D8B5 /* TraceFlagsTests.swift */; };
 		666B2996235F5E6700BEBCD1 /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D997235F5B880019D8B5 /* StatusTests.swift */; };
 		666B2997235F5E6800BEBCD1 /* SpanContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D990235F5B880019D8B5 /* SpanContextTests.swift */; };
-		666B2998235F5E6800BEBCD1 /* DefaultSpanTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D991235F5B880019D8B5 /* DefaultSpanTest.swift */; };
+		666B2998235F5E6800BEBCD1 /* DefaultSpanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D991235F5B880019D8B5 /* DefaultSpanTests.swift */; };
 		666B2999235F5E6800BEBCD1 /* TraceIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D992235F5B880019D8B5 /* TraceIdTests.swift */; };
 		666B299A235F5E6800BEBCD1 /* DefaultTracerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D993235F5B880019D8B5 /* DefaultTracerTests.swift */; };
 		666B299B235F5E6800BEBCD1 /* TracestateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D994235F5B880019D8B5 /* TracestateTests.swift */; };
@@ -192,7 +192,7 @@
 		666B299D235F5E6800BEBCD1 /* TraceFlagsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D996235F5B880019D8B5 /* TraceFlagsTests.swift */; };
 		666B299E235F5E6800BEBCD1 /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D997235F5B880019D8B5 /* StatusTests.swift */; };
 		666B299F235F5E6900BEBCD1 /* SpanContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D990235F5B880019D8B5 /* SpanContextTests.swift */; };
-		666B29A0235F5E6900BEBCD1 /* DefaultSpanTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D991235F5B880019D8B5 /* DefaultSpanTest.swift */; };
+		666B29A0235F5E6900BEBCD1 /* DefaultSpanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D991235F5B880019D8B5 /* DefaultSpanTests.swift */; };
 		666B29A1235F5E6900BEBCD1 /* TraceIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D992235F5B880019D8B5 /* TraceIdTests.swift */; };
 		666B29A2235F5E6900BEBCD1 /* DefaultTracerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D993235F5B880019D8B5 /* DefaultTracerTests.swift */; };
 		666B29A3235F5E6900BEBCD1 /* TracestateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D994235F5B880019D8B5 /* TracestateTests.swift */; };
@@ -203,6 +203,8 @@
 		66CE5AED23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
 		66CE5AEE23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
 		66CE5AEF23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
+		66E61D5423706A4B00C03C72 /* LinksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5323706A4B00C03C72 /* LinksTests.swift */; };
+		66E61D5623706A5F00C03C72 /* EventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5523706A5F00C03C72 /* EventsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,7 +239,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6653AF94236044A4001B0948 /* AttributeValueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeValueTest.swift; sourceTree = "<group>"; };
+		6653AF94236044A4001B0948 /* AttributeValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeValueTests.swift; sourceTree = "<group>"; };
 		6653AF9623604953001B0948 /* SpanBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanBuilderTests.swift; sourceTree = "<group>"; };
 		6653CF3B23700F4200D9EE42 /* HttpTraceContextFormatTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpTraceContextFormatTest.swift; sourceTree = "<group>"; };
 		666B2888235F5DF100BEBCD1 /* OpenTelemetrySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenTelemetrySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,8 +269,8 @@
 		66D4D8D6235F5B6F0019D8B5 /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		66D4D8D7235F5B6F0019D8B5 /* Decision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decision.swift; sourceTree = "<group>"; };
 		66D4D8D9235F5B6F0019D8B5 /* NoopScope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoopScope.swift; sourceTree = "<group>"; };
-		66D4D8DB235F5B6F0019D8B5 /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
-		66D4D8DC235F5B6F0019D8B5 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		66D4D8DB235F5B6F0019D8B5 /* SimpleLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleLink.swift; sourceTree = "<group>"; };
+		66D4D8DC235F5B6F0019D8B5 /* SimpleEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleEvent.swift; sourceTree = "<group>"; };
 		66D4D8DD235F5B6F0019D8B5 /* Timestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
 		66D4D8E0235F5B6F0019D8B5 /* AlwaysSampleSampler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlwaysSampleSampler.swift; sourceTree = "<group>"; };
 		66D4D8E1235F5B6F0019D8B5 /* NeverSampleSampler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeverSampleSampler.swift; sourceTree = "<group>"; };
@@ -288,13 +290,15 @@
 		66D4D8F0235F5B6F0019D8B5 /* Sampler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sampler.swift; sourceTree = "<group>"; };
 		66D4D8F1235F5B6F0019D8B5 /* Tracestate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracestate.swift; sourceTree = "<group>"; };
 		66D4D990235F5B880019D8B5 /* SpanContextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpanContextTests.swift; sourceTree = "<group>"; };
-		66D4D991235F5B880019D8B5 /* DefaultSpanTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSpanTest.swift; sourceTree = "<group>"; };
+		66D4D991235F5B880019D8B5 /* DefaultSpanTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSpanTests.swift; sourceTree = "<group>"; };
 		66D4D992235F5B880019D8B5 /* TraceIdTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceIdTests.swift; sourceTree = "<group>"; };
 		66D4D993235F5B880019D8B5 /* DefaultTracerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTracerTests.swift; sourceTree = "<group>"; };
 		66D4D994235F5B880019D8B5 /* TracestateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracestateTests.swift; sourceTree = "<group>"; };
 		66D4D995235F5B880019D8B5 /* SpanIdTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpanIdTests.swift; sourceTree = "<group>"; };
 		66D4D996235F5B880019D8B5 /* TraceFlagsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceFlagsTests.swift; sourceTree = "<group>"; };
 		66D4D997235F5B880019D8B5 /* StatusTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
+		66E61D5323706A4B00C03C72 /* LinksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksTests.swift; sourceTree = "<group>"; };
+		66E61D5523706A5F00C03C72 /* EventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,8 +496,8 @@
 		66D4D8DA235F5B6F0019D8B5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				66D4D8DB235F5B6F0019D8B5 /* Links.swift */,
-				66D4D8DC235F5B6F0019D8B5 /* Events.swift */,
+				66D4D8DB235F5B6F0019D8B5 /* SimpleLink.swift */,
+				66D4D8DC235F5B6F0019D8B5 /* SimpleEvent.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -562,8 +566,9 @@
 		66D4D98F235F5B880019D8B5 /* Trace */ = {
 			isa = PBXGroup;
 			children = (
-				6653AF94236044A4001B0948 /* AttributeValueTest.swift */,
-				66D4D991235F5B880019D8B5 /* DefaultSpanTest.swift */,
+				66E61D5223706A3600C03C72 /* Utils */,
+				6653AF94236044A4001B0948 /* AttributeValueTests.swift */,
+				66D4D991235F5B880019D8B5 /* DefaultSpanTests.swift */,
 				66D4D993235F5B880019D8B5 /* DefaultTracerTests.swift */,
 				6653AF9623604953001B0948 /* SpanBuilderTests.swift */,
 				66D4D990235F5B880019D8B5 /* SpanContextTests.swift */,
@@ -583,6 +588,15 @@
 				6653CF3B23700F4200D9EE42 /* HttpTraceContextFormatTest.swift */,
 			);
 			path = Propagation;
+			sourceTree = "<group>";
+		};
+		66E61D5223706A3600C03C72 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				66E61D5323706A4B00C03C72 /* LinksTests.swift */,
+				66E61D5523706A5F00C03C72 /* EventsTests.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -889,7 +903,7 @@
 			files = (
 				666B2911235F5E4B00BEBCD1 /* EndSpanOptions.swift in Sources */,
 				666B2907235F5E4B00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
-				666B2905235F5E4B00BEBCD1 /* Events.swift in Sources */,
+				666B2905235F5E4B00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B2914235F5E4B00BEBCD1 /* Status.swift in Sources */,
 				666B28F7235F5E4B00BEBCD1 /* TextFormattable.swift in Sources */,
 				666B28FB235F5E4B00BEBCD1 /* Event.swift in Sources */,
@@ -914,7 +928,7 @@
 				666B2910235F5E4B00BEBCD1 /* ProxyTracer.swift in Sources */,
 				666B28FF235F5E4B00BEBCD1 /* SpanId.swift in Sources */,
 				666B2917235F5E4B00BEBCD1 /* Tracestate.swift in Sources */,
-				666B2904235F5E4B00BEBCD1 /* Links.swift in Sources */,
+				666B2904235F5E4B00BEBCD1 /* SimpleLink.swift in Sources */,
 				666B28FA235F5E4B00BEBCD1 /* TracerFactoryBase.swift in Sources */,
 				666B2909235F5E4B00BEBCD1 /* Samplers.swift in Sources */,
 				666B2915235F5E4B00BEBCD1 /* TraceFlags.swift in Sources */,
@@ -930,13 +944,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6653AF95236044A4001B0948 /* AttributeValueTest.swift in Sources */,
+				6653AF95236044A4001B0948 /* AttributeValueTests.swift in Sources */,
 				6653AF9723604953001B0948 /* SpanBuilderTests.swift in Sources */,
 				666B2989235F5E6600BEBCD1 /* TraceIdTests.swift in Sources */,
 				66CE5AEC23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */,
 				6653CF3C23700F4200D9EE42 /* HttpTraceContextFormatTest.swift in Sources */,
+				66E61D5423706A4B00C03C72 /* LinksTests.swift in Sources */,
 				666B298C235F5E6600BEBCD1 /* SpanIdTests.swift in Sources */,
-				666B2988235F5E6600BEBCD1 /* DefaultSpanTest.swift in Sources */,
+				666B2988235F5E6600BEBCD1 /* DefaultSpanTests.swift in Sources */,
+				66E61D5623706A5F00C03C72 /* EventsTests.swift in Sources */,
 				666B2987235F5E6600BEBCD1 /* SpanContextTests.swift in Sources */,
 				666B298A235F5E6600BEBCD1 /* DefaultTracerTests.swift in Sources */,
 				666B298B235F5E6600BEBCD1 /* TracestateTests.swift in Sources */,
@@ -951,7 +967,7 @@
 			files = (
 				666B2936235F5E4B00BEBCD1 /* EndSpanOptions.swift in Sources */,
 				666B292C235F5E4B00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
-				666B292A235F5E4B00BEBCD1 /* Events.swift in Sources */,
+				666B292A235F5E4B00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B2939235F5E4B00BEBCD1 /* Status.swift in Sources */,
 				666B291C235F5E4B00BEBCD1 /* TextFormattable.swift in Sources */,
 				666B2920235F5E4B00BEBCD1 /* Event.swift in Sources */,
@@ -976,7 +992,7 @@
 				666B2935235F5E4B00BEBCD1 /* ProxyTracer.swift in Sources */,
 				666B2924235F5E4B00BEBCD1 /* SpanId.swift in Sources */,
 				666B293C235F5E4B00BEBCD1 /* Tracestate.swift in Sources */,
-				666B2929235F5E4B00BEBCD1 /* Links.swift in Sources */,
+				666B2929235F5E4B00BEBCD1 /* SimpleLink.swift in Sources */,
 				666B291F235F5E4B00BEBCD1 /* TracerFactoryBase.swift in Sources */,
 				666B292E235F5E4B00BEBCD1 /* Samplers.swift in Sources */,
 				666B293A235F5E4B00BEBCD1 /* TraceFlags.swift in Sources */,
@@ -995,10 +1011,10 @@
 			files = (
 				666B2991235F5E6700BEBCD1 /* TraceIdTests.swift in Sources */,
 				666B2994235F5E6700BEBCD1 /* SpanIdTests.swift in Sources */,
-				6653AF9B23604956001B0948 /* AttributeValueTest.swift in Sources */,
+				6653AF9B23604956001B0948 /* AttributeValueTests.swift in Sources */,
 				66CE5AED23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */,
 				6653AF9823604953001B0948 /* SpanBuilderTests.swift in Sources */,
-				666B2990235F5E6700BEBCD1 /* DefaultSpanTest.swift in Sources */,
+				666B2990235F5E6700BEBCD1 /* DefaultSpanTests.swift in Sources */,
 				666B298F235F5E6700BEBCD1 /* SpanContextTests.swift in Sources */,
 				666B2992235F5E6700BEBCD1 /* DefaultTracerTests.swift in Sources */,
 				666B2993235F5E6700BEBCD1 /* TracestateTests.swift in Sources */,
@@ -1013,7 +1029,7 @@
 			files = (
 				666B295B235F5E4C00BEBCD1 /* EndSpanOptions.swift in Sources */,
 				666B2951235F5E4C00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
-				666B294F235F5E4C00BEBCD1 /* Events.swift in Sources */,
+				666B294F235F5E4C00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B295E235F5E4C00BEBCD1 /* Status.swift in Sources */,
 				666B2941235F5E4C00BEBCD1 /* TextFormattable.swift in Sources */,
 				666B2945235F5E4C00BEBCD1 /* Event.swift in Sources */,
@@ -1038,7 +1054,7 @@
 				666B295A235F5E4C00BEBCD1 /* ProxyTracer.swift in Sources */,
 				666B2949235F5E4C00BEBCD1 /* SpanId.swift in Sources */,
 				666B2961235F5E4C00BEBCD1 /* Tracestate.swift in Sources */,
-				666B294E235F5E4C00BEBCD1 /* Links.swift in Sources */,
+				666B294E235F5E4C00BEBCD1 /* SimpleLink.swift in Sources */,
 				666B2944235F5E4C00BEBCD1 /* TracerFactoryBase.swift in Sources */,
 				666B2953235F5E4C00BEBCD1 /* Samplers.swift in Sources */,
 				666B295F235F5E4C00BEBCD1 /* TraceFlags.swift in Sources */,
@@ -1057,10 +1073,10 @@
 			files = (
 				666B2999235F5E6800BEBCD1 /* TraceIdTests.swift in Sources */,
 				666B299C235F5E6800BEBCD1 /* SpanIdTests.swift in Sources */,
-				6653AF9C23604957001B0948 /* AttributeValueTest.swift in Sources */,
+				6653AF9C23604957001B0948 /* AttributeValueTests.swift in Sources */,
 				66CE5AEE23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */,
 				6653AF9923604953001B0948 /* SpanBuilderTests.swift in Sources */,
-				666B2998235F5E6800BEBCD1 /* DefaultSpanTest.swift in Sources */,
+				666B2998235F5E6800BEBCD1 /* DefaultSpanTests.swift in Sources */,
 				666B2997235F5E6800BEBCD1 /* SpanContextTests.swift in Sources */,
 				666B299A235F5E6800BEBCD1 /* DefaultTracerTests.swift in Sources */,
 				666B299B235F5E6800BEBCD1 /* TracestateTests.swift in Sources */,
@@ -1075,7 +1091,7 @@
 			files = (
 				666B2980235F5E4D00BEBCD1 /* EndSpanOptions.swift in Sources */,
 				666B2976235F5E4D00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
-				666B2974235F5E4D00BEBCD1 /* Events.swift in Sources */,
+				666B2974235F5E4D00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B2983235F5E4D00BEBCD1 /* Status.swift in Sources */,
 				666B2966235F5E4D00BEBCD1 /* TextFormattable.swift in Sources */,
 				666B296A235F5E4D00BEBCD1 /* Event.swift in Sources */,
@@ -1100,7 +1116,7 @@
 				666B297F235F5E4D00BEBCD1 /* ProxyTracer.swift in Sources */,
 				666B296E235F5E4D00BEBCD1 /* SpanId.swift in Sources */,
 				666B2986235F5E4D00BEBCD1 /* Tracestate.swift in Sources */,
-				666B2973235F5E4D00BEBCD1 /* Links.swift in Sources */,
+				666B2973235F5E4D00BEBCD1 /* SimpleLink.swift in Sources */,
 				666B2969235F5E4D00BEBCD1 /* TracerFactoryBase.swift in Sources */,
 				666B2978235F5E4D00BEBCD1 /* Samplers.swift in Sources */,
 				666B2984235F5E4D00BEBCD1 /* TraceFlags.swift in Sources */,
@@ -1119,10 +1135,10 @@
 			files = (
 				666B29A1235F5E6900BEBCD1 /* TraceIdTests.swift in Sources */,
 				666B29A4235F5E6900BEBCD1 /* SpanIdTests.swift in Sources */,
-				6653AF9D23604958001B0948 /* AttributeValueTest.swift in Sources */,
+				6653AF9D23604958001B0948 /* AttributeValueTests.swift in Sources */,
 				66CE5AEF23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */,
 				6653AF9A23604953001B0948 /* SpanBuilderTests.swift in Sources */,
-				666B29A0235F5E6900BEBCD1 /* DefaultSpanTest.swift in Sources */,
+				666B29A0235F5E6900BEBCD1 /* DefaultSpanTests.swift in Sources */,
 				666B299F235F5E6900BEBCD1 /* SpanContextTests.swift in Sources */,
 				666B29A2235F5E6900BEBCD1 /* DefaultTracerTests.swift in Sources */,
 				666B29A3235F5E6900BEBCD1 /* TracestateTests.swift in Sources */,

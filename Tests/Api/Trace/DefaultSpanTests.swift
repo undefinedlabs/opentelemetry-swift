@@ -29,7 +29,7 @@ final class DefaultSpanTest: XCTestCase {
         span.setAttribute(key: "MyLongAttributeKey", value: AttributeValue.int(123))
         span.addEvent(name: "event")
         span.addEvent(name: "event", attributes: ["MyBooleanAttributeKey": AttributeValue.bool(true)])
-        span.addEvent(event: Events.create(name: "event"))
+        span.addEvent(event: SimpleEvent(name: "event"))
 
         span.status = .ok
         span.end()
