@@ -13,7 +13,7 @@ class SpanBuilderTests: XCTestCase {
 
     func testDoNotCrash_NoopImplementation() {
         let spanBuilder = tracer.spanBuilder(spanName: "MySpanName")
-        spanBuilder.setSampler(sampler: Samplers.AlwaysSample)
+        spanBuilder.setSampler(sampler: Samplers.alwaysSample)
         spanBuilder.setSpanKind(spanKind: .server)
         spanBuilder.setParent(parent: DefaultSpan.createRandom())
         spanBuilder.setParent(parent: DefaultSpan.createRandom().context)

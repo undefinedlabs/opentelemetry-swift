@@ -11,10 +11,10 @@ public struct Samplers {
     /// <summary>
     /// Gets the sampler that always sample.
     /// </summary>
-    public static var AlwaysSample: Sampler { return AlwaysSampleSampler() }
+    public static var alwaysSample: Sampler { return AlwaysSampleSampler() }
 
     /// <summary>
     /// Gets the sampler than never samples.
     /// </summary>
-    public static var NeverSample: Sampler { return NeverSampleSampler() }
+    public static var neverSample: Sampler { return NeverSampleSampler() }
 }

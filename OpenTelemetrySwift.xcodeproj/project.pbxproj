@@ -205,6 +205,7 @@
 		66CE5AEF23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
 		66E61D5423706A4B00C03C72 /* LinksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5323706A4B00C03C72 /* LinksTests.swift */; };
 		66E61D5623706A5F00C03C72 /* EventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5523706A5F00C03C72 /* EventsTests.swift */; };
+		66E61D592370739500C03C72 /* SamplersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D582370739500C03C72 /* SamplersTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,6 +300,7 @@
 		66D4D997235F5B880019D8B5 /* StatusTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusTests.swift; sourceTree = "<group>"; };
 		66E61D5323706A4B00C03C72 /* LinksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksTests.swift; sourceTree = "<group>"; };
 		66E61D5523706A5F00C03C72 /* EventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTests.swift; sourceTree = "<group>"; };
+		66E61D582370739500C03C72 /* SamplersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplersTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -566,6 +568,7 @@
 		66D4D98F235F5B880019D8B5 /* Trace */ = {
 			isa = PBXGroup;
 			children = (
+				66E61D572370738000C03C72 /* Sampler */,
 				66E61D5223706A3600C03C72 /* Utils */,
 				6653AF94236044A4001B0948 /* AttributeValueTests.swift */,
 				66D4D991235F5B880019D8B5 /* DefaultSpanTests.swift */,
@@ -597,6 +600,14 @@
 				66E61D5523706A5F00C03C72 /* EventsTests.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		66E61D572370738000C03C72 /* Sampler */ = {
+			isa = PBXGroup;
+			children = (
+				66E61D582370739500C03C72 /* SamplersTests.swift */,
+			);
+			path = Sampler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -955,6 +966,7 @@
 				66E61D5623706A5F00C03C72 /* EventsTests.swift in Sources */,
 				666B2987235F5E6600BEBCD1 /* SpanContextTests.swift in Sources */,
 				666B298A235F5E6600BEBCD1 /* DefaultTracerTests.swift in Sources */,
+				66E61D592370739500C03C72 /* SamplersTests.swift in Sources */,
 				666B298B235F5E6600BEBCD1 /* TracestateTests.swift in Sources */,
 				666B298E235F5E6600BEBCD1 /* StatusTests.swift in Sources */,
 				666B298D235F5E6600BEBCD1 /* TraceFlagsTests.swift in Sources */,

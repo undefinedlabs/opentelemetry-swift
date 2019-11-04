@@ -22,5 +22,5 @@ public protocol Sampler: CustomStringConvertible {
     /// </param>
     /// <param name="links">Links associated with the span.</param>
     /// <returns>Sampling decision on whether Span needs to be sampled or not.</returns>
-    func shouldSample(parentContext: SpanContext, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision
+    func shouldSample(parentContext: SpanContext, hasRemoteParent: Bool, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision
 }
