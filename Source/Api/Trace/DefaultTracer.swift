@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct DefaultTracer: Tracer {
+class DefaultTracer: Tracer {
     static var shared = DefaultTracer()
     var binaryFormat = BinaryFormat()
     var textFormat: TextFormattable = HttpTraceContextFormat()
 
     var currentSpan: Span? {
-        return ActivityUtils.getCurrent()
+        return ContextUtils.getCurrent()
     }
 
     func withSpan(span: Span) -> Scope {

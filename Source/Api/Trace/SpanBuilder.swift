@@ -5,7 +5,7 @@
 //  Created by Ignacio Bonafonte on 22/10/2019.
 //
 
-public protocol SpanBuilder {
+public protocol SpanBuilder: class {
   /**
    * Sets the parent {@code Span} to use. If not set, the value of {@code Tracer.getCurrentSpan()}
    * at {@link #startSpan()} time will be used as parent.

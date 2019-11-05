@@ -26,7 +26,7 @@ class DefaultSpan: Span {
         return false
     }
 
-    var status: Status {
+    var status: Status? {
         get {
             return Status.ok
         }

@@ -21,7 +21,7 @@ public protocol Span: AnyObject, CustomStringConvertible {
     /// <summary>
     /// Sets the status of the span execution.
     /// </summary>
-    var status: Status { get set }
+    var status: Status? { get set }
 
     /// <summary>
     /// Updates the <see cref="ISpan"/> name.
@@ -81,12 +81,6 @@ public protocol Span: AnyObject, CustomStringConvertible {
     /// </summary>
     /// <param name="newEvent"><see cref="Event"/> to add to the span.</param>
     func addEvent<E: Event>(event: E)
-
-    /// <summary>
-    /// Adds link to the span.
-    /// </summary>
-    /// <param name="link">Link to add to the span.</param>
-    func addLink(link: Link)
 
     /// <summary>
     /// End the span.

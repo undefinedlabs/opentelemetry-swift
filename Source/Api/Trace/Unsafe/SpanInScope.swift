@@ -12,12 +12,12 @@ import os.activity
 struct SpanInScope: Scope {
     
     init(span: Span) {
-        ActivityUtils.setActivityForSpan(span: span)
+        ContextUtils.setContextForSpan(span: span)
     }
 
     func close() {
-        if let currentSpan = ActivityUtils.getCurrent() {
-            ActivityUtils.removeActivityForSpan(span: currentSpan)
+        if let currentSpan = ContextUtils.getCurrent() {
+            ContextUtils.removeContextForSpan(span: currentSpan)
         }
     }
 }

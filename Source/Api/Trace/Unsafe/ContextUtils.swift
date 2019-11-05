@@ -8,7 +8,7 @@
 import Foundation
 import os.activity
 
-struct ActivityUtils {
+struct ContextUtils {
 
     static let RTLD_DEFAULT = UnsafeMutableRawPointer(bitPattern: -2)
     static let sym = dlsym(RTLD_DEFAULT, "_os_activity_current")
@@ -29,11 +29,11 @@ struct ActivityUtils {
         return span.context.activityId
     }
 
-    static func setActivityForSpan(span:Span) {
+    static func setContextForSpan(span:Span) {
         spanActivityMap[span.context.activityId] = span
     }
 
-    static func removeActivityForSpan(span:Span) {
+    static func removeContextForSpan(span:Span) {
         spanActivityMap[span.context.activityId] = span
     }
 }

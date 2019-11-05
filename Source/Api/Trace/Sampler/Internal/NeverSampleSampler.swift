@@ -9,7 +9,7 @@ import Foundation
 
 struct NeverSampleSampler: Sampler {
 
-    func shouldSample(parentContext: SpanContext, hasRemoteParent: Bool, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision {
+    func shouldSample(parentContext: SpanContext?, hasRemoteParent: Bool, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision {
         return Decision(isSampled:false)
     }
 

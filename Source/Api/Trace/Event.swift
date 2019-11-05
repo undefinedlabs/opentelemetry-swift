@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Event: Equatable {
+public protocol Event {
     /**
      * Return the name of the {@code Event}.
      *
