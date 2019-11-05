@@ -11,6 +11,7 @@ typealias AttributesWithCapacity = [String: AttributeValue]
 typealias EvictingQueue = [TimedEvent]
 
 class RecordEventsReadableSpan: ReadableSpan {
+//    private static final Logger logger = Logger.getLogger(Tracer.class.getName());
 
     var IsRecordingEvents = true
 
@@ -97,7 +98,9 @@ class RecordEventsReadableSpan: ReadableSpan {
     private func adaptTimedEvents() -> [TimedEvent] {
         let sourceEvents = getTimedEvents()
         var result = [TimedEvent]()
-        _ = sourceEvents.map { result.append(RecordEventsReadableSpan.adaptTimedEvent(sourceEvent: $0, timestampConverter: timestampConverter)) }
+        sourceEvents.forEach {
+            result.append(RecordEventsReadableSpan.adaptTimedEvent(sourceEvent: $0, timestampConverter: timestampConverter))
+        }
         return result
     }
 
@@ -197,9 +200,7 @@ class RecordEventsReadableSpan: ReadableSpan {
         return status ?? .ok
     }
 
-
     var description: String {
         return "RecordEventsReadableSpan{}"
     }
-
 }

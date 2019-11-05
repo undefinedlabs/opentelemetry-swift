@@ -8,7 +8,7 @@
 import Foundation
 
 class DefaultTracer: Tracer {
-    static var shared = DefaultTracer()
+    static var instance = DefaultTracer()
     var binaryFormat = BinaryFormat()
     var textFormat: TextFormattable = HttpTraceContextFormat()
 

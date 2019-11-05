@@ -230,14 +230,14 @@
 		66E61D7D2370847200C03C72 /* TimedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D7B2370847200C03C72 /* TimedEvent.swift */; };
 		66E61D7E2370847200C03C72 /* TimedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D7B2370847200C03C72 /* TimedEvent.swift */; };
 		66E61D7F2370847200C03C72 /* TimedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D7B2370847200C03C72 /* TimedEvent.swift */; };
-		66E61D81237086F200C03C72 /* SpanBuilderSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5B237079CF00C03C72 /* SpanBuilderSDK.swift */; };
-		66E61D82237086F300C03C72 /* SpanBuilderSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5B237079CF00C03C72 /* SpanBuilderSDK.swift */; };
-		66E61D83237086F300C03C72 /* SpanBuilderSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5B237079CF00C03C72 /* SpanBuilderSDK.swift */; };
+		66E61D81237086F200C03C72 /* SpanBuilderSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5B237079CF00C03C72 /* SpanBuilderSdk.swift */; };
+		66E61D82237086F300C03C72 /* SpanBuilderSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5B237079CF00C03C72 /* SpanBuilderSdk.swift */; };
+		66E61D83237086F300C03C72 /* SpanBuilderSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5B237079CF00C03C72 /* SpanBuilderSdk.swift */; };
 		66E61D862370872500C03C72 /* TraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D852370872500C03C72 /* TraceConfig.swift */; };
 		66E61D872370872500C03C72 /* TraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D852370872500C03C72 /* TraceConfig.swift */; };
 		66E61D882370872500C03C72 /* TraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D852370872500C03C72 /* TraceConfig.swift */; };
 		66E61D892370872500C03C72 /* TraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D852370872500C03C72 /* TraceConfig.swift */; };
-		66E61D8A2370888A00C03C72 /* SpanBuilderSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5B237079CF00C03C72 /* SpanBuilderSDK.swift */; };
+		66E61D8A2370888A00C03C72 /* SpanBuilderSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5B237079CF00C03C72 /* SpanBuilderSdk.swift */; };
 		66E61D8D23708A9F00C03C72 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D8C23708A9F00C03C72 /* Clock.swift */; };
 		66E61D8E23708A9F00C03C72 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D8C23708A9F00C03C72 /* Clock.swift */; };
 		66E61D8F23708A9F00C03C72 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D8C23708A9F00C03C72 /* Clock.swift */; };
@@ -250,6 +250,58 @@
 		66E61D9823716B1600C03C72 /* RecordEventsReadableSpan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D9623716B1600C03C72 /* RecordEventsReadableSpan.swift */; };
 		66E61D9923716B1600C03C72 /* RecordEventsReadableSpan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D9623716B1600C03C72 /* RecordEventsReadableSpan.swift */; };
 		66E61D9A23716B1600C03C72 /* RecordEventsReadableSpan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D9623716B1600C03C72 /* RecordEventsReadableSpan.swift */; };
+		66E61D9C2371998D00C03C72 /* TracerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D9B2371998D00C03C72 /* TracerSdk.swift */; };
+		66E61D9D2371998D00C03C72 /* TracerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D9B2371998D00C03C72 /* TracerSdk.swift */; };
+		66E61D9E2371998D00C03C72 /* TracerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D9B2371998D00C03C72 /* TracerSdk.swift */; };
+		66E61D9F2371998D00C03C72 /* TracerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D9B2371998D00C03C72 /* TracerSdk.swift */; };
+		66E61DA123719A9900C03C72 /* MillisClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DA023719A9900C03C72 /* MillisClock.swift */; };
+		66E61DA223719A9900C03C72 /* MillisClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DA023719A9900C03C72 /* MillisClock.swift */; };
+		66E61DA323719A9900C03C72 /* MillisClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DA023719A9900C03C72 /* MillisClock.swift */; };
+		66E61DA423719A9900C03C72 /* MillisClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DA023719A9900C03C72 /* MillisClock.swift */; };
+		66E61DA62371B06300C03C72 /* EnvVarResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DA52371B06300C03C72 /* EnvVarResource.swift */; };
+		66E61DA72371B06300C03C72 /* EnvVarResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DA52371B06300C03C72 /* EnvVarResource.swift */; };
+		66E61DA82371B06300C03C72 /* EnvVarResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DA52371B06300C03C72 /* EnvVarResource.swift */; };
+		66E61DA92371B06300C03C72 /* EnvVarResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DA52371B06300C03C72 /* EnvVarResource.swift */; };
+		66E61DAB2371B86400C03C72 /* NoopSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DAA2371B86400C03C72 /* NoopSpanProcessor.swift */; };
+		66E61DAC2371B86400C03C72 /* NoopSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DAA2371B86400C03C72 /* NoopSpanProcessor.swift */; };
+		66E61DAD2371B86400C03C72 /* NoopSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DAA2371B86400C03C72 /* NoopSpanProcessor.swift */; };
+		66E61DAE2371B86400C03C72 /* NoopSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DAA2371B86400C03C72 /* NoopSpanProcessor.swift */; };
+		66E61DB02371C33E00C03C72 /* MultiSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DAF2371C33E00C03C72 /* MultiSpanProcessor.swift */; };
+		66E61DB12371C33E00C03C72 /* MultiSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DAF2371C33E00C03C72 /* MultiSpanProcessor.swift */; };
+		66E61DB22371C33E00C03C72 /* MultiSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DAF2371C33E00C03C72 /* MultiSpanProcessor.swift */; };
+		66E61DB32371C33F00C03C72 /* MultiSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DAF2371C33E00C03C72 /* MultiSpanProcessor.swift */; };
+		66E61DB62371C6B200C03C72 /* ProbabilitySampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DB52371C6B200C03C72 /* ProbabilitySampler.swift */; };
+		66E61DB72371C6B200C03C72 /* ProbabilitySampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DB52371C6B200C03C72 /* ProbabilitySampler.swift */; };
+		66E61DB82371C6B200C03C72 /* ProbabilitySampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DB52371C6B200C03C72 /* ProbabilitySampler.swift */; };
+		66E61DB92371C6B200C03C72 /* ProbabilitySampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DB52371C6B200C03C72 /* ProbabilitySampler.swift */; };
+		66E61DBC2371D00F00C03C72 /* SpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DBB2371D00F00C03C72 /* SpanExporter.swift */; };
+		66E61DBD2371D00F00C03C72 /* SpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DBB2371D00F00C03C72 /* SpanExporter.swift */; };
+		66E61DBE2371D00F00C03C72 /* SpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DBB2371D00F00C03C72 /* SpanExporter.swift */; };
+		66E61DBF2371D00F00C03C72 /* SpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DBB2371D00F00C03C72 /* SpanExporter.swift */; };
+		66E61DC12371D0CE00C03C72 /* InMemorySpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DC02371D0CE00C03C72 /* InMemorySpanExporter.swift */; };
+		66E61DC22371D0CE00C03C72 /* InMemorySpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DC02371D0CE00C03C72 /* InMemorySpanExporter.swift */; };
+		66E61DC32371D0CE00C03C72 /* InMemorySpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DC02371D0CE00C03C72 /* InMemorySpanExporter.swift */; };
+		66E61DC42371D0CE00C03C72 /* InMemorySpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DC02371D0CE00C03C72 /* InMemorySpanExporter.swift */; };
+		66E61DC62371D23800C03C72 /* MultiSpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DC52371D23800C03C72 /* MultiSpanExporter.swift */; };
+		66E61DC72371D23800C03C72 /* MultiSpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DC52371D23800C03C72 /* MultiSpanExporter.swift */; };
+		66E61DC82371D23800C03C72 /* MultiSpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DC52371D23800C03C72 /* MultiSpanExporter.swift */; };
+		66E61DC92371D23800C03C72 /* MultiSpanExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DC52371D23800C03C72 /* MultiSpanExporter.swift */; };
+		66E61DCB2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DCA2371D59700C03C72 /* SimpleSpanProcessor.swift */; };
+		66E61DCC2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DCA2371D59700C03C72 /* SimpleSpanProcessor.swift */; };
+		66E61DCD2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DCA2371D59700C03C72 /* SimpleSpanProcessor.swift */; };
+		66E61DCE2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DCA2371D59700C03C72 /* SimpleSpanProcessor.swift */; };
+		66E61DDA2371DA3F00C03C72 /* BatchSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DD92371DA3F00C03C72 /* BatchSpanProcessor.swift */; };
+		66E61DDB2371DA3F00C03C72 /* BatchSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DD92371DA3F00C03C72 /* BatchSpanProcessor.swift */; };
+		66E61DDC2371DA3F00C03C72 /* BatchSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DD92371DA3F00C03C72 /* BatchSpanProcessor.swift */; };
+		66E61DDD2371DA3F00C03C72 /* BatchSpanProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DD92371DA3F00C03C72 /* BatchSpanProcessor.swift */; };
+		66E61DE42371DCE300C03C72 /* OpenTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DE32371DCE300C03C72 /* OpenTelemetry.swift */; };
+		66E61DE52371DCE300C03C72 /* OpenTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DE32371DCE300C03C72 /* OpenTelemetry.swift */; };
+		66E61DE62371DCE300C03C72 /* OpenTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DE32371DCE300C03C72 /* OpenTelemetry.swift */; };
+		66E61DE72371DCE300C03C72 /* OpenTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DE32371DCE300C03C72 /* OpenTelemetry.swift */; };
+		66E61DE92371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DE82371DE5E00C03C72 /* OpenTelemetrySdk.swift */; };
+		66E61DEA2371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DE82371DE5E00C03C72 /* OpenTelemetrySdk.swift */; };
+		66E61DEB2371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DE82371DE5E00C03C72 /* OpenTelemetrySdk.swift */; };
+		66E61DEC2371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61DE82371DE5E00C03C72 /* OpenTelemetrySdk.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,7 +397,7 @@
 		66E61D5323706A4B00C03C72 /* LinksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksTests.swift; sourceTree = "<group>"; };
 		66E61D5523706A5F00C03C72 /* EventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTests.swift; sourceTree = "<group>"; };
 		66E61D582370739500C03C72 /* SamplersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplersTests.swift; sourceTree = "<group>"; };
-		66E61D5B237079CF00C03C72 /* SpanBuilderSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanBuilderSDK.swift; sourceTree = "<group>"; };
+		66E61D5B237079CF00C03C72 /* SpanBuilderSdk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanBuilderSdk.swift; sourceTree = "<group>"; };
 		66E61D6123707B9D00C03C72 /* SpanProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanProcessor.swift; sourceTree = "<group>"; };
 		66E61D6623707BF500C03C72 /* ReadableSpan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableSpan.swift; sourceTree = "<group>"; };
 		66E61D6B23707CC100C03C72 /* SpanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanData.swift; sourceTree = "<group>"; };
@@ -356,6 +408,19 @@
 		66E61D8C23708A9F00C03C72 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		66E61D912371677600C03C72 /* TimestampConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampConverter.swift; sourceTree = "<group>"; };
 		66E61D9623716B1600C03C72 /* RecordEventsReadableSpan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordEventsReadableSpan.swift; sourceTree = "<group>"; };
+		66E61D9B2371998D00C03C72 /* TracerSdk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracerSdk.swift; sourceTree = "<group>"; };
+		66E61DA023719A9900C03C72 /* MillisClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MillisClock.swift; sourceTree = "<group>"; };
+		66E61DA52371B06300C03C72 /* EnvVarResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvVarResource.swift; sourceTree = "<group>"; };
+		66E61DAA2371B86400C03C72 /* NoopSpanProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoopSpanProcessor.swift; sourceTree = "<group>"; };
+		66E61DAF2371C33E00C03C72 /* MultiSpanProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSpanProcessor.swift; sourceTree = "<group>"; };
+		66E61DB52371C6B200C03C72 /* ProbabilitySampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbabilitySampler.swift; sourceTree = "<group>"; };
+		66E61DBB2371D00F00C03C72 /* SpanExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanExporter.swift; sourceTree = "<group>"; };
+		66E61DC02371D0CE00C03C72 /* InMemorySpanExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemorySpanExporter.swift; sourceTree = "<group>"; };
+		66E61DC52371D23800C03C72 /* MultiSpanExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSpanExporter.swift; sourceTree = "<group>"; };
+		66E61DCA2371D59700C03C72 /* SimpleSpanProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSpanProcessor.swift; sourceTree = "<group>"; };
+		66E61DD92371DA3F00C03C72 /* BatchSpanProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchSpanProcessor.swift; sourceTree = "<group>"; };
+		66E61DE32371DCE300C03C72 /* OpenTelemetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTelemetry.swift; sourceTree = "<group>"; };
+		66E61DE82371DE5E00C03C72 /* OpenTelemetrySdk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTelemetrySdk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,6 +535,7 @@
 				66E61D8B23708A7700C03C72 /* Internal */,
 				66E61D7023707EF700C03C72 /* Resources */,
 				66E61D5A237078C000C03C72 /* Trace */,
+				66E61DE82371DE5E00C03C72 /* OpenTelemetrySdk.swift */,
 			);
 			path = Sdk;
 			sourceTree = "<group>";
@@ -480,6 +546,7 @@
 				66D4D8C4235F5B6F0019D8B5 /* Metrics */,
 				66D4D8C5235F5B6F0019D8B5 /* Context */,
 				66D4D8CC235F5B6F0019D8B5 /* Trace */,
+				66E61DE32371DCE300C03C72 /* OpenTelemetry.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -494,7 +561,9 @@
 		66D4D8C5235F5B6F0019D8B5 /* Context */ = {
 			isa = PBXGroup;
 			children = (
+				66D4D8D9235F5B6F0019D8B5 /* NoopScope.swift */,
 				66D4D8C6235F5B6F0019D8B5 /* Propagation */,
+				66D4D8CE235F5B6F0019D8B5 /* Scope.swift */,
 			);
 			path = Context;
 			sourceTree = "<group>";
@@ -525,7 +594,6 @@
 				66D4D8EA235F5B6F0019D8B5 /* ProxyTracer.swift */,
 				66D4D8DE235F5B6F0019D8B5 /* Sampler */,
 				66D4D8F0235F5B6F0019D8B5 /* Sampler.swift */,
-				66D4D8CE235F5B6F0019D8B5 /* Scope.swift */,
 				66D4D8D3235F5B6F0019D8B5 /* Span.swift */,
 				66D4D8CD235F5B6F0019D8B5 /* SpanAttributeConstants.swift */,
 				66D4D8E8235F5B6F0019D8B5 /* SpanBuilder.swift */,
@@ -548,7 +616,6 @@
 		66D4D8D8235F5B6F0019D8B5 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				66D4D8D9235F5B6F0019D8B5 /* NoopScope.swift */,
 				66E61D76237081AD00C03C72 /* StringUtils.swift */,
 			);
 			path = Internal;
@@ -673,12 +740,17 @@
 			isa = PBXGroup;
 			children = (
 				66E61D842370871300C03C72 /* Config */,
-				66E61D5B237079CF00C03C72 /* SpanBuilderSDK.swift */,
-				66E61D7B2370847200C03C72 /* TimedEvent.swift */,
-				66E61D9623716B1600C03C72 /* RecordEventsReadableSpan.swift */,
-				66E61D6123707B9D00C03C72 /* SpanProcessor.swift */,
-				66E61D6B23707CC100C03C72 /* SpanData.swift */,
+				66E61DBA2371CFE800C03C72 /* Export */,
+				66E61DAF2371C33E00C03C72 /* MultiSpanProcessor.swift */,
+				66E61DAA2371B86400C03C72 /* NoopSpanProcessor.swift */,
 				66E61D6623707BF500C03C72 /* ReadableSpan.swift */,
+				66E61D9623716B1600C03C72 /* RecordEventsReadableSpan.swift */,
+				66E61DB42371C69F00C03C72 /* Samplers */,
+				66E61D5B237079CF00C03C72 /* SpanBuilderSdk.swift */,
+				66E61D6B23707CC100C03C72 /* SpanData.swift */,
+				66E61D6123707B9D00C03C72 /* SpanProcessor.swift */,
+				66E61D7B2370847200C03C72 /* TimedEvent.swift */,
+				66E61D9B2371998D00C03C72 /* TracerSdk.swift */,
 			);
 			path = Trace;
 			sourceTree = "<group>";
@@ -687,6 +759,7 @@
 			isa = PBXGroup;
 			children = (
 				66E61D7123707F0600C03C72 /* Resource.swift */,
+				66E61DA52371B06300C03C72 /* EnvVarResource.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -704,8 +777,29 @@
 			children = (
 				66E61D8C23708A9F00C03C72 /* Clock.swift */,
 				66E61D912371677600C03C72 /* TimestampConverter.swift */,
+				66E61DA023719A9900C03C72 /* MillisClock.swift */,
 			);
 			path = Internal;
+			sourceTree = "<group>";
+		};
+		66E61DB42371C69F00C03C72 /* Samplers */ = {
+			isa = PBXGroup;
+			children = (
+				66E61DB52371C6B200C03C72 /* ProbabilitySampler.swift */,
+			);
+			path = Samplers;
+			sourceTree = "<group>";
+		};
+		66E61DBA2371CFE800C03C72 /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				66E61DD92371DA3F00C03C72 /* BatchSpanProcessor.swift */,
+				66E61DBB2371D00F00C03C72 /* SpanExporter.swift */,
+				66E61DC02371D0CE00C03C72 /* InMemorySpanExporter.swift */,
+				66E61DC52371D23800C03C72 /* MultiSpanExporter.swift */,
+				66E61DCA2371D59700C03C72 /* SimpleSpanProcessor.swift */,
+			);
+			path = Export;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1013,22 +1107,28 @@
 				66E61D7C2370847200C03C72 /* TimedEvent.swift in Sources */,
 				666B2911235F5E4B00BEBCD1 /* EndSpanOptions.swift in Sources */,
 				666B2907235F5E4B00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
+				66E61DDA2371DA3F00C03C72 /* BatchSpanProcessor.swift in Sources */,
 				666B2905235F5E4B00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B2914235F5E4B00BEBCD1 /* Status.swift in Sources */,
 				66E61D922371677600C03C72 /* TimestampConverter.swift in Sources */,
 				666B28F7235F5E4B00BEBCD1 /* TextFormattable.swift in Sources */,
-				66E61D8A2370888A00C03C72 /* SpanBuilderSDK.swift in Sources */,
+				66E61D8A2370888A00C03C72 /* SpanBuilderSdk.swift in Sources */,
+				66E61DC62371D23800C03C72 /* MultiSpanExporter.swift in Sources */,
 				666B28FB235F5E4B00BEBCD1 /* Event.swift in Sources */,
 				666B28FC235F5E4B00BEBCD1 /* AttributeValue.swift in Sources */,
 				666B28F9235F5E4B00BEBCD1 /* Scope.swift in Sources */,
 				666B290B235F5E4B00BEBCD1 /* ContextUtils.swift in Sources */,
 				666B28F6235F5E4B00BEBCD1 /* BinaryFormattable.swift in Sources */,
+				66E61D9C2371998D00C03C72 /* TracerSdk.swift in Sources */,
 				666B2906235F5E4B00BEBCD1 /* Timestamp.swift in Sources */,
 				66E61D6723707BF500C03C72 /* ReadableSpan.swift in Sources */,
 				666B28F8235F5E4B00BEBCD1 /* SpanAttributeConstants.swift in Sources */,
 				666B290F235F5E4B00BEBCD1 /* SpanKind.swift in Sources */,
 				666B28F5235F5E4B00BEBCD1 /* HttpTraceContextFormat.swift in Sources */,
+				66E61DAB2371B86400C03C72 /* NoopSpanProcessor.swift in Sources */,
 				66E61D862370872500C03C72 /* TraceConfig.swift in Sources */,
+				66E61DE42371DCE300C03C72 /* OpenTelemetry.swift in Sources */,
+				66E61DE92371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */,
 				666B2902235F5E4B00BEBCD1 /* Decision.swift in Sources */,
 				666B28F3235F5E4B00BEBCD1 /* BinaryFormat.swift in Sources */,
 				666B290E235F5E4B00BEBCD1 /* SpanBuilder.swift in Sources */,
@@ -1040,8 +1140,11 @@
 				666B290A235F5E4B00BEBCD1 /* SpanInScope.swift in Sources */,
 				666B2913235F5E4B00BEBCD1 /* Tracer.swift in Sources */,
 				666B2912235F5E4B00BEBCD1 /* DefaultTracer.swift in Sources */,
+				66E61DB02371C33E00C03C72 /* MultiSpanProcessor.swift in Sources */,
+				66E61DB62371C6B200C03C72 /* ProbabilitySampler.swift in Sources */,
 				66E61D6223707B9D00C03C72 /* SpanProcessor.swift in Sources */,
 				666B2910235F5E4B00BEBCD1 /* ProxyTracer.swift in Sources */,
+				66E61DA62371B06300C03C72 /* EnvVarResource.swift in Sources */,
 				666B28FF235F5E4B00BEBCD1 /* SpanId.swift in Sources */,
 				66E61D9723716B1600C03C72 /* RecordEventsReadableSpan.swift in Sources */,
 				666B2917235F5E4B00BEBCD1 /* Tracestate.swift in Sources */,
@@ -1049,6 +1152,7 @@
 				666B28FA235F5E4B00BEBCD1 /* TracerFactoryBase.swift in Sources */,
 				666B2909235F5E4B00BEBCD1 /* Samplers.swift in Sources */,
 				666B2915235F5E4B00BEBCD1 /* TraceFlags.swift in Sources */,
+				66E61DA123719A9900C03C72 /* MillisClock.swift in Sources */,
 				66E61D7223707F0600C03C72 /* Resource.swift in Sources */,
 				66E61D6C23707CC100C03C72 /* SpanData.swift in Sources */,
 				66E61D8D23708A9F00C03C72 /* Clock.swift in Sources */,
@@ -1056,7 +1160,10 @@
 				666B2908235F5E4B00BEBCD1 /* NeverSampleSampler.swift in Sources */,
 				666B28F4235F5E4B00BEBCD1 /* TracestateUtils.swift in Sources */,
 				666B290D235F5E4B00BEBCD1 /* TraceId.swift in Sources */,
+				66E61DBC2371D00F00C03C72 /* SpanExporter.swift in Sources */,
 				666B28FE235F5E4B00BEBCD1 /* Span.swift in Sources */,
+				66E61DCB2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */,
+				66E61DC12371D0CE00C03C72 /* InMemorySpanExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1086,13 +1193,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66E61D9D2371998D00C03C72 /* TracerSdk.swift in Sources */,
 				666B2936235F5E4B00BEBCD1 /* EndSpanOptions.swift in Sources */,
 				666B292C235F5E4B00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
 				666B292A235F5E4B00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B2939235F5E4B00BEBCD1 /* Status.swift in Sources */,
 				666B291C235F5E4B00BEBCD1 /* TextFormattable.swift in Sources */,
 				666B2920235F5E4B00BEBCD1 /* Event.swift in Sources */,
-				66E61D81237086F200C03C72 /* SpanBuilderSDK.swift in Sources */,
+				66E61D81237086F200C03C72 /* SpanBuilderSdk.swift in Sources */,
 				66E61D7D2370847200C03C72 /* TimedEvent.swift in Sources */,
 				66E61D78237081AD00C03C72 /* StringUtils.swift in Sources */,
 				666B2921235F5E4B00BEBCD1 /* AttributeValue.swift in Sources */,
@@ -1100,35 +1208,47 @@
 				666B2930235F5E4B00BEBCD1 /* ContextUtils.swift in Sources */,
 				666B291B235F5E4B00BEBCD1 /* BinaryFormattable.swift in Sources */,
 				666B292B235F5E4B00BEBCD1 /* Timestamp.swift in Sources */,
+				66E61DE52371DCE300C03C72 /* OpenTelemetry.swift in Sources */,
 				666B291D235F5E4B00BEBCD1 /* SpanAttributeConstants.swift in Sources */,
 				666B2934235F5E4B00BEBCD1 /* SpanKind.swift in Sources */,
+				66E61DB12371C33E00C03C72 /* MultiSpanProcessor.swift in Sources */,
+				66E61DEA2371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */,
 				66E61D6D23707CC100C03C72 /* SpanData.swift in Sources */,
 				666B291A235F5E4B00BEBCD1 /* HttpTraceContextFormat.swift in Sources */,
 				666B2927235F5E4B00BEBCD1 /* Decision.swift in Sources */,
 				666B2918235F5E4B00BEBCD1 /* BinaryFormat.swift in Sources */,
 				66E61D8E23708A9F00C03C72 /* Clock.swift in Sources */,
 				66E61D6323707B9D00C03C72 /* SpanProcessor.swift in Sources */,
+				66E61DC72371D23800C03C72 /* MultiSpanExporter.swift in Sources */,
 				666B2933235F5E4B00BEBCD1 /* SpanBuilder.swift in Sources */,
+				66E61DA223719A9900C03C72 /* MillisClock.swift in Sources */,
 				666B2922235F5E4B00BEBCD1 /* DefaultSpan.swift in Sources */,
 				666B2928235F5E4B00BEBCD1 /* NoopScope.swift in Sources */,
 				66E61D872370872500C03C72 /* TraceConfig.swift in Sources */,
 				666B2926235F5E4B00BEBCD1 /* Link.swift in Sources */,
 				666B293B235F5E4B00BEBCD1 /* Sampler.swift in Sources */,
 				666B292F235F5E4B00BEBCD1 /* SpanInScope.swift in Sources */,
+				66E61DBD2371D00F00C03C72 /* SpanExporter.swift in Sources */,
+				66E61DDB2371DA3F00C03C72 /* BatchSpanProcessor.swift in Sources */,
 				666B2938235F5E4B00BEBCD1 /* Tracer.swift in Sources */,
 				666B2937235F5E4B00BEBCD1 /* DefaultTracer.swift in Sources */,
 				666B2935235F5E4B00BEBCD1 /* ProxyTracer.swift in Sources */,
 				66E61D932371677600C03C72 /* TimestampConverter.swift in Sources */,
 				666B2924235F5E4B00BEBCD1 /* SpanId.swift in Sources */,
 				666B293C235F5E4B00BEBCD1 /* Tracestate.swift in Sources */,
+				66E61DCC2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */,
 				666B2929235F5E4B00BEBCD1 /* SimpleLink.swift in Sources */,
+				66E61DC22371D0CE00C03C72 /* InMemorySpanExporter.swift in Sources */,
+				66E61DA72371B06300C03C72 /* EnvVarResource.swift in Sources */,
 				666B291F235F5E4B00BEBCD1 /* TracerFactoryBase.swift in Sources */,
 				666B292E235F5E4B00BEBCD1 /* Samplers.swift in Sources */,
 				66E61D7323707F0600C03C72 /* Resource.swift in Sources */,
 				66E61D6823707BF500C03C72 /* ReadableSpan.swift in Sources */,
 				666B293A235F5E4B00BEBCD1 /* TraceFlags.swift in Sources */,
+				66E61DAC2371B86400C03C72 /* NoopSpanProcessor.swift in Sources */,
 				666B2925235F5E4B00BEBCD1 /* SpanContext.swift in Sources */,
 				666B292D235F5E4B00BEBCD1 /* NeverSampleSampler.swift in Sources */,
+				66E61DB72371C6B200C03C72 /* ProbabilitySampler.swift in Sources */,
 				666B2919235F5E4B00BEBCD1 /* TracestateUtils.swift in Sources */,
 				666B2931235F5E4B00BEBCD1 /* Activity.swift in Sources */,
 				666B2932235F5E4B00BEBCD1 /* TraceId.swift in Sources */,
@@ -1159,13 +1279,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66E61D9E2371998D00C03C72 /* TracerSdk.swift in Sources */,
 				666B295B235F5E4C00BEBCD1 /* EndSpanOptions.swift in Sources */,
 				666B2951235F5E4C00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
 				666B294F235F5E4C00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B295E235F5E4C00BEBCD1 /* Status.swift in Sources */,
 				666B2941235F5E4C00BEBCD1 /* TextFormattable.swift in Sources */,
 				666B2945235F5E4C00BEBCD1 /* Event.swift in Sources */,
-				66E61D82237086F300C03C72 /* SpanBuilderSDK.swift in Sources */,
+				66E61D82237086F300C03C72 /* SpanBuilderSdk.swift in Sources */,
 				66E61D7E2370847200C03C72 /* TimedEvent.swift in Sources */,
 				66E61D79237081AD00C03C72 /* StringUtils.swift in Sources */,
 				666B2946235F5E4C00BEBCD1 /* AttributeValue.swift in Sources */,
@@ -1173,35 +1294,47 @@
 				666B2955235F5E4C00BEBCD1 /* ContextUtils.swift in Sources */,
 				666B2940235F5E4C00BEBCD1 /* BinaryFormattable.swift in Sources */,
 				666B2950235F5E4C00BEBCD1 /* Timestamp.swift in Sources */,
+				66E61DE62371DCE300C03C72 /* OpenTelemetry.swift in Sources */,
 				666B2942235F5E4C00BEBCD1 /* SpanAttributeConstants.swift in Sources */,
 				666B2959235F5E4C00BEBCD1 /* SpanKind.swift in Sources */,
+				66E61DB22371C33E00C03C72 /* MultiSpanProcessor.swift in Sources */,
+				66E61DEB2371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */,
 				66E61D6E23707CC100C03C72 /* SpanData.swift in Sources */,
 				666B293F235F5E4C00BEBCD1 /* HttpTraceContextFormat.swift in Sources */,
 				666B294C235F5E4C00BEBCD1 /* Decision.swift in Sources */,
 				666B293D235F5E4C00BEBCD1 /* BinaryFormat.swift in Sources */,
 				66E61D8F23708A9F00C03C72 /* Clock.swift in Sources */,
 				66E61D6423707B9D00C03C72 /* SpanProcessor.swift in Sources */,
+				66E61DC82371D23800C03C72 /* MultiSpanExporter.swift in Sources */,
 				666B2958235F5E4C00BEBCD1 /* SpanBuilder.swift in Sources */,
+				66E61DA323719A9900C03C72 /* MillisClock.swift in Sources */,
 				666B2947235F5E4C00BEBCD1 /* DefaultSpan.swift in Sources */,
 				666B294D235F5E4C00BEBCD1 /* NoopScope.swift in Sources */,
 				66E61D882370872500C03C72 /* TraceConfig.swift in Sources */,
 				666B294B235F5E4C00BEBCD1 /* Link.swift in Sources */,
 				666B2960235F5E4C00BEBCD1 /* Sampler.swift in Sources */,
 				666B2954235F5E4C00BEBCD1 /* SpanInScope.swift in Sources */,
+				66E61DBE2371D00F00C03C72 /* SpanExporter.swift in Sources */,
+				66E61DDC2371DA3F00C03C72 /* BatchSpanProcessor.swift in Sources */,
 				666B295D235F5E4C00BEBCD1 /* Tracer.swift in Sources */,
 				666B295C235F5E4C00BEBCD1 /* DefaultTracer.swift in Sources */,
 				666B295A235F5E4C00BEBCD1 /* ProxyTracer.swift in Sources */,
 				66E61D942371677600C03C72 /* TimestampConverter.swift in Sources */,
 				666B2949235F5E4C00BEBCD1 /* SpanId.swift in Sources */,
 				666B2961235F5E4C00BEBCD1 /* Tracestate.swift in Sources */,
+				66E61DCD2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */,
 				666B294E235F5E4C00BEBCD1 /* SimpleLink.swift in Sources */,
+				66E61DC32371D0CE00C03C72 /* InMemorySpanExporter.swift in Sources */,
+				66E61DA82371B06300C03C72 /* EnvVarResource.swift in Sources */,
 				666B2944235F5E4C00BEBCD1 /* TracerFactoryBase.swift in Sources */,
 				666B2953235F5E4C00BEBCD1 /* Samplers.swift in Sources */,
 				66E61D7423707F0600C03C72 /* Resource.swift in Sources */,
 				66E61D6923707BF500C03C72 /* ReadableSpan.swift in Sources */,
 				666B295F235F5E4C00BEBCD1 /* TraceFlags.swift in Sources */,
+				66E61DAD2371B86400C03C72 /* NoopSpanProcessor.swift in Sources */,
 				666B294A235F5E4C00BEBCD1 /* SpanContext.swift in Sources */,
 				666B2952235F5E4C00BEBCD1 /* NeverSampleSampler.swift in Sources */,
+				66E61DB82371C6B200C03C72 /* ProbabilitySampler.swift in Sources */,
 				666B293E235F5E4C00BEBCD1 /* TracestateUtils.swift in Sources */,
 				666B2956235F5E4C00BEBCD1 /* Activity.swift in Sources */,
 				666B2957235F5E4C00BEBCD1 /* TraceId.swift in Sources */,
@@ -1232,13 +1365,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66E61D9F2371998D00C03C72 /* TracerSdk.swift in Sources */,
 				666B2980235F5E4D00BEBCD1 /* EndSpanOptions.swift in Sources */,
 				666B2976235F5E4D00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
 				666B2974235F5E4D00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B2983235F5E4D00BEBCD1 /* Status.swift in Sources */,
 				666B2966235F5E4D00BEBCD1 /* TextFormattable.swift in Sources */,
 				666B296A235F5E4D00BEBCD1 /* Event.swift in Sources */,
-				66E61D83237086F300C03C72 /* SpanBuilderSDK.swift in Sources */,
+				66E61D83237086F300C03C72 /* SpanBuilderSdk.swift in Sources */,
 				66E61D7F2370847200C03C72 /* TimedEvent.swift in Sources */,
 				66E61D7A237081AD00C03C72 /* StringUtils.swift in Sources */,
 				666B296B235F5E4D00BEBCD1 /* AttributeValue.swift in Sources */,
@@ -1246,35 +1380,47 @@
 				666B297A235F5E4D00BEBCD1 /* ContextUtils.swift in Sources */,
 				666B2965235F5E4D00BEBCD1 /* BinaryFormattable.swift in Sources */,
 				666B2975235F5E4D00BEBCD1 /* Timestamp.swift in Sources */,
+				66E61DE72371DCE300C03C72 /* OpenTelemetry.swift in Sources */,
 				666B2967235F5E4D00BEBCD1 /* SpanAttributeConstants.swift in Sources */,
 				666B297E235F5E4D00BEBCD1 /* SpanKind.swift in Sources */,
+				66E61DB32371C33F00C03C72 /* MultiSpanProcessor.swift in Sources */,
+				66E61DEC2371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */,
 				66E61D6F23707CC100C03C72 /* SpanData.swift in Sources */,
 				666B2964235F5E4D00BEBCD1 /* HttpTraceContextFormat.swift in Sources */,
 				666B2971235F5E4D00BEBCD1 /* Decision.swift in Sources */,
 				666B2962235F5E4D00BEBCD1 /* BinaryFormat.swift in Sources */,
 				66E61D9023708A9F00C03C72 /* Clock.swift in Sources */,
 				66E61D6523707B9D00C03C72 /* SpanProcessor.swift in Sources */,
+				66E61DC92371D23800C03C72 /* MultiSpanExporter.swift in Sources */,
 				666B297D235F5E4D00BEBCD1 /* SpanBuilder.swift in Sources */,
+				66E61DA423719A9900C03C72 /* MillisClock.swift in Sources */,
 				666B296C235F5E4D00BEBCD1 /* DefaultSpan.swift in Sources */,
 				666B2972235F5E4D00BEBCD1 /* NoopScope.swift in Sources */,
 				66E61D892370872500C03C72 /* TraceConfig.swift in Sources */,
 				666B2970235F5E4D00BEBCD1 /* Link.swift in Sources */,
 				666B2985235F5E4D00BEBCD1 /* Sampler.swift in Sources */,
 				666B2979235F5E4D00BEBCD1 /* SpanInScope.swift in Sources */,
+				66E61DBF2371D00F00C03C72 /* SpanExporter.swift in Sources */,
+				66E61DDD2371DA3F00C03C72 /* BatchSpanProcessor.swift in Sources */,
 				666B2982235F5E4D00BEBCD1 /* Tracer.swift in Sources */,
 				666B2981235F5E4D00BEBCD1 /* DefaultTracer.swift in Sources */,
 				666B297F235F5E4D00BEBCD1 /* ProxyTracer.swift in Sources */,
 				66E61D952371677600C03C72 /* TimestampConverter.swift in Sources */,
 				666B296E235F5E4D00BEBCD1 /* SpanId.swift in Sources */,
 				666B2986235F5E4D00BEBCD1 /* Tracestate.swift in Sources */,
+				66E61DCE2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */,
 				666B2973235F5E4D00BEBCD1 /* SimpleLink.swift in Sources */,
+				66E61DC42371D0CE00C03C72 /* InMemorySpanExporter.swift in Sources */,
+				66E61DA92371B06300C03C72 /* EnvVarResource.swift in Sources */,
 				666B2969235F5E4D00BEBCD1 /* TracerFactoryBase.swift in Sources */,
 				666B2978235F5E4D00BEBCD1 /* Samplers.swift in Sources */,
 				66E61D7523707F0600C03C72 /* Resource.swift in Sources */,
 				66E61D6A23707BF500C03C72 /* ReadableSpan.swift in Sources */,
 				666B2984235F5E4D00BEBCD1 /* TraceFlags.swift in Sources */,
+				66E61DAE2371B86400C03C72 /* NoopSpanProcessor.swift in Sources */,
 				666B296F235F5E4D00BEBCD1 /* SpanContext.swift in Sources */,
 				666B2977235F5E4D00BEBCD1 /* NeverSampleSampler.swift in Sources */,
+				66E61DB92371C6B200C03C72 /* ProbabilitySampler.swift in Sources */,
 				666B2963235F5E4D00BEBCD1 /* TracestateUtils.swift in Sources */,
 				666B297B235F5E4D00BEBCD1 /* Activity.swift in Sources */,
 				666B297C235F5E4D00BEBCD1 /* TraceId.swift in Sources */,

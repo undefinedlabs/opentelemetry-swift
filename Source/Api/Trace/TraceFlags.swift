@@ -160,7 +160,7 @@ public struct TraceFlags: Equatable, CustomStringConvertible {
      * @return a boolean indicating whether the trace is sampled.
      * @since 0.1.0
      */
-    public var isSampled: Bool {
+    public var sampled: Bool {
         hasOption(mask: TraceFlags.IS_SAMPLED)
     }
 
@@ -183,7 +183,7 @@ public struct TraceFlags: Equatable, CustomStringConvertible {
     }
 
     public var description: String {
-        "TraceFlags{sampled=\(isSampled)}"
+        "TraceFlags{sampled=\(sampled)}"
     }
 
     private func hasOption(mask: UInt8) -> Bool {

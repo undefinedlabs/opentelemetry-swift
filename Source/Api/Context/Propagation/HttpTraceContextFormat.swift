@@ -25,7 +25,7 @@ public struct HttpTraceContextFormat: TextFormattable {
     public func inject<S>(spanContext: SpanContext, carrier: inout [String:String], setter: S) where S: Setter {
         var traceparent = "00-\(spanContext.traceId.hexString)-\(spanContext.spanId.hexString)"
 
-        traceparent += spanContext.traceFlags.isSampled ? "-01" : "-00"
+        traceparent += spanContext.traceFlags.sampled ? "-01" : "-00"
 
         setter.set(carrier: &carrier, key: HttpTraceContextFormat.TRACEPARENT, value: traceparent)
 

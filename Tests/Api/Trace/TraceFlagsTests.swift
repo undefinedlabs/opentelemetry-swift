@@ -23,8 +23,8 @@ final class TraceFlagsTests: XCTestCase {
     }
 
     func testIsSampled() {
-        XCTAssertFalse(TraceFlags().isSampled)
-        XCTAssertTrue(TraceFlags().settingIsSampled(true).isSampled)
+        XCTAssertFalse(TraceFlags().sampled)
+        XCTAssertTrue(TraceFlags().settingIsSampled(true).sampled)
     }
 
     func testFromByte() {

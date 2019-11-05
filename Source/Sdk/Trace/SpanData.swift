@@ -77,7 +77,6 @@ struct SpanData {
      */
     private(set) var timestamp: Timestamp
 
-
     /**
      * Returns the attributes recorded for this {@code Span}.
      *
@@ -92,7 +91,7 @@ struct SpanData {
      * @return the timed events recorded for this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var timedEvents: [ TimedEvent]?
+    private(set) var timedEvents: [TimedEvent]?
 
     /**
      * Returns links recorded for this {@code Span}.
@@ -100,7 +99,7 @@ struct SpanData {
      * @return links recorded for this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var links: [ Link]
+    private(set) var links: [Link]
 
     /**
      * Returns the {@code Status}.
@@ -118,63 +117,76 @@ struct SpanData {
      */
     private(set) var endTimestamp: Timestamp
 
-
-    mutating func settingName(_ name:String) -> SpanData {
+    mutating func settingName(_ name: String) -> SpanData {
         self.name = name
         return self
     }
+
     mutating func settingTraceId(_ traceId: TraceId) -> SpanData {
         self.traceId = traceId
         return self
     }
+
     mutating func settingSpanId(_ spanId: SpanId) -> SpanData {
         self.spanId = spanId
         return self
     }
+
     mutating func settingTraceFlags(_ traceFlags: TraceFlags) -> SpanData {
         self.traceFlags = traceFlags
         return self
     }
-    mutating func settingTracestate(_ tracestate: Tracestate    ) -> SpanData {
+
+    mutating func settingTracestate(_ tracestate: Tracestate) -> SpanData {
         self.tracestate = tracestate
         return self
     }
-    mutating func settingAttributes(_ attributes: [String :AttributeValue]) -> SpanData {
+
+    mutating func settingAttributes(_ attributes: [String: AttributeValue]) -> SpanData {
         self.attributes = attributes
         return self
     }
+
     mutating func settingStartTimestamp(_ startTimestamp: Timestamp) -> SpanData {
-        self.timestamp  = startTimestamp
+        timestamp = startTimestamp
         return self
     }
+
     mutating func settingEndTimestamp(_ endTimestamp: Timestamp) -> SpanData {
         self.endTimestamp = endTimestamp
         return self
     }
+
     mutating func settingKind(_ kind: SpanKind) -> SpanData {
         self.kind = kind
         return self
     }
+
     mutating func settingLinks(_ links: [Link]) -> SpanData {
         self.links = links
         return self
     }
+
     mutating func settingParentSpanId(_ parentSpanId: SpanId) -> SpanData {
         self.parentSpanId = parentSpanId
         return self
     }
+
     mutating func settingResource(_ resource: Resource) -> SpanData {
         self.resource = resource
         return self
     }
+
     mutating func settingStatus(_ status: Status) -> SpanData {
         self.status = status
         return self
     }
+
     mutating func settingTimedEvents(_ timedEvents: [TimedEvent]) -> SpanData {
         self.timedEvents = timedEvents
         return self
     }
+
     /**
      * A timed event representation.
      *

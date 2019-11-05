@@ -25,8 +25,8 @@ struct ContextUtils {
         }
     }
 
-    static func withSpan(span: Span) -> os_activity_id_t {
-        return span.context.activityId
+    static func withSpan(span: Span) -> Scope {
+        return SpanInScope(span: span)
     }
 
     static func setContextForSpan(span:Span) {
@@ -34,6 +34,6 @@ struct ContextUtils {
     }
 
     static func removeContextForSpan(span:Span) {
-        spanActivityMap[span.context.activityId] = span
+        spanActivityMap[span.context.activityId] = nil
     }
 }

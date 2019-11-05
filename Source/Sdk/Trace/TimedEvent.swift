@@ -8,14 +8,13 @@
 import Foundation
 
 struct TimedEvent {
-
     private static let emptyAttributes = [String: AttributeValue]()
 
     private(set) var nanotime: Int
     private(set) var name: String
-    private(set) var attributes:[String: AttributeValue]
+    private(set) var attributes: [String: AttributeValue]
 
-    init( nanotime: Int, name: String, attributes: [String: AttributeValue] = emptyAttributes) {
+    init(nanotime: Int, name: String, attributes: [String: AttributeValue] = emptyAttributes) {
         self.nanotime = nanotime
         self.name = name
         self.attributes = attributes
@@ -23,7 +22,7 @@ struct TimedEvent {
 
     init(nanotime: Int, event: Event) {
         self.nanotime = nanotime
-        self.name = event.name
-        self.attributes = event.attributes
+        name = event.name
+        attributes = event.attributes
     }
 }

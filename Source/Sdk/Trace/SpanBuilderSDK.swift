@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SpanBuilderSDK: SpanBuilder {
+class SpanBuilderSdk: SpanBuilder {
     private enum ParentType {
         case currentSpan
         case explicitParent
@@ -111,7 +111,7 @@ class SpanBuilderSDK: SpanBuilder {
 
         let spanContext = SpanContext(traceId: traceId, spanId: spanId, traceFlags: TraceFlags().settingIsSampled(samplingDecision.isSampled), tracestate: tracestate)
 
-        let timestampConverter = SpanBuilderSDK.getTimestampConverter(parent: SpanBuilderSDK.getParentSpan(parentType: parentType, explicitParent: parent))
+        let timestampConverter = SpanBuilderSdk.getTimestampConverter(parent: SpanBuilderSdk.getParentSpan(parentType: parentType, explicitParent: parent))
 
         return RecordEventsReadableSpan.startSpan(context: spanContext, name: spanName, kind: spanKind, parentSpanId: parentContext?.spanId, traceConfig: traceConfig, spanProcessor: spanProcessor, timestampConverter: timestampConverter, clock: clock, resource: resource, attributes: samplingDecision.attributes, links: truncatedLinks, totalRecordedLinks: links.count)
     }
@@ -134,15 +134,15 @@ class SpanBuilderSDK: SpanBuilder {
         }
     }
 
-    private static func getParentSpan( parentType: ParentType,  explicitParent: Span?)-> Span? {
-      switch (parentType) {
-      case .currentSpan:
-          return ContextUtils.getCurrent();
-      case .explicitParent:
-          return explicitParent;
+    private static func getParentSpan(parentType: ParentType, explicitParent: Span?) -> Span? {
+        switch parentType {
+        case .currentSpan:
+            return ContextUtils.getCurrent()
+        case .explicitParent:
+            return explicitParent
         default:
-          return nil;
-      }
+            return nil
+        }
     }
 
     private static func getTimestampConverter(parent: Span?) -> TimestampConverter? {
