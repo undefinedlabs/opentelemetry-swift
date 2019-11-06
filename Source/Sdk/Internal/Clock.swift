@@ -11,3 +11,9 @@ protocol Clock {
     var now: Timestamp { get }
     var nowNanos: Int { get }
 }
+
+extension Clock {
+    var nowNanos: Int {
+        return Int(now.timeInterval * Double(TimestampConverter.nanosPerSecond))
+    }
+}

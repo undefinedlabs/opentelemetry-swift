@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Resource {
+struct Resource: Equatable {
     private static let maxLength = 255
 
     var labels: [String: String]
@@ -23,6 +23,12 @@ struct Resource {
     mutating func merge(other: Resource) {
         labels.merge(other.labels) { current, _ in current }
     }
+
+    func merging(other: Resource) -> Resource {
+        let labelsCopy = self.labels.merging(other.labels) { current, _ in current }
+        return Resource(labels: labelsCopy)
+    }
+
 
     private static func checkLabels(labels: [String: String]) -> Bool {
         for entry in labels {

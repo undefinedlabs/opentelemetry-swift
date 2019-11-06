@@ -19,17 +19,21 @@ public struct Timestamp: Comparable {
      *     represented by {@code Timestamp}.
      * @since 0.1.0
      */
-    init() {
+    public init() {
         self.timeInterval = Date().timeIntervalSince1970
     }
 
 
-    init(timeInterval: TimeInterval) {
+    public init(timeInterval: TimeInterval) {
         self.timeInterval = timeInterval
     }
 
-    init(fromMillis: Int) {
+    public init(fromMillis: Int) {
         timeInterval = Double(fromMillis) / 1000
+    }
+
+    public init(fromMillis: Int, nanoseconds: Int) {
+        timeInterval = Double(fromMillis) / 1000 + Double(nanoseconds) / 1000_000_000
     }
 
     public func getSeconds() -> Int {
@@ -37,7 +41,7 @@ public struct Timestamp: Comparable {
     }
 
     public func getNanos() -> Int {
-        return Int(floor(timeInterval.truncatingRemainder(dividingBy: 1) * 1000000))
+        return Int(floor(timeInterval * 1000_000_000))
     }
 
     public static func < (lhs: Timestamp, rhs: Timestamp) -> Bool {
