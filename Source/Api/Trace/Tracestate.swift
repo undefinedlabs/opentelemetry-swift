@@ -29,10 +29,6 @@ public struct Tracestate: Equatable {
     init() {
     }
 
-    init(tracestate: Tracestate) {
-        entries = tracestate.entries
-    }
-
     init?(entries: [Entry]) {
         guard entries.count <= Tracestate.MAX_KEY_VALUE_PAIRS else { return nil }
 
@@ -61,9 +57,9 @@ public struct Tracestate: Equatable {
         entries.append(entry)
     }
 
-    public func setting(key: String, value: String) -> Tracestate {
+    public func setting(key: String, value: String) -> Self {
         // Initially create the Entry to validate input.
-        var newTracestate = Tracestate(tracestate: self)
+        var newTracestate = self
         newTracestate.set(key: key, value: value)
         return newTracestate
     }
@@ -83,7 +79,7 @@ public struct Tracestate: Equatable {
 
     public func removing(key: String) -> Tracestate {
         // Initially create the Entry to validate input.
-        var newTracestate = Tracestate(tracestate: self)
+        var newTracestate = self
         newTracestate.remove(key: key)
         return newTracestate
     }

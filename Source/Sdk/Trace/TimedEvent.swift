@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimedEvent {
+struct TimedEvent: Equatable {
     private static let emptyAttributes = [String: AttributeValue]()
 
     private(set) var nanotime: Int

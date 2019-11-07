@@ -37,7 +37,7 @@ class DefaultTracer: Tracer {
             if spanContext == nil && !isRootSpan {
                 spanContext = tracer.currentSpan?.context
             }
-            return spanContext != nil && spanContext != SpanContext.invalid ? DefaultSpan(context: spanContext!) : DefaultSpan.createRandom()
+            return spanContext != nil && spanContext != SpanContext.invalid ? DefaultSpan(context: spanContext!) : DefaultSpan.random()
         }
 
         func setParent(parent: Span) -> SpanBuilder {

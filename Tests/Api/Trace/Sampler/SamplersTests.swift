@@ -9,9 +9,9 @@
 import XCTest
 
 class SamplersTests: XCTestCase {
-    let traceId = TraceId.createRandom()
-    let parentSpanId = SpanId.createRandom()
-    let spanId = SpanId.createRandom()
+    let traceId = TraceId.random()
+    let parentSpanId = SpanId.random()
+    let spanId = SpanId.random()
     let tracestate = Tracestate()
     var sampledSpanContext: SpanContext!
     var notSampledSpanContext: SpanContext!

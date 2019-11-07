@@ -16,4 +16,40 @@ struct TraceConfig {
     var maxNumberOfLinks: Int = 32
     var maxNumberOfAttributesPerEvent: Int = 32
     var maxNumberOfAttributesPerLink: Int = 32
+
+    func settingSampler(sampler: Sampler) -> Self {
+        var traceConfig = self
+        traceConfig.sampler = sampler
+        return traceConfig
+    }
+
+    func settingMaxNumberOfAttributes(_ number: Int) -> Self {
+        var traceConfig = self
+        traceConfig.maxNumberOfAttributes = number
+        return self
+    }
+
+    func settingMaxNumberOfEvents(_ number: Int) -> Self {
+        var traceConfig = self
+        traceConfig.maxNumberOfEvents = number
+        return self
+    }
+
+    func settingMaxNumberOfLinks(_ number: Int) -> Self {
+        var traceConfig = self
+        traceConfig.maxNumberOfLinks = number
+        return self
+    }
+
+    func settingMaxNumberOfAttributesPerEvent(_ number: Int) -> Self {
+        var traceConfig = self
+        traceConfig.maxNumberOfAttributesPerEvent = number
+        return self
+    }
+
+    func settingMaxNumberOfAttributesPerLink(_ number: Int) -> Self {
+        var traceConfig = self
+        traceConfig.maxNumberOfAttributesPerLink = number
+        return self
+    }
 }

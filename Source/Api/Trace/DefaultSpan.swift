@@ -18,8 +18,8 @@ class DefaultSpan: Span {
         self.context = context
     }
 
-    static func createRandom() -> DefaultSpan {
-        return DefaultSpan(context: SpanContext(traceId: TraceId.createRandom(), spanId: SpanId.createRandom(), traceFlags: TraceFlags(), tracestate: Tracestate()))
+    static func random() -> DefaultSpan {
+        return DefaultSpan(context: SpanContext(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate()))
     }
 
     var IsRecordingEvents: Bool {

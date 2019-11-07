@@ -27,7 +27,7 @@ final class DefaultTracerTests: XCTestCase {
 
     func testGetCurrentSpan_WithSpan() {
         XCTAssert(defaultTracer.currentSpan == nil)
-        var ws = defaultTracer.withSpan(span: DefaultSpan.createRandom())
+        var ws = defaultTracer.withSpan(span: DefaultSpan.random())
         XCTAssert(defaultTracer.currentSpan != nil)
         XCTAssert(defaultTracer.currentSpan is DefaultSpan)
         ws.close()

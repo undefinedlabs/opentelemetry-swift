@@ -36,4 +36,6 @@ struct SimpleSpanProcessor: SpanProcessor {
         self.sampled = sampled
         return self
     }
+
+
 }

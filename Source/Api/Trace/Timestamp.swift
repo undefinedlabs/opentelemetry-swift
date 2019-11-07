@@ -32,8 +32,8 @@ public struct Timestamp: Comparable {
         timeInterval = Double(fromMillis) / 1000
     }
 
-    public init(fromMillis: Int, nanoseconds: Int) {
-        timeInterval = Double(fromMillis) / 1000 + Double(nanoseconds) / 1000_000_000
+    public init(fromSeconds: Int, nanoseconds: Int) {
+        timeInterval = Double(fromSeconds) + ( Double(nanoseconds) / 1000_000_000 )
     }
 
     public func getSeconds() -> Int {

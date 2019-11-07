@@ -67,7 +67,7 @@ public struct SpanId: Comparable, Hashable, CustomStringConvertible {
      * @param random The random number generator.
      * @return a valid new {@code SpanId}.
      */
-    static func createRandom() -> SpanId {
+    static func random() -> SpanId {
         var id: UInt64
         repeat {
             id =  UInt64.random(in: .min ... .max)

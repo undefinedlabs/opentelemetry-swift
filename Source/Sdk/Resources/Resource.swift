@@ -20,6 +20,10 @@ struct Resource: Equatable {
         }
     }
 
+    static func empty() -> Resource {
+        return Resource(labels: [String: String]())
+    }
+
     mutating func merge(other: Resource) {
         labels.merge(other.labels) { current, _ in current }
     }

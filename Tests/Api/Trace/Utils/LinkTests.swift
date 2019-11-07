@@ -14,7 +14,7 @@ class LinksTests: XCTestCase {
     var spanContext: SpanContext!
 
     override func setUp() {
-        spanContext = SpanContext(traceId: TraceId.createRandom(), spanId: SpanId.createRandom(), traceFlags: TraceFlags(), tracestate: tracestate)
+        spanContext = SpanContext(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: tracestate)
         attributesMap["MyAttributeKey0"] = AttributeValue.string("MyStringAttribute")
         attributesMap["MyAttributeKey1"] = AttributeValue.int(10)
         attributesMap["MyAttributeKey2"] = AttributeValue.bool(true)

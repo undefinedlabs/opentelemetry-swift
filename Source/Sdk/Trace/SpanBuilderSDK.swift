@@ -96,14 +96,14 @@ class SpanBuilderSdk: SpanBuilder {
     func startSpan() -> Span {
         var parentContext = getParentContext(parentType: parentType, explicitParent: parent, remoteParent: remoteParent)
         let traceId: TraceId
-        let spanId = SpanId.createRandom()
+        let spanId = SpanId.random()
         var tracestate = Tracestate()
 
         if parentContext?.isValid ?? false {
             traceId = parentContext!.traceId
             tracestate = parentContext!.tracestate
         } else {
-            traceId = TraceId.createRandom()
+            traceId = TraceId.random()
             parentContext = nil
         }
 

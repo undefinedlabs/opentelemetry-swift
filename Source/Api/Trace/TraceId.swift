@@ -66,7 +66,7 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible {
      * @param random the random number generator.
      * @return a new valid {@code TraceId}.
      */
-    public static func createRandom()-> TraceId {
+    public static func random()-> TraceId {
         var idHi: UInt64
         var idLo: UInt64
         repeat {

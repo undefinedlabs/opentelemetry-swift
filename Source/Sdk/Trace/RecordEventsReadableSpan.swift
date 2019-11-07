@@ -7,8 +7,8 @@
 
 import Foundation
 
-typealias AttributesWithCapacity = [String: AttributeValue]
 typealias EvictingQueue = [TimedEvent]
+typealias AttributesWithCapacity = [String: AttributeValue]
 
 class RecordEventsReadableSpan: ReadableSpan {
 //    private static final Logger logger = Logger.getLogger(Tracer.class.getName());
@@ -43,7 +43,7 @@ class RecordEventsReadableSpan: ReadableSpan {
     private(set) var startNanoTime: Int
     // Set of recorded attributes. DO NOT CALL any other method that changes the ordering of events.
 //    var attributes: AttributesWithCapacity?
-    private(set) var attributes: AttributesWithCapacity?
+    private(set) var attributes = AttributesWithCapacity()
     // List of recorded events.
     private(set) var events: EvictingQueue?
     // Number of events recorded.
@@ -51,9 +51,17 @@ class RecordEventsReadableSpan: ReadableSpan {
     // The number of children.
     private(set) var numberOfChildren: Int
     // The status of the span.
-    var status: Status?
+    var status: Status? = .ok {
+        didSet {
+            if hasBeenEnded || status == nil {
+                status = oldValue
+            }
+        }
+    }
+
     // The end time of the span.
-    private(set) var endNanoTime: Int?
+    private var endNanoTime: Int?
+
     // True if the span is ended.
     private(set) var hasBeenEnded: Bool
 
@@ -71,6 +79,7 @@ class RecordEventsReadableSpan: ReadableSpan {
         hasBeenEnded = false
         numberOfChildren = 0
         self.timestampConverter = timestampConverter ?? TimestampConverter.now(clock: clock)
+        self.attributes = attributes
         startNanoTime = clock.nowNanos
     }
 
@@ -82,18 +91,10 @@ class RecordEventsReadableSpan: ReadableSpan {
 
     func toSpanData() -> SpanData {
         let startTimestamp = timestampConverter.convertNanoTime(nanoTime: startNanoTime)
-        let endTimestamp = timestampConverter.convertNanoTime(nanoTime: endNanoTime ?? startNanoTime)
+        let endTimestamp = timestampConverter.convertNanoTime(nanoTime: getEndNanoTime())
 
         return SpanData(traceId: context.traceId, spanId: context.spanId, traceFlags: context.traceFlags, tracestate: context.tracestate, parentSpanId: parentSpanId, resource: resource, name: name, kind: kind, timestamp: startTimestamp, attributes: attributes, timedEvents: adaptTimedEvents(), links: links, status: status, endTimestamp: endTimestamp)
     }
-
-//    private mutating func getInitializedAttributes() -> AttributesWithCapacity {
-//        if attributes == nil {
-    ////            attributes = AttributesWithCapacity(maximumCapacity: traceConfig.maxNumberOfAttributes);
-//            attributes = AttributesWithCapacity()
-//        }
-//        return attributes!
-//    }
 
     private func adaptTimedEvents() -> [TimedEvent] {
         let sourceEvents = getTimedEvents()
@@ -121,6 +122,7 @@ class RecordEventsReadableSpan: ReadableSpan {
     func updateName(name: String) {
         if hasBeenEnded {
             // logger.log(Level.FINE, "Calling updateName() on an ended Span.");
+            return
         }
         self.name = name
     }
@@ -146,8 +148,7 @@ class RecordEventsReadableSpan: ReadableSpan {
             //               logger.log(Level.FINE, "Calling setAttribute() on an ended Span.");
             return
         }
-        attributes = AttributesWithCapacity()
-        attributes![key] = value
+        attributes[key] = value
     }
 
     func addEvent(name: String) {
@@ -181,11 +182,17 @@ class RecordEventsReadableSpan: ReadableSpan {
         }
         endNanoTime = clock.nowNanos
         hasBeenEnded = true
+        spanProcessor.onEnd(span: self)
     }
 
     func end(timestamp: Timestamp) {
+        if hasBeenEnded {
+//               logger.log(Level.FINE, "Calling end() on an ended Span.");
+            return
+        }
         endNanoTime = timestamp.getNanos()
         hasBeenEnded = true
+        spanProcessor.onEnd(span: self)
     }
 
     func addChild() {
@@ -196,6 +203,31 @@ class RecordEventsReadableSpan: ReadableSpan {
         numberOfChildren += 1
     }
 
+    /**
+     * Returns the latency of the {@code Span} in nanos. If still active then returns now() - start
+     * time.
+     *
+     * @return the latency of the {@code Span} in nanos.
+     */
+    func getLatencyNs() -> Int {
+        return getEndNanoTimeInternal() - startNanoTime
+    }
+
+    /**
+     * Returns the end nano time (see {@link System#nanoTime()}). If the current {@code Span} is not
+     * ended then returns {@link Clock#nowNanos()}.
+     *
+     * @return the end nano time.
+     */
+    func getEndNanoTime() -> Int {
+        return getEndNanoTimeInternal()
+    }
+
+    // Use getEndNanoTimeInternal to avoid over-locking.
+    private func getEndNanoTimeInternal() -> Int {
+        return hasBeenEnded ? endNanoTime! : clock.nowNanos
+    }
+
     private func getStatusWithDefault() -> Status {
         return status ?? .ok
     }
@@ -204,3 +236,27 @@ class RecordEventsReadableSpan: ReadableSpan {
         return "RecordEventsReadableSpan{}"
     }
 }
+
+//struct AttributesWithCapacity {
+//    fileprivate var attributes = [(String, AttributeValue)]()
+//    fileprivate var capacity: Int = 0
+//
+//    init( attributes)
+//
+//    mutating func setCapacity(capacity: Int) {
+//        self.capacity = capacity
+//        attributes.reserveCapacity(capacity + 1)
+//    }
+//
+//    subscript(name: String) -> AttributeValue {
+//        get {
+//            return attributes.first { $0.0 == name }!.1
+//        }
+//        set(newValue) {
+//            attributes.append((name, newValue))
+//            if attributes.count > capacity {
+//                attributes.removeFirst()
+//            }
+//        }
+//    }
+//}

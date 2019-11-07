@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct TestClock: Clock {
+class TestClock: Clock {
     var currentTimestamp: Timestamp
 
     init(timestamp: Timestamp) {
         currentTimestamp = timestamp
     }
 
-    init() {
+    convenience init() {
         self.init(timestamp: Timestamp(fromMillis: 1557212400000))
     }
 
@@ -24,7 +24,7 @@ struct TestClock: Clock {
      * @param timestamp the new time.
      * @since 0.1.0
      */
-    mutating func setTime(timestamp: Timestamp) {
+    func setTime(timestamp: Timestamp) {
       currentTimestamp = timestamp;
     }
 
@@ -35,7 +35,7 @@ struct TestClock: Clock {
      * @param millis the increase in time.
      * @since 0.1.0
      */
-    mutating func advanceMillis(millis: Int) {
+    func advanceMillis(millis: Int) {
         let incomingSeconds = Double(millis) / 1000
 
         currentTimestamp = Timestamp(timeInterval: currentTimestamp.timeInterval + incomingSeconds )

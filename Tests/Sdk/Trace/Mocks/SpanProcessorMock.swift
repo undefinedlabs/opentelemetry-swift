@@ -5,30 +5,30 @@
 //  Created by Ignacio Bonafonte on 06/11/2019.
 //
 
-@testable import OpenTelemetrySwift
 import Foundation
+@testable import OpenTelemetrySwift
 
 class SpanProcessorMock: SpanProcessor {
-
-    var onStartCalled = false
+    var onStartCalledTimes = 0
+    lazy var onStartCalled: Bool = { self.onStartCalledTimes > 0 }()
     var onStartCalledSpan: ReadableSpan?
-    var onEndCalled = false
+    var onEndCalledTimes = 0
+    lazy var onEndCalled: Bool = { self.onEndCalledTimes > 0 }()
     var onEndCalledSpan: ReadableSpan?
-    var shutdownCalled = false
-
+    var shutdownCalledTimes = 0
+    lazy var shutdownCalled: Bool = { self.shutdownCalledTimes > 0 }()
 
     func onStart(span: ReadableSpan) {
-        onStartCalled = true
+        onStartCalledTimes += 1
         onStartCalledSpan = span
     }
 
     func onEnd(span: ReadableSpan) {
-        onEndCalled = true
+        onEndCalledTimes += 1
         onEndCalledSpan = span
     }
 
     func shutdown() {
-        shutdownCalled = true
+        shutdownCalledTimes += 1
     }
-
 }
