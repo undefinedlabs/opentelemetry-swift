@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimestampConverter {
+struct TimestampConverter: Equatable {
     static let nanosPerSecond = 1000000000
     static let nanosPerMilli = 1000000
 

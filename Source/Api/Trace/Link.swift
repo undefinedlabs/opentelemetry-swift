@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Link {
+public protocol Link: AnyObject {
     /**
      * Returns the {@code SpanContext}.
      *
@@ -23,4 +23,12 @@ public protocol Link {
      * @since 0.1.0
      */
     var attributes: [String:AttributeValue] { get }
+}
+
+func == (lhs: Link, rhs: Link) -> Bool {
+    return lhs.context == rhs.context && lhs.attributes == rhs.attributes
+}
+
+func == (lhs: [Link], rhs: [Link]) -> Bool {
+    return lhs.elementsEqual(rhs) { $0.context == $1.context && $0.attributes == $1.attributes }
 }

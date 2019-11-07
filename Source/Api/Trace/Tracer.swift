@@ -49,7 +49,7 @@ public protocol Tracer {
     /// </summary>
     /// <param name="span">Span to associate with the current context.</param>
     /// <returns>Disposable object to control span to current context association.</returns>
-    func withSpan(span: Span) -> Scope
+    func withSpan(_ span: Span) -> Scope
 
     // TODO: add sampling hints
     // TODO: add lazy links

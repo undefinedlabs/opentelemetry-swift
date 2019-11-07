@@ -16,7 +16,7 @@ public protocol Span: AnyObject, CustomStringConvertible {
     /// <summary>
     /// Gets a value indicating whether this span will be recorded.
     /// </summary>
-    var IsRecordingEvents: Bool { get }
+    var isRecordingEvents: Bool { get }
 
     /// <summary>
     /// Sets the status of the span execution.

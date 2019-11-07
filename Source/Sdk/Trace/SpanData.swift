@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SpanData {
+struct SpanData: Equatable {
     /**
      * Gets the trace id for this span.
      *
@@ -83,7 +83,7 @@ struct SpanData {
      * @return the attributes recorded for this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var attributes: [String: AttributeValue]?
+    private(set) var attributes = [String: AttributeValue]()
 
     /**
      * Returns the timed events recorded for this {@code Span}.
@@ -91,7 +91,7 @@ struct SpanData {
      * @return the timed events recorded for this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var timedEvents: [TimedEvent]?
+    private(set) var timedEvents = [TimedEvent]()
 
     /**
      * Returns links recorded for this {@code Span}.
@@ -99,7 +99,7 @@ struct SpanData {
      * @return links recorded for this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var links: [Link]
+    private(set) var links = [Link]()
 
     /**
      * Returns the {@code Status}.
@@ -116,6 +116,23 @@ struct SpanData {
      * @since 0.1.0
      */
     private(set) var endTimestamp: Timestamp
+
+    static func == (lhs: SpanData, rhs: SpanData) -> Bool {
+        return lhs.traceId == rhs.traceId &&
+            lhs.spanId == rhs.spanId &&
+            lhs.traceFlags == rhs.traceFlags &&
+            lhs.tracestate == rhs.tracestate &&
+            lhs.parentSpanId == rhs.parentSpanId &&
+            lhs.name == rhs.name &&
+            lhs.kind == rhs.kind &&
+            lhs.status == rhs.status &&
+            lhs.endTimestamp == rhs.endTimestamp &&
+            lhs.timestamp == rhs.timestamp &&
+            lhs.resource == rhs.resource &&
+            lhs.attributes == rhs.attributes &&
+            lhs.timedEvents == rhs.timedEvents &&
+            lhs.links == rhs.links
+    }
 
     mutating func settingName(_ name: String) -> SpanData {
         self.name = name

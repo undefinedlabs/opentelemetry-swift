@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SimpleLink: Link, Equatable, CustomStringConvertible {
+class SimpleLink: Link, Equatable, CustomStringConvertible {
 
     private static var emptyAttributes = [String: AttributeValue]()
 
@@ -23,8 +23,8 @@ struct SimpleLink: Link, Equatable, CustomStringConvertible {
         return "SimpleLink{context=\(context), attributes=\(attributes)}"
     }
 
-    func isEqualTo(_ other: Link) -> Bool {
-        return context == other.context && attributes == other.attributes
+    static func == (lhs: SimpleLink, rhs: SimpleLink) -> Bool {
+        return lhs.context == rhs.context && lhs.attributes == rhs.attributes
     }
 
 }

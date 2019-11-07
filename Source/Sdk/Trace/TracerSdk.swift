@@ -15,7 +15,8 @@ struct TracerSdk: Tracer {
     var clock = MillisClock()
     var resource = EnvVarResource.resource
 
-    let activeTraceConfig = TraceConfig()
+    var activeTraceConfig = TraceConfig()
+    
     private var activeSpanProcessor: SpanProcessor = NoopSpanProcessor()
 
     private var registeredSpanProcessors = [SpanProcessor]()
@@ -33,7 +34,7 @@ struct TracerSdk: Tracer {
         return SpanBuilderSdk(spanName: spanName, spanProcessor: activeSpanProcessor, traceConfig: activeTraceConfig, resource: resource, clock: clock)
     }
 
-    func withSpan(span: Span) -> Scope {
+    func withSpan(_ span: Span) -> Scope {
         return ContextUtils.withSpan(span: span)
     }
 

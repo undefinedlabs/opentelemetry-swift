@@ -27,7 +27,7 @@ final class DefaultTracerTests: XCTestCase {
 
     func testGetCurrentSpan_WithSpan() {
         XCTAssert(defaultTracer.currentSpan == nil)
-        var ws = defaultTracer.withSpan(span: DefaultSpan.random())
+        var ws = defaultTracer.withSpan(DefaultSpan.random())
         XCTAssert(defaultTracer.currentSpan != nil)
         XCTAssert(defaultTracer.currentSpan is DefaultSpan)
         ws.close()
@@ -44,11 +44,11 @@ final class DefaultTracerTests: XCTestCase {
 
     func testTestInProcessContext() {
         let span = defaultTracer.spanBuilder(spanName: spanName).startSpan()
-        var scope = defaultTracer.withSpan(span: span)
+        var scope = defaultTracer.withSpan(span)
         XCTAssert(defaultTracer.currentSpan === span)
 
         let secondSpan = defaultTracer.spanBuilder(spanName: spanName).startSpan()
-        var secondScope = defaultTracer.withSpan(span: secondSpan)
+        var secondScope = defaultTracer.withSpan(secondSpan)
 
         XCTAssert(defaultTracer.currentSpan === secondSpan)
 
@@ -60,20 +60,20 @@ final class DefaultTracerTests: XCTestCase {
     }
 
     func testTestSpanContextPropagationExplicitParent() {
-        let span = defaultTracer.spanBuilder(spanName: spanName).setParent(parent: spanContext).startSpan()
+        let span = defaultTracer.spanBuilder(spanName: spanName).setParent(spanContext).startSpan()
         XCTAssert(span.context === spanContext)
     }
 
     func testTestSpanContextPropagation() {
         let parent = DefaultSpan(context: spanContext)
 
-        let span = defaultTracer.spanBuilder(spanName: spanName).setParent(parent: parent).startSpan()
+        let span = defaultTracer.spanBuilder(spanName: spanName).setParent(parent).startSpan()
         XCTAssert(span.context === spanContext)
     }
 
     func testTestSpanContextPropagationCurrentSpan() {
         let parent = DefaultSpan(context: spanContext)
-        var scope = defaultTracer.withSpan(span: parent)
+        var scope = defaultTracer.withSpan(parent)
         let span = defaultTracer.spanBuilder(spanName: spanName).startSpan()
         XCTAssert(span.context === spanContext)
         scope.close()

@@ -16,7 +16,7 @@ import Foundation
  *
  * @since 0.1.0
  */
-public struct Status {
+public struct Status: Equatable  {
 
     /**
      * The set of canonical status codes. If new codes are added over time they must choose a
@@ -354,9 +354,6 @@ public struct Status {
     var isOk: Bool {
         return CanonicalCode.ok == canonicalCode
     }
-}
-
-extension Status: Equatable {
 }
 
 extension Status: CustomStringConvertible {

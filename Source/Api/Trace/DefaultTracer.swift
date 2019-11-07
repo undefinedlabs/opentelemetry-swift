@@ -16,7 +16,7 @@ class DefaultTracer: Tracer {
         return ContextUtils.getCurrent()
     }
 
-    func withSpan(span: Span) -> Scope {
+    func withSpan(_ span: Span) -> Scope {
         return SpanInScope(span: span)
     }
 
@@ -40,12 +40,12 @@ class DefaultTracer: Tracer {
             return spanContext != nil && spanContext != SpanContext.invalid ? DefaultSpan(context: spanContext!) : DefaultSpan.random()
         }
 
-        func setParent(parent: Span) -> SpanBuilder {
+        func setParent(_ parent: Span) -> SpanBuilder {
             spanContext = parent.context
             return self
         }
 
-        func setParent(parent: SpanContext) -> SpanBuilder {
+        func setParent(_ parent: SpanContext) -> SpanBuilder {
             spanContext = parent
             return self
         }
@@ -67,7 +67,7 @@ class DefaultTracer: Tracer {
             return self
         }
 
-        func addLink(link: Link) -> SpanBuilder {
+        func addLink(_ link: Link) -> SpanBuilder {
             return self
         }
 

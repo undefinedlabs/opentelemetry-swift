@@ -13,7 +13,7 @@ import Foundation
  *
  * @since 0.1.0
  */
-public struct SpanId: Comparable, Hashable, CustomStringConvertible {
+public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     private static let SIZE = 8
     private static let BASE16_SIZE = 2 * SIZE
     private static let INVALID_ID: UInt64 = 0

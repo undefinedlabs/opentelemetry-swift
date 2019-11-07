@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SpanKind {
+public enum SpanKind: Equatable {
     /**
      * Default value. Indicates that the span is used internally.
      *

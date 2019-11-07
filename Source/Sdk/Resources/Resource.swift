@@ -20,8 +20,8 @@ struct Resource: Equatable {
         }
     }
 
-    static func empty() -> Resource {
-        return Resource(labels: [String: String]())
+    init() {
+        self.init(labels: [String: String]())
     }
 
     mutating func merge(other: Resource) {

@@ -19,7 +19,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
     let startTime = Timestamp(fromSeconds: 1000, nanoseconds: 0)
     var testClock: TestClock!
     var timestampConverter: TimestampConverter!
-    let resource = Resource.empty()
+    let resource = Resource()
     var attributes = [String: AttributeValue]()
     var expectedAttributes = [String: AttributeValue]()
     let event = SimpleEvent(name: "event2", attributes: [String: AttributeValue]())
@@ -85,7 +85,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         let span = createTestSpan(attributes: attributes)
         span.end()
         let spanData = span.toSpanData()
-        XCTAssertEqual(spanData.attributes?.count, attributes.count)
+        XCTAssertEqual(spanData.attributes.count, attributes.count)
     }
 
     func testSetStatus() {
@@ -141,7 +141,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         span.setAttribute(key: "BooleanKey", value: false)
         span.end()
         let spanData = span.toSpanData()
-        XCTAssertEqual(spanData.attributes?.count, 4)
+        XCTAssertEqual(spanData.attributes.count, 4)
     }
 
     func testAddEvent() {
@@ -151,111 +151,136 @@ class RecordEventsReadableSpanTest: XCTestCase {
         span.addEvent(event: SimpleEvent(name: "event3"))
         span.end()
         let spanData = span.toSpanData()
-        XCTAssertEqual(spanData.timedEvents?.count, 3)
+        XCTAssertEqual(spanData.timedEvents.count, 3)
     }
 
-
-//      func testDroppingAttributes() {
-//        let maxNumberOfAttributes = 8;
+    func testDroppingAttributes() {
+        // TODO: needs proper implementation of AttributesWithCapacity
+//        let maxNumberOfAttributes = 8
 //        let traceConfig = TraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttributes)
 //        let span = createTestSpan(config: traceConfig)
 //
-//        for i in 0..<(2 * maxNumberOfAttributes) {
-//            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i));
-//          }
-//          var spanData = span.toSpanData()
+//        for i in 0 ..< 2 * maxNumberOfAttributes {
+//            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
+//        }
+//        var spanData = span.toSpanData()
 //        XCTAssertEqual(spanData.attributes?.count, maxNumberOfAttributes)
 //
-//          for i in 0..<maxNumberOfAttributes  {
-//            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes);
+//        for i in 0 ..< maxNumberOfAttributes {
+//            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
 //            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
-//          }
-//          span.end();
+//        }
+//        span.end()
 //        spanData = span.toSpanData()
 //        XCTAssertEqual(spanData.attributes?.count, maxNumberOfAttributes)
 //
-//        for i in 0..<maxNumberOfAttributes {
-//          let expectedValue = AttributeValue.int(i + maxNumberOfAttributes);
-//          XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
+//        for i in 0 ..< maxNumberOfAttributes {
+//            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
+//            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
 //        }
-//      }
-//
-//      func test droppingAndAddingAttributes() {
-//        final int maxNumberOfAttributes = 8;
-//        TraceConfig traceConfig =
-//            TraceConfig.getDefault()
-//                .toBuilder()
-//                .setMaxNumberOfAttributes(maxNumberOfAttributes)
-//                .build();
+    }
+
+    func testDroppingAndAddingAttributes() {
+        // TODO: needs proper implementation of AttributesWithCapacity
+
+//        let maxNumberOfAttributes = 8
+//        let traceConfig = TraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttributes)
 //        let span = createTestSpan(config: traceConfig)
-//        try {
-//          for (int i = 0; i < 2 * maxNumberOfAttributes; i++) {
-//            span.setAttribute("MyStringAttributeKey" + i, AttributeValue.longAttributeValue(i));
-//          }
-//          let spanData = span.toSpanData()
-//          assertThat(spanData.getAttributes().size()).isEqualTo(maxNumberOfAttributes);
-//          for (int i = 0; i < maxNumberOfAttributes; i++) {
-//            AttributeValue expectedValue = AttributeValue.longAttributeValue(i + maxNumberOfAttributes);
-//            assertThat(
-//                    spanData.getAttributes().get("MyStringAttributeKey" + (i + maxNumberOfAttributes)))
-//                .isEqualTo(expectedValue);
-//          }
-//
-//          for (int i = 0; i < maxNumberOfAttributes / 2; i++) {
-//            span.setAttribute("MyStringAttributeKey" + i, AttributeValue.longAttributeValue(i));
-//          }
-//          spanData = span.toSpanData();
-//          assertThat(spanData.getAttributes().size()).isEqualTo(maxNumberOfAttributes);
-//          // Test that we still have in the attributes map the latest maxNumberOfAttributes / 2 entries.
-//          for (int i = 0; i < maxNumberOfAttributes / 2; i++) {
-//            int val = i + maxNumberOfAttributes * 3 / 2;
-//            AttributeValue expectedValue = AttributeValue.longAttributeValue(val);
-//            assertThat(spanData.getAttributes().get("MyStringAttributeKey" + val))
-//                .isEqualTo(expectedValue);
-//          }
-//          // Test that we have the newest re-added initial entries.
-//          for (int i = 0; i < maxNumberOfAttributes / 2; i++) {
-//            AttributeValue expectedValue = AttributeValue.longAttributeValue(i);
-//            assertThat(spanData.getAttributes().get("MyStringAttributeKey" + i))
-//                .isEqualTo(expectedValue);
-//          }
-//        } finally {
-//          span.end();
+//        for i in 0 ..< 2 * maxNumberOfAttributes {
+//            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
 //        }
-//      }
+//        var spanData = span.toSpanData()
+//        XCTAssertEqual(spanData.attributes?.count, maxNumberOfAttributes)
 //
-//      func test droppingEvents() {
-//        final int maxNumberOfEvents = 8;
-//        TraceConfig traceConfig =
-//            TraceConfig.getDefault().toBuilder().setMaxNumberOfEvents(maxNumberOfEvents).build();
+//        for i in 0 ..< maxNumberOfAttributes {
+//            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
+//            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
+//        }
+//
+//        for i in 0 ..< maxNumberOfAttributes / 2 {
+//            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
+//        }
+//        spanData = span.toSpanData()
+//        XCTAssertEqual(spanData.attributes?.count, maxNumberOfAttributes)
+//        // Test that we still have in the attributes map the latest maxNumberOfAttributes / 2 entries.
+//        for i in 0 ..< maxNumberOfAttributes / 2 {
+//            let val = i + maxNumberOfAttributes * 3 / 2
+//            let expectedValue = AttributeValue.int(val)
+//            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(val)"], expectedValue)
+//        }
+//        // Test that we have the newest re-added initial entries.
+//        for i in 0 ..< maxNumberOfAttributes / 2 {
+//            let expectedValue = AttributeValue.int(i)
+//            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(i)"], expectedValue)
+//        }
+//        span.end()
+    }
+
+    func testDroppingEvents() {
+        // TODO: needs proper implementation of AttributesWithCapacity
+
+//        let maxNumberOfEvents = 8
+//        let traceConfig = TraceConfig().settingMaxNumberOfEvents(maxNumberOfEvents)
 //        let span = createTestSpan(config: traceConfig)
-//        try {
-//          for (int i = 0; i < 2 * maxNumberOfEvents; i++) {
-//            span.addEvent(event);
-//            testClock.advanceMillis(MILLIS_PER_SECOND);
-//          }
-//          let spanData = span.toSpanData()
-//
-//          assertThat(spanData.getTimedEvents().size()).isEqualTo(maxNumberOfEvents);
-//          for (int i = 0; i < maxNumberOfEvents; i++) {
-//            SpanData.TimedEvent expectedEvent =
-//                SpanData.TimedEvent.create(
-//                    Timestamp.create(startTime.getSeconds() + maxNumberOfEvents + i, 0), event);
-//            assertThat(spanData.getTimedEvents().get(i)).isEqualTo(expectedEvent);
-//          }
-//        } finally {
-//          span.end();
+//        for _ in 0 ..< 2 * maxNumberOfEvents {
+//            span.addEvent(event: event)
+//            testClock.advanceMillis(millis: millisPerSecond)
 //        }
-//        let spanData = span.toSpanData()
-//        assertThat(spanData.getTimedEvents().size()).isEqualTo(maxNumberOfEvents);
-//        for (int i = 0; i < maxNumberOfEvents; i++) {
-//          SpanData.TimedEvent expectedEvent =
-//              SpanData.TimedEvent.create(
-//                  Timestamp.create(startTime.getSeconds() + maxNumberOfEvents + i, 0), event);
-//          assertThat(spanData.getTimedEvents().get(i)).isEqualTo(expectedEvent);
-//        }
-//      }
+//        var spanData = span.toSpanData()
+//        XCTAssertEqual(spanData.timedEvents?.count, maxNumberOfEvents)
 //
+//        for i in 0 ..< maxNumberOfEvents {
+//            let expectedEvent = TimedEvent( nanotime: Timestamp(fromSeconds: startTime.getSeconds() + maxNumberOfEvents + i, nanoseconds: 0).getNanos(), event: event)
+//            XCTAssertEqual(spanData.timedEvents?[i], expectedEvent)
+//        }
+//        span.end()
+//        spanData = span.toSpanData()
+//        XCTAssertEqual(spanData.timedEvents?.count, maxNumberOfEvents)
+//        for i in 0 ..< maxNumberOfEvents {
+//            let expectedEvent = TimedEvent( nanotime: Timestamp(fromSeconds: startTime.getSeconds() + maxNumberOfEvents + i, nanoseconds: 0).getNanos(), event: event)
+//            XCTAssertEqual(spanData.timedEvents?[i], expectedEvent)
+//        }
+    }
+
+    func testAsSpanData() {
+        let name = "GreatSpan"
+        let kind = SpanKind.server
+        let traceId = TraceId.random()
+        let spanId = SpanId.random()
+        let parentSpanId = SpanId.random()
+        let traceConfig = TraceConfig()
+        let spanProcessor = NoopSpanProcessor()
+        let clock = TestClock()
+        var labels = [String: String]()
+        labels["foo"] = "bar"
+        let resource = Resource(labels: labels)
+        let attributes = TestUtils.generateRandomAttributes()
+        let event1Attributes = TestUtils.generateRandomAttributes()
+        let event2Attributes = TestUtils.generateRandomAttributes()
+        let context = SpanContext(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: Tracestate())
+        let link1 = SimpleLink(context: context, attributes: TestUtils.generateRandomAttributes())
+        let links = [link1]
+
+        let readableSpan = RecordEventsReadableSpan.startSpan(context: context, name: name, kind: kind, parentSpanId: parentSpanId, traceConfig: traceConfig, spanProcessor: spanProcessor, timestampConverter: nil, clock: clock, resource: resource, attributes: attributes, links: links, totalRecordedLinks: 1)
+        let startTimeNanos = clock.nowNanos
+        clock.advanceMillis(millis: 4)
+        let firstEventTimeNanos = clock.nowNanos
+        readableSpan.addEvent(name: "event1", attributes: event1Attributes)
+        clock.advanceMillis(millis: 6)
+        let secondEventTimeNanos = clock.nowNanos
+        readableSpan.addEvent(name: "event2", attributes: event2Attributes)
+
+        clock.advanceMillis(millis: 100)
+        readableSpan.end()
+        let endTimeNanos = clock.nowNanos
+        let timedEvent1 = TimedEvent(nanotime: firstEventTimeNanos, event: SimpleEvent(name: "event1", attributes: event1Attributes))
+        let timedEvent2 = TimedEvent(nanotime: secondEventTimeNanos, event: SimpleEvent(name: "event2", attributes: event2Attributes))
+        let timedEvents = [timedEvent1, timedEvent2]
+        let expected = SpanData(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: Tracestate(), parentSpanId: parentSpanId, resource: resource, name: name, kind: kind, timestamp: nanoToTimestamp(nanotime: startTimeNanos), attributes: attributes, timedEvents: timedEvents, links: links, status: .ok, endTimestamp: nanoToTimestamp(nanotime: endTimeNanos))
+
+        let result = readableSpan.toSpanData()
+        XCTAssertEqual(expected, result)
+    }
 
     private func createTestRootSpan() -> RecordEventsReadableSpan {
         return createTestSpan(kind: .internal, config: TraceConfig(), parentSpanId: nil, attributes: [String: AttributeValue]())
@@ -302,110 +327,13 @@ class RecordEventsReadableSpanTest: XCTestCase {
         XCTAssertEqual(spanData.name, spanName)
         XCTAssertEqual(spanData.attributes, attributes)
         XCTAssertEqual(spanData.timedEvents, timedEvents)
-        XCTAssertTrue(spanData.links.elementsEqual(links) { $0.context == $1.context && $0.attributes == $1.attributes })
+        XCTAssert(spanData.links == links)
         XCTAssertEqual(spanData.timestamp, startTime)
         XCTAssertEqual(spanData.endTimestamp, endTime)
         XCTAssertEqual(spanData.status?.canonicalCode, status.canonicalCode)
     }
 
-//
-//      private static final class SimpleEvent implements Event {
-//
-//        private final String name;
-//        private final Map<String, AttributeValue> attributes;
-//
-//        private SimpleEvent(String name, Map<String, AttributeValue> attributes) {
-//          this.name = name;
-//          this.attributes = attributes;
-//        }
-//
-//        @Override
-//        public String getName() {
-//          return name;
-//        }
-//
-//        @Override
-//        public Map<String, AttributeValue> getAttributes() {
-//          return attributes;
-//        }
-//      }
-//
-//      func test testAsSpanData() {
-//        String name = "GreatSpan";
-//        Kind kind = Kind.SERVER;
-//        TraceId traceId = TestUtils.generateRandomTraceId();
-//        SpanId spanId = TestUtils.generateRandomSpanId();
-//        SpanId parentSpanId = TestUtils.generateRandomSpanId();
-//        TraceConfig traceConfig = TraceConfig.getDefault();
-//        SpanProcessor spanProcessor = NoopSpanProcessor.getInstance();
-//        TestClock clock = TestClock.create();
-//        Map<String, String> labels = new HashMap<>();
-//        labels.put("foo", "bar");
-//        Resource resource = Resource.create(labels);
-//        Map<String, AttributeValue> attributes = TestUtils.generateRandomAttributes();
-//        Map<String, AttributeValue> event1Attributes = TestUtils.generateRandomAttributes();
-//        Map<String, AttributeValue> event2Attributes = TestUtils.generateRandomAttributes();
-//        SpanContext context =
-//            SpanContext.create(traceId, spanId, TraceFlags.getDefault(), Tracestate.getDefault());
-//        Link link1 =
-//            io.opentelemetry.trace.util.Links.create(context, TestUtils.generateRandomAttributes());
-//        List<Link> links = Collections.singletonList(link1);
-//
-//        RecordEventsReadableSpan readableSpan =
-//            RecordEventsReadableSpan.startSpan(
-//                context,
-//                name,
-//                kind,
-//                parentSpanId,
-//                traceConfig,
-//                spanProcessor,
-//                null,
-//                clock,
-//                resource,
-//                attributes,
-//                links,
-//                1);
-//        long startTimeNanos = clock.nowNanos();
-//        clock.advanceMillis(4);
-//        long firstEventTimeNanos = clock.nowNanos();
-//        readableSpan.addEvent("event1", event1Attributes);
-//        clock.advanceMillis(6);
-//        long secondEventTimeNanos = clock.nowNanos();
-//        readableSpan.addEvent("event2", event2Attributes);
-//
-//        clock.advanceMillis(100);
-//        readableSpan.end();
-//        long endTimeNanos = clock.nowNanos();
-//
-//        SpanData expected =
-//            SpanData.newBuilder()
-//                .setName(name)
-//                .setKind(kind)
-//                .setStatus(Status.OK)
-//                .setStartTimestamp(nanoToTimestamp(startTimeNanos))
-//                .setEndTimestamp(nanoToTimestamp(endTimeNanos))
-//                .setTimedEvents(
-//                    Arrays.asList(
-//                        SpanData.TimedEvent.create(
-//                            nanoToTimestamp(firstEventTimeNanos),
-//                            Events.create("event1", event1Attributes)),
-//                        SpanData.TimedEvent.create(
-//                            nanoToTimestamp(secondEventTimeNanos),
-//                            Events.create("event2", event2Attributes))))
-//                .setResource(resource)
-//                .setParentSpanId(parentSpanId)
-//                .setLinks(links)
-//                .setTraceId(traceId)
-//                .setSpanId(spanId)
-//                .setAttributes(attributes)
-//                .build();
-//
-//        SpanData result = readableSpan.toSpanData();
-//        assertEquals(expected, result);
-//      }
-//
-//      private static Timestamp nanoToTimestamp(long nanotime) {
-//        return Timestamp.create(nanotime / NANOS_PER_SECOND, (int) (nanotime % NANOS_PER_SECOND));
-//      }
-//    }
+    private func nanoToTimestamp(nanotime: Int) -> Timestamp {
+        return Timestamp(fromSeconds: nanotime / nanosPerSecond, nanoseconds: nanotime % nanosPerSecond)
+    }
 }

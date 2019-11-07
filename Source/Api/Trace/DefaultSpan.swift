@@ -22,7 +22,7 @@ class DefaultSpan: Span {
         return DefaultSpan(context: SpanContext(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate()))
     }
 
-    var IsRecordingEvents: Bool {
+    var isRecordingEvents: Bool {
         return false
     }
 

@@ -7,13 +7,15 @@
 
 import Foundation
 
+//TODO: needs proper implementation of AttributesWithCapacity
 typealias EvictingQueue = [TimedEvent]
+//TODO: needs proper implementation of AttributesWithCapacity
 typealias AttributesWithCapacity = [String: AttributeValue]
 
 class RecordEventsReadableSpan: ReadableSpan {
 //    private static final Logger logger = Logger.getLogger(Tracer.class.getName());
 
-    var IsRecordingEvents = true
+    var isRecordingEvents = true
 
     // Contains the identifiers associated with this Span.
     private(set) var context: SpanContext
@@ -235,6 +237,21 @@ class RecordEventsReadableSpan: ReadableSpan {
     var description: String {
         return "RecordEventsReadableSpan{}"
     }
+
+    // For testing purposes
+    internal func getDroppedLinksCount() -> Int {
+      return totalRecordedLinks - links.count;
+    }
+
+    internal func getNumberOfChildren()  -> Int{
+        return numberOfChildren;
+
+    }
+
+    internal func getTotalRecordedEvents()  -> Int{
+        return totalRecordedEvents;
+    }
+
 }
 
 //struct AttributesWithCapacity {

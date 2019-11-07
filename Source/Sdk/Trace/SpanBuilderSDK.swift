@@ -44,14 +44,14 @@ class SpanBuilderSdk: SpanBuilder {
         sampler = traceConfig.sampler
     }
 
-    func setParent(parent: Span) -> SpanBuilder {
+    func setParent(_ parent: Span) -> SpanBuilder {
         self.parent = parent
         remoteParent = nil
         parentType = .explicitParent
         return self
     }
 
-    func setParent(parent: SpanContext) -> SpanBuilder {
+    func setParent(_ parent: SpanContext) -> SpanBuilder {
         remoteParent = parent
         self.parent = nil
         parentType = .explicitRemoteParent
@@ -71,14 +71,14 @@ class SpanBuilderSdk: SpanBuilder {
     }
 
     func addLink(spanContext: SpanContext) -> SpanBuilder {
-        return addLink(link: SimpleLink(context: spanContext))
+        return addLink(SimpleLink(context: spanContext))
     }
 
     func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> SpanBuilder {
-        return addLink(link: SimpleLink(context: spanContext, attributes: attributes))
+        return addLink(SimpleLink(context: spanContext, attributes: attributes))
     }
 
-    func addLink(link: Link) -> SpanBuilder {
+    func addLink(_ link: Link) -> SpanBuilder {
         links.append(link)
         return self
     }
@@ -108,11 +108,9 @@ class SpanBuilderSdk: SpanBuilder {
         }
 
         let samplingDecision = sampler.shouldSample(parentContext: parentContext, hasRemoteParent: false, traceId: traceId, spanId: spanId, name: spanName, parentLinks: links)
-
-        let spanContext = SpanContext(traceId: traceId, spanId: spanId, traceFlags: TraceFlags().settingIsSampled(samplingDecision.isSampled), tracestate: tracestate)
-
         let timestampConverter = SpanBuilderSdk.getTimestampConverter(parent: SpanBuilderSdk.getParentSpan(parentType: parentType, explicitParent: parent))
 
+        let spanContext = SpanContext(traceId: traceId, spanId: spanId, traceFlags: TraceFlags().settingIsSampled(samplingDecision.isSampled), tracestate: tracestate)
         return RecordEventsReadableSpan.startSpan(context: spanContext, name: spanName, kind: spanKind, parentSpanId: parentContext?.spanId, traceConfig: traceConfig, spanProcessor: spanProcessor, timestampConverter: timestampConverter, clock: clock, resource: resource, attributes: samplingDecision.attributes, links: truncatedLinks, totalRecordedLinks: links.count)
     }
 

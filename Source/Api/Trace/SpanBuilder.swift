@@ -26,7 +26,7 @@ public protocol SpanBuilder: class {
    * @see #setNoParent()
    * @since 0.1.0
    */
-    @discardableResult func setParent(parent: Span) -> SpanBuilder
+    @discardableResult func setParent(_ parent: Span) -> SpanBuilder
 
   /**
    * Sets the parent {@link SpanContext} to use. If not set, the value of {@code
@@ -49,7 +49,7 @@ public protocol SpanBuilder: class {
    * @see #setNoParent()
    * @since 0.1.0
    */
-    @discardableResult func setParent(parent: SpanContext) -> SpanBuilder
+    @discardableResult func setParent(_ parent: SpanContext) -> SpanBuilder
 
   /**
    * Sets the option to become a root {@code Span} for a new trace. If not set, the value of
@@ -111,7 +111,7 @@ public protocol SpanBuilder: class {
    * @throws NullPointerException if {@code link} is {@code null}.
    * @since 0.1.0
    */
-    @discardableResult func addLink(link: Link) -> SpanBuilder
+    @discardableResult func addLink(_ link: Link) -> SpanBuilder
 
   /**
    * Sets the {@link Span.Kind} for the newly created {@code Span}. If not called, the

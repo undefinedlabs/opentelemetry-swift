@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Timestamp: Comparable {
+public struct Timestamp: Equatable, Comparable {
     var timeInterval: TimeInterval
 
     /**

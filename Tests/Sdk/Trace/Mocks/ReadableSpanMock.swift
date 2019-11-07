@@ -13,12 +13,12 @@ class ReadableSpanMock: ReadableSpan {
     var name: String = "ReadableSpanMock"
 
     func toSpanData() -> SpanData {
-        return SpanData(traceId: context.traceId, spanId: context.spanId, traceFlags: context.traceFlags, tracestate: Tracestate(), parentSpanId: nil, resource: Resource(labels: [String:String]()), name: "ReadableSpanMock", kind: .client, timestamp: Timestamp(), attributes: nil, timedEvents: nil, links: [Link](), status: nil, endTimestamp: Timestamp())
+        return SpanData(traceId: context.traceId, spanId: context.spanId, traceFlags: context.traceFlags, tracestate: Tracestate(), parentSpanId: nil, resource: Resource(labels: [String:String]()), name: "ReadableSpanMock", kind: .client, timestamp: Timestamp(), status: nil, endTimestamp: Timestamp())
     }
 
     var context: SpanContext = SpanContext(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags())
 
-    var IsRecordingEvents: Bool = false
+    var isRecordingEvents: Bool = false
 
     var status: Status?
 

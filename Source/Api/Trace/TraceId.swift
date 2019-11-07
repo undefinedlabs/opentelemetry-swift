@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TraceId: Comparable, Hashable, CustomStringConvertible {
+public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable {
     private static let SIZE = 16
     // private static let BASE16_SIZE = 2 * BigendianEncoding.LONG_BASE16;
     private static let INVALID_ID: UInt64 = 0
