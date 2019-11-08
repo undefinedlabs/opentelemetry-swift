@@ -10,18 +10,18 @@ import Foundation
 struct TimedEvent: Equatable {
     private static let emptyAttributes = [String: AttributeValue]()
 
-    private(set) var nanotime: Int
+    private(set) var nanoTime: Int
     private(set) var name: String
     private(set) var attributes: [String: AttributeValue]
 
     init(nanotime: Int, name: String, attributes: [String: AttributeValue] = emptyAttributes) {
-        self.nanotime = nanotime
+        self.nanoTime = nanotime
         self.name = name
         self.attributes = attributes
     }
 
     init(nanotime: Int, event: Event) {
-        self.nanotime = nanotime
+        self.nanoTime = nanotime
         name = event.name
         attributes = event.attributes
     }

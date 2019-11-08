@@ -47,5 +47,4 @@ class ResourceTest: XCTestCase {
         let resource = defaultResource.merging(other: resource1)
         XCTAssertEqual(resource.labels, expectedLabelMap)
     }
-
 }

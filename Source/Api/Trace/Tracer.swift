@@ -25,7 +25,7 @@ public protocol Tracer {
     /// <summary>
     /// Gets the <see cref="IBinaryFormat"/> for this implementation.
     /// </summary>
-    var binaryFormat: BinaryFormat { get }
+    var binaryFormat: BinaryFormattable { get }
 
     /// <summary>
     /// Gets the <see cref="ITextFormat"/> for this implementation.

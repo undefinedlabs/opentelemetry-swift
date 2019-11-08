@@ -25,9 +25,8 @@ class TimestampConverterTest: XCTestCase {
         let timeConverter = TimestampConverter.now(clock: testClock)
         XCTAssertEqual(timeConverter.convertNanoTime(nanoTime: testClock.nowNanos + 3210), Timestamp(fromSeconds: 1234, nanoseconds: 8888))
         XCTAssertEqual(timeConverter.convertNanoTime(nanoTime: testClock.nowNanos + 1000), Timestamp(fromSeconds: 1234, nanoseconds: 6678))
-        XCTAssertEqual(timeConverter.convertNanoTime(nanoTime: testClock.nowNanos + 15_999_994_322), Timestamp(fromSeconds: 1250, nanoseconds: 0))
+        XCTAssertEqual(timeConverter.convertNanoTime(nanoTime: testClock.nowNanos + 15999994322), Timestamp(fromSeconds: 1250, nanoseconds: 0))
     }
-
 
     func testConvertNanoTime_Negative() {
         let timeConverter = TimestampConverter.now(clock: testClock)

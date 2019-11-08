@@ -23,11 +23,13 @@ enum SpanExporterResultCode {
         // If both errors are success then return success.
         if self == .success && newResultCode == .success {
             self = .success
+            return
         }
 
         // If any of the codes is none retryable then return none_retryable;
         if self == .failedNotRetryable || newResultCode == .failedNotRetryable {
             self = .failedNotRetryable
+            return
         }
 
         // At this point at least one of the code is FAILED_RETRYABLE and none are
@@ -36,18 +38,18 @@ enum SpanExporterResultCode {
     }
 }
 
-protocol SpanExporter {
+protocol SpanExporter: AnyObject {
     /**
      * Called to export sampled {@code Span}s.
      *
      * @param spans the list of sampled Spans to be exported.
      * @return the result of the export.
      */
-    @discardableResult mutating func export(spans: [SpanData]) -> SpanExporterResultCode
+    @discardableResult func export(spans: [SpanData]) -> SpanExporterResultCode
 
     /**
      * Called when {@link TracerSdk#shutdown()} is called, if this {@code SpanExporter} is register to
      * a {@code TracerSdk} object.
      */
-    mutating func shutdown()
+    func shutdown()
 }

@@ -8,7 +8,6 @@
 import XCTest
 
 class SpanDataTests: XCTestCase {
-
     func testdefaultValues() {
         let spanData = createBasicSpan()
         XCTAssertNil(spanData.parentSpanId)

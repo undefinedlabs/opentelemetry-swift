@@ -12,9 +12,8 @@ class NoopSpanProcessorTest: XCTestCase {
 
     func testNoCrash() {
         let noopSpanProcessor = NoopSpanProcessor()
-        noopSpanProcessor.onStart(span: readableSpan);
-        noopSpanProcessor.onEnd(span: readableSpan);
-        noopSpanProcessor.shutdown();
+        noopSpanProcessor.onStart(span: readableSpan)
+        noopSpanProcessor.onEnd(span: readableSpan)
+        noopSpanProcessor.shutdown()
     }
-
 }

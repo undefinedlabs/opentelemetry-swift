@@ -75,13 +75,13 @@ class SpanBuilderSdkTest: XCTestCase {
     }
 
     func testSampler_decisionAttributes() {
-        struct TestSampler: Sampler {
+        class TestSampler: Sampler {
             var decision: Decision
             func shouldSample(parentContext: SpanContext?, hasRemoteParent: Bool, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision {
                 return decision
             }
-
             var description: String { return "TestSampler" }
+            init(decision: Decision) { self.decision = decision }
         }
         let decision = Decision(isSampled: true, attributes: ["sampler-attribute": AttributeValue.string("bar")])
         let sampler = TestSampler(decision: decision)

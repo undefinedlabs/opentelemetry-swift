@@ -23,6 +23,7 @@ import Foundation
 * TODO: Add a link to the SpanProcessor that uses Disruptor as alternative with low contention.
 */
 
+//TODO: Missing all
 struct BatchSpanProcessor/*: SpanProcessor*/ {
     private let workerThreadName = "BatchSpanProcessor_WorkerThread"
     var sampled: Bool

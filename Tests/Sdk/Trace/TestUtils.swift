@@ -8,17 +8,15 @@
 import Foundation
 
 struct TestUtils {
-
-    static func generateRandomAttributes() -> [String:AttributeValue] {
-        var result = [String:AttributeValue]()
+    static func generateRandomAttributes() -> [String: AttributeValue] {
+        var result = [String: AttributeValue]()
         let name = UUID().uuidString
-        let attribute = AttributeValue.string(UUID().uuidString);
+        let attribute = AttributeValue.string(UUID().uuidString)
         result[name] = attribute
         return result
     }
 
-//    static func makeBasicSpan() -> SpanData {
-//        var result = SpanData(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags, tracestate: <#T##Tracestate#>, parentSpanId: <#T##SpanId?#>, resource: <#T##Resource#>, name: <#T##String#>, kind: <#T##SpanKind#>, timestamp: <#T##Timestamp#>, attributes: <#T##[String : AttributeValue]?#>, timedEvents: <#T##[TimedEvent]?#>, links: <#T##[Link]#>, status: <#T##Status?#>, endTimestamp: <#T##Timestamp#>)
-//        return result
-//    }
+    static func makeBasicSpan() -> SpanData {
+        return SpanData(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate(), resource: Resource(), name: "spanName", kind: .server, timestamp: Timestamp(fromSeconds: 3001, nanoseconds: 255), endTimestamp: Timestamp(fromSeconds: 3001, nanoseconds: 255))
+    }
 }

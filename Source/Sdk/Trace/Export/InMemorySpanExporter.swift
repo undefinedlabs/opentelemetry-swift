@@ -32,11 +32,11 @@ import Foundation
  *   }
  * </code></pre>
  */
-struct InMemorySpanExporter: SpanExporter {
+class InMemorySpanExporter: SpanExporter {
     private(set) var finishedSpanItems = [SpanData]()
     private var isStopped = false
 
-    mutating func export(spans: [SpanData]) -> SpanExporterResultCode {
+    func export(spans: [SpanData]) -> SpanExporterResultCode {
         if isStopped {
             return .failedNotRetryable
         }
@@ -44,12 +44,12 @@ struct InMemorySpanExporter: SpanExporter {
         return .success
     }
 
-    mutating func shutdown() {
+    func shutdown() {
         finishedSpanItems.removeAll()
         isStopped = true
     }
 
-    mutating func reset() {
+    func reset() {
         finishedSpanItems.removeAll()
     }
 }

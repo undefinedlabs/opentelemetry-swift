@@ -1,5 +1,5 @@
 //
-//  BinaryFormat.swift
+//  BinaryTraceContextFormat.swift
 //
 //
 //  Created by Ignacio Bonafonte on 16/10/2019.
@@ -11,7 +11,7 @@ enum SpanContextParseError: Error {
     case UnsupportedVersion
 }
 
-public struct BinaryFormat: BinaryFormattable {
+public struct BinaryTraceContextFormat: BinaryFormattable {
     private static let versionId: UInt8 = 0
     private static let versionIdOffset: Int = 0
     private static let traceIdSize: Int = 16
@@ -35,12 +35,12 @@ public struct BinaryFormat: BinaryFormattable {
 //    public static func fromData(data: Data) throws -> SpanContext {
 //
 //        try data.withUnsafeBytes { rawPointer -> SpanContext in
-//            if rawPointer.load(as: UInt8.self) != BinaryFormat.VersionId {
+//            if rawPointer.load(as: UInt8.self) != BinaryTraceContextFormat.VersionId {
 //                throw SpanContextParseError.UnsupportedVersion
 //            }
 //            var traceId = TraceId.invalid;
 //            var pos = 1
-//            if rawPointer.load(fromByteOffset: pos, as: UInt8.self) == BinaryFormat.TraceIdFieldId {
+//            if rawPointer.load(fromByteOffset: pos, as: UInt8.self) == BinaryTraceContextFormat.TraceIdFieldId {
 //                traceId = TraceId(fromData: data[0...4))
 //            }
 //
@@ -49,7 +49,7 @@ public struct BinaryFormat: BinaryFormattable {
 //    }
 
     public func fromByteArray(bytes: [UInt8]) -> SpanContext? {
-        if bytes.count == 0 || bytes[0] != BinaryFormat.versionId || bytes.count < BinaryFormat.requiredFormatLength {
+        if bytes.count == 0 || bytes[0] != BinaryTraceContextFormat.versionId || bytes.count < BinaryTraceContextFormat.requiredFormatLength {
             return nil
         }
 
@@ -58,42 +58,42 @@ public struct BinaryFormat: BinaryFormattable {
         var traceOptions = TraceFlags()
         var pos = 1
 
-        if bytes.count >= pos + BinaryFormat.idSize + BinaryFormat.traceIdSize,
-            bytes[pos] == BinaryFormat.traceIdFieldId {
-            traceId = TraceId(fromBytes: bytes[(pos + BinaryFormat.idSize)...])
-            pos += BinaryFormat.idSize + BinaryFormat.traceIdSize
+        if bytes.count >= pos + BinaryTraceContextFormat.idSize + BinaryTraceContextFormat.traceIdSize,
+            bytes[pos] == BinaryTraceContextFormat.traceIdFieldId {
+            traceId = TraceId(fromBytes: bytes[(pos + BinaryTraceContextFormat.idSize)...])
+            pos += BinaryTraceContextFormat.idSize + BinaryTraceContextFormat.traceIdSize
         } else {
             return nil
         }
 
-        if bytes.count >= pos + BinaryFormat.idSize + BinaryFormat.spanIdSize,
-            bytes[pos] == BinaryFormat.spanIdFieldId {
-            spanId = SpanId(fromBytes: bytes[(pos + BinaryFormat.idSize)...])
-            pos += BinaryFormat.idSize + BinaryFormat.spanIdSize
+        if bytes.count >= pos + BinaryTraceContextFormat.idSize + BinaryTraceContextFormat.spanIdSize,
+            bytes[pos] == BinaryTraceContextFormat.spanIdFieldId {
+            spanId = SpanId(fromBytes: bytes[(pos + BinaryTraceContextFormat.idSize)...])
+            pos += BinaryTraceContextFormat.idSize + BinaryTraceContextFormat.spanIdSize
         } else {
             return nil
         }
 
-        if bytes.count >= pos + BinaryFormat.idSize,
-            bytes[pos] == BinaryFormat.traceOptionsFieldId {
-            if bytes.count < BinaryFormat.allFormatLength {
+        if bytes.count >= pos + BinaryTraceContextFormat.idSize,
+            bytes[pos] == BinaryTraceContextFormat.traceOptionsFieldId {
+            if bytes.count < BinaryTraceContextFormat.allFormatLength {
                 return nil
             }
-            traceOptions = TraceFlags(fromByte: bytes[pos + BinaryFormat.idSize])
+            traceOptions = TraceFlags(fromByte: bytes[pos + BinaryTraceContextFormat.idSize])
         }
 
         return SpanContext(traceId: traceId, spanId: spanId, traceFlags: traceOptions)
     }
 
     public func toByteArray(spanContext: SpanContext) -> [UInt8] {
-        var byteArray = [UInt8](repeating: 0, count: BinaryFormat.allFormatLength)
-        byteArray[BinaryFormat.versionIdOffset] = BinaryFormat.versionId
-        byteArray[BinaryFormat.traceIdFieldIdOffset] = BinaryFormat.traceIdFieldId
-        byteArray[BinaryFormat.spanIdFieldIdOffset] = BinaryFormat.spanIdFieldId
-        byteArray[BinaryFormat.traceOptionFieldIdOffset] = BinaryFormat.traceOptionsFieldId
-        byteArray[BinaryFormat.traceOptionOffset] = spanContext.traceFlags.byte
-        spanContext.traceId.copyBytesTo(dest: &byteArray, destOffset: BinaryFormat.traceIdOffset)
-        spanContext.spanId.copyBytesTo(dest: &byteArray, destOffset: BinaryFormat.spanIdOffset)
+        var byteArray = [UInt8](repeating: 0, count: BinaryTraceContextFormat.allFormatLength)
+        byteArray[BinaryTraceContextFormat.versionIdOffset] = BinaryTraceContextFormat.versionId
+        byteArray[BinaryTraceContextFormat.traceIdFieldIdOffset] = BinaryTraceContextFormat.traceIdFieldId
+        byteArray[BinaryTraceContextFormat.spanIdFieldIdOffset] = BinaryTraceContextFormat.spanIdFieldId
+        byteArray[BinaryTraceContextFormat.traceOptionFieldIdOffset] = BinaryTraceContextFormat.traceOptionsFieldId
+        byteArray[BinaryTraceContextFormat.traceOptionOffset] = spanContext.traceFlags.byte
+        spanContext.traceId.copyBytesTo(dest: &byteArray, destOffset: BinaryTraceContextFormat.traceIdOffset)
+        spanContext.spanId.copyBytesTo(dest: &byteArray, destOffset: BinaryTraceContextFormat.spanIdOffset)
         return byteArray
     }
 }

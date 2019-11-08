@@ -9,7 +9,7 @@ import Foundation
 
 class DefaultTracer: Tracer {
     static var instance = DefaultTracer()
-    var binaryFormat = BinaryFormat()
+    var binaryFormat:BinaryFormattable = BinaryTraceContextFormat()
     var textFormat: TextFormattable = HttpTraceContextFormat()
 
     var currentSpan: Span? {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Sampler: CustomStringConvertible {
+public protocol Sampler: AnyObject, CustomStringConvertible {
 
     /// <summary>
     /// Checks whether span needs to be created and tracked.

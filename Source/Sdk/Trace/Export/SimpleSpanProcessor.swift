@@ -32,9 +32,10 @@ struct SimpleSpanProcessor: SpanProcessor {
         self.spanExporter = spanExporter
     }
 
-    mutating func reportOnlySampled(sampled: Bool) -> Self {
-        self.sampled = sampled
-        return self
+    func reportingOnlySampled(sampled: Bool) -> Self {
+        var processor = self
+        processor.sampled = sampled
+        return processor
     }
 
 

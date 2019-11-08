@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AlwaysSampleSampler: Sampler {
+class AlwaysSampleSampler: Sampler {
 
     func shouldSample(parentContext: SpanContext?, hasRemoteParent: Bool, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision {
         return Decision(isSampled:true)

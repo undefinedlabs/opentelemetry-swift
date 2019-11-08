@@ -115,7 +115,7 @@ class SpanBuilderSdk: SpanBuilder {
     }
 
     private var truncatedLinks: [Link] {
-        return links.suffix(traceConfig.maxNumberOfLinks)
+        return links.suffix(Int(traceConfig.maxNumberOfLinks))
     }
 
     private func getParentContext(parentType: ParentType, explicitParent: Span?, remoteParent: SpanContext?) -> SpanContext? {

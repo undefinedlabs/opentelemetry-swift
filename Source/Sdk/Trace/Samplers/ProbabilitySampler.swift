@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct ProbabilitySampler: Sampler {
+class ProbabilitySampler: Sampler {
     var probability: Double
-    var idUpperBound: Int
+    var idUpperBound: UInt
 
     init(probability: Double) {
         self.probability = probability
-        if probability == 0.0 {
-            idUpperBound = Int.min
-        } else if probability == 1.0 {
-            idUpperBound = Int.max
+        if probability <= 0.0 {
+            idUpperBound = UInt.min
+        } else if probability >= 1.0 {
+            idUpperBound = UInt.max
         } else {
-            idUpperBound = Int(probability * Double(Int.max))
+            idUpperBound = UInt(probability * Double(UInt.max))
         }
     }
 

@@ -164,19 +164,19 @@ class RecordEventsReadableSpanTest: XCTestCase {
 //            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
 //        }
 //        var spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes?.count, maxNumberOfAttributes)
+//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)
 //
 //        for i in 0 ..< maxNumberOfAttributes {
 //            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
-//            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
+//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
 //        }
 //        span.end()
 //        spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes?.count, maxNumberOfAttributes)
+//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)
 //
 //        for i in 0 ..< maxNumberOfAttributes {
 //            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
-//            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
+//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
 //        }
     }
 
@@ -227,18 +227,18 @@ class RecordEventsReadableSpanTest: XCTestCase {
 //            testClock.advanceMillis(millis: millisPerSecond)
 //        }
 //        var spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.timedEvents?.count, maxNumberOfEvents)
+//        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)
 //
 //        for i in 0 ..< maxNumberOfEvents {
 //            let expectedEvent = TimedEvent( nanotime: Timestamp(fromSeconds: startTime.getSeconds() + maxNumberOfEvents + i, nanoseconds: 0).getNanos(), event: event)
-//            XCTAssertEqual(spanData.timedEvents?[i], expectedEvent)
+//            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
 //        }
 //        span.end()
 //        spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.timedEvents?.count, maxNumberOfEvents)
+//        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)
 //        for i in 0 ..< maxNumberOfEvents {
 //            let expectedEvent = TimedEvent( nanotime: Timestamp(fromSeconds: startTime.getSeconds() + maxNumberOfEvents + i, nanoseconds: 0).getNanos(), event: event)
-//            XCTAssertEqual(spanData.timedEvents?[i], expectedEvent)
+//            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
 //        }
     }
 

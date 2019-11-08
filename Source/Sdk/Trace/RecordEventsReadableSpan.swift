@@ -118,7 +118,7 @@ class RecordEventsReadableSpan: ReadableSpan {
 
     private static func adaptTimedEvent(sourceEvent: TimedEvent, timestampConverter: TimestampConverter) -> TimedEvent {
         let event = SimpleEvent(name: sourceEvent.name, attributes: sourceEvent.attributes)
-        return TimedEvent(nanotime: sourceEvent.nanotime, event: event)
+        return TimedEvent(nanotime: sourceEvent.nanoTime, event: event)
     }
 
     func updateName(name: String) {

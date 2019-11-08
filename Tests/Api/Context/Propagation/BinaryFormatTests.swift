@@ -18,7 +18,7 @@ class BinaryFormatTests: XCTestCase {
                                   101, 102, 103, 104, 2, 1]
     var exampleSpanContext: SpanContext!
     var invalidSpanContext: SpanContext!
-    let binaryFormat = BinaryFormat()
+    let binaryFormat = BinaryTraceContextFormat()
 
     override func setUp() {
         traceId = TraceId(fromBytes: traceId_bytes)
@@ -30,7 +30,7 @@ class BinaryFormatTests: XCTestCase {
 
     private func testSpanContextConversion(spanContext: SpanContext) {
         let propagatedBinarySpanContext = binaryFormat.fromByteArray(bytes: binaryFormat.toByteArray(spanContext: spanContext))
-        XCTAssertEqual(propagatedBinarySpanContext, spanContext, "BinaryFormat propagated context is not equal with the initial context.")
+        XCTAssertEqual(propagatedBinarySpanContext, spanContext, "BinaryTraceContextFormat propagated context is not equal with the initial context.")
     }
 
     func testPropagate_SpanContextTracingEnabled() {

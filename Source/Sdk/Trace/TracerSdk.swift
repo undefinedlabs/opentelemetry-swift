@@ -10,7 +10,7 @@ import Foundation
 struct TracerSdk: Tracer {
 //    private static final Logger logger = Logger.getLogger(TracerSdk.class.getName());
 
-    var binaryFormat = BinaryFormat()
+    var binaryFormat:BinaryFormattable = BinaryTraceContextFormat()
     var textFormat: TextFormattable = HttpTraceContextFormat()
     var clock = MillisClock()
     var resource = EnvVarResource.resource
@@ -35,7 +35,7 @@ struct TracerSdk: Tracer {
     }
 
     func withSpan(_ span: Span) -> Scope {
-        return ContextUtils.withSpan(span: span)
+        return ContextUtils.with(span: span)
     }
 
     /**

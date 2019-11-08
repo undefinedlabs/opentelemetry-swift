@@ -10,7 +10,7 @@
 //struct ProxyTracer: Tracer {
 //
 //    private var scope = NoopScope()
-//    var binaryFormat = BinaryFormat()
+//    var BinaryTraceContextFormat = BinaryTraceContextFormat()
 //    var textFormat: TextFormattable = TraceContextFormat()
 //
 //    private var realTracer: Tracer?;
