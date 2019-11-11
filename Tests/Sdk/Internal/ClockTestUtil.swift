@@ -12,6 +12,6 @@ struct ClockTestUtil {
     static let nanosPerMilli = 1000 * 1000
 
     static func createTimestamp(seconds: Int, nanos: Int) -> Timestamp {
-        return Timestamp(timeInterval: Double(seconds) + Double(nanos) / Double(nanosPerSecond))
+        return Timestamp(seconds: seconds, nanos: nanos)
     }
 }

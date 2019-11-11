@@ -36,12 +36,25 @@ class TestClock: Clock {
      * @since 0.1.0
      */
     func advanceMillis(millis: Int) {
-        let incomingSeconds = Double(millis) / 1000
+        let incomingSeconds = millis / 1000;
+        let  remainingMillis = millis % 1000;
+        let  remainingNanos = remainingMillis * TimestampConverter.nanosPerMilli;
 
-        currentTimestamp = Timestamp(timeInterval: currentTimestamp.timeInterval + incomingSeconds )
+        var newSeconds = incomingSeconds + currentTimestamp.seconds
+        var newNanos = remainingNanos + currentTimestamp.nanos;
+
+        if (newNanos >= TimestampConverter.nanosPerSecond) {
+          newSeconds += newNanos / TimestampConverter.nanosPerSecond;
+          newNanos = newNanos % TimestampConverter.nanosPerSecond;
+        }
+        currentTimestamp = Timestamp(seconds: newSeconds, nanos: newNanos);
     }
 
     var now: Timestamp {
         return currentTimestamp
+    }
+
+    var nowNanos: Int {
+        return (currentTimestamp.seconds * TimestampConverter.nanosPerSecond) + currentTimestamp.nanos
     }
 }

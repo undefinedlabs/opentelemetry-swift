@@ -192,7 +192,7 @@ class RecordEventsReadableSpan: ReadableSpan {
 //               logger.log(Level.FINE, "Calling end() on an ended Span.");
             return
         }
-        endNanoTime = timestamp.getNanos()
+        endNanoTime = timestamp.nanos
         hasBeenEnded = true
         spanProcessor.onEnd(span: self)
     }

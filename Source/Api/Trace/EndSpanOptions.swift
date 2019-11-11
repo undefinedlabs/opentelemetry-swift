@@ -14,7 +14,7 @@ public class EndSpanOptions {
         self.timestamp = timestamp
     }
 
-    private static let DEFAULT = EndSpanOptions(timestamp: Timestamp(timeInterval: Date().timeIntervalSince1970))
+    private static let DEFAULT = EndSpanOptions(timestamp: Timestamp())
 
     /**
      * The default {@code EndSpanOptions}.

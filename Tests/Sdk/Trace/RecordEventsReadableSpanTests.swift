@@ -10,13 +10,13 @@ import XCTest
 class RecordEventsReadableSpanTest: XCTestCase {
     let spanName = "MySpanName"
     let spanNewName = "NewName"
-    let nanosPerSecond = 1000000000
+    let nanosPerSecond = 1000_000_000
     let millisPerSecond = 1000
     let traceId = TraceId.random()
     let spanId = SpanId.random()
     let parentSpanId = SpanId.random()
     var spanContext: SpanContext!
-    let startTime = Timestamp(fromSeconds: 1000, nanoseconds: 0)
+    let startTime = Timestamp(seconds: 1000, nanos: 0)
     var testClock: TestClock!
     var timestampConverter: TimestampConverter!
     let resource = Resource()
@@ -45,7 +45,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         // and are ignored.
         spanDoWork(span: span, status: .cancelled)
         let spanData = span.toSpanData()
-        verifySpanData(spanData: spanData, attributes: [String: AttributeValue](), timedEvents: [TimedEvent](), links: [link], spanName: spanName, startTime: Timestamp(fromSeconds: startTime.getSeconds(), nanoseconds: 0), endTime: Timestamp(fromSeconds: startTime.getSeconds(), nanoseconds: 0), status: .ok)
+        verifySpanData(spanData: spanData, attributes: [String: AttributeValue](), timedEvents: [TimedEvent](), links: [link], spanName: spanName, startTime: Timestamp(seconds: startTime.seconds, nanos: 0), endTime: Timestamp(seconds: startTime.seconds, nanos: 0), status: .ok)
     }
 
     func testEndSpanTwice_DoNotCrash() {
@@ -58,8 +58,8 @@ class RecordEventsReadableSpanTest: XCTestCase {
         let span = createTestSpan(kind: .internal)
         spanDoWork(span: span, status: nil)
         let spanData = span.toSpanData()
-        let timedEvent = TimedEvent(nanotime: Timestamp(fromSeconds: startTime.getSeconds() + 1, nanoseconds: 0).getNanos(), event: event)
-        verifySpanData(spanData: spanData, attributes: expectedAttributes, timedEvents: [timedEvent], links: [link], spanName: spanNewName, startTime: Timestamp(fromSeconds: startTime.getSeconds(), nanoseconds: 0), endTime: Timestamp(fromSeconds: testClock.now.getSeconds(), nanoseconds: 0), status: .ok)
+        let timedEvent = TimedEvent(nanotime: Timestamp(seconds: startTime.seconds + 1, nanos: 0).nanos, event: event)
+        verifySpanData(spanData: spanData, attributes: expectedAttributes, timedEvents: [timedEvent], links: [link], spanName: spanNewName, startTime: Timestamp(seconds: startTime.seconds, nanos: 0), endTime: Timestamp(seconds: testClock.now.seconds, nanos: 0), status: .ok)
         span.end()
     }
 
@@ -69,8 +69,8 @@ class RecordEventsReadableSpanTest: XCTestCase {
         span.end()
         XCTAssertEqual(spanProcessor.onEndCalledTimes, 1)
         let spanData = span.toSpanData()
-        let timedEvent = TimedEvent(nanotime: Timestamp(fromSeconds: startTime.getSeconds() + 1, nanoseconds: 0).getNanos(), event: event)
-        verifySpanData(spanData: spanData, attributes: expectedAttributes, timedEvents: [timedEvent], links: [link], spanName: spanNewName, startTime: Timestamp(fromSeconds: startTime.getSeconds(), nanoseconds: 0), endTime: Timestamp(fromSeconds: testClock.now.getSeconds(), nanoseconds: 0), status: .cancelled)
+        let timedEvent = TimedEvent(nanotime: Timestamp(seconds: startTime.seconds + 1, nanos: 0).nanos, event: event)
+        verifySpanData(spanData: spanData, attributes: expectedAttributes, timedEvents: [timedEvent], links: [link], spanName: spanNewName, startTime: Timestamp(seconds: startTime.seconds, nanos: 0), endTime: Timestamp(seconds: testClock.now.seconds, nanos: 0), status: .cancelled)
     }
 
     func testToSpanData_RootSpan() {
@@ -115,10 +115,10 @@ class RecordEventsReadableSpanTest: XCTestCase {
     func testGetLatencyNs_ActiveSpan() {
         let span = createTestSpan(kind: .internal)
         testClock.advanceMillis(millis: millisPerSecond)
-        let elapsedTimeNanos1 = (testClock.now.getSeconds() - startTime.getSeconds()) * nanosPerSecond
+        let elapsedTimeNanos1 = (testClock.now.seconds - startTime.seconds) * nanosPerSecond
         XCTAssertEqual(span.getLatencyNs(), elapsedTimeNanos1)
         testClock.advanceMillis(millis: millisPerSecond)
-        let elapsedTimeNanos2 = (testClock.now.getSeconds() - startTime.getSeconds()) * nanosPerSecond
+        let elapsedTimeNanos2 = (testClock.now.seconds - startTime.seconds) * nanosPerSecond
         XCTAssertEqual(span.getLatencyNs(), elapsedTimeNanos2)
         span.end()
     }
@@ -127,7 +127,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         let span = createTestSpan(kind: .internal)
         testClock.advanceMillis(millis: millisPerSecond)
         span.end()
-        let elapsedTimeNanos = (testClock.now.getSeconds() - startTime.getSeconds()) * nanosPerSecond
+        let elapsedTimeNanos = (testClock.now.seconds - startTime.seconds) * nanosPerSecond
         XCTAssertEqual(span.getLatencyNs(), elapsedTimeNanos)
         testClock.advanceMillis(millis: millisPerSecond)
         XCTAssertEqual(span.getLatencyNs(), elapsedTimeNanos)
@@ -230,14 +230,14 @@ class RecordEventsReadableSpanTest: XCTestCase {
 //        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)
 //
 //        for i in 0 ..< maxNumberOfEvents {
-//            let expectedEvent = TimedEvent( nanotime: Timestamp(fromSeconds: startTime.getSeconds() + maxNumberOfEvents + i, nanoseconds: 0).getNanos(), event: event)
+//            let expectedEvent = TimedEvent( nanotime: Timestamp(seconds: startTime.seconds + maxNumberOfEvents + i, nanos: 0).nanos, event: event)
 //            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
 //        }
 //        span.end()
 //        spanData = span.toSpanData()
 //        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)
 //        for i in 0 ..< maxNumberOfEvents {
-//            let expectedEvent = TimedEvent( nanotime: Timestamp(fromSeconds: startTime.getSeconds() + maxNumberOfEvents + i, nanoseconds: 0).getNanos(), event: event)
+//            let expectedEvent = TimedEvent( nanotime: Timestamp(seconds: startTime.seconds + maxNumberOfEvents + i, nanos: 0).nanos, event: event)
 //            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
 //        }
     }
@@ -334,6 +334,6 @@ class RecordEventsReadableSpanTest: XCTestCase {
     }
 
     private func nanoToTimestamp(nanotime: Int) -> Timestamp {
-        return Timestamp(fromSeconds: nanotime / nanosPerSecond, nanoseconds: nanotime % nanosPerSecond)
+        return Timestamp(seconds: nanotime / nanosPerSecond, nanos: nanotime % nanosPerSecond)
     }
 }

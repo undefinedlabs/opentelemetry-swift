@@ -8,7 +8,7 @@
 @testable import OpenTelemetrySwift
 import XCTest
 
-class TextClockTests: XCTestCase {
+class TestClockTests: XCTestCase {
     func testSetAndGetTime() {
         let clock = TestClock(timestamp: ClockTestUtil.createTimestamp(seconds: 1, nanos: 2))
         XCTAssertEqual(clock.now, ClockTestUtil.createTimestamp(seconds: 1, nanos: 2))

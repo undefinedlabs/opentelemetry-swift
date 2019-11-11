@@ -17,6 +17,6 @@ class SpanDataTests: XCTestCase {
     }
 
     private func createBasicSpan() -> SpanData {
-        return SpanData(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate(), resource: Resource(), name: "spanName", kind: .server, timestamp: Timestamp(fromSeconds: 3001, nanoseconds: 255), endTimestamp: Timestamp(fromSeconds: 3001, nanoseconds: 255))
+        return SpanData(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate(), resource: Resource(), name: "spanName", kind: .server, timestamp: Timestamp(seconds: 3001, nanos: 255), endTimestamp: Timestamp(seconds: 3001, nanos: 255))
     }
 }
