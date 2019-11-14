@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 
 final class DefaultTracerTests: XCTestCase {
-    let defaultTracer = DefaultTracer()
+    let defaultTracer = DefaultTracer.instance
     let spanName = "MySpanName"
     let firstBytes: [UInt8] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, UInt8(ascii: "a")]
 
@@ -31,7 +31,7 @@ final class DefaultTracerTests: XCTestCase {
         XCTAssert(defaultTracer.currentSpan != nil)
         XCTAssert(defaultTracer.currentSpan is DefaultSpan)
         ws.close()
-        // XCTAssert(defaultTracer.currentSpan == nil)
+        XCTAssert(defaultTracer.currentSpan == nil)
     }
 
     func testDefaultSpanBuilderWithName() {
@@ -53,10 +53,10 @@ final class DefaultTracerTests: XCTestCase {
         XCTAssert(defaultTracer.currentSpan === secondSpan)
 
         secondScope.close()
-//        XCTAssert(defaultTracer.currentSpan === span)
+        XCTAssert(defaultTracer.currentSpan === span)
 
         scope.close()
-//        XCTAssert(defaultTracer.currentSpan == nil)
+        XCTAssert(defaultTracer.currentSpan == nil)
     }
 
     func testTestSpanContextPropagationExplicitParent() {

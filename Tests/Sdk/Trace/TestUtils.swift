@@ -1,11 +1,11 @@
 //
+import Foundation
 //  TestUtils.swift
 //  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 07/11/2019.
 //
 @testable import OpenTelemetrySwift
-import Foundation
 
 struct TestUtils {
     static func generateRandomAttributes() -> [String: AttributeValue] {

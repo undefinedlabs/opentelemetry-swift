@@ -66,7 +66,7 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
      * @param random the random number generator.
      * @return a new valid {@code TraceId}.
      */
-    public static func random()-> TraceId {
+    public static func random() -> TraceId {
         var idHi: UInt64
         var idLo: UInt64
         repeat {
@@ -108,7 +108,7 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
     }
 
     init(fromBytes bytes: ArraySlice<Character>) {
-        self.init(fromData: Data(String(bytes).utf8.map{ UInt8($0) }))
+        self.init(fromData: Data(String(bytes).utf8.map { UInt8($0) }))
     }
 
     /**
@@ -124,18 +124,18 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
      */
 
     public func copyBytesTo(dest: inout Data, destOffset: Int) {
-        dest.replaceSubrange(destOffset..<destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
-        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size..<destOffset + MemoryLayout<UInt64>.size*2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
     }
 
     public func copyBytesTo(dest: inout Array<UInt8>, destOffset: Int) {
-        dest.replaceSubrange(destOffset..<destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
-        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size..<destOffset + MemoryLayout<UInt64>.size*2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
     }
 
     public func copyBytesTo(dest: inout ArraySlice<UInt8>, destOffset: Int) {
-        dest.replaceSubrange(destOffset..<destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
-        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size..<destOffset + MemoryLayout<UInt64>.size*2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
     }
 
     /**
@@ -152,14 +152,14 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
      */
     init(fromHexString hex: String, withOffset offset: Int = 0) {
         let firstIndex = hex.index(hex.startIndex, offsetBy: offset)
-        let secondIndex =  hex.index(firstIndex, offsetBy: 16)
-        let thirdIndex =  hex.index(secondIndex, offsetBy: 16)
+        let secondIndex = hex.index(firstIndex, offsetBy: 16)
+        let thirdIndex = hex.index(secondIndex, offsetBy: 16)
 
         guard hex.count >= 32 + offset,
-            let idHi = UInt64(hex[firstIndex..<secondIndex], radix: 16),
-            let idLo = UInt64(hex[secondIndex..<thirdIndex], radix: 16) else {
-                self.init()
-                return
+            let idHi = UInt64(hex[firstIndex ..< secondIndex], radix: 16),
+            let idLo = UInt64(hex[secondIndex ..< thirdIndex], radix: 16) else {
+            self.init()
+            return
         }
         self.init(idHi: idHi, idLo: idLo)
     }
@@ -230,7 +230,7 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
     //  }
 
     public var description: String {
-        return "TraceId{traceId=\(self.hexString)}"
+        return "TraceId{traceId=\(hexString)}"
     }
 
     public static func < (lhs: TraceId, rhs: TraceId) -> Bool {

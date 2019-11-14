@@ -8,9 +8,8 @@
 import Foundation
 
 class OpenTelemetrySDK {
-
     public static var tracer: TracerSdk {
-      return TracerSdk()
+        return TracerSdk()
     }
 
     /**

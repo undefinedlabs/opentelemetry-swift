@@ -57,7 +57,7 @@ final class SpanIdTests: XCTestCase {
         XCTAssertNotEqual(SpanId.invalid, second)
         XCTAssertNotEqual(SpanId.invalid, SpanId(fromBytes: secondBytes))
         XCTAssertEqual(first, SpanId(fromBytes: firstBytes))
-        XCTAssertNotEqual(first,second)
+        XCTAssertNotEqual(first, second)
         XCTAssertNotEqual(first, SpanId(fromBytes: secondBytes))
         XCTAssertEqual(second, SpanId(fromBytes: secondBytes))
     }

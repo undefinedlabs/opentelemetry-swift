@@ -213,6 +213,14 @@
 		666B29A4235F5E6900BEBCD1 /* SpanIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D995235F5B880019D8B5 /* SpanIdTests.swift */; };
 		666B29A5235F5E6900BEBCD1 /* TraceFlagsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D996235F5B880019D8B5 /* TraceFlagsTests.swift */; };
 		666B29A6235F5E6900BEBCD1 /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D997235F5B880019D8B5 /* StatusTests.swift */; };
+		66B5140B237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */; };
+		66B5140C237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */; };
+		66B5140D237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */; };
+		66B5140E237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */; };
+		66B51410237DA389007B8974 /* DistributedContextSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140F237DA389007B8974 /* DistributedContextSdk.swift */; };
+		66B51411237DA389007B8974 /* DistributedContextSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140F237DA389007B8974 /* DistributedContextSdk.swift */; };
+		66B51412237DA389007B8974 /* DistributedContextSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140F237DA389007B8974 /* DistributedContextSdk.swift */; };
+		66B51413237DA389007B8974 /* DistributedContextSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140F237DA389007B8974 /* DistributedContextSdk.swift */; };
 		66CE5AEC23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
 		66CE5AED23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
 		66CE5AEE23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
@@ -384,6 +392,80 @@
 		66E61E4F23747A6900C03C72 /* SpanMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61E4D23747A6900C03C72 /* SpanMock.swift */; };
 		66E61E5023747A6900C03C72 /* SpanMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61E4D23747A6900C03C72 /* SpanMock.swift */; };
 		66E61E5123747A6900C03C72 /* SpanMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61E4D23747A6900C03C72 /* SpanMock.swift */; };
+		66F78DDB237D489100905CE8 /* TraceConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660111F32375551A0089597D /* TraceConfigTests.swift */; };
+		66F78DDC237D489200905CE8 /* TraceConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660111F32375551A0089597D /* TraceConfigTests.swift */; };
+		66F78DDD237D489300905CE8 /* TraceConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660111F32375551A0089597D /* TraceConfigTests.swift */; };
+		66F78DDE237D489600905CE8 /* InMemorySpanExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660111F623755C6C0089597D /* InMemorySpanExporterTests.swift */; };
+		66F78DDF237D489600905CE8 /* InMemorySpanExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660111F623755C6C0089597D /* InMemorySpanExporterTests.swift */; };
+		66F78DE0237D489700905CE8 /* InMemorySpanExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660111F623755C6C0089597D /* InMemorySpanExporterTests.swift */; };
+		66F78DE1237D48BB00905CE8 /* HttpTraceContextFormatTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653CF3B23700F4200D9EE42 /* HttpTraceContextFormatTest.swift */; };
+		66F78DE2237D48BC00905CE8 /* HttpTraceContextFormatTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653CF3B23700F4200D9EE42 /* HttpTraceContextFormatTest.swift */; };
+		66F78DE3237D48BC00905CE8 /* HttpTraceContextFormatTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653CF3B23700F4200D9EE42 /* HttpTraceContextFormatTest.swift */; };
+		66F78DE4237D48C300905CE8 /* SamplersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D582370739500C03C72 /* SamplersTests.swift */; };
+		66F78DE5237D48C300905CE8 /* SamplersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D582370739500C03C72 /* SamplersTests.swift */; };
+		66F78DE6237D48C400905CE8 /* SamplersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D582370739500C03C72 /* SamplersTests.swift */; };
+		66F78DE7237D48C800905CE8 /* LinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5323706A4B00C03C72 /* LinkTests.swift */; };
+		66F78DE8237D48C900905CE8 /* LinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5323706A4B00C03C72 /* LinkTests.swift */; };
+		66F78DE9237D48C900905CE8 /* LinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5323706A4B00C03C72 /* LinkTests.swift */; };
+		66F78DEA237D48CC00905CE8 /* EventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5523706A5F00C03C72 /* EventsTests.swift */; };
+		66F78DEB237D48CC00905CE8 /* EventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5523706A5F00C03C72 /* EventsTests.swift */; };
+		66F78DEC237D48CD00905CE8 /* EventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E61D5523706A5F00C03C72 /* EventsTests.swift */; };
+		66F78DEF237D499500905CE8 /* EntryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DEE237D499500905CE8 /* EntryValue.swift */; };
+		66F78DF1237D4B5400905CE8 /* EntryMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF0237D4B5400905CE8 /* EntryMetadata.swift */; };
+		66F78DF3237D4C7B00905CE8 /* EntryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF2237D4C7B00905CE8 /* EntryKey.swift */; };
+		66F78DF5237D4D4100905CE8 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF4237D4D4100905CE8 /* Entry.swift */; };
+		66F78DF6237D4D4100905CE8 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF4237D4D4100905CE8 /* Entry.swift */; };
+		66F78DF7237D4D4100905CE8 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF4237D4D4100905CE8 /* Entry.swift */; };
+		66F78DF8237D4D4100905CE8 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF4237D4D4100905CE8 /* Entry.swift */; };
+		66F78DF9237D4D4400905CE8 /* EntryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DEE237D499500905CE8 /* EntryValue.swift */; };
+		66F78DFA237D4D4400905CE8 /* EntryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF2237D4C7B00905CE8 /* EntryKey.swift */; };
+		66F78DFB237D4D4400905CE8 /* EntryMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF0237D4B5400905CE8 /* EntryMetadata.swift */; };
+		66F78DFC237D4D4500905CE8 /* EntryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DEE237D499500905CE8 /* EntryValue.swift */; };
+		66F78DFD237D4D4500905CE8 /* EntryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF2237D4C7B00905CE8 /* EntryKey.swift */; };
+		66F78DFE237D4D4500905CE8 /* EntryMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF0237D4B5400905CE8 /* EntryMetadata.swift */; };
+		66F78DFF237D4D4500905CE8 /* EntryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DEE237D499500905CE8 /* EntryValue.swift */; };
+		66F78E00237D4D4500905CE8 /* EntryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF2237D4C7B00905CE8 /* EntryKey.swift */; };
+		66F78E01237D4D4500905CE8 /* EntryMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78DF0237D4B5400905CE8 /* EntryMetadata.swift */; };
+		66F78E03237D4EF600905CE8 /* DistributedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E02237D4EF600905CE8 /* DistributedContext.swift */; };
+		66F78E04237D4EF600905CE8 /* DistributedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E02237D4EF600905CE8 /* DistributedContext.swift */; };
+		66F78E05237D4EF600905CE8 /* DistributedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E02237D4EF600905CE8 /* DistributedContext.swift */; };
+		66F78E06237D4EF600905CE8 /* DistributedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E02237D4EF600905CE8 /* DistributedContext.swift */; };
+		66F78E08237D54EC00905CE8 /* EmptyDistributedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E07237D54EC00905CE8 /* EmptyDistributedContext.swift */; };
+		66F78E09237D54EC00905CE8 /* EmptyDistributedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E07237D54EC00905CE8 /* EmptyDistributedContext.swift */; };
+		66F78E0A237D54EC00905CE8 /* EmptyDistributedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E07237D54EC00905CE8 /* EmptyDistributedContext.swift */; };
+		66F78E0B237D54EC00905CE8 /* EmptyDistributedContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E07237D54EC00905CE8 /* EmptyDistributedContext.swift */; };
+		66F78E0D237D55C100905CE8 /* DistributedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E0C237D55C100905CE8 /* DistributedContextManager.swift */; };
+		66F78E0E237D55C100905CE8 /* DistributedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E0C237D55C100905CE8 /* DistributedContextManager.swift */; };
+		66F78E0F237D55C100905CE8 /* DistributedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E0C237D55C100905CE8 /* DistributedContextManager.swift */; };
+		66F78E10237D55C100905CE8 /* DistributedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E0C237D55C100905CE8 /* DistributedContextManager.swift */; };
+		66F78E12237D65E900905CE8 /* DefaultDistributedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E11237D65E900905CE8 /* DefaultDistributedContextManager.swift */; };
+		66F78E13237D65E900905CE8 /* DefaultDistributedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E11237D65E900905CE8 /* DefaultDistributedContextManager.swift */; };
+		66F78E14237D65E900905CE8 /* DefaultDistributedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E11237D65E900905CE8 /* DefaultDistributedContextManager.swift */; };
+		66F78E15237D65E900905CE8 /* DefaultDistributedContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E11237D65E900905CE8 /* DefaultDistributedContextManager.swift */; };
+		66F78E18237D6BAB00905CE8 /* DistributedContextInScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E17237D6BAB00905CE8 /* DistributedContextInScope.swift */; };
+		66F78E19237D6BAB00905CE8 /* DistributedContextInScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E17237D6BAB00905CE8 /* DistributedContextInScope.swift */; };
+		66F78E1A237D6BAB00905CE8 /* DistributedContextInScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E17237D6BAB00905CE8 /* DistributedContextInScope.swift */; };
+		66F78E1B237D6BAB00905CE8 /* DistributedContextInScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E17237D6BAB00905CE8 /* DistributedContextInScope.swift */; };
+		66F78E1E237D779100905CE8 /* EntryKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E1D237D779100905CE8 /* EntryKeyTests.swift */; };
+		66F78E20237D877E00905CE8 /* EntryValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E1F237D877E00905CE8 /* EntryValueTests.swift */; };
+		66F78E22237D88C900905CE8 /* EntryMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E21237D88C900905CE8 /* EntryMetadataTests.swift */; };
+		66F78E24237D896D00905CE8 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E23237D896D00905CE8 /* EntryTests.swift */; };
+		66F78E25237D896D00905CE8 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E23237D896D00905CE8 /* EntryTests.swift */; };
+		66F78E26237D896D00905CE8 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E23237D896D00905CE8 /* EntryTests.swift */; };
+		66F78E27237D896D00905CE8 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E23237D896D00905CE8 /* EntryTests.swift */; };
+		66F78E28237D897100905CE8 /* EntryKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E1D237D779100905CE8 /* EntryKeyTests.swift */; };
+		66F78E29237D897100905CE8 /* EntryValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E1F237D877E00905CE8 /* EntryValueTests.swift */; };
+		66F78E2A237D897100905CE8 /* EntryMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E21237D88C900905CE8 /* EntryMetadataTests.swift */; };
+		66F78E2B237D897200905CE8 /* EntryKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E1D237D779100905CE8 /* EntryKeyTests.swift */; };
+		66F78E2C237D897200905CE8 /* EntryValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E1F237D877E00905CE8 /* EntryValueTests.swift */; };
+		66F78E2D237D897200905CE8 /* EntryMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E21237D88C900905CE8 /* EntryMetadataTests.swift */; };
+		66F78E2E237D897200905CE8 /* EntryKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E1D237D779100905CE8 /* EntryKeyTests.swift */; };
+		66F78E2F237D897200905CE8 /* EntryValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E1F237D877E00905CE8 /* EntryValueTests.swift */; };
+		66F78E30237D897200905CE8 /* EntryMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E21237D88C900905CE8 /* EntryMetadataTests.swift */; };
+		66F78E32237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E31237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift */; };
+		66F78E33237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E31237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift */; };
+		66F78E34237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E31237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift */; };
+		66F78E35237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F78E31237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -437,6 +519,8 @@
 		666B28DC235F5E1A00BEBCD1 /* OpenTelemetrySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenTelemetrySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		666B28E4235F5E1A00BEBCD1 /* OpenTelemetrySwift watchOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenTelemetrySwift watchOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		666B29AC23602ACD00BEBCD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextManagerSdk.swift; sourceTree = "<group>"; };
+		66B5140F237DA389007B8974 /* DistributedContextSdk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextSdk.swift; sourceTree = "<group>"; };
 		66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFormatTests.swift; sourceTree = "<group>"; };
 		66D4D8C7235F5B6F0019D8B5 /* BinaryTraceContextFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTraceContextFormat.swift; sourceTree = "<group>"; };
 		66D4D8C8235F5B6F0019D8B5 /* TracestateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracestateUtils.swift; sourceTree = "<group>"; };
@@ -525,6 +609,20 @@
 		66E61E432374778000C03C72 /* TimedEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedEventTests.swift; sourceTree = "<group>"; };
 		66E61E4823747A2500C03C72 /* TracerSdkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracerSdkTests.swift; sourceTree = "<group>"; };
 		66E61E4D23747A6900C03C72 /* SpanMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanMock.swift; sourceTree = "<group>"; };
+		66F78DEE237D499500905CE8 /* EntryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryValue.swift; sourceTree = "<group>"; };
+		66F78DF0237D4B5400905CE8 /* EntryMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryMetadata.swift; sourceTree = "<group>"; };
+		66F78DF2237D4C7B00905CE8 /* EntryKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryKey.swift; sourceTree = "<group>"; };
+		66F78DF4237D4D4100905CE8 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		66F78E02237D4EF600905CE8 /* DistributedContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContext.swift; sourceTree = "<group>"; };
+		66F78E07237D54EC00905CE8 /* EmptyDistributedContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDistributedContext.swift; sourceTree = "<group>"; };
+		66F78E0C237D55C100905CE8 /* DistributedContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextManager.swift; sourceTree = "<group>"; };
+		66F78E11237D65E900905CE8 /* DefaultDistributedContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDistributedContextManager.swift; sourceTree = "<group>"; };
+		66F78E17237D6BAB00905CE8 /* DistributedContextInScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextInScope.swift; sourceTree = "<group>"; };
+		66F78E1D237D779100905CE8 /* EntryKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryKeyTests.swift; sourceTree = "<group>"; };
+		66F78E1F237D877E00905CE8 /* EntryValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryValueTests.swift; sourceTree = "<group>"; };
+		66F78E21237D88C900905CE8 /* EntryMetadataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryMetadataTests.swift; sourceTree = "<group>"; };
+		66F78E23237D896D00905CE8 /* EntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTests.swift; sourceTree = "<group>"; };
+		66F78E31237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDistributedContextManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -643,6 +741,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		66B51409237DA2BF007B8974 /* DistributedContext */ = {
+			isa = PBXGroup;
+			children = (
+				66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */,
+				66B5140F237DA389007B8974 /* DistributedContextSdk.swift */,
+			);
+			path = DistributedContext;
+			sourceTree = "<group>";
+		};
 		66D4D848235F5B1F0019D8B5 = {
 			isa = PBXGroup;
 			children = (
@@ -680,6 +787,8 @@
 		66D4D8C2235F5B6F0019D8B5 /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
+				66E61DAF2371C33E00C03C72 /* MultiSpanProcessor.swift */,
+				66B51409237DA2BF007B8974 /* DistributedContext */,
 				66E61D8B23708A7700C03C72 /* Internal */,
 				66E61D7023707EF700C03C72 /* Resources */,
 				66E61D5A237078C000C03C72 /* Trace */,
@@ -693,6 +802,7 @@
 			children = (
 				6601120F23757F180089597D /* Common */,
 				66D4D8C5235F5B6F0019D8B5 /* Context */,
+				66F78DED237D494200905CE8 /* DistributedContext */,
 				66D4D8D8235F5B6F0019D8B5 /* Internal */,
 				66D4D8C4235F5B6F0019D8B5 /* Metrics */,
 				66D4D8CC235F5B6F0019D8B5 /* Trace */,
@@ -711,6 +821,7 @@
 		66D4D8C5235F5B6F0019D8B5 /* Context */ = {
 			isa = PBXGroup;
 			children = (
+				66D4D8E5235F5B6F0019D8B5 /* ContextUtils.swift */,
 				66D4D8D9235F5B6F0019D8B5 /* NoopScope.swift */,
 				66D4D8C6235F5B6F0019D8B5 /* Propagation */,
 				66D4D8CE235F5B6F0019D8B5 /* Scope.swift */,
@@ -781,7 +892,6 @@
 			isa = PBXGroup;
 			children = (
 				66D4D8E4235F5B6F0019D8B5 /* SpanInScope.swift */,
-				66D4D8E5235F5B6F0019D8B5 /* ContextUtils.swift */,
 				66D4D8E6235F5B6F0019D8B5 /* Activity.swift */,
 			);
 			path = Unsafe;
@@ -811,6 +921,7 @@
 			children = (
 				66011212237580830089597D /* Common */,
 				66D4D98E235F5B880019D8B5 /* Context */,
+				66F78E1C237D775400905CE8 /* DistributedContext */,
 				66D4D98F235F5B880019D8B5 /* Trace */,
 			);
 			path = Api;
@@ -874,7 +985,6 @@
 			children = (
 				66E61D842370871300C03C72 /* Config */,
 				66E61DBA2371CFE800C03C72 /* Export */,
-				66E61DAF2371C33E00C03C72 /* MultiSpanProcessor.swift */,
 				66E61DAA2371B86400C03C72 /* NoopSpanProcessor.swift */,
 				66E61D6623707BF500C03C72 /* ReadableSpan.swift */,
 				66E61D9623716B1600C03C72 /* RecordEventsReadableSpan.swift */,
@@ -990,6 +1100,42 @@
 				66E61E3E23746E7A00C03C72 /* ProbabilitySamplerTests.swift */,
 			);
 			path = Samplers;
+			sourceTree = "<group>";
+		};
+		66F78DED237D494200905CE8 /* DistributedContext */ = {
+			isa = PBXGroup;
+			children = (
+				66F78E16237D6B8D00905CE8 /* unsafe */,
+				66F78E02237D4EF600905CE8 /* DistributedContext.swift */,
+				66F78E11237D65E900905CE8 /* DefaultDistributedContextManager.swift */,
+				66F78E07237D54EC00905CE8 /* EmptyDistributedContext.swift */,
+				66F78E0C237D55C100905CE8 /* DistributedContextManager.swift */,
+				66F78DEE237D499500905CE8 /* EntryValue.swift */,
+				66F78DF2237D4C7B00905CE8 /* EntryKey.swift */,
+				66F78DF4237D4D4100905CE8 /* Entry.swift */,
+				66F78DF0237D4B5400905CE8 /* EntryMetadata.swift */,
+			);
+			path = DistributedContext;
+			sourceTree = "<group>";
+		};
+		66F78E16237D6B8D00905CE8 /* unsafe */ = {
+			isa = PBXGroup;
+			children = (
+				66F78E17237D6BAB00905CE8 /* DistributedContextInScope.swift */,
+			);
+			path = unsafe;
+			sourceTree = "<group>";
+		};
+		66F78E1C237D775400905CE8 /* DistributedContext */ = {
+			isa = PBXGroup;
+			children = (
+				66F78E31237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift */,
+				66F78E1D237D779100905CE8 /* EntryKeyTests.swift */,
+				66F78E21237D88C900905CE8 /* EntryMetadataTests.swift */,
+				66F78E23237D896D00905CE8 /* EntryTests.swift */,
+				66F78E1F237D877E00905CE8 /* EntryValueTests.swift */,
+			);
+			path = DistributedContext;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1295,10 +1441,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				66E61D7C2370847200C03C72 /* TimedEvent.swift in Sources */,
+				66F78DF1237D4B5400905CE8 /* EntryMetadata.swift in Sources */,
 				666B2911235F5E4B00BEBCD1 /* EndSpanOptions.swift in Sources */,
 				666B2907235F5E4B00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
 				66E61DDA2371DA3F00C03C72 /* BatchSpanProcessor.swift in Sources */,
 				666B2905235F5E4B00BEBCD1 /* SimpleEvent.swift in Sources */,
+				66F78DF3237D4C7B00905CE8 /* EntryKey.swift in Sources */,
 				666B2914235F5E4B00BEBCD1 /* Status.swift in Sources */,
 				66E61D922371677600C03C72 /* TimestampConverter.swift in Sources */,
 				666B28F7235F5E4B00BEBCD1 /* TextFormattable.swift in Sources */,
@@ -1319,8 +1467,11 @@
 				66E61DAB2371B86400C03C72 /* NoopSpanProcessor.swift in Sources */,
 				66E61D862370872500C03C72 /* TraceConfig.swift in Sources */,
 				66E61DE42371DCE300C03C72 /* OpenTelemetry.swift in Sources */,
+				66F78E03237D4EF600905CE8 /* DistributedContext.swift in Sources */,
 				66E61DE92371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */,
 				666B28F3235F5E4B00BEBCD1 /* BinaryTraceContextFormat.swift in Sources */,
+				66F78E12237D65E900905CE8 /* DefaultDistributedContextManager.swift in Sources */,
+				66B5140B237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */,
 				666B290E235F5E4B00BEBCD1 /* SpanBuilder.swift in Sources */,
 				666B28FD235F5E4B00BEBCD1 /* DefaultSpan.swift in Sources */,
 				66E61D77237081AD00C03C72 /* StringUtils.swift in Sources */,
@@ -1332,10 +1483,14 @@
 				666B2912235F5E4B00BEBCD1 /* DefaultTracer.swift in Sources */,
 				66E61DB02371C33E00C03C72 /* MultiSpanProcessor.swift in Sources */,
 				66E61DB62371C6B200C03C72 /* ProbabilitySampler.swift in Sources */,
+				66F78E0D237D55C100905CE8 /* DistributedContextManager.swift in Sources */,
+				66B51410237DA389007B8974 /* DistributedContextSdk.swift in Sources */,
 				66E61D6223707B9D00C03C72 /* SpanProcessor.swift in Sources */,
 				66E61DA62371B06300C03C72 /* EnvVarResource.swift in Sources */,
+				66F78DF5237D4D4100905CE8 /* Entry.swift in Sources */,
 				666B28FF235F5E4B00BEBCD1 /* SpanId.swift in Sources */,
 				66E61D9723716B1600C03C72 /* RecordEventsReadableSpan.swift in Sources */,
+				66F78DEF237D499500905CE8 /* EntryValue.swift in Sources */,
 				666B2917235F5E4B00BEBCD1 /* Tracestate.swift in Sources */,
 				666B2904235F5E4B00BEBCD1 /* SimpleLink.swift in Sources */,
 				666B28FA235F5E4B00BEBCD1 /* TracerFactoryBase.swift in Sources */,
@@ -1346,12 +1501,14 @@
 				66E61D6C23707CC100C03C72 /* SpanData.swift in Sources */,
 				66E61D8D23708A9F00C03C72 /* Clock.swift in Sources */,
 				666B2900235F5E4B00BEBCD1 /* SpanContext.swift in Sources */,
+				66F78E18237D6BAB00905CE8 /* DistributedContextInScope.swift in Sources */,
 				666B2908235F5E4B00BEBCD1 /* NeverSampleSampler.swift in Sources */,
 				666B28F4235F5E4B00BEBCD1 /* TracestateUtils.swift in Sources */,
 				666B290D235F5E4B00BEBCD1 /* TraceId.swift in Sources */,
 				66E61DBC2371D00F00C03C72 /* SpanExporter.swift in Sources */,
 				666B28FE235F5E4B00BEBCD1 /* Span.swift in Sources */,
 				66E61DCB2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */,
+				66F78E08237D54EC00905CE8 /* EmptyDistributedContext.swift in Sources */,
 				66E61DC12371D0CE00C03C72 /* InMemorySpanExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1378,6 +1535,7 @@
 				66011205237563380089597D /* SpanExporterMock.swift in Sources */,
 				66CE5AEC23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */,
 				660111F723755C6C0089597D /* InMemorySpanExporterTests.swift in Sources */,
+				66F78E20237D877E00905CE8 /* EntryValueTests.swift in Sources */,
 				6653CF3C23700F4200D9EE42 /* HttpTraceContextFormatTest.swift in Sources */,
 				66E61D5423706A4B00C03C72 /* LinkTests.swift in Sources */,
 				6601120A23756A6D0089597D /* SimpleSpansProcessorTests.swift in Sources */,
@@ -1385,8 +1543,10 @@
 				660111FE2375627F0089597D /* MultiSpanExporterTests.swift in Sources */,
 				666B2988235F5E6600BEBCD1 /* DefaultSpanTests.swift in Sources */,
 				66E61E142372C7C500C03C72 /* SpanProcessorMock.swift in Sources */,
+				66F78E1E237D779100905CE8 /* EntryKeyTests.swift in Sources */,
 				66E61D5623706A5F00C03C72 /* EventsTests.swift in Sources */,
 				666B2987235F5E6600BEBCD1 /* SpanContextTests.swift in Sources */,
+				66F78E32237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */,
 				66E61DF92372AF0A00C03C72 /* ClockTestUtil.swift in Sources */,
 				66E61E1A2372C88B00C03C72 /* ReadableSpanMock.swift in Sources */,
 				666B298A235F5E6600BEBCD1 /* DefaultTracerTests.swift in Sources */,
@@ -1396,7 +1556,9 @@
 				66E61E092372BE8000C03C72 /* ResourceTest.swift in Sources */,
 				66E61E242372DC8600C03C72 /* NoopSpanProcessorTests.swift in Sources */,
 				666B298E235F5E6600BEBCD1 /* StatusTests.swift in Sources */,
+				66F78E24237D896D00905CE8 /* EntryTests.swift in Sources */,
 				666B298D235F5E6600BEBCD1 /* TraceFlagsTests.swift in Sources */,
+				66F78E22237D88C900905CE8 /* EntryMetadataTests.swift in Sources */,
 				66E61E292372DCF600C03C72 /* RecordEventsReadableSpanTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1410,24 +1572,32 @@
 				666B292C235F5E4B00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
 				666B292A235F5E4B00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B2939235F5E4B00BEBCD1 /* Status.swift in Sources */,
+				66F78DF6237D4D4100905CE8 /* Entry.swift in Sources */,
 				666B291C235F5E4B00BEBCD1 /* TextFormattable.swift in Sources */,
+				66F78E04237D4EF600905CE8 /* DistributedContext.swift in Sources */,
 				666B2920235F5E4B00BEBCD1 /* Event.swift in Sources */,
+				66F78E13237D65E900905CE8 /* DefaultDistributedContextManager.swift in Sources */,
 				66E61D81237086F200C03C72 /* SpanBuilderSdk.swift in Sources */,
 				66E61D7D2370847200C03C72 /* TimedEvent.swift in Sources */,
+				66F78DF9237D4D4400905CE8 /* EntryValue.swift in Sources */,
 				66E61D78237081AD00C03C72 /* StringUtils.swift in Sources */,
 				666B2921235F5E4B00BEBCD1 /* AttributeValue.swift in Sources */,
+				66B51411237DA389007B8974 /* DistributedContextSdk.swift in Sources */,
 				666B291E235F5E4B00BEBCD1 /* Scope.swift in Sources */,
 				666B2930235F5E4B00BEBCD1 /* ContextUtils.swift in Sources */,
 				666B291B235F5E4B00BEBCD1 /* BinaryFormattable.swift in Sources */,
 				666B292B235F5E4B00BEBCD1 /* Timestamp.swift in Sources */,
 				66E61DE52371DCE300C03C72 /* OpenTelemetry.swift in Sources */,
+				66B5140C237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */,
 				666B291D235F5E4B00BEBCD1 /* SpanAttributeConstants.swift in Sources */,
 				666B2934235F5E4B00BEBCD1 /* SpanKind.swift in Sources */,
 				66E61DB12371C33E00C03C72 /* MultiSpanProcessor.swift in Sources */,
 				66E61DEA2371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */,
 				66E61D6D23707CC100C03C72 /* SpanData.swift in Sources */,
 				666B291A235F5E4B00BEBCD1 /* HttpTraceContextFormat.swift in Sources */,
+				66F78E0E237D55C100905CE8 /* DistributedContextManager.swift in Sources */,
 				666B2918235F5E4B00BEBCD1 /* BinaryTraceContextFormat.swift in Sources */,
+				66F78DFA237D4D4400905CE8 /* EntryKey.swift in Sources */,
 				66E61D8E23708A9F00C03C72 /* Clock.swift in Sources */,
 				66E61D6323707B9D00C03C72 /* SpanProcessor.swift in Sources */,
 				66E61DC72371D23800C03C72 /* MultiSpanExporter.swift in Sources */,
@@ -1435,6 +1605,7 @@
 				66E61DA223719A9900C03C72 /* MillisClock.swift in Sources */,
 				666B2922235F5E4B00BEBCD1 /* DefaultSpan.swift in Sources */,
 				666B2928235F5E4B00BEBCD1 /* NoopScope.swift in Sources */,
+				66F78DFB237D4D4400905CE8 /* EntryMetadata.swift in Sources */,
 				66E61D872370872500C03C72 /* TraceConfig.swift in Sources */,
 				666B2926235F5E4B00BEBCD1 /* Link.swift in Sources */,
 				666B293B235F5E4B00BEBCD1 /* Sampler.swift in Sources */,
@@ -1445,6 +1616,7 @@
 				666B2937235F5E4B00BEBCD1 /* DefaultTracer.swift in Sources */,
 				66E61D932371677600C03C72 /* TimestampConverter.swift in Sources */,
 				666B2924235F5E4B00BEBCD1 /* SpanId.swift in Sources */,
+				66F78E09237D54EC00905CE8 /* EmptyDistributedContext.swift in Sources */,
 				666B293C235F5E4B00BEBCD1 /* Tracestate.swift in Sources */,
 				66E61DCC2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */,
 				666B2929235F5E4B00BEBCD1 /* SimpleLink.swift in Sources */,
@@ -1460,6 +1632,7 @@
 				666B2925235F5E4B00BEBCD1 /* SpanContext.swift in Sources */,
 				666B292D235F5E4B00BEBCD1 /* NeverSampleSampler.swift in Sources */,
 				66E61DB72371C6B200C03C72 /* ProbabilitySampler.swift in Sources */,
+				66F78E19237D6BAB00905CE8 /* DistributedContextInScope.swift in Sources */,
 				666B2919235F5E4B00BEBCD1 /* TracestateUtils.swift in Sources */,
 				666B2931235F5E4B00BEBCD1 /* Activity.swift in Sources */,
 				666B2932235F5E4B00BEBCD1 /* TraceId.swift in Sources */,
@@ -1474,12 +1647,15 @@
 			files = (
 				66E61E452374778000C03C72 /* TimedEventTests.swift in Sources */,
 				666B2991235F5E6700BEBCD1 /* TraceIdTests.swift in Sources */,
+				66F78DDE237D489600905CE8 /* InMemorySpanExporterTests.swift in Sources */,
 				666B2994235F5E6700BEBCD1 /* SpanIdTests.swift in Sources */,
+				66F78E28237D897100905CE8 /* EntryKeyTests.swift in Sources */,
 				6653AF9B23604956001B0948 /* AttributeValueTests.swift in Sources */,
 				66E61E042372B41300C03C72 /* TimestampConverterTest.swift in Sources */,
 				66E61E2F2374186500C03C72 /* TestUtils.swift in Sources */,
 				66E61E202372CA2000C03C72 /* MultiSpanProcessorTests.swift in Sources */,
 				660111FF2375627F0089597D /* MultiSpanExporterTests.swift in Sources */,
+				66F78DE7237D48C800905CE8 /* LinkTests.swift in Sources */,
 				66E61DF52372ADE800C03C72 /* TestClockTests.swift in Sources */,
 				66E61E3423742B1D00C03C72 /* SpanDataTests.swift in Sources */,
 				66CE5AED23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */,
@@ -1487,12 +1663,18 @@
 				660111FA2375623A0089597D /* BatchSpansProcessorTests.swift in Sources */,
 				66E61E3A237431F900C03C72 /* SpanBuilderSdkTests.swift in Sources */,
 				666B2990235F5E6700BEBCD1 /* DefaultSpanTests.swift in Sources */,
+				66F78E25237D896D00905CE8 /* EntryTests.swift in Sources */,
 				666B298F235F5E6700BEBCD1 /* SpanContextTests.swift in Sources */,
 				666B2992235F5E6700BEBCD1 /* DefaultTracerTests.swift in Sources */,
 				666B2993235F5E6700BEBCD1 /* TracestateTests.swift in Sources */,
+				66F78E29237D897100905CE8 /* EntryValueTests.swift in Sources */,
+				66F78E2A237D897100905CE8 /* EntryMetadataTests.swift in Sources */,
 				66E61E4F23747A6900C03C72 /* SpanMock.swift in Sources */,
+				66F78DDB237D489100905CE8 /* TraceConfigTests.swift in Sources */,
+				66F78DEA237D48CC00905CE8 /* EventsTests.swift in Sources */,
 				66E61DFA2372AF0A00C03C72 /* ClockTestUtil.swift in Sources */,
 				66011206237563380089597D /* SpanExporterMock.swift in Sources */,
+				66F78E33237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */,
 				66E61E4A23747A2500C03C72 /* TracerSdkTests.swift in Sources */,
 				66011215237580D00089597D /* TimestampTests.swift in Sources */,
 				66E61E0A2372BE8000C03C72 /* ResourceTest.swift in Sources */,
@@ -1500,7 +1682,9 @@
 				66E61E252372DC8600C03C72 /* NoopSpanProcessorTests.swift in Sources */,
 				66E61E152372C7C500C03C72 /* SpanProcessorMock.swift in Sources */,
 				66E61E4023746E7A00C03C72 /* ProbabilitySamplerTests.swift in Sources */,
+				66F78DE1237D48BB00905CE8 /* HttpTraceContextFormatTest.swift in Sources */,
 				66E61E1B2372C88B00C03C72 /* ReadableSpanMock.swift in Sources */,
+				66F78DE4237D48C300905CE8 /* SamplersTests.swift in Sources */,
 				666B2995235F5E6700BEBCD1 /* TraceFlagsTests.swift in Sources */,
 				6601120B23756A6D0089597D /* SimpleSpansProcessorTests.swift in Sources */,
 				66E61E2A2372DCF600C03C72 /* RecordEventsReadableSpanTests.swift in Sources */,
@@ -1516,24 +1700,32 @@
 				666B2951235F5E4C00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
 				666B294F235F5E4C00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B295E235F5E4C00BEBCD1 /* Status.swift in Sources */,
+				66F78DF7237D4D4100905CE8 /* Entry.swift in Sources */,
 				666B2941235F5E4C00BEBCD1 /* TextFormattable.swift in Sources */,
+				66F78E05237D4EF600905CE8 /* DistributedContext.swift in Sources */,
 				666B2945235F5E4C00BEBCD1 /* Event.swift in Sources */,
+				66F78E14237D65E900905CE8 /* DefaultDistributedContextManager.swift in Sources */,
 				66E61D82237086F300C03C72 /* SpanBuilderSdk.swift in Sources */,
 				66E61D7E2370847200C03C72 /* TimedEvent.swift in Sources */,
+				66F78DFC237D4D4500905CE8 /* EntryValue.swift in Sources */,
 				66E61D79237081AD00C03C72 /* StringUtils.swift in Sources */,
 				666B2946235F5E4C00BEBCD1 /* AttributeValue.swift in Sources */,
+				66B51412237DA389007B8974 /* DistributedContextSdk.swift in Sources */,
 				666B2943235F5E4C00BEBCD1 /* Scope.swift in Sources */,
 				666B2955235F5E4C00BEBCD1 /* ContextUtils.swift in Sources */,
 				666B2940235F5E4C00BEBCD1 /* BinaryFormattable.swift in Sources */,
 				666B2950235F5E4C00BEBCD1 /* Timestamp.swift in Sources */,
 				66E61DE62371DCE300C03C72 /* OpenTelemetry.swift in Sources */,
+				66B5140D237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */,
 				666B2942235F5E4C00BEBCD1 /* SpanAttributeConstants.swift in Sources */,
 				666B2959235F5E4C00BEBCD1 /* SpanKind.swift in Sources */,
 				66E61DB22371C33E00C03C72 /* MultiSpanProcessor.swift in Sources */,
 				66E61DEB2371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */,
 				66E61D6E23707CC100C03C72 /* SpanData.swift in Sources */,
 				666B293F235F5E4C00BEBCD1 /* HttpTraceContextFormat.swift in Sources */,
+				66F78E0F237D55C100905CE8 /* DistributedContextManager.swift in Sources */,
 				666B293D235F5E4C00BEBCD1 /* BinaryTraceContextFormat.swift in Sources */,
+				66F78DFD237D4D4500905CE8 /* EntryKey.swift in Sources */,
 				66E61D8F23708A9F00C03C72 /* Clock.swift in Sources */,
 				66E61D6423707B9D00C03C72 /* SpanProcessor.swift in Sources */,
 				66E61DC82371D23800C03C72 /* MultiSpanExporter.swift in Sources */,
@@ -1541,6 +1733,7 @@
 				66E61DA323719A9900C03C72 /* MillisClock.swift in Sources */,
 				666B2947235F5E4C00BEBCD1 /* DefaultSpan.swift in Sources */,
 				666B294D235F5E4C00BEBCD1 /* NoopScope.swift in Sources */,
+				66F78DFE237D4D4500905CE8 /* EntryMetadata.swift in Sources */,
 				66E61D882370872500C03C72 /* TraceConfig.swift in Sources */,
 				666B294B235F5E4C00BEBCD1 /* Link.swift in Sources */,
 				666B2960235F5E4C00BEBCD1 /* Sampler.swift in Sources */,
@@ -1551,6 +1744,7 @@
 				666B295C235F5E4C00BEBCD1 /* DefaultTracer.swift in Sources */,
 				66E61D942371677600C03C72 /* TimestampConverter.swift in Sources */,
 				666B2949235F5E4C00BEBCD1 /* SpanId.swift in Sources */,
+				66F78E0A237D54EC00905CE8 /* EmptyDistributedContext.swift in Sources */,
 				666B2961235F5E4C00BEBCD1 /* Tracestate.swift in Sources */,
 				66E61DCD2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */,
 				666B294E235F5E4C00BEBCD1 /* SimpleLink.swift in Sources */,
@@ -1566,6 +1760,7 @@
 				666B294A235F5E4C00BEBCD1 /* SpanContext.swift in Sources */,
 				666B2952235F5E4C00BEBCD1 /* NeverSampleSampler.swift in Sources */,
 				66E61DB82371C6B200C03C72 /* ProbabilitySampler.swift in Sources */,
+				66F78E1A237D6BAB00905CE8 /* DistributedContextInScope.swift in Sources */,
 				666B293E235F5E4C00BEBCD1 /* TracestateUtils.swift in Sources */,
 				666B2956235F5E4C00BEBCD1 /* Activity.swift in Sources */,
 				666B2957235F5E4C00BEBCD1 /* TraceId.swift in Sources */,
@@ -1580,12 +1775,15 @@
 			files = (
 				66E61E462374778000C03C72 /* TimedEventTests.swift in Sources */,
 				666B2999235F5E6800BEBCD1 /* TraceIdTests.swift in Sources */,
+				66F78DDF237D489600905CE8 /* InMemorySpanExporterTests.swift in Sources */,
 				666B299C235F5E6800BEBCD1 /* SpanIdTests.swift in Sources */,
+				66F78E2B237D897200905CE8 /* EntryKeyTests.swift in Sources */,
 				6653AF9C23604957001B0948 /* AttributeValueTests.swift in Sources */,
 				66E61E052372B41300C03C72 /* TimestampConverterTest.swift in Sources */,
 				66E61E302374186500C03C72 /* TestUtils.swift in Sources */,
 				66E61E212372CA2000C03C72 /* MultiSpanProcessorTests.swift in Sources */,
 				660112002375627F0089597D /* MultiSpanExporterTests.swift in Sources */,
+				66F78DE8237D48C900905CE8 /* LinkTests.swift in Sources */,
 				66E61DF62372ADE800C03C72 /* TestClockTests.swift in Sources */,
 				66E61E3523742B1D00C03C72 /* SpanDataTests.swift in Sources */,
 				66CE5AEE23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */,
@@ -1593,12 +1791,18 @@
 				660111FB2375623A0089597D /* BatchSpansProcessorTests.swift in Sources */,
 				66E61E3B237431F900C03C72 /* SpanBuilderSdkTests.swift in Sources */,
 				666B2998235F5E6800BEBCD1 /* DefaultSpanTests.swift in Sources */,
+				66F78E26237D896D00905CE8 /* EntryTests.swift in Sources */,
 				666B2997235F5E6800BEBCD1 /* SpanContextTests.swift in Sources */,
 				666B299A235F5E6800BEBCD1 /* DefaultTracerTests.swift in Sources */,
 				666B299B235F5E6800BEBCD1 /* TracestateTests.swift in Sources */,
+				66F78E2C237D897200905CE8 /* EntryValueTests.swift in Sources */,
+				66F78E2D237D897200905CE8 /* EntryMetadataTests.swift in Sources */,
 				66E61E5023747A6900C03C72 /* SpanMock.swift in Sources */,
+				66F78DDC237D489200905CE8 /* TraceConfigTests.swift in Sources */,
+				66F78DEB237D48CC00905CE8 /* EventsTests.swift in Sources */,
 				66E61DFB2372AF0A00C03C72 /* ClockTestUtil.swift in Sources */,
 				66011207237563380089597D /* SpanExporterMock.swift in Sources */,
+				66F78E34237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */,
 				66E61E4B23747A2500C03C72 /* TracerSdkTests.swift in Sources */,
 				66011216237580D00089597D /* TimestampTests.swift in Sources */,
 				66E61E0B2372BE8000C03C72 /* ResourceTest.swift in Sources */,
@@ -1606,7 +1810,9 @@
 				66E61E262372DC8600C03C72 /* NoopSpanProcessorTests.swift in Sources */,
 				66E61E162372C7C500C03C72 /* SpanProcessorMock.swift in Sources */,
 				66E61E4123746E7A00C03C72 /* ProbabilitySamplerTests.swift in Sources */,
+				66F78DE2237D48BC00905CE8 /* HttpTraceContextFormatTest.swift in Sources */,
 				66E61E1C2372C88B00C03C72 /* ReadableSpanMock.swift in Sources */,
+				66F78DE5237D48C300905CE8 /* SamplersTests.swift in Sources */,
 				666B299D235F5E6800BEBCD1 /* TraceFlagsTests.swift in Sources */,
 				6601120C23756A6D0089597D /* SimpleSpansProcessorTests.swift in Sources */,
 				66E61E2B2372DCF600C03C72 /* RecordEventsReadableSpanTests.swift in Sources */,
@@ -1622,24 +1828,32 @@
 				666B2976235F5E4D00BEBCD1 /* AlwaysSampleSampler.swift in Sources */,
 				666B2974235F5E4D00BEBCD1 /* SimpleEvent.swift in Sources */,
 				666B2983235F5E4D00BEBCD1 /* Status.swift in Sources */,
+				66F78DF8237D4D4100905CE8 /* Entry.swift in Sources */,
 				666B2966235F5E4D00BEBCD1 /* TextFormattable.swift in Sources */,
+				66F78E06237D4EF600905CE8 /* DistributedContext.swift in Sources */,
 				666B296A235F5E4D00BEBCD1 /* Event.swift in Sources */,
+				66F78E15237D65E900905CE8 /* DefaultDistributedContextManager.swift in Sources */,
 				66E61D83237086F300C03C72 /* SpanBuilderSdk.swift in Sources */,
 				66E61D7F2370847200C03C72 /* TimedEvent.swift in Sources */,
+				66F78DFF237D4D4500905CE8 /* EntryValue.swift in Sources */,
 				66E61D7A237081AD00C03C72 /* StringUtils.swift in Sources */,
 				666B296B235F5E4D00BEBCD1 /* AttributeValue.swift in Sources */,
+				66B51413237DA389007B8974 /* DistributedContextSdk.swift in Sources */,
 				666B2968235F5E4D00BEBCD1 /* Scope.swift in Sources */,
 				666B297A235F5E4D00BEBCD1 /* ContextUtils.swift in Sources */,
 				666B2965235F5E4D00BEBCD1 /* BinaryFormattable.swift in Sources */,
 				666B2975235F5E4D00BEBCD1 /* Timestamp.swift in Sources */,
 				66E61DE72371DCE300C03C72 /* OpenTelemetry.swift in Sources */,
+				66B5140E237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */,
 				666B2967235F5E4D00BEBCD1 /* SpanAttributeConstants.swift in Sources */,
 				666B297E235F5E4D00BEBCD1 /* SpanKind.swift in Sources */,
 				66E61DB32371C33F00C03C72 /* MultiSpanProcessor.swift in Sources */,
 				66E61DEC2371DE5E00C03C72 /* OpenTelemetrySdk.swift in Sources */,
 				66E61D6F23707CC100C03C72 /* SpanData.swift in Sources */,
 				666B2964235F5E4D00BEBCD1 /* HttpTraceContextFormat.swift in Sources */,
+				66F78E10237D55C100905CE8 /* DistributedContextManager.swift in Sources */,
 				666B2962235F5E4D00BEBCD1 /* BinaryTraceContextFormat.swift in Sources */,
+				66F78E00237D4D4500905CE8 /* EntryKey.swift in Sources */,
 				66E61D9023708A9F00C03C72 /* Clock.swift in Sources */,
 				66E61D6523707B9D00C03C72 /* SpanProcessor.swift in Sources */,
 				66E61DC92371D23800C03C72 /* MultiSpanExporter.swift in Sources */,
@@ -1647,6 +1861,7 @@
 				66E61DA423719A9900C03C72 /* MillisClock.swift in Sources */,
 				666B296C235F5E4D00BEBCD1 /* DefaultSpan.swift in Sources */,
 				666B2972235F5E4D00BEBCD1 /* NoopScope.swift in Sources */,
+				66F78E01237D4D4500905CE8 /* EntryMetadata.swift in Sources */,
 				66E61D892370872500C03C72 /* TraceConfig.swift in Sources */,
 				666B2970235F5E4D00BEBCD1 /* Link.swift in Sources */,
 				666B2985235F5E4D00BEBCD1 /* Sampler.swift in Sources */,
@@ -1657,6 +1872,7 @@
 				666B2981235F5E4D00BEBCD1 /* DefaultTracer.swift in Sources */,
 				66E61D952371677600C03C72 /* TimestampConverter.swift in Sources */,
 				666B296E235F5E4D00BEBCD1 /* SpanId.swift in Sources */,
+				66F78E0B237D54EC00905CE8 /* EmptyDistributedContext.swift in Sources */,
 				666B2986235F5E4D00BEBCD1 /* Tracestate.swift in Sources */,
 				66E61DCE2371D59700C03C72 /* SimpleSpanProcessor.swift in Sources */,
 				666B2973235F5E4D00BEBCD1 /* SimpleLink.swift in Sources */,
@@ -1672,6 +1888,7 @@
 				666B296F235F5E4D00BEBCD1 /* SpanContext.swift in Sources */,
 				666B2977235F5E4D00BEBCD1 /* NeverSampleSampler.swift in Sources */,
 				66E61DB92371C6B200C03C72 /* ProbabilitySampler.swift in Sources */,
+				66F78E1B237D6BAB00905CE8 /* DistributedContextInScope.swift in Sources */,
 				666B2963235F5E4D00BEBCD1 /* TracestateUtils.swift in Sources */,
 				666B297B235F5E4D00BEBCD1 /* Activity.swift in Sources */,
 				666B297C235F5E4D00BEBCD1 /* TraceId.swift in Sources */,
@@ -1686,12 +1903,15 @@
 			files = (
 				66E61E472374778000C03C72 /* TimedEventTests.swift in Sources */,
 				666B29A1235F5E6900BEBCD1 /* TraceIdTests.swift in Sources */,
+				66F78DE0237D489700905CE8 /* InMemorySpanExporterTests.swift in Sources */,
 				666B29A4235F5E6900BEBCD1 /* SpanIdTests.swift in Sources */,
+				66F78E2E237D897200905CE8 /* EntryKeyTests.swift in Sources */,
 				6653AF9D23604958001B0948 /* AttributeValueTests.swift in Sources */,
 				66E61E062372B41300C03C72 /* TimestampConverterTest.swift in Sources */,
 				66E61E312374186500C03C72 /* TestUtils.swift in Sources */,
 				66E61E222372CA2000C03C72 /* MultiSpanProcessorTests.swift in Sources */,
 				660112012375627F0089597D /* MultiSpanExporterTests.swift in Sources */,
+				66F78DE9237D48C900905CE8 /* LinkTests.swift in Sources */,
 				66E61DF72372ADE800C03C72 /* TestClockTests.swift in Sources */,
 				66E61E3623742B1D00C03C72 /* SpanDataTests.swift in Sources */,
 				66CE5AEF23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */,
@@ -1699,12 +1919,18 @@
 				660111FC2375623A0089597D /* BatchSpansProcessorTests.swift in Sources */,
 				66E61E3C237431F900C03C72 /* SpanBuilderSdkTests.swift in Sources */,
 				666B29A0235F5E6900BEBCD1 /* DefaultSpanTests.swift in Sources */,
+				66F78E27237D896D00905CE8 /* EntryTests.swift in Sources */,
 				666B299F235F5E6900BEBCD1 /* SpanContextTests.swift in Sources */,
 				666B29A2235F5E6900BEBCD1 /* DefaultTracerTests.swift in Sources */,
 				666B29A3235F5E6900BEBCD1 /* TracestateTests.swift in Sources */,
+				66F78E2F237D897200905CE8 /* EntryValueTests.swift in Sources */,
+				66F78E30237D897200905CE8 /* EntryMetadataTests.swift in Sources */,
 				66E61E5123747A6900C03C72 /* SpanMock.swift in Sources */,
+				66F78DDD237D489300905CE8 /* TraceConfigTests.swift in Sources */,
+				66F78DEC237D48CD00905CE8 /* EventsTests.swift in Sources */,
 				66E61DFC2372AF0A00C03C72 /* ClockTestUtil.swift in Sources */,
 				66011208237563380089597D /* SpanExporterMock.swift in Sources */,
+				66F78E35237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */,
 				66E61E4C23747A2500C03C72 /* TracerSdkTests.swift in Sources */,
 				66011217237580D00089597D /* TimestampTests.swift in Sources */,
 				66E61E0C2372BE8000C03C72 /* ResourceTest.swift in Sources */,
@@ -1712,7 +1938,9 @@
 				66E61E272372DC8600C03C72 /* NoopSpanProcessorTests.swift in Sources */,
 				66E61E172372C7C500C03C72 /* SpanProcessorMock.swift in Sources */,
 				66E61E4223746E7A00C03C72 /* ProbabilitySamplerTests.swift in Sources */,
+				66F78DE3237D48BC00905CE8 /* HttpTraceContextFormatTest.swift in Sources */,
 				66E61E1D2372C88B00C03C72 /* ReadableSpanMock.swift in Sources */,
+				66F78DE6237D48C400905CE8 /* SamplersTests.swift in Sources */,
 				666B29A5235F5E6900BEBCD1 /* TraceFlagsTests.swift in Sources */,
 				6601120D23756A6D0089597D /* SimpleSpansProcessorTests.swift in Sources */,
 				66E61E2C2372DCF600C03C72 /* RecordEventsReadableSpanTests.swift in Sources */,

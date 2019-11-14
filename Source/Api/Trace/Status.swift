@@ -16,8 +16,7 @@ import Foundation
  *
  * @since 0.1.0
  */
-public struct Status: Equatable  {
-
+public struct Status: Equatable {
     /**
      * The set of canonical status codes. If new codes are added over time they must choose a
      * numerical value that does not collide with any previously used value.
@@ -194,7 +193,6 @@ public struct Status: Equatable  {
         }
     }
 
-
     // A pseudo-enum of Status instances mapped 1:1 with values in CanonicalCode. This simplifies
     // construction patterns for derived instances of Status.
     /**
@@ -202,49 +200,49 @@ public struct Status: Equatable  {
      *
      * @since 0.1.0
      */
-    static let ok = Status(canonicalCode:  CanonicalCode.ok)
+    static let ok = Status(canonicalCode: CanonicalCode.ok)
 
     /**
      * The operation was cancelled (typically by the caller).
      *
      * @since 0.1.0
      */
-    static let cancelled = Status(canonicalCode:  CanonicalCode.cancelled)
+    static let cancelled = Status(canonicalCode: CanonicalCode.cancelled)
 
     /**
      * Unknown error. See {@link CanonicalCode#unknown}.
      *
      * @since 0.1.0
      */
-    static let unknown = Status(canonicalCode:  CanonicalCode.unknown)
+    static let unknown = Status(canonicalCode: CanonicalCode.unknown)
 
     /**
      * Client specified an invalid argument. See {@link CanonicalCode#INVALID_ARGUMENT}.
      *
      * @since 0.1.0
      */
-    static let invalid_argument = Status(canonicalCode:  CanonicalCode.invalid_argument)
+    static let invalid_argument = Status(canonicalCode: CanonicalCode.invalid_argument)
 
     /**
      * Deadline expired before operation could complete. See {@link CanonicalCode#DEADLINE_EXCEEDED}.
      *
      * @since 0.1.0
      */
-    static let deadline_exceeded = Status(canonicalCode:  CanonicalCode.deadline_exceeded)
+    static let deadline_exceeded = Status(canonicalCode: CanonicalCode.deadline_exceeded)
 
     /**
      * Some requested entity (e.g., file or directory) was not found.
      *
      * @since 0.1.0
      */
-    static let not_found = Status(canonicalCode:  CanonicalCode.not_found)
+    static let not_found = Status(canonicalCode: CanonicalCode.not_found)
 
     /**
      * Some entity that we attempted to create (e.g., file or directory) already exists.
      *
      * @since 0.1.0
      */
-    static let already_exists = Status(canonicalCode:  CanonicalCode.already_exists)
+    static let already_exists = Status(canonicalCode: CanonicalCode.already_exists)
 
     /**
      * The caller does not have permission to execute the specified operation. See {@link
@@ -252,14 +250,14 @@ public struct Status: Equatable  {
      *
      * @since 0.1.0
      */
-    static let permission_denied = Status(canonicalCode:  CanonicalCode.permission_denied)
+    static let permission_denied = Status(canonicalCode: CanonicalCode.permission_denied)
 
     /**
      * The request does not have valid authentication credentials for the operation.
      *
      * @since 0.1.0
      */
-    static let unauthenticated = Status(canonicalCode:  CanonicalCode.unauthenticated)
+    static let unauthenticated = Status(canonicalCode: CanonicalCode.unauthenticated)
 
     /**
      * Some resource has been exhausted, perhaps a per-user quota, or perhaps the entire file system
@@ -267,7 +265,7 @@ public struct Status: Equatable  {
      *
      * @since 0.1.0
      */
-    static let resource_exhausted = Status(canonicalCode:  CanonicalCode.resource_exhausted)
+    static let resource_exhausted = Status(canonicalCode: CanonicalCode.resource_exhausted)
 
     /**
      * Operation was rejected because the system is not in a state required for the operation's
@@ -275,7 +273,7 @@ public struct Status: Equatable  {
      *
      * @since 0.1.0
      */
-    static let failed_precondition = Status(canonicalCode:  CanonicalCode.failed_precondition)
+    static let failed_precondition = Status(canonicalCode: CanonicalCode.failed_precondition)
 
     /**
      * The operation was aborted, typically due to a concurrency issue like sequencer check failures,
@@ -283,42 +281,42 @@ public struct Status: Equatable  {
      *
      * @since 0.1.0
      */
-    static let aborted = Status(canonicalCode:  CanonicalCode.aborted)
+    static let aborted = Status(canonicalCode: CanonicalCode.aborted)
 
     /**
      * Operation was attempted past the valid range. See {@link CanonicalCode#OUT_OF_RANGE}.
      *
      * @since 0.1.0
      */
-    static let out_of_range = Status(canonicalCode:  CanonicalCode.out_of_range)
+    static let out_of_range = Status(canonicalCode: CanonicalCode.out_of_range)
 
     /**
      * Operation is not implemented or not supported/enabled in this service.
      *
      * @since 0.1.0
      */
-    static let unimplemented = Status(canonicalCode:  CanonicalCode.unimplemented)
+    static let unimplemented = Status(canonicalCode: CanonicalCode.unimplemented)
 
     /**
      * Internal errors. See {@link CanonicalCode#INTERNAL}.
      *
      * @since 0.1.0
      */
-    static let `internal` = Status(canonicalCode:  CanonicalCode.internal)
+    static let `internal` = Status(canonicalCode: CanonicalCode.internal)
 
     /**
      * The service is currently unavailable. See {@link CanonicalCode#UNAVAILABLE}.
      *
      * @since 0.1.0
      */
-    static let unavailable = Status(canonicalCode:  CanonicalCode.unavailable)
+    static let unavailable = Status(canonicalCode: CanonicalCode.unavailable)
 
     /**
      * Unrecoverable data loss or corruption.
      *
      * @since 0.1.0
      */
-    static let data_loss = Status(canonicalCode:  CanonicalCode.data_loss)
+    static let data_loss = Status(canonicalCode: CanonicalCode.data_loss)
 
     // The canonical code of this message.
     private(set) var canonicalCode: CanonicalCode
@@ -328,7 +326,7 @@ public struct Status: Equatable  {
 
     private init(canonicalCode: CanonicalCode, description: String? = nil) {
         self.canonicalCode = canonicalCode
-        self.statusDescription = description
+        statusDescription = description
     }
 
     /**
@@ -339,7 +337,7 @@ public struct Status: Equatable  {
      * @since 0.1.0
      */
     public func withDescription(description: String?) -> Status {
-        if self.statusDescription == description {
+        if statusDescription == description {
             return self
         }
         return Status(canonicalCode: canonicalCode, description: description)

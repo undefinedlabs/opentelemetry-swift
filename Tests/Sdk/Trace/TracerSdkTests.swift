@@ -44,11 +44,11 @@ class TracerSdkTests: XCTestCase {
 
     func testGetCurrentSpan_WithSpan() {
         // TODO: Review, only works in isolation
-//        XCTAssertNil(tracer.currentSpan)
-//        var ws = tracer.withSpan(span)
-//        XCTAssertTrue(tracer.currentSpan === span)
-//        ws.close()
-//        XCTAssertNil(tracer.currentSpan)
+        XCTAssertNil(tracer.currentSpan)
+        var ws = tracer.withSpan(span)
+        XCTAssertTrue(tracer.currentSpan === span)
+        ws.close()
+        XCTAssertNil(tracer.currentSpan)
     }
 
     func testUpdateActiveTraceConfig() {
@@ -58,25 +58,25 @@ class TracerSdkTests: XCTestCase {
         XCTAssertEqual(tracer.activeTraceConfig, newConfig)
     }
 
-     func testShutdown() {
-         tracer.shutdown();
+    func testShutdown() {
+        tracer.shutdown()
         XCTAssertEqual(spanProcessor.shutdownCalledTimes, 1)
-         tracer.unsafeRestart();
-     }
+        tracer.unsafeRestart()
+    }
 
-     func testShutdownTwice_OnlyFlushSpanProcessorOnce() {
-         tracer.shutdown();
+    func testShutdownTwice_OnlyFlushSpanProcessorOnce() {
+        tracer.shutdown()
         XCTAssertEqual(spanProcessor.shutdownCalledTimes, 1)
-         tracer.shutdown(); // the second call will be ignored
+        tracer.shutdown() // the second call will be ignored
         XCTAssertEqual(spanProcessor.shutdownCalledTimes, 1)
-         tracer.unsafeRestart();
-     }
+        tracer.unsafeRestart()
+    }
 
-     func testReturnNoopSpanAfterShutdown() {
-         tracer.shutdown();
-        let span = tracer.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.alwaysSample).startSpan();
+    func testReturnNoopSpanAfterShutdown() {
+        tracer.shutdown()
+        let span = tracer.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.alwaysSample).startSpan()
         XCTAssertTrue(span is DefaultSpan)
-         span.end();
-         tracer.unsafeRestart();
-     }
+        span.end()
+        tracer.unsafeRestart()
+    }
 }

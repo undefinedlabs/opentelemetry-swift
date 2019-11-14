@@ -104,10 +104,10 @@ public protocol Tracer {
 //    /// <param name="kind">Kind.</param>
 //    /// <param name="links">Links collection.</param>
 //    /// <returns>Span instance.</returns>
-////    ISpan StartSpanFromActivity(string operationName, Activity activity, SpanKind kind, IEnumerable<Link> links);
-//}
+    ////    ISpan StartSpanFromActivity(string operationName, Activity activity, SpanKind kind, IEnumerable<Link> links);
+    // }
 //
-//extension Tracer {
+    // extension Tracer {
 //    /// <summary>
 //    /// Creates root span.
 //    /// </summary>

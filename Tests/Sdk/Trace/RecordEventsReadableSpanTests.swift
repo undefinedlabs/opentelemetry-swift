@@ -10,7 +10,7 @@ import XCTest
 class RecordEventsReadableSpanTest: XCTestCase {
     let spanName = "MySpanName"
     let spanNewName = "NewName"
-    let nanosPerSecond = 1000_000_000
+    let nanosPerSecond = 1000000000
     let millisPerSecond = 1000
     let traceId = TraceId.random()
     let spanId = SpanId.random()
@@ -58,7 +58,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         let span = createTestSpan(kind: .internal)
         spanDoWork(span: span, status: nil)
         let spanData = span.toSpanData()
-        let timedEvent = TimedEvent(nanotime: Timestamp(seconds: startTime.seconds + 1, nanos: 0).nanos, event: event)
+        let timedEvent = TimedEvent(timestamp: Timestamp(seconds: startTime.seconds + 1, nanos: 0), event: event)
         verifySpanData(spanData: spanData, attributes: expectedAttributes, timedEvents: [timedEvent], links: [link], spanName: spanNewName, startTime: Timestamp(seconds: startTime.seconds, nanos: 0), endTime: Timestamp(seconds: testClock.now.seconds, nanos: 0), status: .ok)
         span.end()
     }
@@ -69,7 +69,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         span.end()
         XCTAssertEqual(spanProcessor.onEndCalledTimes, 1)
         let spanData = span.toSpanData()
-        let timedEvent = TimedEvent(nanotime: Timestamp(seconds: startTime.seconds + 1, nanos: 0).nanos, event: event)
+        let timedEvent = TimedEvent(timestamp: Timestamp(seconds: startTime.seconds + 1, nanos: 0), event: event)
         verifySpanData(spanData: spanData, attributes: expectedAttributes, timedEvents: [timedEvent], links: [link], spanName: spanNewName, startTime: Timestamp(seconds: startTime.seconds, nanos: 0), endTime: Timestamp(seconds: testClock.now.seconds, nanos: 0), status: .cancelled)
     }
 

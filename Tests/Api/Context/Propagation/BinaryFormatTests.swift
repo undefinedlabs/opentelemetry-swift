@@ -55,40 +55,40 @@ class BinaryFormatTests: XCTestCase {
     }
 
     func testFromBinaryValue_UnsupportedVersionId() {
-        XCTAssertNil( binaryFormat.fromByteArray(bytes: [66, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 97, 98, 99, 100, 101,
-            102, 103, 104, 1]))
+        XCTAssertNil(binaryFormat.fromByteArray(bytes: [66, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 97, 98, 99, 100, 101,
+                                                        102, 103, 104, 1]))
     }
 
     func testFromBinaryValue_UnsupportedFieldIdFirst() {
-        XCTAssertNil( binaryFormat.fromByteArray(bytes: [0, 4, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 1, 97, 98, 99, 100, 101, 102, 103, 104, 2, 1]))
+        XCTAssertNil(binaryFormat.fromByteArray(bytes: [0, 4, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 1, 97, 98, 99, 100, 101, 102, 103, 104, 2, 1]))
     }
 
     func testFromBinaryValue_UnsupportedFieldIdSecond() {
-      XCTAssertNil( binaryFormat.fromByteArray(bytes: [0, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 3, 97, 98, 99, 100,
-      101, 102, 103, 104, 2, 1]))
+        XCTAssertNil(binaryFormat.fromByteArray(bytes: [0, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 3, 97, 98, 99, 100,
+                                                        101, 102, 103, 104, 2, 1]))
     }
 
     func testFromBinaryValue_UnsupportedFieldIdThird_skipped() {
         XCTAssertTrue(binaryFormat.fromByteArray(bytes: [0, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 1, 97,
-            98, 99, 100, 101, 102, 103, 104, 0, 1])!.isValid)
+                                                         98, 99, 100, 101, 102, 103, 104, 0, 1])!.isValid)
     }
 
     func testFromBinaryValue_ShorterTraceId() {
-        XCTAssertNil( binaryFormat.fromByteArray(bytes: [0, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76]))
+        XCTAssertNil(binaryFormat.fromByteArray(bytes: [0, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76]))
     }
 
     func testFromBinaryValue_ShorterSpanId() {
-        XCTAssertNil( binaryFormat.fromByteArray(bytes: [0, 1, 97, 98, 99, 100, 101, 102, 103]))
+        XCTAssertNil(binaryFormat.fromByteArray(bytes: [0, 1, 97, 98, 99, 100, 101, 102, 103]))
     }
 
     func testFromBinaryValue_ShorterTraceFlags() {
-        XCTAssertNil( binaryFormat.fromByteArray(bytes: [0, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 1, 97, 98, 99, 100,
-        101, 102, 103, 104, 2]))
+        XCTAssertNil(binaryFormat.fromByteArray(bytes: [0, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 1, 97, 98, 99, 100,
+                                                        101, 102, 103, 104, 2]))
     }
 
     func testFromBinaryValue_MissingTraceFlagsOk() {
         let extracted = binaryFormat.fromByteArray(bytes: [0, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 1, 97, 98, 99,
-        100, 101, 102, 103, 104])
+                                                           100, 101, 102, 103, 104])
         XCTAssertTrue(extracted!.isValid)
         XCTAssertEqual(extracted?.traceFlags, TraceFlags())
     }

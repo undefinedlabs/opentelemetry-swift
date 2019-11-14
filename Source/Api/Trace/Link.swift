@@ -1,6 +1,6 @@
 //
 //  Link.swift
-//  
+//
 //
 //  Created by Ignacio Bonafonte on 15/10/2019.
 //
@@ -22,7 +22,7 @@ public protocol Link: AnyObject {
      * @return the set of attributes.
      * @since 0.1.0
      */
-    var attributes: [String:AttributeValue] { get }
+    var attributes: [String: AttributeValue] { get }
 }
 
 func == (lhs: Link, rhs: Link) -> Bool {

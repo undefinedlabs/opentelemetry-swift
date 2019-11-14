@@ -36,15 +36,15 @@ struct TimestampConverter: Equatable {
      * @return the {@code Timestamp} representation of the {@code time}.
      */
     public func convertNanoTime(nanoTime: Int) -> Timestamp {
-        let deltaNanos = nanoTime - self.nanoTime;
+        let deltaNanos = nanoTime - self.nanoTime
 
-        var seconds = timestamp.seconds + (deltaNanos / TimestampConverter.nanosPerSecond);
-        var nanos = timestamp.nanos + (deltaNanos % TimestampConverter.nanosPerSecond);
+        var seconds = timestamp.seconds + (deltaNanos / TimestampConverter.nanosPerSecond)
+        var nanos = timestamp.nanos + (deltaNanos % TimestampConverter.nanosPerSecond)
 
-        if (nanos >= TimestampConverter.nanosPerSecond) {
-            seconds += nanos / TimestampConverter.nanosPerSecond;
-            nanos = nanos % TimestampConverter.nanosPerSecond;
+        if nanos >= TimestampConverter.nanosPerSecond {
+            seconds += nanos / TimestampConverter.nanosPerSecond
+            nanos = nanos % TimestampConverter.nanosPerSecond
         }
-        return Timestamp(seconds: seconds, nanos: nanos);
+        return Timestamp(seconds: seconds, nanos: nanos)
     }
 }

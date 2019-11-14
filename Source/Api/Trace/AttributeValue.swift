@@ -7,8 +7,7 @@
 
 import Foundation
 
-public enum AttributeValue:Equatable, CustomStringConvertible {
-
+public enum AttributeValue: Equatable, CustomStringConvertible {
     case string(String)
     case bool(Bool)
     case int(Int)
@@ -16,15 +15,14 @@ public enum AttributeValue:Equatable, CustomStringConvertible {
 
     public var description: String {
         switch self {
-        case .string(let value):
+        case let .string(value):
             return value
-        case .bool(let value):
+        case let .bool(value):
             return value ? "true" : "false"
-        case .int(let value):
+        case let .int(value):
             return String(value)
-        case .double(let value):
+        case let .double(value):
             return String(value)
         }
     }
-
 }

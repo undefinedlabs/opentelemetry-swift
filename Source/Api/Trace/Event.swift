@@ -24,4 +24,3 @@ public protocol Event {
      */
     var attributes: [String: AttributeValue] { get }
 }
-

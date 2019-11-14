@@ -59,7 +59,7 @@ class SimpleSpansProcessorTests: XCTestCase {
     }
 
     func testTracerSdk_NotSampled_Span() {
-//TODO: Needs BatchSpansProcessor
+        // TODO: Needs BatchSpansProcessor
 //        tracerSdk.addSpanProcessor(BatchSpansProcessor(waitingSpanExporter).setScheduleDelayMillis(maxScheduleDelayMillis))
 //        tracerSdk.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
 //        tracerSdk.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
@@ -76,41 +76,39 @@ class SimpleSpansProcessorTests: XCTestCase {
 //        XCTAssertEqual(exported, (span as! ReadableSpan).toSpanData())
     }
 
-
     func testTracerSdk_NotSampled_RecordingEventsSpan() {
-      // TODO(bdrutu): Fix this when Sampler return RECORD option.
-      /*
-      tracerSdk.addSpanProcessor(
-          BatchSpansProcessor.newBuilder(waitingSpanExporter)
-              .setScheduleDelayMillis(MAX_SCHEDULE_DELAY_MILLIS)
-              .reportOnlySampled(false)
-              .build());
+        // TODO(bdrutu): Fix this when Sampler return RECORD option.
+        /*
+         tracerSdk.addSpanProcessor(
+             BatchSpansProcessor.newBuilder(waitingSpanExporter)
+                 .setScheduleDelayMillis(MAX_SCHEDULE_DELAY_MILLIS)
+                 .reportOnlySampled(false)
+                 .build());
 
-      io.opentelemetry.trace.Span span =
-          tracerSdk
-              .spanBuilder("FOO")
-              .setSampler(Samplers.neverSample())
-              .startSpan();
-      span.end();
+         io.opentelemetry.trace.Span span =
+             tracerSdk
+                 .spanBuilder("FOO")
+                 .setSampler(Samplers.neverSample())
+                 .startSpan();
+         span.end();
 
-      List<SpanData> exported = waitingSpanExporter.waitForExport(1);
-      assertThat(exported).containsExactly(((ReadableSpan) span).toSpanData());
-      */
+         List<SpanData> exported = waitingSpanExporter.waitForExport(1);
+         assertThat(exported).containsExactly(((ReadableSpan) span).toSpanData());
+         */
     }
 
     func testOnEndSync_ExporterReturnError() {
-      let spanData = TestUtils.makeBasicSpan();
-      readableSpan.forcedReturnSpanContext = sampledSpanContext
-      readableSpan.forcedReturnSpanData = spanData
-        simpleSampledSpansProcessor.onEnd(span: readableSpan);
-      // Try again, now will no longer return error.
-        simpleSampledSpansProcessor.onEnd(span: readableSpan);
+        let spanData = TestUtils.makeBasicSpan()
+        readableSpan.forcedReturnSpanContext = sampledSpanContext
+        readableSpan.forcedReturnSpanData = spanData
+        simpleSampledSpansProcessor.onEnd(span: readableSpan)
+        // Try again, now will no longer return error.
+        simpleSampledSpansProcessor.onEnd(span: readableSpan)
         XCTAssertEqual(spanExporter.exportCalledTimes, 2)
     }
 
     func testShutdown() {
-      simpleSampledSpansProcessor.shutdown();
+        simpleSampledSpansProcessor.shutdown()
         XCTAssertEqual(spanExporter.shutdownCalledTimes, 1)
     }
 }
-

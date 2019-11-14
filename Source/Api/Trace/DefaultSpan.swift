@@ -31,7 +31,6 @@ class DefaultSpan: Span {
             return Status.ok
         }
         set {
-            
         }
     }
 

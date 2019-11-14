@@ -24,7 +24,7 @@ final class DefaultSpanTest: XCTestCase {
 
     func testDoNotCrash() {
         let span = DefaultSpan.random()
-        span.setAttribute( key: "MyStringAttributeKey", value: AttributeValue.string("MyStringAttributeValue"))
+        span.setAttribute(key: "MyStringAttributeKey", value: AttributeValue.string("MyStringAttributeValue"))
         span.setAttribute(key: "MyBooleanAttributeKey", value: AttributeValue.bool(true))
         span.setAttribute(key: "MyLongAttributeKey", value: AttributeValue.int(123))
         span.addEvent(name: "event")

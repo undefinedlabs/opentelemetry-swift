@@ -22,20 +22,20 @@ public struct HttpTraceContextFormat: TextFormattable {
 
     public var fields: Set<String> = [TRACESTATE, TRACEPARENT]
 
-    public func inject<S>(spanContext: SpanContext, carrier: inout [String:String], setter: S) where S: Setter {
+    public func inject<S>(spanContext: SpanContext, carrier: inout [String: String], setter: S) where S: Setter {
         var traceparent = "00-\(spanContext.traceId.hexString)-\(spanContext.spanId.hexString)"
 
         traceparent += spanContext.traceFlags.sampled ? "-01" : "-00"
 
         setter.set(carrier: &carrier, key: HttpTraceContextFormat.TRACEPARENT, value: traceparent)
 
-        let tracestateStr = TracestateUtils.getString(tracestate:spanContext.tracestate)
+        let tracestateStr = TracestateUtils.getString(tracestate: spanContext.tracestate)
         if !tracestateStr.isEmpty {
             setter.set(carrier: &carrier, key: HttpTraceContextFormat.TRACESTATE, value: tracestateStr)
         }
     }
 
-    public func extract<G>(carrier: [String:String], getter: G) -> SpanContext? where G: Getter {
+    public func extract<G>(carrier: [String: String], getter: G) -> SpanContext? where G: Getter {
         guard let traceparentCollection = getter.get(carrier: carrier, key: HttpTraceContextFormat.TRACEPARENT), traceparentCollection.count <= 1 else {
             // multiple traceparent are not allowed
             return nil
@@ -103,7 +103,7 @@ public struct HttpTraceContextFormat: TextFormattable {
         if !spanId.isValid {
             return nil
         }
-        
+
         // let options0 = UInt8(String(traceparentArray[TraceContextFormat.versionAndTraceIdAndSpanIdLength]), radix: 16)!
         guard let options1 = UInt8(String(traceparentArray[HttpTraceContextFormat.versionAndTraceIdAndSpanIdLength + 1]), radix: 16) else {
             return nil

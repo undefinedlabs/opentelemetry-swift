@@ -29,10 +29,9 @@ struct Resource: Equatable {
     }
 
     func merging(other: Resource) -> Resource {
-        let labelsCopy = self.labels.merging(other.labels) { current, _ in current }
+        let labelsCopy = labels.merging(other.labels) { current, _ in current }
         return Resource(labels: labelsCopy)
     }
-
 
     private static func checkLabels(labels: [String: String]) -> Bool {
         for entry in labels {

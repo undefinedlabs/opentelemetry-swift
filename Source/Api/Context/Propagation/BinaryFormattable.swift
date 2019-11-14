@@ -15,7 +15,6 @@ public protocol BinaryFormattable {
     /// <returns>Span context deserialized from the byte array.</returns>
     func fromByteArray(bytes: [UInt8]) -> SpanContext?
 
-
     /// <summary>
     /// Serialize span context into the bytes array.
     /// </summary>

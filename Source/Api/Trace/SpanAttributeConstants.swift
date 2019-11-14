@@ -1,14 +1,13 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Ignacio Bonafonte on 17/10/2019.
 //
 
 import Foundation
 
-enum SpanAttributeConstants: String
-{
+enum SpanAttributeConstants: String {
     case httpMethodKey = "http.method"
     case httpStatusCodeKey = "http.status_code"
     case httpUserAgentKey = "http.user_agent"

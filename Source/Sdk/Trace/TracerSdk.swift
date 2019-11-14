@@ -10,13 +10,13 @@ import Foundation
 struct TracerSdk: Tracer {
 //    private static final Logger logger = Logger.getLogger(TracerSdk.class.getName());
 
-    var binaryFormat:BinaryFormattable = BinaryTraceContextFormat()
+    var binaryFormat: BinaryFormattable = BinaryTraceContextFormat()
     var textFormat: TextFormattable = HttpTraceContextFormat()
     var clock = MillisClock()
     var resource = EnvVarResource.resource
 
     var activeTraceConfig = TraceConfig()
-    
+
     private var activeSpanProcessor: SpanProcessor = NoopSpanProcessor()
 
     private var registeredSpanProcessors = [SpanProcessor]()
@@ -24,18 +24,18 @@ struct TracerSdk: Tracer {
     private var isStopped = false
 
     var currentSpan: Span? {
-        return ContextUtils.getCurrent()
+        return ContextUtils.getCurrentSpan()
     }
 
     func spanBuilder(spanName: String) -> SpanBuilder {
         if isStopped {
-            return DefaultTracer().spanBuilder(spanName: spanName)
+            return DefaultTracer.instance.spanBuilder(spanName: spanName)
         }
         return SpanBuilderSdk(spanName: spanName, spanProcessor: activeSpanProcessor, traceConfig: activeTraceConfig, resource: resource, clock: clock)
     }
 
     func withSpan(_ span: Span) -> Scope {
-        return ContextUtils.with(span: span)
+        return ContextUtils.withSpan(span)
     }
 
     /**

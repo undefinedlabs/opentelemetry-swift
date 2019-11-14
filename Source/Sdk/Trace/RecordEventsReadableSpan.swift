@@ -7,9 +7,9 @@
 
 import Foundation
 
-//TODO: needs proper implementation of AttributesWithCapacity
+// TODO: needs proper implementation of AttributesWithCapacity
 typealias EvictingQueue = [TimedEvent]
-//TODO: needs proper implementation of AttributesWithCapacity
+// TODO: needs proper implementation of AttributesWithCapacity
 typealias AttributesWithCapacity = [String: AttributeValue]
 
 class RecordEventsReadableSpan: ReadableSpan {
@@ -240,21 +240,19 @@ class RecordEventsReadableSpan: ReadableSpan {
 
     // For testing purposes
     internal func getDroppedLinksCount() -> Int {
-      return totalRecordedLinks - links.count;
+        return totalRecordedLinks - links.count
     }
 
-    internal func getNumberOfChildren()  -> Int{
-        return numberOfChildren;
-
+    internal func getNumberOfChildren() -> Int {
+        return numberOfChildren
     }
 
-    internal func getTotalRecordedEvents()  -> Int{
-        return totalRecordedEvents;
+    internal func getTotalRecordedEvents() -> Int {
+        return totalRecordedEvents
     }
-
 }
 
-//struct AttributesWithCapacity {
+// struct AttributesWithCapacity {
 //    fileprivate var attributes = [(String, AttributeValue)]()
 //    fileprivate var capacity: Int = 0
 //
@@ -276,4 +274,4 @@ class RecordEventsReadableSpan: ReadableSpan {
 //            }
 //        }
 //    }
-//}
+// }

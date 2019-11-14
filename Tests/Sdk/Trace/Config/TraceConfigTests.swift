@@ -19,7 +19,7 @@ class TraceConfigTests: XCTestCase {
     }
 
     func testUpdateTraceConfig_All() {
-        let traceConfig = TraceConfig().settingSampler( Samplers.neverSample).settingMaxNumberOfAttributes(8).settingMaxNumberOfEvents(10).settingMaxNumberOfLinks(11).settingMaxNumberOfAttributesPerEvent(1).settingMaxNumberOfAttributesPerLink(2)
+        let traceConfig = TraceConfig().settingSampler(Samplers.neverSample).settingMaxNumberOfAttributes(8).settingMaxNumberOfEvents(10).settingMaxNumberOfLinks(11).settingMaxNumberOfAttributesPerEvent(1).settingMaxNumberOfAttributesPerLink(2)
         XCTAssertTrue(traceConfig.sampler === Samplers.neverSample)
         XCTAssertEqual(traceConfig.maxNumberOfAttributes, 8)
         XCTAssertEqual(traceConfig.maxNumberOfEvents, 10)

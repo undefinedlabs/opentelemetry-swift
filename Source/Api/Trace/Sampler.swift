@@ -8,7 +8,6 @@
 import Foundation
 
 public protocol Sampler: AnyObject, CustomStringConvertible {
-
     /// <summary>
     /// Checks whether span needs to be created and tracked.
     /// </summary>
@@ -43,7 +42,7 @@ public struct Decision {
     /// <param name="isSampled">True if sampled, false otherwise.</param>
     init(isSampled: Bool) {
         self.isSampled = isSampled
-        self.attributes = [String: AttributeValue]()
+        attributes = [String: AttributeValue]()
     }
 
     /// <summary>
@@ -51,7 +50,7 @@ public struct Decision {
     /// </summary>
     /// <param name="isSampled">True if sampled, false otherwise.</param>
     /// <param name="attributes">Attributes associated with the sampling decision.</param>
-    init(isSampled: Bool, attributes: [String: AttributeValue])  {
+    init(isSampled: Bool, attributes: [String: AttributeValue]) {
         self.isSampled = isSampled
         self.attributes = attributes
     }

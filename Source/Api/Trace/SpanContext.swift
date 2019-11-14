@@ -6,13 +6,6 @@
 //
 
 import Foundation
-import ObjectiveC
-import os.activity
-
-// Bridging Obj-C variabled defined as c-macroses. See `activity.h` header.
-private let OS_ACTIVITY_NONE = unsafeBitCast(dlsym(UnsafeMutableRawPointer(bitPattern: -2), "_os_activity_none"), to: os_activity_t.self)
-private let OS_ACTIVITY_CURRENT = unsafeBitCast(dlsym(UnsafeMutableRawPointer(bitPattern: -2), "_os_activity_current"), to: os_activity_t.self)
-@_silgen_name("_os_activity_create") private func _os_activity_create(_ dso: UnsafeRawPointer?, _ description: UnsafePointer<Int8>, _ parent : Unmanaged<AnyObject>?, _ flags: os_activity_flag_t) -> AnyObject!
 
 /**
  * A class that represents a span context. A span context contains the state that must propagate to
@@ -36,13 +29,6 @@ public final class SpanContext: Equatable, CustomStringConvertible {
 
     /// The tracestate associated with this SpanContext
     let tracestate: Tracestate
-
-    private var activityIdHandle: UInt8 = 0
-
-    private var activity_state = os_activity_scope_state_s()
-
-    private(set) var activityId: os_activity_id_t
-    private(set) var activity: os_activity_t
 
     /**
      * Returns the invalid {@code SpanContext} that can be used for no-op operations.
@@ -68,11 +54,6 @@ public final class SpanContext: Equatable, CustomStringConvertible {
         self.spanId = spanId
         self.traceFlags = traceFlags
         self.tracestate = tracestate ?? Tracestate()
-
-        let dso = UnsafeMutableRawPointer(mutating: #dsohandle)
-        activity = _os_activity_create(dso, "InitSpan", OS_ACTIVITY_CURRENT, OS_ACTIVITY_FLAG_DEFAULT);
-        activityId =  os_activity_get_identifier(activity, nil)
-        os_activity_scope_enter(activity, &activity_state);
     }
 
     /*

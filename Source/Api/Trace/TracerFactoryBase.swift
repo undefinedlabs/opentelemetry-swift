@@ -7,7 +7,7 @@
 
 import Foundation
 
-//public class TracerFactoryBase {
+// public class TracerFactoryBase {
 //    private var proxy = ProxyTracer()
 //    private var isInitialized = false
 //    private static var defaultFactory: TracerFactoryBase = TracerFactoryBase()
@@ -45,4 +45,4 @@ import Foundation
 //        isInitialized = false
 //        TracerFactoryBase.defaultFactory = TracerFactoryBase()
 //    }
-//}
+// }

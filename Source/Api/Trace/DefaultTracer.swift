@@ -9,11 +9,13 @@ import Foundation
 
 class DefaultTracer: Tracer {
     static var instance = DefaultTracer()
-    var binaryFormat:BinaryFormattable = BinaryTraceContextFormat()
+    var binaryFormat: BinaryFormattable = BinaryTraceContextFormat()
     var textFormat: TextFormattable = HttpTraceContextFormat()
 
+    private init() {}
+
     var currentSpan: Span? {
-        return ContextUtils.getCurrent()
+        return ContextUtils.getCurrentSpan()
     }
 
     func withSpan(_ span: Span) -> Scope {

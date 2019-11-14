@@ -24,6 +24,7 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
 
     public init() {
     }
+
     /**
      * Constructs a {@code SpanId} whose representation is specified by a long value.
      *
@@ -70,7 +71,7 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     static func random() -> SpanId {
         var id: UInt64
         repeat {
-            id =  UInt64.random(in: .min ... .max)
+            id = UInt64.random(in: .min ... .max)
         } while id == INVALID_ID
 
         return SpanId(id: id)
@@ -107,7 +108,7 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     }
 
     init(fromBytes bytes: ArraySlice<Character>, withOffset offset: Int = 0) {
-        self.init(fromData: Data(String(bytes).utf8.map{ UInt8($0) }))
+        self.init(fromData: Data(String(bytes).utf8.map { UInt8($0) }))
     }
 
     /**
@@ -126,17 +127,17 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
 //            rawPointer.storeBytes(of: id.bigEndian, toByteOffset: Int, as: UInt64)
 //        }
 //    }
-                //RangeReplaceableCollection
+    // RangeReplaceableCollection
     public func copyBytesTo(dest: inout Data, destOffset: Int) {
-        dest.replaceSubrange(destOffset..<destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
     }
 
     public func copyBytesTo(dest: inout Array<UInt8>, destOffset: Int) {
-        dest.replaceSubrange(destOffset..<destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
     }
 
     public func copyBytesTo(dest: inout ArraySlice<UInt8>, destOffset: Int) {
-        dest.replaceSubrange(destOffset..<destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
     }
 
     //  /**
@@ -152,16 +153,16 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     //   * @since 0.1.0
     //   */
     init(fromHexString hex: String, withOffset offset: Int = 0) {
-         let firstIndex = hex.index(hex.startIndex, offsetBy: offset)
-         let secondIndex =  hex.index(firstIndex, offsetBy: 16)
+        let firstIndex = hex.index(hex.startIndex, offsetBy: offset)
+        let secondIndex = hex.index(firstIndex, offsetBy: 16)
 
-         guard hex.count >= 16 + offset,
-             let id = UInt64(hex[firstIndex..<secondIndex], radix: 16)  else {
-                 self.init()
-                 return
-         }
+        guard hex.count >= 16 + offset,
+            let id = UInt64(hex[firstIndex ..< secondIndex], radix: 16) else {
+            self.init()
+            return
+        }
         self.init(id: id)
-     }
+    }
 
     //  public static SpanId fromLowerBase16(CharSequence src, int srcOffset) {
 //    Utils.checkNotNull(src, "src");
@@ -183,7 +184,7 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     //  }
 
     public var hexString: String {
-        return String(format:"%016llx", id)
+        return String(format: "%016llx", id)
     }
 
     /**
@@ -217,7 +218,7 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
 
     public var description: String {
         // return "SpanId{spanId=" + toLowerBase16() + "}";
-        return "SpanId{spanId=\(self.hexString)}"
+        return "SpanId{spanId=\(hexString)}"
     }
 
     public static func < (lhs: SpanId, rhs: SpanId) -> Bool {

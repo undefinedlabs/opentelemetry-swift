@@ -140,11 +140,11 @@ final class TracestateTests: XCTestCase {
         XCTAssertNotEqual(Tracestate(), firstTracestate)
         XCTAssertNotEqual(Tracestate(), Tracestate().setting(key: first_key, value: first_value))
         XCTAssertNotEqual(Tracestate(), secondTracestate)
-        XCTAssertNotEqual(Tracestate(),  Tracestate().setting(key: second_key   , value: second_value))
+        XCTAssertNotEqual(Tracestate(), Tracestate().setting(key: second_key, value: second_value))
         XCTAssertEqual(firstTracestate, Tracestate().setting(key: first_key, value: first_value))
         XCTAssertNotEqual(firstTracestate, secondTracestate)
-        XCTAssertNotEqual(firstTracestate, Tracestate().setting(key: second_key   , value: second_value))
-        XCTAssertEqual(secondTracestate, Tracestate().setting(key: second_key   , value: second_value))
+        XCTAssertNotEqual(firstTracestate, Tracestate().setting(key: second_key, value: second_value))
+        XCTAssertEqual(secondTracestate, Tracestate().setting(key: second_key, value: second_value))
     }
 
     func testTracestate_ToString() {

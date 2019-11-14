@@ -5,11 +5,10 @@
 //  Created by Ignacio Bonafonte on 08/11/2019.
 //
 
-@testable import OpenTelemetrySwift
 import Foundation
+@testable import OpenTelemetrySwift
 
 class SpanExporterMock: SpanExporter {
-
     var exportCalledTimes: Int = 0
 //    var exportCalledData: [SpanData]?
     var shutdownCalledTimes: Int = 0
@@ -24,5 +23,4 @@ class SpanExporterMock: SpanExporter {
     func shutdown() {
         shutdownCalledTimes += 1
     }
-
 }

@@ -9,7 +9,7 @@
 import XCTest
 
 class SpanBuilderTests: XCTestCase {
-    let tracer = DefaultTracer()
+    let tracer = DefaultTracer.instance
 
     func testDoNotCrash_NoopImplementation() {
         let spanBuilder = tracer.spanBuilder(spanName: "MySpanName")

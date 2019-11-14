@@ -80,6 +80,7 @@ class SpanBuilderSdkTest: XCTestCase {
             func shouldSample(parentContext: SpanContext?, hasRemoteParent: Bool, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision {
                 return decision
             }
+
             var description: String { return "TestSampler" }
             init(decision: Decision) { self.decision = decision }
         }

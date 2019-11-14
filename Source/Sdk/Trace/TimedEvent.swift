@@ -15,14 +15,19 @@ struct TimedEvent: Equatable {
     private(set) var attributes: [String: AttributeValue]
 
     init(nanotime: Int, name: String, attributes: [String: AttributeValue] = emptyAttributes) {
-        self.nanoTime = nanotime
+        nanoTime = nanotime
         self.name = name
         self.attributes = attributes
     }
 
     init(nanotime: Int, event: Event) {
-        self.nanoTime = nanotime
+        nanoTime = nanotime
         name = event.name
         attributes = event.attributes
+    }
+
+    init(timestamp: Timestamp, event: Event) {
+        let nanoTime = timestamp.seconds * TimestampConverter.nanosPerSecond + timestamp.nanos
+        self.init(nanotime: nanoTime, event: event)
     }
 }
