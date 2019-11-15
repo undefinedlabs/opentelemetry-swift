@@ -7,7 +7,8 @@
 
 import Foundation
 
-public struct Entry: Equatable {
+public struct Entry: Equatable, Comparable {
+
     static let metadataUnlimitedPropagation = EntryMetadata(entryTtl: .unlimitedPropagation)
 
     private(set) var key: EntryKey
@@ -27,5 +28,9 @@ public struct Entry: Equatable {
         self.key = key
         self.value = value
         metadata = entryMetadata
+    }
+
+    public static func < (lhs: Entry, rhs: Entry) -> Bool {
+        return lhs.key < rhs.key
     }
 }

@@ -213,6 +213,22 @@
 		666B29A4235F5E6900BEBCD1 /* SpanIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D995235F5B880019D8B5 /* SpanIdTests.swift */; };
 		666B29A5235F5E6900BEBCD1 /* TraceFlagsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D996235F5B880019D8B5 /* TraceFlagsTests.swift */; };
 		666B29A6235F5E6900BEBCD1 /* StatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D4D997235F5B880019D8B5 /* StatusTests.swift */; };
+		669DEF52237EA03C0086862A /* DistributedContextSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF51237EA03C0086862A /* DistributedContextSdkTests.swift */; };
+		669DEF53237EA03C0086862A /* DistributedContextSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF51237EA03C0086862A /* DistributedContextSdkTests.swift */; };
+		669DEF54237EA03C0086862A /* DistributedContextSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF51237EA03C0086862A /* DistributedContextSdkTests.swift */; };
+		669DEF55237EA03C0086862A /* DistributedContextSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF51237EA03C0086862A /* DistributedContextSdkTests.swift */; };
+		669DEF57237EA26E0086862A /* DistributedContextTestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF56237EA26E0086862A /* DistributedContextTestUtil.swift */; };
+		669DEF58237EA26E0086862A /* DistributedContextTestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF56237EA26E0086862A /* DistributedContextTestUtil.swift */; };
+		669DEF59237EA26E0086862A /* DistributedContextTestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF56237EA26E0086862A /* DistributedContextTestUtil.swift */; };
+		669DEF5A237EA26E0086862A /* DistributedContextTestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF56237EA26E0086862A /* DistributedContextTestUtil.swift */; };
+		669DEF5C237EF8D90086862A /* DistributedContextManagerSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF5B237EF8D90086862A /* DistributedContextManagerSdkTests.swift */; };
+		669DEF5D237EF8D90086862A /* DistributedContextManagerSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF5B237EF8D90086862A /* DistributedContextManagerSdkTests.swift */; };
+		669DEF5E237EF8D90086862A /* DistributedContextManagerSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF5B237EF8D90086862A /* DistributedContextManagerSdkTests.swift */; };
+		669DEF5F237EF8D90086862A /* DistributedContextManagerSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF5B237EF8D90086862A /* DistributedContextManagerSdkTests.swift */; };
+		669DEF62237EF9BB0086862A /* DistributedContextMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF61237EF9BB0086862A /* DistributedContextMock.swift */; };
+		669DEF63237EF9BB0086862A /* DistributedContextMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF61237EF9BB0086862A /* DistributedContextMock.swift */; };
+		669DEF64237EF9BB0086862A /* DistributedContextMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF61237EF9BB0086862A /* DistributedContextMock.swift */; };
+		669DEF65237EF9BB0086862A /* DistributedContextMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669DEF61237EF9BB0086862A /* DistributedContextMock.swift */; };
 		66B5140B237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */; };
 		66B5140C237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */; };
 		66B5140D237DA2EE007B8974 /* DistributedContextManagerSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */; };
@@ -221,6 +237,10 @@
 		66B51411237DA389007B8974 /* DistributedContextSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140F237DA389007B8974 /* DistributedContextSdk.swift */; };
 		66B51412237DA389007B8974 /* DistributedContextSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140F237DA389007B8974 /* DistributedContextSdk.swift */; };
 		66B51413237DA389007B8974 /* DistributedContextSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5140F237DA389007B8974 /* DistributedContextSdk.swift */; };
+		66B51416237DB12C007B8974 /* ScopedDistributedContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B51415237DB12C007B8974 /* ScopedDistributedContextTests.swift */; };
+		66B51417237DB12C007B8974 /* ScopedDistributedContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B51415237DB12C007B8974 /* ScopedDistributedContextTests.swift */; };
+		66B51418237DB12C007B8974 /* ScopedDistributedContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B51415237DB12C007B8974 /* ScopedDistributedContextTests.swift */; };
+		66B51419237DB12C007B8974 /* ScopedDistributedContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B51415237DB12C007B8974 /* ScopedDistributedContextTests.swift */; };
 		66CE5AEC23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
 		66CE5AED23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
 		66CE5AEE23605A0F001D9CB3 /* BinaryFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */; };
@@ -519,8 +539,13 @@
 		666B28DC235F5E1A00BEBCD1 /* OpenTelemetrySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenTelemetrySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		666B28E4235F5E1A00BEBCD1 /* OpenTelemetrySwift watchOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenTelemetrySwift watchOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		666B29AC23602ACD00BEBCD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		669DEF51237EA03C0086862A /* DistributedContextSdkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextSdkTests.swift; sourceTree = "<group>"; };
+		669DEF56237EA26E0086862A /* DistributedContextTestUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextTestUtil.swift; sourceTree = "<group>"; };
+		669DEF5B237EF8D90086862A /* DistributedContextManagerSdkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextManagerSdkTests.swift; sourceTree = "<group>"; };
+		669DEF61237EF9BB0086862A /* DistributedContextMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextMock.swift; sourceTree = "<group>"; };
 		66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextManagerSdk.swift; sourceTree = "<group>"; };
 		66B5140F237DA389007B8974 /* DistributedContextSdk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributedContextSdk.swift; sourceTree = "<group>"; };
+		66B51415237DB12C007B8974 /* ScopedDistributedContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScopedDistributedContextTests.swift; sourceTree = "<group>"; };
 		66CE5AEB23605A0F001D9CB3 /* BinaryFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFormatTests.swift; sourceTree = "<group>"; };
 		66D4D8C7235F5B6F0019D8B5 /* BinaryTraceContextFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryTraceContextFormat.swift; sourceTree = "<group>"; };
 		66D4D8C8235F5B6F0019D8B5 /* TracestateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracestateUtils.swift; sourceTree = "<group>"; };
@@ -741,11 +766,31 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		669DEF60237EF9880086862A /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				669DEF61237EF9BB0086862A /* DistributedContextMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		66B51409237DA2BF007B8974 /* DistributedContext */ = {
 			isa = PBXGroup;
 			children = (
 				66B5140A237DA2EE007B8974 /* DistributedContextManagerSdk.swift */,
 				66B5140F237DA389007B8974 /* DistributedContextSdk.swift */,
+			);
+			path = DistributedContext;
+			sourceTree = "<group>";
+		};
+		66B51414237DB0E4007B8974 /* DistributedContext */ = {
+			isa = PBXGroup;
+			children = (
+				669DEF60237EF9880086862A /* Mocks */,
+				669DEF51237EA03C0086862A /* DistributedContextSdkTests.swift */,
+				669DEF56237EA26E0086862A /* DistributedContextTestUtil.swift */,
+				66B51415237DB12C007B8974 /* ScopedDistributedContextTests.swift */,
+				669DEF5B237EF8D90086862A /* DistributedContextManagerSdkTests.swift */,
 			);
 			path = DistributedContext;
 			sourceTree = "<group>";
@@ -909,6 +954,7 @@
 		66D4D98C235F5B880019D8B5 /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
+				66B51414237DB0E4007B8974 /* DistributedContext */,
 				66E61DED2371E0D200C03C72 /* Internal */,
 				66E61E072372BE6F00C03C72 /* Resource */,
 				66E61E0D2372C3A800C03C72 /* Trace */,
@@ -1517,10 +1563,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669DEF57237EA26E0086862A /* DistributedContextTestUtil.swift in Sources */,
 				6653AF95236044A4001B0948 /* AttributeValueTests.swift in Sources */,
 				66E61E442374778000C03C72 /* TimedEventTests.swift in Sources */,
 				6653AF9723604953001B0948 /* SpanBuilderTests.swift in Sources */,
 				666B2989235F5E6600BEBCD1 /* TraceIdTests.swift in Sources */,
+				669DEF52237EA03C0086862A /* DistributedContextSdkTests.swift in Sources */,
 				66011214237580D00089597D /* TimestampTests.swift in Sources */,
 				66E61E2E2374186500C03C72 /* TestUtils.swift in Sources */,
 				660111F92375623A0089597D /* BatchSpansProcessorTests.swift in Sources */,
@@ -1544,16 +1592,19 @@
 				666B2988235F5E6600BEBCD1 /* DefaultSpanTests.swift in Sources */,
 				66E61E142372C7C500C03C72 /* SpanProcessorMock.swift in Sources */,
 				66F78E1E237D779100905CE8 /* EntryKeyTests.swift in Sources */,
+				66B51416237DB12C007B8974 /* ScopedDistributedContextTests.swift in Sources */,
 				66E61D5623706A5F00C03C72 /* EventsTests.swift in Sources */,
 				666B2987235F5E6600BEBCD1 /* SpanContextTests.swift in Sources */,
 				66F78E32237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */,
 				66E61DF92372AF0A00C03C72 /* ClockTestUtil.swift in Sources */,
 				66E61E1A2372C88B00C03C72 /* ReadableSpanMock.swift in Sources */,
 				666B298A235F5E6600BEBCD1 /* DefaultTracerTests.swift in Sources */,
+				669DEF5C237EF8D90086862A /* DistributedContextManagerSdkTests.swift in Sources */,
 				66E61E3F23746E7A00C03C72 /* ProbabilitySamplerTests.swift in Sources */,
 				66E61D592370739500C03C72 /* SamplersTests.swift in Sources */,
 				666B298B235F5E6600BEBCD1 /* TracestateTests.swift in Sources */,
 				66E61E092372BE8000C03C72 /* ResourceTest.swift in Sources */,
+				669DEF62237EF9BB0086862A /* DistributedContextMock.swift in Sources */,
 				66E61E242372DC8600C03C72 /* NoopSpanProcessorTests.swift in Sources */,
 				666B298E235F5E6600BEBCD1 /* StatusTests.swift in Sources */,
 				66F78E24237D896D00905CE8 /* EntryTests.swift in Sources */,
@@ -1645,10 +1696,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669DEF58237EA26E0086862A /* DistributedContextTestUtil.swift in Sources */,
 				66E61E452374778000C03C72 /* TimedEventTests.swift in Sources */,
 				666B2991235F5E6700BEBCD1 /* TraceIdTests.swift in Sources */,
 				66F78DDE237D489600905CE8 /* InMemorySpanExporterTests.swift in Sources */,
 				666B2994235F5E6700BEBCD1 /* SpanIdTests.swift in Sources */,
+				669DEF53237EA03C0086862A /* DistributedContextSdkTests.swift in Sources */,
 				66F78E28237D897100905CE8 /* EntryKeyTests.swift in Sources */,
 				6653AF9B23604956001B0948 /* AttributeValueTests.swift in Sources */,
 				66E61E042372B41300C03C72 /* TimestampConverterTest.swift in Sources */,
@@ -1672,16 +1725,19 @@
 				66E61E4F23747A6900C03C72 /* SpanMock.swift in Sources */,
 				66F78DDB237D489100905CE8 /* TraceConfigTests.swift in Sources */,
 				66F78DEA237D48CC00905CE8 /* EventsTests.swift in Sources */,
+				66B51417237DB12C007B8974 /* ScopedDistributedContextTests.swift in Sources */,
 				66E61DFA2372AF0A00C03C72 /* ClockTestUtil.swift in Sources */,
 				66011206237563380089597D /* SpanExporterMock.swift in Sources */,
 				66F78E33237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */,
 				66E61E4A23747A2500C03C72 /* TracerSdkTests.swift in Sources */,
 				66011215237580D00089597D /* TimestampTests.swift in Sources */,
 				66E61E0A2372BE8000C03C72 /* ResourceTest.swift in Sources */,
+				669DEF5D237EF8D90086862A /* DistributedContextManagerSdkTests.swift in Sources */,
 				666B2996235F5E6700BEBCD1 /* StatusTests.swift in Sources */,
 				66E61E252372DC8600C03C72 /* NoopSpanProcessorTests.swift in Sources */,
 				66E61E152372C7C500C03C72 /* SpanProcessorMock.swift in Sources */,
 				66E61E4023746E7A00C03C72 /* ProbabilitySamplerTests.swift in Sources */,
+				669DEF63237EF9BB0086862A /* DistributedContextMock.swift in Sources */,
 				66F78DE1237D48BB00905CE8 /* HttpTraceContextFormatTest.swift in Sources */,
 				66E61E1B2372C88B00C03C72 /* ReadableSpanMock.swift in Sources */,
 				66F78DE4237D48C300905CE8 /* SamplersTests.swift in Sources */,
@@ -1773,10 +1829,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669DEF59237EA26E0086862A /* DistributedContextTestUtil.swift in Sources */,
 				66E61E462374778000C03C72 /* TimedEventTests.swift in Sources */,
 				666B2999235F5E6800BEBCD1 /* TraceIdTests.swift in Sources */,
 				66F78DDF237D489600905CE8 /* InMemorySpanExporterTests.swift in Sources */,
 				666B299C235F5E6800BEBCD1 /* SpanIdTests.swift in Sources */,
+				669DEF54237EA03C0086862A /* DistributedContextSdkTests.swift in Sources */,
 				66F78E2B237D897200905CE8 /* EntryKeyTests.swift in Sources */,
 				6653AF9C23604957001B0948 /* AttributeValueTests.swift in Sources */,
 				66E61E052372B41300C03C72 /* TimestampConverterTest.swift in Sources */,
@@ -1800,16 +1858,19 @@
 				66E61E5023747A6900C03C72 /* SpanMock.swift in Sources */,
 				66F78DDC237D489200905CE8 /* TraceConfigTests.swift in Sources */,
 				66F78DEB237D48CC00905CE8 /* EventsTests.swift in Sources */,
+				66B51418237DB12C007B8974 /* ScopedDistributedContextTests.swift in Sources */,
 				66E61DFB2372AF0A00C03C72 /* ClockTestUtil.swift in Sources */,
 				66011207237563380089597D /* SpanExporterMock.swift in Sources */,
 				66F78E34237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */,
 				66E61E4B23747A2500C03C72 /* TracerSdkTests.swift in Sources */,
 				66011216237580D00089597D /* TimestampTests.swift in Sources */,
 				66E61E0B2372BE8000C03C72 /* ResourceTest.swift in Sources */,
+				669DEF5E237EF8D90086862A /* DistributedContextManagerSdkTests.swift in Sources */,
 				666B299E235F5E6800BEBCD1 /* StatusTests.swift in Sources */,
 				66E61E262372DC8600C03C72 /* NoopSpanProcessorTests.swift in Sources */,
 				66E61E162372C7C500C03C72 /* SpanProcessorMock.swift in Sources */,
 				66E61E4123746E7A00C03C72 /* ProbabilitySamplerTests.swift in Sources */,
+				669DEF64237EF9BB0086862A /* DistributedContextMock.swift in Sources */,
 				66F78DE2237D48BC00905CE8 /* HttpTraceContextFormatTest.swift in Sources */,
 				66E61E1C2372C88B00C03C72 /* ReadableSpanMock.swift in Sources */,
 				66F78DE5237D48C300905CE8 /* SamplersTests.swift in Sources */,
@@ -1901,10 +1962,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669DEF5A237EA26E0086862A /* DistributedContextTestUtil.swift in Sources */,
 				66E61E472374778000C03C72 /* TimedEventTests.swift in Sources */,
 				666B29A1235F5E6900BEBCD1 /* TraceIdTests.swift in Sources */,
 				66F78DE0237D489700905CE8 /* InMemorySpanExporterTests.swift in Sources */,
 				666B29A4235F5E6900BEBCD1 /* SpanIdTests.swift in Sources */,
+				669DEF55237EA03C0086862A /* DistributedContextSdkTests.swift in Sources */,
 				66F78E2E237D897200905CE8 /* EntryKeyTests.swift in Sources */,
 				6653AF9D23604958001B0948 /* AttributeValueTests.swift in Sources */,
 				66E61E062372B41300C03C72 /* TimestampConverterTest.swift in Sources */,
@@ -1928,16 +1991,19 @@
 				66E61E5123747A6900C03C72 /* SpanMock.swift in Sources */,
 				66F78DDD237D489300905CE8 /* TraceConfigTests.swift in Sources */,
 				66F78DEC237D48CD00905CE8 /* EventsTests.swift in Sources */,
+				66B51419237DB12C007B8974 /* ScopedDistributedContextTests.swift in Sources */,
 				66E61DFC2372AF0A00C03C72 /* ClockTestUtil.swift in Sources */,
 				66011208237563380089597D /* SpanExporterMock.swift in Sources */,
 				66F78E35237D8C6600905CE8 /* DefaultDistributedContextManagerTests.swift in Sources */,
 				66E61E4C23747A2500C03C72 /* TracerSdkTests.swift in Sources */,
 				66011217237580D00089597D /* TimestampTests.swift in Sources */,
 				66E61E0C2372BE8000C03C72 /* ResourceTest.swift in Sources */,
+				669DEF5F237EF8D90086862A /* DistributedContextManagerSdkTests.swift in Sources */,
 				666B29A6235F5E6900BEBCD1 /* StatusTests.swift in Sources */,
 				66E61E272372DC8600C03C72 /* NoopSpanProcessorTests.swift in Sources */,
 				66E61E172372C7C500C03C72 /* SpanProcessorMock.swift in Sources */,
 				66E61E4223746E7A00C03C72 /* ProbabilitySamplerTests.swift in Sources */,
+				669DEF65237EF9BB0086862A /* DistributedContextMock.swift in Sources */,
 				66F78DE3237D48BC00905CE8 /* HttpTraceContextFormatTest.swift in Sources */,
 				66E61E1D2372C88B00C03C72 /* ReadableSpanMock.swift in Sources */,
 				66F78DE6237D48C400905CE8 /* SamplersTests.swift in Sources */,

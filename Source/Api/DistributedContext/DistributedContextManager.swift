@@ -22,7 +22,7 @@ protocol DistributedContextManager: AnyObject {
      * @return a new {@code Builder}.
      * @since 0.1.0
      */
-    func getContextBuilder() -> DistributedContextBuilder
+    func contextBuilder() -> DistributedContextBuilder
 
     /**
      * Enters the scope of code where the given {@code DistributedContext} is in the current context

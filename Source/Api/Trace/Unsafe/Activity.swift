@@ -15,7 +15,6 @@ private let OS_ACTIVITY_NONE = unsafeBitCast(dlsym(UnsafeMutableRawPointer(bitPa
 private let OS_ACTIVITY_CURRENT = unsafeBitCast(dlsym(UnsafeMutableRawPointer(bitPattern: -2), "_os_activity_current"), to: OS_os_activity.self)
 
 public struct Activity {
-
     private let activity: OS_os_activity!
 
     public init(_ description: StaticString, dso: UnsafeRawPointer? = #dsohandle, options: Options = []) {
@@ -44,11 +43,9 @@ public struct Activity {
     private init(_ activity: OS_os_activity) {
         self.activity = activity
     }
-
 }
 
 extension Activity {
-
     public static var none: Activity {
         return Activity(OS_ACTIVITY_NONE)
     }
@@ -58,7 +55,7 @@ extension Activity {
     }
 
     public static func initiate(_ description: StaticString, dso: UnsafeRawPointer? = #dsohandle, options: Options = [],
-                                execute body: @convention(block) () -> ()) {
+                                execute body: @convention(block) () -> Void) {
         description.withUTF8Buffer {
             if let dso = UnsafeMutableRawPointer(mutating: dso), let address = $0.baseAddress {
                 let str = UnsafeRawPointer(address).assumingMemoryBound(to: Int8.self)
@@ -67,7 +64,7 @@ extension Activity {
         }
     }
 
-    public func apply(execute body: @convention(block) () -> ()) {
+    public func apply(execute body: @convention(block) () -> Void) {
         if activity != nil {
             os_activity_apply(activity, body)
         }
@@ -96,13 +93,10 @@ extension Activity {
             }
         }
     }
-
 }
 
 extension Activity {
-
     public struct Options: OptionSet {
-
         public let rawValue: UInt32
 
         public init(rawValue: UInt32) {
@@ -115,7 +109,6 @@ extension Activity {
     }
 
     public class Scope {
-
         fileprivate var state = os_activity_scope_state_s()
 
         public func leave() {

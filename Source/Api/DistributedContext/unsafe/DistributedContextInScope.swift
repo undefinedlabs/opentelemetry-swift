@@ -16,7 +16,7 @@ private let OS_ACTIVITY_CURRENT = unsafeBitCast(dlsym(UnsafeMutableRawPointer(bi
 @_silgen_name("_os_activity_create") private func _os_activity_create(_ dso: UnsafeRawPointer?, _ description: UnsafePointer<Int8>, _ parent: Unmanaged<AnyObject>?, _ flags: os_activity_flag_t) -> AnyObject!
 //
 
-struct DistributedContextInScope: Scope {
+class DistributedContextInScope: Scope {
     var current = os_activity_scope_state_s()
 
     init(distContext: DistributedContext) {
@@ -27,7 +27,11 @@ struct DistributedContextInScope: Scope {
         ContextUtils.setContext(activityId: activityId, forDistributedContext: distContext)
     }
 
-    mutating func close() {
+    func close() {
         os_activity_scope_leave(&current)
+    }
+
+    deinit {
+        close()
     }
 }

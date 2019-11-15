@@ -34,7 +34,7 @@ struct TracerSdk: Tracer {
         return SpanBuilderSdk(spanName: spanName, spanProcessor: activeSpanProcessor, traceConfig: activeTraceConfig, resource: resource, clock: clock)
     }
 
-    func withSpan(_ span: Span) -> Scope {
+    dynamic func withSpan(_ span: Span) -> Scope {
         return ContextUtils.withSpan(span)
     }
 

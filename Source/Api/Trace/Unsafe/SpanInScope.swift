@@ -20,7 +20,7 @@ private let OS_ACTIVITY_CURRENT = unsafeBitCast(dlsym(UnsafeMutableRawPointer(bi
 //private(set) var activityId: os_activity_id_t
 //private(set) var activity: os_activity_t
 
-struct SpanInScope: Scope {
+class SpanInScope: Scope {
 
     var current = os_activity_scope_state_s()
 
@@ -32,7 +32,11 @@ struct SpanInScope: Scope {
         ContextUtils.setContext(activityId: activityId, forSpan: span)
     }
 
-    mutating func close() {
+    func close() {
         os_activity_scope_leave(&current)
+    }
+
+    deinit {
+        close()
     }
 }

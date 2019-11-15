@@ -8,11 +8,17 @@
 import Foundation
 
 public class DefaultDistributedContextManager: DistributedContextManager {
+
     static var instance = DefaultDistributedContextManager()
     static var binaryFormat = BinaryTraceContextFormat()
     static var httpTextFormat = HttpTraceContextFormat()
 
     private init() {}
+
+    func contextBuilder() -> DistributedContextBuilder {
+        return NoopDistributedContextBuilder()
+    }
+
 
     func getCurrentContext() -> DistributedContext {
         ContextUtils.getCurrentDistributedContext() ?? EmptyDistributedContext.instance
@@ -28,9 +34,5 @@ public class DefaultDistributedContextManager: DistributedContextManager {
 
     func getHttpTextFormat() -> TextFormattable {
         return DefaultDistributedContextManager.httpTextFormat
-    }
-
-    func getContextBuilder() -> DistributedContextBuilder {
-        return NoopDistributedContextBuilder()
     }
 }

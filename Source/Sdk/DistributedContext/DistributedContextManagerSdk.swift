@@ -8,14 +8,16 @@
 import Foundation
 
 class DistributedContextManagerSdk: DistributedContextManager {
-    func getCurrentContext() -> DistributedContext {
-        return ContextUtils.getCurrentDistributedContext() ?? EmptyDistributedContext.instance
-    }
 
-    func getContextBuilder() -> DistributedContextBuilder {
+    func contextBuilder() -> DistributedContextBuilder {
         return DistributedContextSdkBuilder()
     }
 
+
+    func getCurrentContext() -> DistributedContext {
+        return ContextUtils.getCurrentDistributedContext() ?? EmptyDistributedContext.instance
+    }
+    
     func withContext(distContext: DistributedContext) -> Scope {
         return ContextUtils.withDistributedContext(distContext)
     }

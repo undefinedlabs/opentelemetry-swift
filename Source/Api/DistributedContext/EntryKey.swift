@@ -7,7 +7,8 @@
 
 import Foundation
 
-public struct EntryKey: Equatable, Hashable {
+public struct EntryKey: Equatable, Comparable, Hashable {
+
     static let maxLength = 255
     private(set) var name: String = ""
 
@@ -20,5 +21,9 @@ public struct EntryKey: Equatable, Hashable {
 
     private static func isValid(value: String) -> Bool {
         return value.count > 0 && value.count <= maxLength && StringUtils.isPrintableString(value)
+    }
+
+    public static func < (lhs: EntryKey, rhs: EntryKey) -> Bool {
+        return lhs.name < rhs.name
     }
 }

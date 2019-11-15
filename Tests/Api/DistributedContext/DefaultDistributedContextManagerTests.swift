@@ -12,16 +12,17 @@ fileprivate let key = EntryKey(name: "key")!
 fileprivate let value = EntryValue(string: "value")!
 
 class TestDistributedContext: DistributedContext {
+
+    static func contextBuilder() -> DistributedContextBuilder {
+        NoopDistributedContextBuilder()
+    }
+
     func getEntries() -> [Entry] {
         return [Entry(key: key, value: value, entryMetadata: EntryMetadata(entryTtl: .unlimitedPropagation))]
     }
 
     func getEntryValue(key: EntryKey) -> EntryValue? {
         return value
-    }
-
-    func getBuilder() -> DistributedContextBuilder {
-        return NoopDistributedContextBuilder()
     }
 }
 
@@ -30,7 +31,7 @@ class DefaultDistributedContextManagerTests: XCTestCase {
     let distContext = TestDistributedContext()
 
     func testBuilderMethod() {
-        var builder = defaultDistributedContextManager.getContextBuilder()
+        let builder = defaultDistributedContextManager.contextBuilder()
         XCTAssertEqual(builder.build().getEntries().count, 0)
     }
 

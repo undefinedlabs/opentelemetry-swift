@@ -1,20 +1,18 @@
 //
-//  EmptyDistributedContext.swift
+//  DistributedContextMock.swift
 //  OpenTelemetrySwift
 //
-//  Created by Ignacio Bonafonte on 14/11/2019.
+//  Created by Ignacio Bonafonte on 15/11/2019.
 //
 
+@testable import OpenTelemetrySwift
 import Foundation
 
-class EmptyDistributedContext: DistributedContext {
-    static var instance = EmptyDistributedContext()
+class DistributedContextMock: DistributedContext {
 
     static func contextBuilder() -> DistributedContextBuilder {
         return NoopDistributedContextBuilder()
     }
-    
-    private init() {}
 
     func getEntries() -> [Entry] {
         return [Entry]()
@@ -23,6 +21,5 @@ class EmptyDistributedContext: DistributedContext {
     func getEntryValue(key: EntryKey) -> EntryValue? {
         return nil
     }
-
 
 }

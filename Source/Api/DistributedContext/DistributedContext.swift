@@ -8,21 +8,21 @@
 import Foundation
 
 protocol DistributedContext: AnyObject {
+    static func contextBuilder() -> DistributedContextBuilder
     func getEntries() -> [Entry]
     func getEntryValue(key: EntryKey) -> EntryValue?
-    func getBuilder() -> DistributedContextBuilder
 }
 
-protocol DistributedContextBuilder {
-    mutating func setParent(parent: DistributedContext) -> Self
-    mutating func setNoParent() -> Self
-    mutating func put(key: EntryKey, value: EntryValue, metadata: EntryMetadata) -> Self
-    mutating func remove(key: EntryKey) -> Self
-    mutating func build() -> DistributedContext
+protocol DistributedContextBuilder: AnyObject  {
+    @discardableResult func setParent(_ parent: DistributedContext) -> Self
+    @discardableResult func setNoParent() -> Self
+    @discardableResult func put(key: EntryKey, value: EntryValue, metadata: EntryMetadata) -> Self
+    @discardableResult func remove(key: EntryKey) -> Self
+    func build() -> DistributedContext
 }
 
-struct NoopDistributedContextBuilder: DistributedContextBuilder {
-    func setParent(parent: DistributedContext) -> Self {
+class NoopDistributedContextBuilder: DistributedContextBuilder {
+    func setParent(_ parent: DistributedContext) -> Self {
         return self
     }
 
