@@ -10,18 +10,18 @@ let package = Package(
                 .tvOS(.v10),
                 .watchOS(.v3)],
     products: [
-        .library( name: "Api", targets: ["Api"]),
-        .library( name: "Sdk", targets: ["Sdk"]),
+        .library( name: "OpenTelemetryApi", targets: ["OpenTelemetryApi"]),
+        .library( name: "OpenTelemetrySdk", targets: ["OpenTelemetrySdk"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
     targets: [
-        .target(  name: "Api", dependencies: []),
-        .target(  name: "Sdk", dependencies: ["Api"]),
+        .target(  name: "OpenTelemetryApi", dependencies: []),
+        .target(  name: "OpenTelemetrySdk", dependencies: ["OpenTelemetryApi"]),
 
-        .testTarget( name: "ApiTests", dependencies: ["Api"], path: "Tests/ApiTests"),
-        .testTarget( name: "SdkTests", dependencies: ["Api", "Sdk"], path: "Tests/SdkTests"),
+        .testTarget( name: "OpenTelemetryApiTests", dependencies: ["OpenTelemetryApi"], path: "Tests/OpenTelemetryApiTests"),
+        .testTarget( name: "OpenTelemetrySdkTests", dependencies: ["OpenTelemetryApi", "OpenTelemetrySdk"], path: "Tests/OpenTelemetrySdkTests"),
     ]
 )

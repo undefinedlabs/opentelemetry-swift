@@ -20,20 +20,6 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OpenTelemetrySdk"
-               BuildableName = "OpenTelemetrySdk"
-               BlueprintName = "OpenTelemetrySdk"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -49,16 +35,6 @@
                BlueprintIdentifier = "OpenTelemetryApiTests"
                BuildableName = "OpenTelemetryApiTests"
                BlueprintName = "OpenTelemetryApiTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OpenTelemetrySdkTests"
-               BuildableName = "OpenTelemetrySdkTests"
-               BlueprintName = "OpenTelemetrySdkTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

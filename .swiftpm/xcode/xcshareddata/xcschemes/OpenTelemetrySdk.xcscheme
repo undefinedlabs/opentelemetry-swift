@@ -14,20 +14,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OpenTelemetryApi"
-               BuildableName = "OpenTelemetryApi"
-               BlueprintName = "OpenTelemetryApi"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "OpenTelemetrySdk"
                BuildableName = "OpenTelemetrySdk"
                BlueprintName = "OpenTelemetrySdk"
@@ -42,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OpenTelemetryApiTests"
-               BuildableName = "OpenTelemetryApiTests"
-               BlueprintName = "OpenTelemetryApiTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
@@ -84,9 +60,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OpenTelemetryApi"
-            BuildableName = "OpenTelemetryApi"
-            BlueprintName = "OpenTelemetryApi"
+            BlueprintIdentifier = "OpenTelemetrySdk"
+            BuildableName = "OpenTelemetrySdk"
+            BlueprintName = "OpenTelemetrySdk"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>
