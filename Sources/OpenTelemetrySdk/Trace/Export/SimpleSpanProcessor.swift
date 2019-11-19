@@ -8,16 +8,16 @@
 import Foundation
 import OpenTelemetryApi
 
-struct SimpleSpanProcessor: SpanProcessor {
+public struct SimpleSpanProcessor: SpanProcessor {
 //    private static final Logger logger = Logger.getLogger(SimpleSpansProcessor.class.getName());
 
     private var spanExporter: SpanExporter
     private var sampled: Bool = true
 
-    func onStart(span: ReadableSpan) {
+    public func onStart(span: ReadableSpan) {
     }
 
-    mutating func onEnd(span: ReadableSpan) {
+    mutating public func onEnd(span: ReadableSpan) {
         if sampled && !span.context.traceFlags.sampled {
             return
         }
@@ -25,19 +25,17 @@ struct SimpleSpanProcessor: SpanProcessor {
         spanExporter.export(spans: [span])
     }
 
-    mutating func shutdown() {
+    mutating public func shutdown() {
         spanExporter.shutdown()
     }
 
-    init(spanExporter: SpanExporter) {
+    public init(spanExporter: SpanExporter) {
         self.spanExporter = spanExporter
     }
 
-    func reportingOnlySampled(sampled: Bool) -> Self {
+    public func reportingOnlySampled(sampled: Bool) -> Self {
         var processor = self
         processor.sampled = sampled
         return processor
     }
-
-
 }

@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct EnvVarResource {
+public struct EnvVarResource {
     private static let ocResourceLabelsEnv = "OC_RESOURCE_LABELS"
     private static let labelListSplitter = Character(",")
     private static let labelKeyValueSplitter = Character("=")
 
-    static let resource = Resource(labels: parseResourceLabels(rawEnvLabels: ProcessInfo.processInfo.environment["ocResourceLabelsEnv"]))
+    public static let resource = Resource(labels: parseResourceLabels(rawEnvLabels: ProcessInfo.processInfo.environment["ocResourceLabelsEnv"]))
 
     private init() {}
 

@@ -8,13 +8,13 @@
 import Foundation
 import OpenTelemetryApi
 
-struct MillisClock: Clock {
+public class MillisClock: Clock {
 
-    var now: Int {
+    public var now: Int {
         return Int(Date().timeIntervalSince1970 * 1000000000)
     }
 
-    var nanoTime: Int {
+    public var nanoTime: Int {
         return Int(Date().timeIntervalSince1970 * 1000000000)
     }
 }

@@ -24,7 +24,7 @@ import Foundation
 */
 
 //TODO: Missing all
-struct BatchSpanProcessor/*: SpanProcessor*/ {
+public struct BatchSpanProcessor/*: SpanProcessor*/ {
     private let workerThreadName = "BatchSpanProcessor_WorkerThread"
     var sampled: Bool
 

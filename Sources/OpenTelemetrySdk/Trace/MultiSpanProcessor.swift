@@ -11,26 +11,26 @@ import Foundation
  * Implementation of the {@code SpanProcessor} that simply forwards all received events to a list of
  * {@code SpanProcessor}s.
  */
-struct MultiSpanProcessor: SpanProcessor {
+public struct MultiSpanProcessor: SpanProcessor {
     var spanProcessors = [SpanProcessor]()
 
-    init(spanProcessors: [SpanProcessor]) {
+    public init(spanProcessors: [SpanProcessor]) {
         self.spanProcessors = spanProcessors
     }
 
-    func onStart(span: ReadableSpan) {
+    public func onStart(span: ReadableSpan) {
         for processor in spanProcessors {
             processor.onStart(span: span)
         }
     }
 
-    func onEnd(span: ReadableSpan) {
+    public func onEnd(span: ReadableSpan) {
         for var processor in spanProcessors {
             processor.onEnd(span: span)
         }
     }
 
-    func shutdown() {
+    public func shutdown() {
         for var processor in spanProcessors {
             processor.shutdown()
         }

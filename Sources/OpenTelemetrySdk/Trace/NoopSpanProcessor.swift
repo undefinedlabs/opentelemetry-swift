@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct NoopSpanProcessor: SpanProcessor {
-    func onStart(span: ReadableSpan) {
+public struct NoopSpanProcessor: SpanProcessor {
+    public func onStart(span: ReadableSpan) {
     }
 
-    func onEnd(span: ReadableSpan) {
+    public func onEnd(span: ReadableSpan) {
     }
 
-    func shutdown() {
+    public func shutdown() {
     }
 }

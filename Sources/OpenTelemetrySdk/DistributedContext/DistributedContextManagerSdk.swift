@@ -8,26 +8,26 @@
 import Foundation
 import OpenTelemetryApi
 
-class DistributedContextManagerSdk: DistributedContextManager {
+public class DistributedContextManagerSdk: DistributedContextManager {
 
-    func contextBuilder() -> DistributedContextBuilder {
+    public func contextBuilder() -> DistributedContextBuilder {
         return DistributedContextSdkBuilder()
     }
 
 
-    func getCurrentContext() -> DistributedContext {
+    public func getCurrentContext() -> DistributedContext {
         return ContextUtils.getCurrentDistributedContext() ?? EmptyDistributedContext.instance
     }
     
-    func withContext(distContext: DistributedContext) -> Scope {
+    public func withContext(distContext: DistributedContext) -> Scope {
         return ContextUtils.withDistributedContext(distContext)
     }
 
-    func getBinaryFormat() -> BinaryFormattable {
+    public func getBinaryFormat() -> BinaryFormattable {
         return BinaryTraceContextFormat()
     }
 
-    func getHttpTextFormat() -> TextFormattable {
+    public func getHttpTextFormat() -> TextFormattable {
         return HttpTraceContextFormat()
     }
 }

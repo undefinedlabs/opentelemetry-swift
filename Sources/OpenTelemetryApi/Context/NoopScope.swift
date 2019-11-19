@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NoopScope: Scope {
-    func close() {
+public struct NoopScope: Scope {
+    public func close() {
     }
 }

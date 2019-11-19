@@ -8,7 +8,7 @@
 import Foundation
 import OpenTelemetryApi
 
-struct TraceConfig: Equatable {
+public struct TraceConfig: Equatable {
     // These values are the default values for all the global parameters.
     // TODO: decide which default sampler to use
     var sampler: Sampler = Samplers.alwaysOn
@@ -42,43 +42,46 @@ struct TraceConfig: Equatable {
         }
     }
 
+    public init() {
+    }
+
     public func settingSampler(_ sampler: Sampler) -> Self {
         var traceConfig = self
         traceConfig.sampler = sampler
         return traceConfig
     }
 
-    func settingMaxNumberOfAttributes(_ number: Int) -> Self {
+    public func settingMaxNumberOfAttributes(_ number: Int) -> Self {
         var traceConfig = self
         traceConfig.maxNumberOfAttributes = number
         return traceConfig
     }
 
-    func settingMaxNumberOfEvents(_ number: Int) -> Self {
+    public func settingMaxNumberOfEvents(_ number: Int) -> Self {
         var traceConfig = self
         traceConfig.maxNumberOfEvents = number
         return traceConfig
     }
 
-    func settingMaxNumberOfLinks(_ number: Int) -> Self {
+    public func settingMaxNumberOfLinks(_ number: Int) -> Self {
         var traceConfig = self
         traceConfig.maxNumberOfLinks = number
         return traceConfig
     }
 
-    func settingMaxNumberOfAttributesPerEvent(_ number: Int) -> Self {
+    public func settingMaxNumberOfAttributesPerEvent(_ number: Int) -> Self {
         var traceConfig = self
         traceConfig.maxNumberOfAttributesPerEvent = number
         return traceConfig
     }
 
-    func settingMaxNumberOfAttributesPerLink(_ number: Int) -> Self {
+    public func settingMaxNumberOfAttributesPerLink(_ number: Int) -> Self {
         var traceConfig = self
         traceConfig.maxNumberOfAttributesPerLink = number
         return traceConfig
     }
 
-    static func == (lhs: TraceConfig, rhs: TraceConfig) -> Bool {
+    public static func == (lhs: TraceConfig, rhs: TraceConfig) -> Bool {
         return lhs.sampler === rhs.sampler &&
             lhs.maxNumberOfAttributes == rhs.maxNumberOfAttributes &&
             lhs.maxNumberOfEvents == rhs.maxNumberOfEvents &&

@@ -7,18 +7,18 @@
 
 import Foundation
 
-class TracerSharedState {
-    private(set) var clock: Clock
-    private(set) var idsGenerator: IdsGenerator
-    private(set) var resource: Resource
+public class TracerSharedState {
+    public private(set) var clock: Clock
+    public private(set) var idsGenerator: IdsGenerator
+    public private(set) var resource: Resource
 
-    var activeTraceConfig = TraceConfig()
-    private(set) var activeSpanProcessor: SpanProcessor = NoopSpanProcessor()
-    private(set) var isStopped = false
+    public private(set) var activeTraceConfig = TraceConfig()
+    public private(set) var activeSpanProcessor: SpanProcessor = NoopSpanProcessor()
+    public private(set) var isStopped = false
 
     private var registeredSpanProcessors =  [SpanProcessor]()
 
-    init(clock: Clock, idsGenerator: IdsGenerator, resource: Resource) {
+    public init(clock: Clock, idsGenerator: IdsGenerator, resource: Resource) {
         self.clock = clock
         self.idsGenerator = idsGenerator
         self.resource = resource
@@ -36,4 +36,8 @@ class TracerSharedState {
          activeSpanProcessor.shutdown();
          isStopped = true;
      }
+
+    internal func setActiveTraceConfig(_ activeTraceConfig: TraceConfig) {
+        self.activeTraceConfig = activeTraceConfig
+    }
 }

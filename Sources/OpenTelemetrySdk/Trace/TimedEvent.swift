@@ -8,20 +8,19 @@
 import Foundation
 import OpenTelemetryApi
 
-struct TimedEvent: Equatable {
-    private static let emptyAttributes = [String: AttributeValue]()
+public struct TimedEvent: Equatable {
+    
+    public private(set) var epochNanos: Int
+    public private(set) var name: String
+    public private(set) var attributes: [String: AttributeValue]
 
-    private(set) var epochNanos: Int
-    private(set) var name: String
-    private(set) var attributes: [String: AttributeValue]
-
-    init(nanotime: Int, name: String, attributes: [String: AttributeValue] = emptyAttributes) {
+    public init(nanotime: Int, name: String, attributes: [String: AttributeValue] =  [String: AttributeValue]()) {
         self.epochNanos = nanotime
         self.name = name
         self.attributes = attributes
     }
 
-    init(nanotime: Int, event: Event) {
+    public init(nanotime: Int, event: Event) {
         self.init(nanotime: nanotime, name: event.name, attributes: event.attributes)
     }
 

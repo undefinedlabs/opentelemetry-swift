@@ -8,24 +8,24 @@
 import Foundation
 import OpenTelemetryApi
 
-class MonotonicClock: Clock {
+public class MonotonicClock: Clock {
 
     let clock: Clock
     let epochNanos: Int
     let initialNanoTime: Int
 
-    init(clock:Clock) {
+    public init(clock:Clock) {
         self.clock = clock
         self.epochNanos = clock.now
         self.initialNanoTime = clock.nanoTime
     }
 
-    var now: Int {
+    public var now: Int {
         let deltaNanos = clock.nanoTime - self.initialNanoTime
         return epochNanos + deltaNanos
     }
 
-    var nanoTime: Int {
+    public var nanoTime: Int {
         return clock.nanoTime
     }
 

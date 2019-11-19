@@ -8,12 +8,12 @@
 import Foundation
 import OpenTelemetryApi
 
-struct Resource: Equatable {
+public struct Resource: Equatable {
     private static let maxLength = 255
 
     var labels: [String: String]
 
-    init(labels: [String: String]) {
+    public init(labels: [String: String]) {
         if Resource.checkLabels(labels: labels) {
             self.labels = labels
         } else {
@@ -21,15 +21,15 @@ struct Resource: Equatable {
         }
     }
 
-    init() {
+    public init() {
         self.init(labels: [String: String]())
     }
 
-    mutating func merge(other: Resource) {
+    public mutating func merge(other: Resource) {
         labels.merge(other.labels) { current, _ in current }
     }
 
-    func merging(other: Resource) -> Resource {
+    public func merging(other: Resource) -> Resource {
         let labelsCopy = labels.merging(other.labels) { current, _ in current }
         return Resource(labels: labelsCopy)
     }

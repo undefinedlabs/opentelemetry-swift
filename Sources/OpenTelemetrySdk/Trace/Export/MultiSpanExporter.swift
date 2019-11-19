@@ -7,15 +7,15 @@
 
 import Foundation
 
-class MultiSpanExporter: SpanExporter {
+public class MultiSpanExporter: SpanExporter {
 //    private static final Logger logger = Logger.getLogger(MultiSpanExporter.class.getName());
     var spanExporters: [SpanExporter]
 
-    init(spanExporters: [SpanExporter]) {
+    public init(spanExporters: [SpanExporter]) {
         self.spanExporters = spanExporters
     }
 
-    func export(spans: [SpanData]) -> SpanExporterResultCode {
+    public func export(spans: [SpanData]) -> SpanExporterResultCode {
         var currentResultCode = SpanExporterResultCode.success
         for exporter in spanExporters {
             currentResultCode.mergeResultCode(newResultCode: exporter.export(spans: spans))
@@ -23,7 +23,7 @@ class MultiSpanExporter: SpanExporter {
         return currentResultCode
     }
 
-    func shutdown() {
+    public func shutdown() {
         for exporter in spanExporters {
             exporter.shutdown()
         }

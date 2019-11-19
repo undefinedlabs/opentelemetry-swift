@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SpanAttributeConstants: String {
+public enum SpanAttributeConstants: String {
     case httpMethodKey = "http.method"
     case httpStatusCodeKey = "http.status_code"
     case httpUserAgentKey = "http.user_agent"

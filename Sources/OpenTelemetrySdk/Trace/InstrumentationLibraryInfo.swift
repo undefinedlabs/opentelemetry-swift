@@ -10,4 +10,12 @@ import Foundation
 public struct InstrumentationLibraryInfo: Hashable {
     var name: String = ""
     var version: String?
+
+    public init() {
+    }
+    
+    public init(name: String, version: String?) {
+        self.name = name
+        self.version = version
+    }
 }

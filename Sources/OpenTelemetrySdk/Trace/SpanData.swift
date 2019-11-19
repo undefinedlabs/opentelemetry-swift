@@ -31,28 +31,28 @@ public struct SpanData: Equatable {
      *
      * @return the trace id.
      */
-    private(set) var traceId: TraceId
+    public private(set) var traceId: TraceId
 
     /**
      * Gets the span id for this span.
      *
      * @return the span id.
      */
-    private(set) var spanId: SpanId
+    public private(set) var spanId: SpanId
 
     /**
      * Gets the trace flags for this span.
      *
      * @return the trace flags for this span.
      */
-    private(set) var traceFlags: TraceFlags
+    public private(set) var traceFlags: TraceFlags
 
     /**
      * Gets the Tracestate for this span.
      *
      * @return the Tracestate for this span.
      */
-    private(set) var tracestate: Tracestate
+    public private(set) var tracestate: Tracestate
 
     /**
      * Returns the parent {@code SpanId}. If the {@code Span} is a root {@code Span}, the SpanId
@@ -61,7 +61,7 @@ public struct SpanData: Equatable {
      * @return the parent {@code SpanId} or an invalid SpanId if this is a root {@code Span}.
      * @since 0.1.0
      */
-    private(set) var parentSpanId: SpanId?
+    public private(set) var parentSpanId: SpanId?
 
     /**
      * Returns the resource of this {@code Span}.
@@ -69,7 +69,7 @@ public struct SpanData: Equatable {
      * @return the resource of this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var resource: Resource
+    public private(set) var resource: Resource
 
     /**
      * Returns the instrumentation library specified when creating the tracer which produced this
@@ -77,7 +77,7 @@ public struct SpanData: Equatable {
       *
       * @return an instance of {@link InstrumentationLibraryInfo}
       */
-    private(set) var instrumentationLibraryInfo: InstrumentationLibraryInfo
+    public private(set) var instrumentationLibraryInfo: InstrumentationLibraryInfo
 
     /**
      * Returns the name of this {@code Span}.
@@ -85,7 +85,7 @@ public struct SpanData: Equatable {
      * @return the name of this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var name: String
+    public private(set) var name: String
 
     /**
      * Returns the kind of this {@code Span}.
@@ -93,7 +93,7 @@ public struct SpanData: Equatable {
      * @return the kind of this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var kind: SpanKind
+    public private(set) var kind: SpanKind
 
     /**
      * Returns the start epoch timestamp in nanos of this {@code Span}.
@@ -101,7 +101,7 @@ public struct SpanData: Equatable {
      * @return the start epoch timestamp in nanos of this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var startEpochNanos: Int
+    public private(set) var startEpochNanos: Int
 
     /**
      * Returns the attributes recorded for this {@code Span}.
@@ -109,7 +109,7 @@ public struct SpanData: Equatable {
      * @return the attributes recorded for this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var attributes = [String: AttributeValue]()
+    public private(set) var attributes = [String: AttributeValue]()
 
     /**
      * Returns the timed events recorded for this {@code Span}.
@@ -117,7 +117,7 @@ public struct SpanData: Equatable {
      * @return the timed events recorded for this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var timedEvents = [TimedEvent]()
+    public private(set) var timedEvents = [TimedEvent]()
 
     /**
      * Returns links recorded for this {@code Span}.
@@ -125,7 +125,7 @@ public struct SpanData: Equatable {
      * @return links recorded for this {@code Span}.
      * @since 0.1.0
      */
-    private(set) var links = [Link]()
+    public private(set) var links = [Link]()
 
     /**
      * Returns the {@code Status}.
@@ -133,7 +133,7 @@ public struct SpanData: Equatable {
      * @return the {@code Status}.
      * @since 0.1.0
      */
-    private(set) var status: Status?
+    public private(set) var status: Status?
 
     /**
      * Returns the end {@code Timestamp}.
@@ -141,7 +141,7 @@ public struct SpanData: Equatable {
      * @return the end {@code Timestamp}.
      * @since 0.1.0
      */
-    private(set) var endEpochNanos: Int
+    public private(set) var endEpochNanos: Int
 
     /**
      * Returns {@code true} if the parent is on a different process. {@code false} if this is a root
@@ -151,7 +151,7 @@ public struct SpanData: Equatable {
      *     span.
      * @since 0.3.0
      */
-    private(set) var hasRemoteParent: Bool;
+    public private(set) var hasRemoteParent: Bool;
 
     public static func == (lhs: SpanData, rhs: SpanData) -> Bool {
         return lhs.traceId == rhs.traceId &&
@@ -171,77 +171,77 @@ public struct SpanData: Equatable {
             lhs.links == rhs.links
     }
 
-    mutating func settingName(_ name: String) -> SpanData {
+    public mutating func settingName(_ name: String) -> SpanData {
         self.name = name
         return self
     }
 
-    mutating func settingTraceId(_ traceId: TraceId) -> SpanData {
+    public mutating func settingTraceId(_ traceId: TraceId) -> SpanData {
         self.traceId = traceId
         return self
     }
 
-    mutating func settingSpanId(_ spanId: SpanId) -> SpanData {
+    public mutating func settingSpanId(_ spanId: SpanId) -> SpanData {
         self.spanId = spanId
         return self
     }
 
-    mutating func settingTraceFlags(_ traceFlags: TraceFlags) -> SpanData {
+    public mutating func settingTraceFlags(_ traceFlags: TraceFlags) -> SpanData {
         self.traceFlags = traceFlags
         return self
     }
 
-    mutating func settingTracestate(_ tracestate: Tracestate) -> SpanData {
+    public mutating func settingTracestate(_ tracestate: Tracestate) -> SpanData {
         self.tracestate = tracestate
         return self
     }
 
-    mutating func settingAttributes(_ attributes: [String: AttributeValue]) -> SpanData {
+    public mutating func settingAttributes(_ attributes: [String: AttributeValue]) -> SpanData {
         self.attributes = attributes
         return self
     }
 
-    mutating func settingStartEpochNanos(_ nanos: Int) -> SpanData {
+    public mutating func settingStartEpochNanos(_ nanos: Int) -> SpanData {
         self.startEpochNanos = nanos
         return self
     }
 
-    mutating func settingEndEpochNanos(_ nanos: Int) -> SpanData {
+    public mutating func settingEndEpochNanos(_ nanos: Int) -> SpanData {
         self.endEpochNanos = nanos
         return self
     }
 
-    mutating func settingKind(_ kind: SpanKind) -> SpanData {
+    public mutating func settingKind(_ kind: SpanKind) -> SpanData {
         self.kind = kind
         return self
     }
 
-    mutating func settingLinks(_ links: [Link]) -> SpanData {
+    public mutating func settingLinks(_ links: [Link]) -> SpanData {
         self.links = links
         return self
     }
 
-    mutating func settingParentSpanId(_ parentSpanId: SpanId) -> SpanData {
+    public mutating func settingParentSpanId(_ parentSpanId: SpanId) -> SpanData {
         self.parentSpanId = parentSpanId
         return self
     }
 
-    mutating func settingResource(_ resource: Resource) -> SpanData {
+    public mutating func settingResource(_ resource: Resource) -> SpanData {
         self.resource = resource
         return self
     }
 
-    mutating func settingStatus(_ status: Status) -> SpanData {
+    public mutating func settingStatus(_ status: Status) -> SpanData {
         self.status = status
         return self
     }
 
-    mutating func settingTimedEvents(_ timedEvents: [TimedEvent]) -> SpanData {
+    public mutating func settingTimedEvents(_ timedEvents: [TimedEvent]) -> SpanData {
         self.timedEvents = timedEvents
         return self
     }
 
-    mutating func settingHasRemoteParent(_ hasRemoteParent: Bool) -> SpanData {
+    public mutating func settingHasRemoteParent(_ hasRemoteParent: Bool) -> SpanData {
         self.hasRemoteParent = hasRemoteParent
         return self
     }

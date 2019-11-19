@@ -8,7 +8,7 @@
 import Foundation
 import OpenTelemetryApi
 
-class DistributedContextSdk: DistributedContext, Equatable {
+public class DistributedContextSdk: DistributedContext, Equatable {
     // The types of the EntryKey and Entry must match for each entry.
     var entries: [EntryKey: Entry?]
     var parent: DistributedContextSdk?
@@ -24,11 +24,11 @@ class DistributedContextSdk: DistributedContext, Equatable {
         self.parent = parent
     }
 
-    static func contextBuilder() -> DistributedContextBuilder {
+    static public func contextBuilder() -> DistributedContextBuilder {
         return DistributedContextSdkBuilder()
     }
 
-    func getEntries() -> [Entry] {
+    public func getEntries() -> [Entry] {
         var combined = entries
         if let parent = parent {
             for entry in parent.getEntries() {
@@ -40,39 +40,39 @@ class DistributedContextSdk: DistributedContext, Equatable {
         return Array(combined.values).compactMap { $0 }
     }
 
-    func getEntryValue(key: EntryKey) -> EntryValue? {
+    public func getEntryValue(key: EntryKey) -> EntryValue? {
         return entries[key]??.value ?? parent?.getEntryValue(key: key)
     }
 
 
-    static func == (lhs: DistributedContextSdk, rhs: DistributedContextSdk) -> Bool {
+    public static func == (lhs: DistributedContextSdk, rhs: DistributedContextSdk) -> Bool {
         return lhs.parent == rhs.parent && lhs.entries == rhs.entries
     }
 }
 
-class DistributedContextSdkBuilder: DistributedContextBuilder {
+public class DistributedContextSdkBuilder: DistributedContextBuilder {
     var parent: DistributedContext?
     var noImplicitParent: Bool = false
     var entries = [EntryKey: Entry?]()
 
-    @discardableResult func setParent(_ parent: DistributedContext) -> Self {
+    @discardableResult public func setParent(_ parent: DistributedContext) -> Self {
         self.parent = parent
         return self
     }
 
-    @discardableResult func setNoParent() -> Self {
+    @discardableResult public func setNoParent() -> Self {
         parent = nil
         noImplicitParent = true
         return self
     }
 
-    @discardableResult func put(key: EntryKey, value: EntryValue, metadata: EntryMetadata) -> Self {
+    @discardableResult public func put(key: EntryKey, value: EntryValue, metadata: EntryMetadata) -> Self {
         let entry = Entry(key: key, value: value, entryMetadata: metadata)
         entries[key] = entry
         return self
     }
 
-    @discardableResult func remove(key: EntryKey) -> Self {
+    @discardableResult public func remove(key: EntryKey) -> Self {
         entries[key] = nil
         if parent?.getEntryValue(key: key) != nil {
             entries.updateValue(nil, forKey: key)
@@ -80,7 +80,7 @@ class DistributedContextSdkBuilder: DistributedContextBuilder {
         return self
     }
 
-    func build() -> DistributedContext {
+    public func build() -> DistributedContext {
         var parentCopy = parent
         if parent == nil && !noImplicitParent {
             parentCopy = OpenTelemetry.instance.distributedContextManager.getCurrentContext()

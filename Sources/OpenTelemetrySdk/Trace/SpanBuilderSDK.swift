@@ -8,7 +8,7 @@
 import Foundation
 import OpenTelemetryApi
 
-class SpanBuilderSdk: SpanBuilder {
+public class SpanBuilderSdk: SpanBuilder {
     private enum ParentType {
         case currentSpan
         case explicitParent
@@ -36,7 +36,7 @@ class SpanBuilderSdk: SpanBuilder {
 
     private var startEpochNanos: Int = 0
 
-    init(spanName: String, instrumentationLibraryInfo: InstrumentationLibraryInfo, spanProcessor: SpanProcessor, traceConfig: TraceConfig, resource: Resource, idsGenerator: IdsGenerator, clock: Clock) {
+    public init(spanName: String, instrumentationLibraryInfo: InstrumentationLibraryInfo, spanProcessor: SpanProcessor, traceConfig: TraceConfig, resource: Resource, idsGenerator: IdsGenerator, clock: Clock) {
         self.spanName = spanName
         self.instrumentationLibraryInfo = instrumentationLibraryInfo
         self.spanProcessor = spanProcessor
@@ -46,51 +46,51 @@ class SpanBuilderSdk: SpanBuilder {
         self.clock = clock
     }
 
-    func setParent(_ parent: Span) -> SpanBuilder {
+    public func setParent(_ parent: Span) -> SpanBuilder {
         self.parent = parent
         remoteParent = nil
         parentType = .explicitParent
         return self
     }
 
-    func setParent(_ parent: SpanContext) -> SpanBuilder {
+    public func setParent(_ parent: SpanContext) -> SpanBuilder {
         remoteParent = parent
         self.parent = nil
         parentType = .explicitRemoteParent
         return self
     }
 
-    func setNoParent() -> SpanBuilder {
+    public func setNoParent() -> SpanBuilder {
         parentType = .noParent
         remoteParent = nil
         parent = nil
         return self
     }
 
-    func addLink(spanContext: SpanContext) -> SpanBuilder {
+    public func addLink(spanContext: SpanContext) -> SpanBuilder {
         return addLink(SpanData.Link(context: spanContext))
     }
 
-    func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> SpanBuilder {
+    public func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> SpanBuilder {
         return addLink(SpanData.Link(context: spanContext, attributes: attributes))
     }
 
-    func addLink(_ link: Link) -> SpanBuilder {
+    public func addLink(_ link: Link) -> SpanBuilder {
         links.append(link)
         return self
     }
 
-    func setSpanKind(spanKind: SpanKind) -> SpanBuilder {
+    public func setSpanKind(spanKind: SpanKind) -> SpanBuilder {
         self.spanKind = spanKind
         return self
     }
 
-    func setStartTimestamp(startTimestamp: Int) -> SpanBuilder {
+    public func setStartTimestamp(startTimestamp: Int) -> SpanBuilder {
         startEpochNanos = startTimestamp
         return self
     }
 
-    func startSpan() -> Span {
+    public func startSpan() -> Span {
         var parentContext = getParentContext(parentType: parentType, explicitParent: parent, remoteParent: remoteParent)
         let traceId: TraceId
         let spanId = idsGenerator.generateSpanId()

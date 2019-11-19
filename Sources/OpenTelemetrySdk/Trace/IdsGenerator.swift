@@ -8,7 +8,7 @@
 import Foundation
 import OpenTelemetryApi
 
-protocol IdsGenerator {
+public protocol IdsGenerator {
     /**
      * Generates a new valid {@code SpanId}.
      *

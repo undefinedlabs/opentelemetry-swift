@@ -9,51 +9,51 @@ import Foundation
 import OpenTelemetryApi
 
 // TODO: needs proper implementation of AttributesWithCapacity
-typealias EvictingQueue = [TimedEvent]
+public typealias EvictingQueue = [TimedEvent]
 // TODO: needs proper implementation of AttributesWithCapacity
-typealias AttributesWithCapacity = [String: AttributeValue]
+public typealias AttributesWithCapacity = [String: AttributeValue]
 
-class RecordEventsReadableSpan: ReadableSpan {
+public class RecordEventsReadableSpan: ReadableSpan {
 //    private static final Logger logger = Logger.getLogger(Tracer.class.getName());
 
-    var isRecordingEvents = true
+    public var isRecordingEvents = true
 
     // Contains the identifiers associated with this Span.
-    private(set) var context: SpanContext
+    public private(set) var context: SpanContext
     // The parent SpanId of this span. Invalid if this is a root span.
-    private(set) var parentSpanId: SpanId?
+    public private(set) var parentSpanId: SpanId?
     // True if the parent is on a different process.
-    private(set) var hasRemoteParent: Bool
+    public private(set) var hasRemoteParent: Bool
     // Handler called when the span starts and ends.
-    private(set) var spanProcessor: SpanProcessor
+    public private(set) var spanProcessor: SpanProcessor
     // The displayed name of the span.
     // List of recorded links to parent and child spans.
-    private(set) var links = [Link]()
+    public private(set) var links = [Link]()
     // Number of links recorded.
-    private(set) var totalRecordedLinks: Int
+    public private(set) var totalRecordedLinks: Int
 
-    private(set) var name: String
+    public private(set) var name: String
     // The kind of the span.
-    private(set) var kind: SpanKind
+    public private(set) var kind: SpanKind
     // The clock used to get the time.
-    private(set) var clock: Clock
+    public private(set) var clock: Clock
     // The resource associated with this span.
-    private(set) var resource: Resource
+    public private(set) var resource: Resource
     // The start time of the span.
     // instrumentation library of the named tracer which created this span
-    private(set) var instrumentationLibraryInfo: InstrumentationLibraryInfo
+    public private(set) var instrumentationLibraryInfo: InstrumentationLibraryInfo
     // The resource associated with this span.
-    private(set) var startEpochNanos: Int
+    public private(set) var startEpochNanos: Int
     // Set of recorded attributes. DO NOT CALL any other method that changes the ordering of events.
-    private(set) var attributes = AttributesWithCapacity()
+    public private(set) var attributes = AttributesWithCapacity()
     // List of recorded events.
-    private(set) var events = EvictingQueue()
+    public private(set) var events = EvictingQueue()
     // Number of events recorded.
-    private(set) var totalRecordedEvents = 0
+    public private(set) var totalRecordedEvents = 0
     // The number of children.
-    private(set) var numberOfChildren: Int
+    public private(set) var numberOfChildren: Int
     // The status of the span.
-    var status: Status? = Status.ok {
+    public var status: Status? = Status.ok {
         didSet {
             if hasBeenEnded || status == nil {
                 status = oldValue
@@ -61,7 +61,7 @@ class RecordEventsReadableSpan: ReadableSpan {
         }
     }
     // The end time of the span.
-    private var endEpochNanos: Int?
+    public private(set) var endEpochNanos: Int?
 
     // True if the span is ended.
     private(set) var hasBeenEnded: Bool
@@ -103,13 +103,13 @@ class RecordEventsReadableSpan: ReadableSpan {
      * @return a new and started span.
      */
 
-    static func startSpan(context: SpanContext, name: String, instrumentationLibraryInfo: InstrumentationLibraryInfo, kind: SpanKind, parentSpanId: SpanId?, hasRemoteParent: Bool, traceConfig: TraceConfig, spanProcessor: SpanProcessor, clock: Clock, resource: Resource, attributes: [String: AttributeValue], links: [Link], totalRecordedLinks: Int, startEpochNanos: Int) -> RecordEventsReadableSpan {
+    static public func startSpan(context: SpanContext, name: String, instrumentationLibraryInfo: InstrumentationLibraryInfo, kind: SpanKind, parentSpanId: SpanId?, hasRemoteParent: Bool, traceConfig: TraceConfig, spanProcessor: SpanProcessor, clock: Clock, resource: Resource, attributes: [String: AttributeValue], links: [Link], totalRecordedLinks: Int, startEpochNanos: Int) -> RecordEventsReadableSpan {
         let span = RecordEventsReadableSpan(context: context, name: name, instrumentationLibraryInfo: instrumentationLibraryInfo, kind: kind, parentSpanId: parentSpanId, hasRemoteParent: hasRemoteParent, spanProcessor: spanProcessor, clock: clock, resource: resource, attributes: attributes, links: links, totalRecordedLinks: totalRecordedLinks, startEpochNanos: startEpochNanos)
         spanProcessor.onStart(span: span)
         return span
     }
 
-    func toSpanData() -> SpanData {
+   public func toSpanData() -> SpanData {
         return SpanData(traceId: context.traceId, spanId: context.spanId, traceFlags: context.traceFlags, tracestate: context.tracestate, parentSpanId: parentSpanId, resource: resource, instrumentationLibraryInfo: instrumentationLibraryInfo, name: name, kind: kind, startEpochNanos: startEpochNanos, attributes: attributes, timedEvents: adaptTimedEvents(), links: adaptLinks(), status: status, endEpochNanos: endEpochNanos ?? clock.now, hasRemoteParent: hasRemoteParent)
     }
 
@@ -139,7 +139,7 @@ class RecordEventsReadableSpan: ReadableSpan {
         return events
     }
 
-    func updateName(name: String) {
+   public func updateName(name: String) {
         if hasBeenEnded {
             // logger.log(Level.FINE, "Calling updateName() on an ended Span.");
             return
@@ -147,23 +147,23 @@ class RecordEventsReadableSpan: ReadableSpan {
         self.name = name
     }
 
-    func setAttribute(key: String, value: String) {
+    public func setAttribute(key: String, value: String) {
         setAttribute(key: key, value: AttributeValue.string(value))
     }
 
-    func setAttribute(key: String, value: Int) {
+    public func setAttribute(key: String, value: Int) {
         setAttribute(key: key, value: AttributeValue.int(value))
     }
 
-    func setAttribute(key: String, value: Double) {
+    public func setAttribute(key: String, value: Double) {
         setAttribute(key: key, value: AttributeValue.double(value))
     }
 
-    func setAttribute(key: String, value: Bool) {
+    public func setAttribute(key: String, value: Bool) {
         setAttribute(key: key, value: AttributeValue.bool(value))
     }
 
-    func setAttribute(key: String, value: AttributeValue) {
+    public func setAttribute(key: String, value: AttributeValue) {
         if hasBeenEnded {
             //               logger.log(Level.FINE, "Calling setAttribute() on an ended Span.");
             return
@@ -171,27 +171,27 @@ class RecordEventsReadableSpan: ReadableSpan {
         attributes[key] = value
     }
 
-    func addEvent(name: String) {
+    public func addEvent(name: String) {
         addTimedEvent(timedEvent: TimedEvent(nanotime: clock.now, name: name))
     }
 
-    func addEvent(name: String, timestamp: Int) {
+    public func addEvent(name: String, timestamp: Int) {
         addTimedEvent(timedEvent: TimedEvent(nanotime: timestamp, name: name))
     }
 
-    func addEvent(name: String, attributes: [String: AttributeValue]) {
+    public func addEvent(name: String, attributes: [String: AttributeValue]) {
         addTimedEvent(timedEvent: TimedEvent(nanotime: clock.now, name: name, attributes: attributes))
     }
 
-    func addEvent(name: String, attributes: [String: AttributeValue], timestamp: Int) {
+    public func addEvent(name: String, attributes: [String: AttributeValue], timestamp: Int) {
         addTimedEvent(timedEvent: TimedEvent(nanotime: timestamp, name: name, attributes: attributes))
     }
 
-    func addEvent<E>(event: E) where E: Event {
+    public func addEvent<E>(event: E) where E: Event {
         addTimedEvent(timedEvent: TimedEvent(nanotime: clock.now, event: event))
     }
 
-    func addEvent<E>(event: E, timestamp: Int) where E: Event {
+    public func addEvent<E>(event: E, timestamp: Int) where E: Event {
         addTimedEvent(timedEvent: TimedEvent(nanotime: timestamp, event: event))
     }
 
@@ -204,11 +204,11 @@ class RecordEventsReadableSpan: ReadableSpan {
         totalRecordedEvents += 1
     }
 
-    func end() {
+    public func end() {
         endInternal(timestamp: clock.now)
     }
 
-    func end(endOptions: EndSpanOptions) {
+    public func end(endOptions: EndSpanOptions) {
         endInternal(timestamp: endOptions.getEndTimestamp() == 0 ? clock.now: endOptions.getEndTimestamp())
     }
 
@@ -222,7 +222,7 @@ class RecordEventsReadableSpan: ReadableSpan {
         spanProcessor.onEnd(span: self)
     }
 
-    func addChild() {
+    public func addChild() {
         if hasBeenEnded {
             // logger.log(Level.FINE, "Calling end() on an ended Span.");
             return
@@ -236,7 +236,7 @@ class RecordEventsReadableSpan: ReadableSpan {
      *
      * @return the latency of the {@code Span} in nanos.
      */
-    func getLatencyNs() -> Int {
+    public func getLatencyNs() -> Int {
         return getEndNanoTimeInternal() - startEpochNanos
     }
 
@@ -246,7 +246,7 @@ class RecordEventsReadableSpan: ReadableSpan {
      *
      * @return the end nano time.
      */
-    func getEndNanoTime() -> Int {
+    public func getEndNanoTime() -> Int {
         return getEndNanoTimeInternal()
     }
 
@@ -259,7 +259,7 @@ class RecordEventsReadableSpan: ReadableSpan {
         return status ?? Status.ok
     }
 
-    var description: String {
+    public var description: String {
         return "RecordEventsReadableSpan{}"
     }
 

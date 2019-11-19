@@ -8,7 +8,7 @@
 import Foundation
 import OpenTelemetryApi
 
-struct TracerSdkFactory: TracerFactory {
+public class TracerSdkFactory: TracerFactory {
 //    let logger = Logger.getLogger(TracerFactory.class.getName());
 
     private var tracerRegistry = [InstrumentationLibraryInfo: TracerSdk]()
@@ -20,7 +20,7 @@ struct TracerSdkFactory: TracerFactory {
      *
      * @return a new {@link TracerSdkFactory} with default configs.
      */
-    init() {
+    public convenience init() {
         self.init(clock: MillisClock(), idsGenerator: RandomIdsGenerator(), resource: EnvVarResource.resource)
     }
 
@@ -28,11 +28,11 @@ struct TracerSdkFactory: TracerFactory {
         sharedState = TracerSharedState(clock: clock, idsGenerator: idsGenerator, resource: resource)
     }
 
-    mutating func get(instrumentationName: String) -> Tracer {
+    public func get(instrumentationName: String) -> Tracer {
         return get(instrumentationName: instrumentationName, instrumentationVersion: "")
     }
 
-    mutating func get(instrumentationName: String, instrumentationVersion: String) -> Tracer {
+    public func get(instrumentationName: String, instrumentationVersion: String) -> Tracer {
         let instrumentationLibraryInfo = InstrumentationLibraryInfo(name: instrumentationName, version: instrumentationVersion)
         if let tracer = tracerRegistry[instrumentationLibraryInfo] {
             return tracer
@@ -65,7 +65,7 @@ struct TracerSdkFactory: TracerFactory {
      * @param traceConfig the new active {@code TraceConfig}.
      */
     public func updateActiveTraceConfig(_ traceConfig: TraceConfig) {
-        sharedState.activeTraceConfig = traceConfig
+        sharedState.setActiveTraceConfig(traceConfig)
     }
 
     /**

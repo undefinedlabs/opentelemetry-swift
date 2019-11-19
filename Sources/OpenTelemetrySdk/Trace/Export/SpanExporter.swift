@@ -8,7 +8,7 @@
 import Foundation
 
 /** The possible results for the export method. */
-enum SpanExporterResultCode {
+public enum SpanExporterResultCode {
     /** The export operation finished successfully. */
     case success
     /** The export operation finished with an error, but retrying may succeed. */
@@ -19,7 +19,7 @@ enum SpanExporterResultCode {
      */
     case failedNotRetryable
 
-    mutating func mergeResultCode(newResultCode: SpanExporterResultCode) {
+    public mutating func mergeResultCode(newResultCode: SpanExporterResultCode) {
         // If both errors are success then return success.
         if self == .success && newResultCode == .success {
             self = .success
@@ -38,7 +38,7 @@ enum SpanExporterResultCode {
     }
 }
 
-protocol SpanExporter: AnyObject {
+public protocol SpanExporter: AnyObject {
     /**
      * Called to export sampled {@code Span}s.
      *

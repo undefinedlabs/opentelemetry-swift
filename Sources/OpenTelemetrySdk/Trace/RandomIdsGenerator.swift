@@ -9,7 +9,7 @@ import Foundation
 import OpenTelemetryApi
 
 public struct RandomIdsGenerator: IdsGenerator {
-    func generateSpanId() -> SpanId {
+    public func generateSpanId() -> SpanId {
         var id: UInt64
         repeat {
             id = UInt64.random(in: .min ... .max)
@@ -17,7 +17,7 @@ public struct RandomIdsGenerator: IdsGenerator {
         return SpanId(id: id)
     }
 
-    func generateTraceId() -> TraceId {
+    public func generateTraceId() -> TraceId {
         var idHi: UInt64
         var idLo: UInt64
         repeat {

@@ -11,7 +11,7 @@ import Foundation
  * SpanProcessor is the interface {@code TracerSdk} uses to allow synchronous hooks for when a
  * {@code Span} is started or when a {@code Span} is ended.
  */
-protocol SpanProcessor {
+public protocol SpanProcessor {
     /**
      * Called when a {@link io.opentelemetry.trace.Span} is started, if the {@link Span#isRecording()}
      * returns true.
