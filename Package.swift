@@ -12,6 +12,7 @@ let package = Package(
     products: [
         .library( name: "OpenTelemetryApi", targets: ["OpenTelemetryApi"]),
         .library( name: "OpenTelemetrySdk", targets: ["OpenTelemetrySdk"]),
+        .executable(name: "simpleTest", targets: ["simpleTest"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -20,7 +21,7 @@ let package = Package(
     targets: [
         .target(  name: "OpenTelemetryApi", dependencies: []),
         .target(  name: "OpenTelemetrySdk", dependencies: ["OpenTelemetryApi"]),
-
+        .target(  name: "simpleTest", dependencies: ["OpenTelemetrySdk"], path: "Sources/Samples/SimpleTest"),
         .testTarget( name: "OpenTelemetryApiTests", dependencies: ["OpenTelemetryApi"], path: "Tests/OpenTelemetryApiTests"),
         .testTarget( name: "OpenTelemetrySdkTests", dependencies: ["OpenTelemetryApi", "OpenTelemetrySdk"], path: "Tests/OpenTelemetrySdkTests"),
     ]
