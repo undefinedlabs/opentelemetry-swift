@@ -23,21 +23,21 @@ class TimedEventTests: XCTestCase {
 
     func testRawTimedEventWithName() {
         let event = TimedEvent(nanotime: 1000, name: TimedEventTests.eventName)
-        XCTAssertEqual(event.nanoTime, 1000)
+        XCTAssertEqual(event.epochNanos, 1000)
         XCTAssertEqual(event.name, TimedEventTests.eventName)
         XCTAssertEqual(event.attributes.count, 0)
     }
 
     func testRawTimedEventWithNameAndAttributes() {
         let event = TimedEvent(nanotime: 2000, name: TimedEventTests.eventName, attributes: TimedEventTests.attributes)
-        XCTAssertEqual(event.nanoTime, 2000)
+        XCTAssertEqual(event.epochNanos, 2000)
         XCTAssertEqual(event.name, TimedEventTests.eventName)
         XCTAssertEqual(event.attributes, TimedEventTests.attributes)
     }
 
     func testTimedEventWithEvent() {
         let event = TimedEvent(nanotime: 3000, event: testEvent)
-        XCTAssertEqual(event.nanoTime, 3000)
+        XCTAssertEqual(event.epochNanos, 3000)
         XCTAssertEqual(event.name, TimedEventTests.eventName2)
         XCTAssertEqual(event.attributes, TimedEventTests.attributes2)
     }

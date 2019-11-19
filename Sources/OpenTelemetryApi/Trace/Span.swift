@@ -69,6 +69,21 @@ public protocol Span: AnyObject, CustomStringConvertible {
     /// <param name="name">Name of the <see cref="Event"/>.</param>
     func addEvent(name: String)
 
+    /**
+     * Adds an event to the {@code Span}.
+     *
+     * <p>Use this method to specify an explicit event timestamp. If not called, the implementation
+     * will use the current timestamp value, which should be the default case.
+     *
+     * <p>Important: this is NOT equivalent with System.nanoTime().
+     *
+     * @param name the name of the event.
+     * @param timestamp the explicit event timestamp in nanos since epoch.
+     * @since 0.1.0
+     */
+    func addEvent(name: String, timestamp: Int);
+
+
     /// <summary>
     /// Adds a single <see cref="Event"/> with the <see cref="IDictionary{String, IAttributeValue}"/> attributes to the <see cref="ISpan"/>.
     /// </summary>
@@ -76,11 +91,42 @@ public protocol Span: AnyObject, CustomStringConvertible {
     /// <param name="attributes"><see cref="IDictionary{String, IAttributeValue}"/> of attributes name/value pairs associated with the <see cref="Event"/>.</param>
     func addEvent(name: String, attributes: [String: AttributeValue])
 
+    /**
+     * Adds an event to the {@code Span}.
+     *
+     * <p>Use this method to specify an explicit event timestamp. If not called, the implementation
+     * will use the current timestamp value, which should be the default case.
+     *
+     * <p>Important: this is NOT equivalent with System.nanoTime().
+     *
+     * @param name the name of the event.
+     * @param attributes the attributes that will be added; these are associated with this event, not
+     *     the {@code Span} as for {@code setAttribute()}.
+     * @param timestamp the explicit event timestamp in nanos since epoch.
+     * @since 0.1.0
+     */
+    func addEvent(name: String, attributes: [String: AttributeValue], timestamp: Int);
+
     /// <summary>
     /// Adds an <see cref="Event"/> object to the <see cref="ISpan"/>.
     /// </summary>
     /// <param name="newEvent"><see cref="Event"/> to add to the span.</param>
     func addEvent<E: Event>(event: E)
+
+    /**
+     * Adds an event to the {@code Span}.
+     *
+     * <p>Use this method to specify an explicit event timestamp. If not alled, the implementation
+     * will use the current timestamp value, which should be the default case.
+     *
+     * <p>Important: this is NOT equivalent with System.nanoTime().
+     *
+     * @param event the event to add.
+     * @param timestamp the explicit event timestamp in nanos since epoch.
+     * @since 0.1.0
+     */
+    func addEvent<E: Event>(event: E, timestamp: Int);
+
 
     /// <summary>
     /// End the span.
@@ -91,7 +137,7 @@ public protocol Span: AnyObject, CustomStringConvertible {
     /// End the span.
     /// </summary>
     /// <param name="endTimestamp">End timestamp.</param>
-    func end(timestamp: Timestamp)
+    func end(endOptions: EndSpanOptions)
 }
 
 extension Span {

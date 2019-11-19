@@ -52,7 +52,7 @@ public struct HttpTraceContextFormat: TextFormattable {
 
         let tracestate = extractTracestate(tracestatecollection: tracestateCollection)
 
-        return SpanContext(traceId: extractedTraceParent.traceId, spanId: extractedTraceParent.spanId, traceFlags: extractedTraceParent.traceOptions, tracestate: tracestate)
+        return SpanContext.createFromRemoteParent(traceId: extractedTraceParent.traceId, spanId: extractedTraceParent.spanId, traceFlags: extractedTraceParent.traceOptions, tracestate: tracestate ?? Tracestate())
     }
 
     private func extractTraceparent(traceparent: String?) -> (traceId: TraceId, spanId: SpanId, traceOptions: TraceFlags)? {

@@ -5,9 +5,9 @@
 //  Created by Ignacio Bonafonte on 07/11/2019.
 //
 
-@testable import OpenTelemetrySdk
-import OpenTelemetryApi
 import Foundation
+import OpenTelemetryApi
+@testable import OpenTelemetrySdk
 
 struct TestUtils {
     static func generateRandomAttributes() -> [String: AttributeValue] {
@@ -19,6 +19,13 @@ struct TestUtils {
     }
 
     static func makeBasicSpan() -> SpanData {
-        return SpanData(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate(), resource: Resource(), name: "spanName", kind: .server, timestamp: Timestamp(seconds: 3001, nanos: 255), endTimestamp: Timestamp(seconds: 3001, nanos: 255))
+        return SpanData(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate(), resource: Resource(), instrumentationLibraryInfo: InstrumentationLibraryInfo(), name: "spanName", kind: .server, startEpochNanos: 100000000000 + 100, endEpochNanos: 200000000000 + 200, hasRemoteParent: false)
+    }
+
+    static func startSpanWithSampler(tracerSdkFactory: TracerSdkFactory, tracer: Tracer, spanName: String, sampler: Sampler) -> SpanBuilder {
+        let originalConfig = tracerSdkFactory.getActiveTraceConfig()
+        tracerSdkFactory.updateActiveTraceConfig(originalConfig.settingSampler(sampler))
+        defer { tracerSdkFactory.updateActiveTraceConfig(originalConfig) }
+        return tracer.spanBuilder(spanName: spanName)
     }
 }

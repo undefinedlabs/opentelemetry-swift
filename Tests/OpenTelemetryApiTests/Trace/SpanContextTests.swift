@@ -20,14 +20,16 @@ final class SpanContextTests: XCTestCase {
 
     var first: SpanContext!
     var second: SpanContext!
+    var remote: SpanContext!
 
     override func setUp() {
         firstTracestate = Tracestate().setting(key: "foo", value: "bar")
         secondTracestate = Tracestate().setting(key: "foo", value: "baz")
         emptyTracestate = Tracestate()
 
-        first = SpanContext(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: firstTracestate)
-        second = SpanContext(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate)
+        first = SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: firstTracestate)
+        second = SpanContext.create(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate)
+        remote = SpanContext.createFromRemoteParent(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: emptyTracestate)
     }
 
     func testInvalidSpanContext() {
@@ -38,9 +40,9 @@ final class SpanContextTests: XCTestCase {
 
     func testIsValid() {
         XCTAssertFalse(SpanContext.invalid.isValid)
-        XCTAssertFalse(SpanContext(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId.invalid, traceFlags: TraceFlags(), tracestate: emptyTracestate).isValid)
-        XCTAssertFalse(SpanContext(traceId: TraceId.invalid, spanId: SpanId.invalid, traceFlags: TraceFlags(), tracestate: emptyTracestate).isValid)
-        XCTAssertFalse(SpanContext(traceId: TraceId.invalid, spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate).isValid)
+        XCTAssertFalse(SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId.invalid, traceFlags: TraceFlags(), tracestate: emptyTracestate).isValid)
+        XCTAssertFalse(SpanContext.create(traceId: TraceId.invalid, spanId: SpanId.invalid, traceFlags: TraceFlags(), tracestate: emptyTracestate).isValid)
+        XCTAssertFalse(SpanContext.create(traceId: TraceId.invalid, spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate).isValid)
         XCTAssertTrue(first.isValid)
         XCTAssertTrue(second.isValid)
     }
@@ -65,16 +67,33 @@ final class SpanContextTests: XCTestCase {
         XCTAssertEqual(second.tracestate, secondTracestate)
     }
 
+    func testIsRemote() {
+        XCTAssertFalse(first.isRemote)
+        XCTAssertFalse(second.isRemote)
+        XCTAssertTrue(remote.isRemote)
+    }
+
     func testSpanContext_EqualsAndHashCode() {
-        XCTAssertEqual(first, SpanContext(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate))
-        XCTAssertEqual(first, SpanContext(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(false), tracestate: firstTracestate))
-        XCTAssertEqual(second, SpanContext(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
+        XCTAssertEqual(first, SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate))
+        XCTAssertEqual(first, SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(false), tracestate: firstTracestate))
+        XCTAssertEqual(second, SpanContext.create(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
+        XCTAssertEqual(remote, SpanContext.createFromRemoteParent(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: emptyTracestate))
         XCTAssertNotEqual(first, second)
-        XCTAssertNotEqual(first, SpanContext(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
-        XCTAssertNotEqual(SpanContext(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate), second)
-        XCTAssertNotEqual(SpanContext(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate), SpanContext(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
-        XCTAssertNotEqual(SpanContext(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(false), tracestate: firstTracestate), second)
-        XCTAssertNotEqual(SpanContext(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(false), tracestate: firstTracestate), SpanContext(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
+        XCTAssertNotEqual(first, SpanContext.create(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
+        XCTAssertNotEqual(first, remote)
+        XCTAssertNotEqual(first, SpanContext.createFromRemoteParent(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: emptyTracestate))
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate), second)
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate), SpanContext.create(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate), remote)
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags(), tracestate: emptyTracestate), SpanContext.createFromRemoteParent(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: emptyTracestate))
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(false), tracestate: firstTracestate), second)
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(false), tracestate: firstTracestate), SpanContext.create(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(false), tracestate: firstTracestate), remote)
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: firstTraceIdBytes), spanId: SpanId(fromBytes: firstSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(false), tracestate: firstTracestate), SpanContext.createFromRemoteParent(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: emptyTracestate))
+        XCTAssertNotEqual(second, remote)
+        XCTAssertNotEqual(second, SpanContext.createFromRemoteParent(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate), remote)
+        XCTAssertNotEqual(SpanContext.create(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate), SpanContext.createFromRemoteParent(traceId: TraceId(fromBytes: secondTraceIdBytes), spanId: SpanId(fromBytes: secondSpanIdBytes), traceFlags: TraceFlags().settingIsSampled(true), tracestate: secondTracestate))
     }
 
     func testSpanContext_ToString() {

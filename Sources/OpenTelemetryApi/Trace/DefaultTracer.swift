@@ -57,10 +57,6 @@ public class DefaultTracer: Tracer {
             return self
         }
 
-        func setSampler(sampler: Sampler) -> SpanBuilder {
-            return self
-        }
-
         func addLink(spanContext: SpanContext) -> SpanBuilder {
             return self
         }
@@ -77,7 +73,7 @@ public class DefaultTracer: Tracer {
             return self
         }
 
-        func setStartTimestamp(startTimestamp: Timestamp) -> SpanBuilder {
+        func setStartTimestamp(startTimestamp: Int) -> SpanBuilder {
             return self
         }
     }

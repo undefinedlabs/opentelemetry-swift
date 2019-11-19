@@ -9,14 +9,14 @@ import Foundation
 import OpenTelemetryApi
 
 class TestClock: Clock {
-    var currentTimestamp: Timestamp
+    var currentEpochNanos: Int
 
-    init(timestamp: Timestamp) {
-        currentTimestamp = timestamp
+    init(nanos: Int) {
+        currentEpochNanos = nanos
     }
 
     convenience init() {
-        self.init(timestamp: Timestamp(fromMillis: 1557212400000))
+        self.init(nanos: 1557212400000 * 1000)
     }
 
     /**
@@ -25,8 +25,8 @@ class TestClock: Clock {
      * @param timestamp the new time.
      * @since 0.1.0
      */
-    func setTime(timestamp: Timestamp) {
-        currentTimestamp = timestamp
+    func setTime(nanos: Int) {
+        currentEpochNanos = nanos
     }
 
     /**
@@ -35,26 +35,20 @@ class TestClock: Clock {
      * @param millis the increase in time.
      * @since 0.1.0
      */
-    func advanceMillis(millis: Int) {
-        let incomingSeconds = millis / 1000
-        let remainingMillis = millis % 1000
-        let remainingNanos = remainingMillis * TimestampConverter.nanosPerMilli
 
-        var newSeconds = incomingSeconds + currentTimestamp.seconds
-        var newNanos = remainingNanos + currentTimestamp.nanos
-
-        if newNanos >= TimestampConverter.nanosPerSecond {
-            newSeconds += newNanos / TimestampConverter.nanosPerSecond
-            newNanos = newNanos % TimestampConverter.nanosPerSecond
-        }
-        currentTimestamp = Timestamp(seconds: newSeconds, nanos: newNanos)
+    func advanceMillis(_ millis: Int) {
+        currentEpochNanos += millis * 1_000_000
     }
 
-    var now: Timestamp {
-        return currentTimestamp
+    func advanceNanos(_ nanos: Int) {
+        currentEpochNanos += nanos
     }
 
-    var nowNanos: Int {
-        return (currentTimestamp.seconds * TimestampConverter.nanosPerSecond) + currentTimestamp.nanos
+    var now: Int {
+        return currentEpochNanos
+    }
+
+    var nanoTime: Int {
+        return currentEpochNanos
     }
 }

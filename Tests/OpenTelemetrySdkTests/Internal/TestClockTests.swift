@@ -10,23 +10,23 @@ import XCTest
 
 class TestClockTests: XCTestCase {
     func testSetAndGetTime() {
-        let clock = TestClock(timestamp: ClockTestUtil.createTimestamp(seconds: 1, nanos: 2))
-        XCTAssertEqual(clock.now, ClockTestUtil.createTimestamp(seconds: 1, nanos: 2))
-        clock.setTime(timestamp: ClockTestUtil.createTimestamp(seconds: 3, nanos: 4))
-        XCTAssertEqual(clock.now, ClockTestUtil.createTimestamp(seconds: 3, nanos: 4))
+        let clock = TestClock(nanos: 1234)
+        XCTAssertEqual(clock.now, 1234)
+        clock.setTime(nanos: 9876543210)
+        XCTAssertEqual(clock.now, 9876543210)
     }
 
     func testAdvanceMillis() {
-        let clock = TestClock(timestamp: ClockTestUtil.createTimestamp(seconds: 1, nanos: 500 * ClockTestUtil.nanosPerMilli))
-        clock.advanceMillis(millis: 2600)
-        XCTAssertEqual(clock.now, ClockTestUtil.createTimestamp(seconds: 4, nanos: 100 * ClockTestUtil.nanosPerMilli))
+        let clock = TestClock(nanos: 1_500_000_000)
+        clock.advanceMillis(2600)
+        XCTAssertEqual(clock.now, 4_100_000_000)
     }
 
     func testMeasureElapsedTime() {
-        let clock = TestClock(timestamp: ClockTestUtil.createTimestamp(seconds: 10, nanos: 1))
-        let nanos1 = clock.nowNanos
-        clock.setTime(timestamp: ClockTestUtil.createTimestamp(seconds: 11, nanos: 5))
-        let nanos2 = clock.nowNanos
-        XCTAssertEqual(nanos2 - nanos1, ClockTestUtil.nanosPerSecond + 4)
+        let clock = TestClock(nanos: 10_000_000_001)
+        let nanos1 = clock.nanoTime
+        clock.setTime(nanos:11_000_000_005)
+        let nanos2 = clock.nanoTime
+        XCTAssertEqual(nanos2 - nanos1, 1_000_000_004)
     }
 }

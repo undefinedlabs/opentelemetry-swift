@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OpenTelemetryApi
 
 public protocol Sampler: AnyObject, CustomStringConvertible {
     /// <summary>
@@ -21,37 +22,18 @@ public protocol Sampler: AnyObject, CustomStringConvertible {
     /// </param>
     /// <param name="links">Links associated with the span.</param>
     /// <returns>Sampling decision on whether Span needs to be sampled or not.</returns>
-    func shouldSample(parentContext: SpanContext?, hasRemoteParent: Bool, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision
+    func shouldSample(parentContext: SpanContext?, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision
 }
 
-public struct Decision {
+public protocol Decision {
     /// <summary>
     /// Gets a value indicating whether Span was sampled or not.
     /// The value is not suppose to change over time and can be cached.
     /// </summary>
-    public private(set) var isSampled: Bool
+    var isSampled: Bool { get }
 
     /// <summary>
     /// Gets a map of attributes associated with the sampling decision.
     /// </summary>
-    public  private(set) var attributes: [String: AttributeValue]
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Decision"/> struct.
-    /// </summary>
-    /// <param name="isSampled">True if sampled, false otherwise.</param>
-    public init(isSampled: Bool) {
-        self.isSampled = isSampled
-        attributes = [String: AttributeValue]()
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Decision"/> struct.
-    /// </summary>
-    /// <param name="isSampled">True if sampled, false otherwise.</param>
-    /// <param name="attributes">Attributes associated with the sampling decision.</param>
-    public init(isSampled: Bool, attributes: [String: AttributeValue]) {
-        self.isSampled = isSampled
-        self.attributes = attributes
-    }
+    var attributes: [String: AttributeValue] { get }
 }

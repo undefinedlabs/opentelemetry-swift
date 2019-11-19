@@ -9,11 +9,12 @@ import Foundation
 import OpenTelemetryApi
 
 struct MillisClock: Clock {
-    var now: Timestamp {
-        return Timestamp()
+
+    var now: Int {
+        return Int(Date().timeIntervalSince1970 * 1000000000)
     }
 
-    var nowNanos: Int {
-        return Int(Date().timeIntervalSince1970 / 1000000)
+    var nanoTime: Int {
+        return Int(Date().timeIntervalSince1970 * 1000000000)
     }
 }

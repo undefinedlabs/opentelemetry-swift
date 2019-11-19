@@ -8,6 +8,15 @@
 @testable import OpenTelemetryApi
 import XCTest
 
+final class TestEvent: Event {
+    var name: String {
+        return "name"
+    }
+    var attributes: [String : AttributeValue] {
+        return [String : AttributeValue]()
+    }
+}
+
 final class DefaultSpanTest: XCTestCase {
     func testHasInvalidContextAndDefaultSpanOptions() {
         let context = DefaultSpan.random().context
@@ -28,12 +37,14 @@ final class DefaultSpanTest: XCTestCase {
         span.setAttribute(key: "MyBooleanAttributeKey", value: AttributeValue.bool(true))
         span.setAttribute(key: "MyLongAttributeKey", value: AttributeValue.int(123))
         span.addEvent(name: "event")
+        span.addEvent(name: "event",timestamp: 0)
         span.addEvent(name: "event", attributes: ["MyBooleanAttributeKey": AttributeValue.bool(true)])
-        span.addEvent(event: SimpleEvent(name: "event"))
-
+        span.addEvent(name: "event", attributes: ["MyBooleanAttributeKey": AttributeValue.bool(true)], timestamp: 0)
+        span.addEvent(event: TestEvent())
+        span.addEvent(event: TestEvent(), timestamp: 0)
         span.status = .ok
         span.end()
-        span.end(timestamp: Timestamp())
+        span.end(endOptions: EndSpanOptions())
     }
 
     func testDefaultSpan_ToString() {

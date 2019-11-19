@@ -32,10 +32,20 @@ public protocol ReadableSpan: Span {
     var name: String { get }
 
     /**
+     * Returns the instrumentation library specified when creating the tracer which produced this
+     * span.
+     *
+     * @return an instance of {@link InstrumentationLibraryInfo} describing the instrumentation
+     *     library
+     */
+    var instrumentationLibraryInfo: InstrumentationLibraryInfo { get }
+    
+    /**
      * This converts this instance into an immutable SpanData instance, for use in export.
      *
      * @return an immutable {@link SpanData} instance.
      * @since 0.1.0
      */
     func toSpanData() -> SpanData
+
 }

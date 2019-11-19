@@ -13,14 +13,16 @@ class SimpleSpansProcessorTests: XCTestCase {
     let spanName = "MySpanName"
     var readableSpan = ReadableSpanMock()
     var spanExporter = SpanExporterMock()
-    let tracerSdk = TracerSdk()
+    var tracerSdkFactory = TracerSdkFactory()
+    var tracer: Tracer!
     //   let waitingSpanExporter = WaitingSpanExporter();
-    let sampledSpanContext = SpanContext(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags().settingIsSampled(true), tracestate: Tracestate())
-    let notSampledSpanContext = SpanContext(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate())
+    let sampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags().settingIsSampled(true), tracestate: Tracestate())
+    let notSampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate())
 
     var simpleSampledSpansProcessor: SimpleSpanProcessor!
 
     override func setUp() {
+        tracer = tracerSdkFactory.get(instrumentationName: "SimpleSpanProcessor")
         simpleSampledSpansProcessor = SimpleSpanProcessor(spanExporter: spanExporter)
     }
 
@@ -80,14 +82,14 @@ class SimpleSpansProcessorTests: XCTestCase {
     func testTracerSdk_NotSampled_RecordingEventsSpan() {
         // TODO(bdrutu): Fix this when Sampler return RECORD option.
         /*
-         tracerSdk.addSpanProcessor(
+         tracer.addSpanProcessor(
              BatchSpansProcessor.newBuilder(waitingSpanExporter)
                  .setScheduleDelayMillis(MAX_SCHEDULE_DELAY_MILLIS)
                  .reportOnlySampled(false)
                  .build());
 
          io.opentelemetry.trace.Span span =
-             tracerSdk
+             tracer
                  .spanBuilder("FOO")
                  .setSampler(Samplers.neverSample())
                  .startSpan();

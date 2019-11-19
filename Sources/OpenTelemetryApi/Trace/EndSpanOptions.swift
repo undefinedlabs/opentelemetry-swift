@@ -7,23 +7,8 @@
 
 import Foundation
 
-public class EndSpanOptions {
-    let timestamp: Timestamp?
-
-    private init(timestamp: Timestamp?) {
-        self.timestamp = timestamp
-    }
-
-    private static let DEFAULT = EndSpanOptions(timestamp: Timestamp())
-
-    /**
-     * The default {@code EndSpanOptions}.
-     *
-     * @since 0.1
-     */
-    public static func getDefault() -> EndSpanOptions {
-        return DEFAULT
-    }
+public struct EndSpanOptions {
+    var timestamp: Int = 0
 
     /**
      * Returns the end {@link Timestamp}.
@@ -31,7 +16,7 @@ public class EndSpanOptions {
      * @return the end timestamp.
      * @since 0.1
      */
-    public func getEndTimestamp() -> Timestamp? {
+    public func getEndTimestamp() -> Int {
         return timestamp
     }
 }

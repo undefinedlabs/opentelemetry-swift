@@ -8,6 +8,7 @@
 import Foundation
 
 public class DefaultSpan: Span {
+
     public var context: SpanContext
 
     public init() {
@@ -19,7 +20,7 @@ public class DefaultSpan: Span {
     }
 
     public static func random() -> DefaultSpan {
-        return DefaultSpan(context: SpanContext(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate()))
+        return DefaultSpan(context: SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate()))
     }
 
     public var isRecordingEvents: Bool {
@@ -59,18 +60,27 @@ public class DefaultSpan: Span {
     public func addEvent(name: String) {
     }
 
+    public func addEvent(name: String, timestamp: Int) {
+    }
+
     public func addEvent(name: String, attributes: [String: AttributeValue]) {
+    }
+
+    public func addEvent(name: String, attributes: [String : AttributeValue], timestamp: Int) {
     }
 
     public func addEvent<E>(event: E) where E: Event {
     }
 
+    public func addEvent<E>(event: E, timestamp: Int) where E : Event {
+
+    }
     public func addLink(link: Link) {
     }
 
     public func end() {
     }
 
-    public func end(timestamp: Timestamp) {
+    public func end(endOptions: EndSpanOptions) {
     }
 }

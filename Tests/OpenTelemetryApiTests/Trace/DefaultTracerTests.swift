@@ -18,7 +18,7 @@ final class DefaultTracerTests: XCTestCase {
     var spanContext: SpanContext!
 
     override func setUp() {
-        spanContext = SpanContext(traceId: TraceId(fromBytes: firstBytes), spanId: SpanId(fromBytes: firstBytes, withOffset: 8), traceFlags: TraceFlags(), tracestate: Tracestate())
+        spanContext = SpanContext.create(traceId: TraceId(fromBytes: firstBytes), spanId: SpanId(fromBytes: firstBytes, withOffset: 8), traceFlags: TraceFlags(), tracestate: Tracestate())
     }
 
     func testDefaultGetCurrentSpan() {
@@ -40,6 +40,10 @@ final class DefaultTracerTests: XCTestCase {
 
     func testDefaultHttpTextFormat() {
         XCTAssert(defaultTracer.textFormat is HttpTraceContextFormat)
+    }
+
+    func testDefaultBinarytFormat() {
+        XCTAssert(defaultTracer.binaryFormat is BinaryTraceContextFormat)
     }
 
     func testTestInProcessContext() {

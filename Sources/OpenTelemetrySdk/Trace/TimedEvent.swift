@@ -11,24 +11,18 @@ import OpenTelemetryApi
 struct TimedEvent: Equatable {
     private static let emptyAttributes = [String: AttributeValue]()
 
-    private(set) var nanoTime: Int
+    private(set) var epochNanos: Int
     private(set) var name: String
     private(set) var attributes: [String: AttributeValue]
 
     init(nanotime: Int, name: String, attributes: [String: AttributeValue] = emptyAttributes) {
-        nanoTime = nanotime
+        self.epochNanos = nanotime
         self.name = name
         self.attributes = attributes
     }
 
     init(nanotime: Int, event: Event) {
-        nanoTime = nanotime
-        name = event.name
-        attributes = event.attributes
+        self.init(nanotime: nanotime, name: event.name, attributes: event.attributes)
     }
 
-    init(timestamp: Timestamp, event: Event) {
-        let nanoTime = timestamp.seconds * TimestampConverter.nanosPerSecond + timestamp.nanos
-        self.init(nanotime: nanoTime, event: event)
-    }
 }

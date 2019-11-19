@@ -14,13 +14,13 @@ import Foundation
  * @since 0.1.0
  */
 public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
-    private static let SIZE = 8
-    private static let BASE16_SIZE = 2 * SIZE
-    private static let INVALID_ID: UInt64 = 0
-    private static let INVALID = SpanId(id: INVALID_ID)
+    private static let size = 8
+    private static let base16Size = 2 * size
+    public static let invalidId: UInt64 = 0
+    public static let invalid = SpanId(id: invalidId)
 
     // The internal representation of the SpanId.
-    var id: UInt64 = INVALID_ID
+    var id: UInt64 = invalidId
 
     public init() {
     }
@@ -43,26 +43,6 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     }
 
     /**
-     * Returns the size in bytes of the {@code SpanId}.
-     *
-     * @return the size in bytes of the {@code SpanId}.
-     * @since 0.1.0
-     */
-    public static var size: Int {
-        return SIZE
-    }
-
-    /**
-     * Returns the invalid {@code SpanId}. All bytes are 0.
-     *
-     * @return the invalid {@code SpanId}.
-     * @since 0.1.0
-     */
-    public static var invalid: SpanId {
-        return INVALID
-    }
-
-    /**
      * Generates a new random {@code SpanId}.
      *
      * @param random The random number generator.
@@ -72,7 +52,7 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
         var id: UInt64
         repeat {
             id = UInt64.random(in: .min ... .max)
-        } while id == INVALID_ID
+        } while id == invalidId
 
         return SpanId(id: id)
     }
@@ -195,7 +175,7 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
      * @since 0.1.0
      */
     public var isValid: Bool {
-        return id != SpanId.INVALID_ID
+        return id != SpanId.invalidId
     }
 
     //  /**

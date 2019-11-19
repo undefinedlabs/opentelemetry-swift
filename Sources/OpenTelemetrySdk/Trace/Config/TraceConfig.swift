@@ -11,7 +11,7 @@ import OpenTelemetryApi
 struct TraceConfig: Equatable {
     // These values are the default values for all the global parameters.
     // TODO: decide which default sampler to use
-    var sampler: Sampler = Samplers.alwaysSample
+    var sampler: Sampler = Samplers.alwaysOn
     var maxNumberOfAttributes: Int = 32 {
         didSet {
             maxNumberOfAttributes < 0 ? maxNumberOfAttributes = 0 : Void()

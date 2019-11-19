@@ -32,22 +32,6 @@ public struct BinaryTraceContextFormat: BinaryFormattable {
     private static let requiredFormatLength = 3 * idSize + traceIdSize + spanIdSize
     private static let allFormatLength: Int = requiredFormatLength + idSize + traceOptionsSize
 
-//    public static func fromData(data: Data) throws -> SpanContext {
-//
-//        try data.withUnsafeBytes { rawPointer -> SpanContext in
-//            if rawPointer.load(as: UInt8.self) != BinaryTraceContextFormat.VersionId {
-//                throw SpanContextParseError.UnsupportedVersion
-//            }
-//            var traceId = TraceId.invalid;
-//            var pos = 1
-//            if rawPointer.load(fromByteOffset: pos, as: UInt8.self) == BinaryTraceContextFormat.TraceIdFieldId {
-//                traceId = TraceId(fromData: data[0...4))
-//            }
-//
-//        }
-//
-//    }
-
     public init() {}
 
     public func fromByteArray(bytes: [UInt8]) -> SpanContext? {
@@ -84,7 +68,7 @@ public struct BinaryTraceContextFormat: BinaryFormattable {
             traceOptions = TraceFlags(fromByte: bytes[pos + BinaryTraceContextFormat.idSize])
         }
 
-        return SpanContext(traceId: traceId, spanId: spanId, traceFlags: traceOptions)
+        return SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: traceOptions, tracestate: Tracestate())
     }
 
     public func toByteArray(spanContext: SpanContext) -> [UInt8] {

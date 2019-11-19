@@ -83,7 +83,7 @@ class DistributedContextSdkBuilder: DistributedContextBuilder {
     func build() -> DistributedContext {
         var parentCopy = parent
         if parent == nil && !noImplicitParent {
-            parentCopy = OpenTelemetry.instance.contextManager.getCurrentContext()
+            parentCopy = OpenTelemetry.instance.distributedContextManager.getCurrentContext()
         }
         return DistributedContextSdk(entries: entries, parent: parentCopy as? DistributedContextSdk)
     }

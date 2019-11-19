@@ -16,7 +16,6 @@ class BinaryFormatTests: XCTestCase {
     var traceOptions: TraceFlags!
     let example_bytes: [UInt8] = [0, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 1, 97, 98, 99, 100,
                                   101, 102, 103, 104, 2, 1]
-    var exampleSpanContext: SpanContext!
     var invalidSpanContext: SpanContext!
     let binaryFormat = BinaryTraceContextFormat()
 
@@ -24,22 +23,21 @@ class BinaryFormatTests: XCTestCase {
         traceId = TraceId(fromBytes: traceId_bytes)
         spanId = SpanId(fromBytes: spanId_bytes)
         traceOptions = TraceFlags(fromByte: traceOptions_byte)
-        exampleSpanContext = SpanContext(traceId: traceId, spanId: spanId, traceFlags: traceOptions, tracestate: Tracestate())
         invalidSpanContext = DefaultSpan().context
     }
 
     private func testSpanContextConversion(spanContext: SpanContext) {
         let propagatedBinarySpanContext = binaryFormat.fromByteArray(bytes: binaryFormat.toByteArray(spanContext: spanContext))
-        XCTAssertEqual(propagatedBinarySpanContext, spanContext, "BinaryTraceContextFormat propagated context is not equal with the initial context.")
+        XCTAssertEqual(propagatedBinarySpanContext, spanContext)
     }
 
     func testPropagate_SpanContextTracingEnabled() {
-        testSpanContextConversion(spanContext: SpanContext(traceId: traceId, spanId: spanId, traceFlags: TraceFlags().settingIsSampled(true), tracestate: Tracestate()))
+        testSpanContextConversion(spanContext: SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags().settingIsSampled(true), tracestate: Tracestate()))
     }
 
     func testPropagate_SpanContextNoTracing() {
         testSpanContextConversion(
-            spanContext: SpanContext(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: Tracestate()))
+            spanContext: SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: Tracestate()))
     }
 
     func testToBinaryValue_InvalidSpanContext() {
@@ -47,7 +45,7 @@ class BinaryFormatTests: XCTestCase {
     }
 
     func testFromBinaryValue_BinaryExampleValue() {
-        XCTAssertEqual(binaryFormat.fromByteArray(bytes: example_bytes), exampleSpanContext)
+        XCTAssertEqual(binaryFormat.fromByteArray(bytes: example_bytes), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: traceOptions, tracestate: Tracestate()))
     }
 
     func testFromBinaryValue_EmptyInput() {

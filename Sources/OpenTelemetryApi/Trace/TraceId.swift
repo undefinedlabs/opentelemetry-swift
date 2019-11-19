@@ -8,14 +8,14 @@
 import Foundation
 
 public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable {
-    private static let SIZE = 16
+    private static let size = 16
     // private static let BASE16_SIZE = 2 * BigendianEncoding.LONG_BASE16;
-    private static let INVALID_ID: UInt64 = 0
-    private static let INVALID = TraceId()
+    public static let invalidId: UInt64 = 0
+    public static let invalid = TraceId()
 
     // The internal representation of the TraceId.
-    var idHi: UInt64 = INVALID_ID
-    var idLo: UInt64 = INVALID_ID
+    var idHi: UInt64 = invalidId
+    var idLo: UInt64 = invalidId
 
     public init() {
     }
@@ -41,26 +41,6 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
     }
 
     /**
-     * Returns the size in bytes of the {@code TraceId}.
-     *
-     * @return the size in bytes of the {@code TraceId}.
-     * @since 0.1.0
-     */
-    public static var size: Int {
-        return SIZE
-    }
-
-    /**
-     * Returns the invalid {@code TraceId}. All bytes are '\0'.
-     *
-     * @return the invalid {@code TraceId}.
-     * @since 0.1.0
-     */
-    public static var invalid: TraceId {
-        return INVALID
-    }
-
-    /**
      * Generates a new random {@code TraceId}.
      *
      * @param random the random number generator.
@@ -72,7 +52,7 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
         repeat {
             idHi = UInt64.random(in: .min ... .max)
             idLo = UInt64.random(in: .min ... .max)
-        } while idHi == TraceId.INVALID_ID && idLo == TraceId.INVALID_ID
+        } while idHi == TraceId.invalidId && idLo == TraceId.invalidId
         return TraceId(idHi: idHi, idLo: idLo)
     }
 
@@ -172,7 +152,7 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
      * @since 0.1.0
      */
     public var isValid: Bool {
-        return idHi != TraceId.INVALID_ID || idLo != TraceId.INVALID_ID
+        return idHi != TraceId.invalidId || idLo != TraceId.invalidId
     }
 
 //

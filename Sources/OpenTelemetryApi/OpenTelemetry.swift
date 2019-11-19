@@ -10,13 +10,13 @@ import Foundation
 public class OpenTelemetry {
     public static var instance = OpenTelemetry()
 
-    public private(set) var tracer: Tracer
-//    private(set) var meter: Meter
-    public private(set) var contextManager: DistributedContextManager
+    public private(set) var tracerFactory: TracerFactory
+//    private(set) var meter: MeterFactory
+    public private(set) var distributedContextManager: DistributedContextManager
 
     private init() {
-        tracer = DefaultTracer.instance
-//        meter = DefaultMeter.instance;
-        contextManager = DefaultDistributedContextManager.instance
+        tracerFactory = DefaultTracerFactory.instance
+//        meter = DefaultMeterFactory.instance;
+        distributedContextManager = DefaultDistributedContextManager.instance
     }
 }

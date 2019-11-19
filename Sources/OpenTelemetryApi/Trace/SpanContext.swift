@@ -16,7 +16,7 @@ import Foundation
  * @since 0.1.0
  */
 public final class SpanContext: Equatable, CustomStringConvertible {
-    static let blank = SpanContext(traceId: TraceId.invalid, spanId: SpanId.invalid, traceFlags: TraceFlags(), tracestate: Tracestate())
+    static let blank = SpanContext(traceId: TraceId.invalid, spanId: SpanId.invalid, traceFlags: TraceFlags(), tracestate: Tracestate(), isRemote: false)
 
     /// The trace identifier associated with this SpanContext
     public private(set) var traceId: TraceId
@@ -30,6 +30,9 @@ public final class SpanContext: Equatable, CustomStringConvertible {
     /// The tracestate associated with this SpanContext
     public let tracestate: Tracestate
 
+    /// The tracestate associated with this SpanContext
+    public let isRemote: Bool
+
     /**
      * Returns the invalid {@code SpanContext} that can be used for no-op operations.
      *
@@ -37,6 +40,14 @@ public final class SpanContext: Equatable, CustomStringConvertible {
      */
     static var invalid: SpanContext {
         return blank
+    }
+
+    private init(traceId: TraceId, spanId: SpanId, traceFlags: TraceFlags, tracestate: Tracestate, isRemote: Bool) {
+        self.traceId = traceId
+        self.spanId = spanId
+        self.traceFlags = traceFlags
+        self.tracestate = tracestate
+        self.isRemote = isRemote
     }
 
     /**
@@ -49,11 +60,23 @@ public final class SpanContext: Equatable, CustomStringConvertible {
      * @return a new {@code SpanContext} with the given identifiers and options.
      * @since 0.1.0
      */
-    public init(traceId: TraceId, spanId: SpanId, traceFlags: TraceFlags, tracestate: Tracestate? = nil) {
-        self.traceId = traceId
-        self.spanId = spanId
-        self.traceFlags = traceFlags
-        self.tracestate = tracestate ?? Tracestate()
+    public static func create(traceId: TraceId, spanId: SpanId, traceFlags: TraceFlags, tracestate: Tracestate) -> SpanContext {
+        return SpanContext(traceId: traceId, spanId: spanId, traceFlags: traceFlags, tracestate: tracestate, isRemote: false)
+    }
+
+    /**
+     * Creates a new {@code SpanContext} that was propagated from a remote parent, with the given
+     * identifiers and options.
+     *
+     * @param traceId the trace identifier of the span context.
+     * @param spanId the span identifier of the span context.
+     * @param traceFlags the trace options for the span context.
+     * @param tracestate the trace state for the span context.
+     * @return a new {@code SpanContext} with the given identifiers and options.
+     * @since 0.1.0
+     */
+    public static func createFromRemoteParent(traceId: TraceId, spanId: SpanId, traceFlags: TraceFlags, tracestate: Tracestate) -> SpanContext {
+        return SpanContext(traceId: traceId, spanId: spanId, traceFlags: traceFlags, tracestate: tracestate, isRemote: true)
     }
 
     /*
@@ -67,10 +90,10 @@ public final class SpanContext: Equatable, CustomStringConvertible {
     }
 
     public static func == (lhs: SpanContext, rhs: SpanContext) -> Bool {
-        return lhs.traceId == rhs.traceId && lhs.spanId == rhs.spanId && lhs.traceFlags == rhs.traceFlags
+        return lhs.traceId == rhs.traceId && lhs.spanId == rhs.spanId && lhs.traceFlags == rhs.traceFlags && lhs.isRemote == rhs.isRemote
     }
 
     public var description: String {
-        return "SpanContext{traceId=\(traceId), spanId=\(spanId), traceFlags=\(traceFlags)}"
+        return "SpanContext{traceId=\(traceId), spanId=\(spanId), traceFlags=\(traceFlags)}, isRemote=\(isRemote)"
     }
 }

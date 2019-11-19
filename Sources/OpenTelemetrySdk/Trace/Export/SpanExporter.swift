@@ -48,8 +48,8 @@ protocol SpanExporter: AnyObject {
     @discardableResult func export(spans: [SpanData]) -> SpanExporterResultCode
 
     /**
-     * Called when {@link TracerSdk#shutdown()} is called, if this {@code SpanExporter} is register to
-     * a {@code TracerSdk} object.
+     * Called when {@link io.opentelemetry.sdk.trace.TracerSdkFactory#shutdown()} is called, if this
+     * {@code SpanExporter} is register to a {@code TracerSdkFactory} object.
      */
     func shutdown()
 }

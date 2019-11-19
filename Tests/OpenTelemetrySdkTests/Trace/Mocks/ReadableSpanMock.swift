@@ -10,17 +10,29 @@ import OpenTelemetryApi
 @testable import OpenTelemetrySdk
 
 class ReadableSpanMock: ReadableSpan {
+    var instrumentationLibraryInfo: InstrumentationLibraryInfo = InstrumentationLibraryInfo()
+
     var name: String = "ReadableSpanMock"
 
     var forcedReturnSpanContext: SpanContext?
     var forcedReturnSpanData: SpanData?
 
     func toSpanData() -> SpanData {
-        return forcedReturnSpanData ?? SpanData(traceId: context.traceId, spanId: context.spanId, traceFlags: context.traceFlags, tracestate: Tracestate(), parentSpanId: nil, resource: Resource(labels: [String: String]()), name: "ReadableSpanMock", kind: .client, timestamp: Timestamp(), status: nil, endTimestamp: Timestamp())
+        return forcedReturnSpanData ?? SpanData(traceId: context.traceId,
+                                                spanId: context.spanId,
+                                                traceFlags: context.traceFlags,
+                                                tracestate: Tracestate(),
+                                                resource: Resource(labels: [String: String]()),
+                                                instrumentationLibraryInfo: InstrumentationLibraryInfo(),
+                                                name: "ReadableSpanMock",
+                                                kind: .client,
+                                                startEpochNanos: 0,
+                                                endEpochNanos: 0,
+                                                hasRemoteParent: false)
     }
 
     var context: SpanContext {
-        forcedReturnSpanContext ?? SpanContext(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags())
+        forcedReturnSpanContext ?? SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate())
     }
 
     var isRecordingEvents: Bool = false
@@ -54,10 +66,19 @@ class ReadableSpanMock: ReadableSpan {
     func addEvent<E>(event: E) where E: Event {
     }
 
+    func addEvent(name: String, timestamp: Int) {
+    }
+
+    func addEvent(name: String, attributes: [String: AttributeValue], timestamp: Int) {
+    }
+
+    func addEvent<E>(event: E, timestamp: Int) where E: Event {
+    }
+
     func end() {
     }
 
-    func end(timestamp: Timestamp) {
+    func end(endOptions: EndSpanOptions) {
     }
 
     var description: String = "ReadableSpanMock"

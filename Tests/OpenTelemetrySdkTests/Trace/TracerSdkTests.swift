@@ -1,21 +1,26 @@
 //
+import OpenTelemetryApi
 //  TracerSdkTests.swift
 //  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 07/11/2019.
 //
 @testable import OpenTelemetrySdk
-import OpenTelemetryApi
 import XCTest
 
 class TracerSdkTests: XCTestCase {
     let spanName = "span_name"
+    let instrumentationLibraryName = "TracerSdkTest"
+    let instrumentationLibraryVersion = "semver:0.2.0"
+    var instrumentationLibraryInfo: InstrumentationLibraryInfo!
     var span = SpanMock()
     var spanProcessor = SpanProcessorMock()
-    var tracer = TracerSdk()
+    var tracerSdkFactory = TracerSdkFactory()
+    var tracer: TracerSdk!
 
     override func setUp() {
-        tracer.addSpanProcessor(spanProcessor: spanProcessor)
+        instrumentationLibraryInfo = InstrumentationLibraryInfo(name: instrumentationLibraryName, version: instrumentationLibraryVersion)
+        tracer = (tracerSdkFactory.get(instrumentationName: instrumentationLibraryName, instrumentationVersion: instrumentationLibraryVersion) as! TracerSdk)
     }
 
     func testDefaultGetCurrentSpan() {
@@ -38,7 +43,7 @@ class TracerSdkTests: XCTestCase {
         XCTAssertNil(tracer.currentSpan)
         // Make sure context is detached even if test fails.
         // TODO: Check context bahaviour
-//        let origContext = ContextUtils.with(span: span)
+//        let origContext = ContextUtils.withSpan(span)
 //        XCTAssertTrue(tracer.currentSpan === span)
 //        XCTAssertTrue(tracer.currentSpan is DefaultSpan)
     }
@@ -52,32 +57,12 @@ class TracerSdkTests: XCTestCase {
         XCTAssertNil(tracer.currentSpan)
     }
 
-    func testUpdateActiveTraceConfig() {
-        XCTAssertEqual(tracer.activeTraceConfig, TraceConfig())
-        let newConfig = TraceConfig().settingSampler(Samplers.neverSample)
-        tracer.activeTraceConfig = newConfig
-        XCTAssertEqual(tracer.activeTraceConfig, newConfig)
+    func testGetInstrumentationLibraryInfo() {
+        XCTAssertEqual(tracer.instrumentationLibraryInfo, instrumentationLibraryInfo)
     }
 
-    func testShutdown() {
-        tracer.shutdown()
-        XCTAssertEqual(spanProcessor.shutdownCalledTimes, 1)
-        tracer.unsafeRestart()
-    }
-
-    func testShutdownTwice_OnlyFlushSpanProcessorOnce() {
-        tracer.shutdown()
-        XCTAssertEqual(spanProcessor.shutdownCalledTimes, 1)
-        tracer.shutdown() // the second call will be ignored
-        XCTAssertEqual(spanProcessor.shutdownCalledTimes, 1)
-        tracer.unsafeRestart()
-    }
-
-    func testReturnNoopSpanAfterShutdown() {
-        tracer.shutdown()
-        let span = tracer.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.alwaysSample).startSpan()
-        XCTAssertTrue(span is DefaultSpan)
-        span.end()
-        tracer.unsafeRestart()
+    func testPropagatesInstrumentationLibraryInfoToSpan() {
+        let readableSpan = tracer.spanBuilder(spanName: "spanName").startSpan() as! ReadableSpan
+        XCTAssertEqual(readableSpan.instrumentationLibraryInfo, instrumentationLibraryInfo)
     }
 }

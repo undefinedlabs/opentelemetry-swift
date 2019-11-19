@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import OpenTelemetryApi
 
 class OpenTelemetrySDK {
-    public static var tracer: TracerSdk {
-        return TracerSdk()
+
+    public static var tracerFactory: TracerSdkFactory {
+        return OpenTelemetry.instance.tracerFactory as! TracerSdkFactory
     }
 
     /**
@@ -18,8 +20,8 @@ class OpenTelemetrySDK {
      * @return meter returned by {@link OpenTelemetry#getMeter()}.
      * @since 0.1.0
      */
-//    public static var meter: MeterSdk  {
-//      return MeterSdk()
+//    public static var meter: MeterSdkFactory  {
+//            return OpenTelemetry.instance.meterFactory as! MeterSdkFactory
 //
 //    }
 
@@ -29,7 +31,7 @@ class OpenTelemetrySDK {
      * @return context manager returned by {@link OpenTelemetry#getDistributedContextManager()}.
      * @since 0.1.0
      */
-//    public static var distributedContextManager: DistributedContextManagerSdk {
-//      return DistributedContextManagerSdk()
-//    }
+    public static var distributedContextManager: DistributedContextManagerSdk {
+      return OpenTelemetry.instance.distributedContextManager as! DistributedContextManagerSdk
+    }
 }

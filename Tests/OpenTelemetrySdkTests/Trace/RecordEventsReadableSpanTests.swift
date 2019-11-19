@@ -4,34 +4,48 @@
 //
 //  Created by Ignacio Bonafonte on 06/11/2019.
 //
-@testable import OpenTelemetrySdk
+
 import OpenTelemetryApi
+@testable import OpenTelemetrySdk
 import XCTest
 
 class RecordEventsReadableSpanTest: XCTestCase {
+    class TestEvent: Event {
+        var name: String {
+            return "event3"
+        }
+
+        var attributes: [String: AttributeValue] {
+            return [String: AttributeValue]()
+        }
+    }
+
     let spanName = "MySpanName"
     let spanNewName = "NewName"
     let nanosPerSecond = 1000000000
     let millisPerSecond = 1000
-    let traceId = TraceId.random()
-    let spanId = SpanId.random()
-    let parentSpanId = SpanId.random()
+    let idsGenerator: IdsGenerator = RandomIdsGenerator()
+    var traceId: TraceId!
+    var spanId: SpanId!
+    var parentSpanId: SpanId!
+    let expectedHasRemoteParent = true
     var spanContext: SpanContext!
-    let startTime = Timestamp(seconds: 1000, nanos: 0)
+    let startEpochNanos: Int = 1000123789654
     var testClock: TestClock!
-    var timestampConverter: TimestampConverter!
     let resource = Resource()
+    let instrumentationLibraryInfo = InstrumentationLibraryInfo(name: "theName", version: nil)
     var attributes = [String: AttributeValue]()
     var expectedAttributes = [String: AttributeValue]()
-    let event = SimpleEvent(name: "event2", attributes: [String: AttributeValue]())
-    var link: SimpleLink!
+    var link: SpanData.Link!
     let spanProcessor = SpanProcessorMock()
 
     override func setUp() {
-        spanContext = SpanContext(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: Tracestate())
-        testClock = TestClock(timestamp: startTime)
-        timestampConverter = TimestampConverter.now(clock: testClock)
-        link = SimpleLink(context: spanContext)
+        traceId = idsGenerator.generateTraceId()
+        spanId = idsGenerator.generateSpanId()
+        parentSpanId = idsGenerator.generateSpanId()
+        spanContext = SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: Tracestate())
+        testClock = TestClock(nanos: startEpochNanos)
+        link = SpanData.Link(context: spanContext)
         attributes["MyStringAttributeKey"] = AttributeValue.string("MyStringAttributeValue")
         attributes["MyLongAttributeKey"] = AttributeValue.int(123)
         attributes["MyBooleanAttributeKey"] = AttributeValue.bool(false)
@@ -46,7 +60,14 @@ class RecordEventsReadableSpanTest: XCTestCase {
         // and are ignored.
         spanDoWork(span: span, status: .cancelled)
         let spanData = span.toSpanData()
-        verifySpanData(spanData: spanData, attributes: [String: AttributeValue](), timedEvents: [TimedEvent](), links: [link], spanName: spanName, startTime: Timestamp(seconds: startTime.seconds, nanos: 0), endTime: Timestamp(seconds: startTime.seconds, nanos: 0), status: .ok)
+        verifySpanData(spanData: spanData,
+                       attributes: [String: AttributeValue](),
+                       timedEvents: [SpanData.TimedEvent](),
+                       links: [link],
+                       spanName: spanName,
+                       startEpochNanos: startEpochNanos,
+                       endEpochNanos: startEpochNanos,
+                       status: .ok)
     }
 
     func testEndSpanTwice_DoNotCrash() {
@@ -59,8 +80,15 @@ class RecordEventsReadableSpanTest: XCTestCase {
         let span = createTestSpan(kind: .internal)
         spanDoWork(span: span, status: nil)
         let spanData = span.toSpanData()
-        let timedEvent = TimedEvent(timestamp: Timestamp(seconds: startTime.seconds + 1, nanos: 0), event: event)
-        verifySpanData(spanData: spanData, attributes: expectedAttributes, timedEvents: [timedEvent], links: [link], spanName: spanNewName, startTime: Timestamp(seconds: startTime.seconds, nanos: 0), endTime: Timestamp(seconds: testClock.now.seconds, nanos: 0), status: .ok)
+        let timedEvent = SpanData.TimedEvent(epochNanos: startEpochNanos + nanosPerSecond, name: "event2", attributes: [String: AttributeValue]())
+        verifySpanData(spanData: spanData,
+                       attributes: expectedAttributes,
+                       timedEvents: [timedEvent],
+                       links: [link],
+                       spanName: spanNewName,
+                       startEpochNanos: startEpochNanos,
+                       endEpochNanos: testClock.now,
+                       status: .ok)
         span.end()
     }
 
@@ -70,8 +98,15 @@ class RecordEventsReadableSpanTest: XCTestCase {
         span.end()
         XCTAssertEqual(spanProcessor.onEndCalledTimes, 1)
         let spanData = span.toSpanData()
-        let timedEvent = TimedEvent(timestamp: Timestamp(seconds: startTime.seconds + 1, nanos: 0), event: event)
-        verifySpanData(spanData: spanData, attributes: expectedAttributes, timedEvents: [timedEvent], links: [link], spanName: spanNewName, startTime: Timestamp(seconds: startTime.seconds, nanos: 0), endTime: Timestamp(seconds: testClock.now.seconds, nanos: 0), status: .cancelled)
+        let timedEvent = SpanData.TimedEvent(epochNanos: startEpochNanos + nanosPerSecond, name: "event2", attributes: [String: AttributeValue]())
+        verifySpanData(spanData: spanData,
+                       attributes: expectedAttributes,
+                       timedEvents: [timedEvent],
+                       links: [link],
+                       spanName: spanNewName,
+                       startEpochNanos: startEpochNanos,
+                       endEpochNanos: testClock.now,
+                       status: .cancelled)
     }
 
     func testToSpanData_RootSpan() {
@@ -91,7 +126,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
 
     func testSetStatus() {
         let span = createTestSpan(kind: .consumer)
-        testClock.advanceMillis(millis: millisPerSecond)
+        testClock.advanceMillis(millisPerSecond)
         XCTAssertEqual(span.status, Status.ok)
         span.status = .cancelled
         XCTAssertEqual(span.status, Status.cancelled)
@@ -105,6 +140,18 @@ class RecordEventsReadableSpanTest: XCTestCase {
         span.end()
     }
 
+    func testGetInstrumentationLibraryInfo() {
+        let span = createTestSpan(kind: .client)
+        XCTAssertEqual(span.instrumentationLibraryInfo, instrumentationLibraryInfo)
+        span.end()
+    }
+
+    func testGetSpanHasRemoteParent() {
+        let span = createTestSpan(kind: .server)
+        XCTAssertTrue(span.toSpanData().hasRemoteParent)
+        span.end()
+    }
+
     func testGetAndUpdateSpanName() {
         let span = createTestRootSpan()
         XCTAssertEqual(span.name, spanName)
@@ -115,22 +162,22 @@ class RecordEventsReadableSpanTest: XCTestCase {
 
     func testGetLatencyNs_ActiveSpan() {
         let span = createTestSpan(kind: .internal)
-        testClock.advanceMillis(millis: millisPerSecond)
-        let elapsedTimeNanos1 = (testClock.now.seconds - startTime.seconds) * nanosPerSecond
+        testClock.advanceMillis(millisPerSecond)
+        let elapsedTimeNanos1 = testClock.now - startEpochNanos
         XCTAssertEqual(span.getLatencyNs(), elapsedTimeNanos1)
-        testClock.advanceMillis(millis: millisPerSecond)
-        let elapsedTimeNanos2 = (testClock.now.seconds - startTime.seconds) * nanosPerSecond
+        testClock.advanceMillis(millisPerSecond)
+        let elapsedTimeNanos2 = testClock.now - startEpochNanos
         XCTAssertEqual(span.getLatencyNs(), elapsedTimeNanos2)
         span.end()
     }
 
     func testGetLatencyNs_EndedSpan() {
         let span = createTestSpan(kind: .internal)
-        testClock.advanceMillis(millis: millisPerSecond)
+        testClock.advanceMillis(millisPerSecond)
         span.end()
-        let elapsedTimeNanos = (testClock.now.seconds - startTime.seconds) * nanosPerSecond
+        let elapsedTimeNanos = testClock.now - startEpochNanos
         XCTAssertEqual(span.getLatencyNs(), elapsedTimeNanos)
-        testClock.advanceMillis(millis: millisPerSecond)
+        testClock.advanceMillis(millisPerSecond)
         XCTAssertEqual(span.getLatencyNs(), elapsedTimeNanos)
     }
 
@@ -149,7 +196,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         let span = createTestRootSpan()
         span.addEvent(name: "event1")
         span.addEvent(name: "event2", attributes: attributes)
-        span.addEvent(event: SimpleEvent(name: "event3"))
+        span.addEvent(event: TestEvent())
         span.end()
         let spanData = span.toSpanData()
         XCTAssertEqual(spanData.timedEvents.count, 3)
@@ -183,7 +230,6 @@ class RecordEventsReadableSpanTest: XCTestCase {
 
     func testDroppingAndAddingAttributes() {
         // TODO: needs proper implementation of AttributesWithCapacity
-
 //        let maxNumberOfAttributes = 8
 //        let traceConfig = TraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttributes)
 //        let span = createTestSpan(config: traceConfig)
@@ -191,54 +237,57 @@ class RecordEventsReadableSpanTest: XCTestCase {
 //            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
 //        }
 //        var spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes?.count, maxNumberOfAttributes)
+//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)
 //
 //        for i in 0 ..< maxNumberOfAttributes {
 //            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
-//            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
+//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
 //        }
 //
 //        for i in 0 ..< maxNumberOfAttributes / 2 {
 //            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
 //        }
 //        spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes?.count, maxNumberOfAttributes)
+//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)
 //        // Test that we still have in the attributes map the latest maxNumberOfAttributes / 2 entries.
 //        for i in 0 ..< maxNumberOfAttributes / 2 {
 //            let val = i + maxNumberOfAttributes * 3 / 2
 //            let expectedValue = AttributeValue.int(val)
-//            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(val)"], expectedValue)
+//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(val)"], expectedValue)
 //        }
 //        // Test that we have the newest re-added initial entries.
 //        for i in 0 ..< maxNumberOfAttributes / 2 {
 //            let expectedValue = AttributeValue.int(i)
-//            XCTAssertEqual(spanData.attributes?["MyStringAttributeKey\(i)"], expectedValue)
+//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i)"], expectedValue)
 //        }
 //        span.end()
     }
 
     func testDroppingEvents() {
         // TODO: needs proper implementation of AttributesWithCapacity
-
 //        let maxNumberOfEvents = 8
 //        let traceConfig = TraceConfig().settingMaxNumberOfEvents(maxNumberOfEvents)
 //        let span = createTestSpan(config: traceConfig)
 //        for _ in 0 ..< 2 * maxNumberOfEvents {
-//            span.addEvent(event: event)
-//            testClock.advanceMillis(millis: millisPerSecond)
+//            span.addEvent(name: "event2", attributes: [String: AttributeValue]())
+//            testClock.advanceMillis(millisPerSecond)
 //        }
 //        var spanData = span.toSpanData()
 //        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)
 //
 //        for i in 0 ..< maxNumberOfEvents {
-//            let expectedEvent = TimedEvent( nanotime: Timestamp(seconds: startTime.seconds + maxNumberOfEvents + i, nanos: 0).nanos, event: event)
+//            let expectedEvent = SpanData.TimedEvent(epochNanos: Int(maxNumberOfEvents + i) * nanosPerSecond,
+//                                                    name: "event2",
+//                                                    attributes: [String: AttributeValue]())
 //            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
 //        }
 //        span.end()
 //        spanData = span.toSpanData()
 //        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)
 //        for i in 0 ..< maxNumberOfEvents {
-//            let expectedEvent = TimedEvent( nanotime: Timestamp(seconds: startTime.seconds + maxNumberOfEvents + i, nanos: 0).nanos, event: event)
+//            let expectedEvent = SpanData.TimedEvent(epochNanos: Int(maxNumberOfEvents + i) * nanosPerSecond,
+//                                                    name: "event2",
+//                                                    attributes: [String: AttributeValue]())
 //            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
 //        }
     }
@@ -246,9 +295,9 @@ class RecordEventsReadableSpanTest: XCTestCase {
     func testAsSpanData() {
         let name = "GreatSpan"
         let kind = SpanKind.server
-        let traceId = TraceId.random()
-        let spanId = SpanId.random()
-        let parentSpanId = SpanId.random()
+        let traceId = idsGenerator.generateTraceId()
+        let spanId = idsGenerator.generateSpanId()
+        let parentSpanId = idsGenerator.generateSpanId()
         let traceConfig = TraceConfig()
         let spanProcessor = NoopSpanProcessor()
         let clock = TestClock()
@@ -258,26 +307,57 @@ class RecordEventsReadableSpanTest: XCTestCase {
         let attributes = TestUtils.generateRandomAttributes()
         let event1Attributes = TestUtils.generateRandomAttributes()
         let event2Attributes = TestUtils.generateRandomAttributes()
-        let context = SpanContext(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: Tracestate())
-        let link1 = SimpleLink(context: context, attributes: TestUtils.generateRandomAttributes())
+        let context = SpanContext.create(traceId: traceId,
+                                         spanId: spanId,
+                                         traceFlags: TraceFlags(),
+                                         tracestate: Tracestate())
+        let link1 = SpanData.Link(context: context, attributes: TestUtils.generateRandomAttributes())
         let links = [link1]
 
-        let readableSpan = RecordEventsReadableSpan.startSpan(context: context, name: name, kind: kind, parentSpanId: parentSpanId, traceConfig: traceConfig, spanProcessor: spanProcessor, timestampConverter: nil, clock: clock, resource: resource, attributes: attributes, links: links, totalRecordedLinks: 1)
-        let startTimeNanos = clock.nowNanos
-        clock.advanceMillis(millis: 4)
-        let firstEventTimeNanos = clock.nowNanos
+        let readableSpan = RecordEventsReadableSpan.startSpan(context: context,
+                                                              name: name,
+                                                              instrumentationLibraryInfo: instrumentationLibraryInfo,
+                                                              kind: kind,
+                                                              parentSpanId: parentSpanId,
+                                                              hasRemoteParent: false,
+                                                              traceConfig: traceConfig,
+                                                              spanProcessor: spanProcessor,
+                                                              clock: clock,
+                                                              resource: resource,
+                                                              attributes: attributes,
+                                                              links: links,
+                                                              totalRecordedLinks: 1,
+                                                              startEpochNanos: 0)
+        let startEpochNanos = clock.now
+        clock.advanceMillis(4)
+        let firstEventTimeNanos = clock.now
         readableSpan.addEvent(name: "event1", attributes: event1Attributes)
-        clock.advanceMillis(millis: 6)
-        let secondEventTimeNanos = clock.nowNanos
+        clock.advanceMillis(6)
+        let secondEventTimeNanos = clock.now
         readableSpan.addEvent(name: "event2", attributes: event2Attributes)
 
-        clock.advanceMillis(millis: 100)
+        clock.advanceMillis(100)
         readableSpan.end()
-        let endTimeNanos = clock.nowNanos
-        let timedEvent1 = TimedEvent(nanotime: firstEventTimeNanos, event: SimpleEvent(name: "event1", attributes: event1Attributes))
-        let timedEvent2 = TimedEvent(nanotime: secondEventTimeNanos, event: SimpleEvent(name: "event2", attributes: event2Attributes))
+        let endEpochNanos = clock.now
+        let timedEvent1 = SpanData.TimedEvent(epochNanos:firstEventTimeNanos, name: "event1", attributes:event1Attributes)
+        let timedEvent2 = SpanData.TimedEvent(epochNanos:secondEventTimeNanos, name: "event2", attributes: event2Attributes)
         let timedEvents = [timedEvent1, timedEvent2]
-        let expected = SpanData(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: Tracestate(), parentSpanId: parentSpanId, resource: resource, name: name, kind: kind, timestamp: nanoToTimestamp(nanotime: startTimeNanos), attributes: attributes, timedEvents: timedEvents, links: links, status: .ok, endTimestamp: nanoToTimestamp(nanotime: endTimeNanos))
+        let expected = SpanData(traceId: traceId,
+                                spanId: spanId,
+                                traceFlags: TraceFlags(),
+                                tracestate: Tracestate(),
+                                parentSpanId: parentSpanId,
+                                resource: resource,
+                                instrumentationLibraryInfo: instrumentationLibraryInfo,
+                                name: name,
+                                kind: kind,
+                                startEpochNanos: startEpochNanos,
+                                attributes: attributes,
+                                timedEvents: timedEvents,
+                                links: links,
+                                status: .ok,
+                                endEpochNanos: endEpochNanos,
+                                hasRemoteParent: false)
 
         let result = readableSpan.toSpanData()
         XCTAssertEqual(expected, result)
@@ -300,7 +380,20 @@ class RecordEventsReadableSpanTest: XCTestCase {
     }
 
     private func createTestSpan(kind: SpanKind, config: TraceConfig, parentSpanId: SpanId?, attributes: [String: AttributeValue]) -> RecordEventsReadableSpan {
-        let span = RecordEventsReadableSpan.startSpan(context: spanContext, name: spanName, kind: kind, parentSpanId: parentSpanId, traceConfig: config, spanProcessor: spanProcessor, timestampConverter: timestampConverter, clock: testClock, resource: resource, attributes: attributes, links: [link], totalRecordedLinks: 1)
+        let span = RecordEventsReadableSpan.startSpan(context: spanContext,
+                                                      name: spanName,
+                                                      instrumentationLibraryInfo: instrumentationLibraryInfo,
+                                                      kind: kind,
+                                                      parentSpanId: parentSpanId,
+                                                      hasRemoteParent: true,
+                                                      traceConfig: config,
+                                                      spanProcessor: spanProcessor,
+                                                      clock: testClock,
+                                                      resource: resource,
+                                                      attributes: attributes,
+                                                      links: [link],
+                                                      totalRecordedLinks: 1,
+                                                      startEpochNanos: 0)
         XCTAssertEqual(spanProcessor.onStartCalledTimes, 1)
         return span
     }
@@ -311,30 +404,34 @@ class RecordEventsReadableSpanTest: XCTestCase {
         for attribute in attributes {
             span.setAttribute(key: attribute.key, value: attribute.value)
         }
-        testClock.advanceMillis(millis: millisPerSecond)
-        span.addEvent(event: event)
-        testClock.advanceMillis(millis: millisPerSecond)
+        testClock.advanceMillis(millisPerSecond)
+        span.addEvent(name: "event2", attributes: [String: AttributeValue]())
+        testClock.advanceMillis(millisPerSecond)
         span.addChild()
         span.updateName(name: spanNewName)
         span.status = status
     }
 
-    private func verifySpanData(spanData: SpanData, attributes: [String: AttributeValue], timedEvents: [TimedEvent], links: [Link], spanName: String, startTime: Timestamp, endTime: Timestamp, status: Status) {
+    private func verifySpanData(spanData: SpanData,
+                                attributes: [String: AttributeValue],
+                                timedEvents: [SpanData.TimedEvent],
+                                links: [Link], spanName: String,
+                                startEpochNanos: Int,
+                                endEpochNanos: Int,
+                                status: Status) {
         XCTAssertEqual(spanData.traceId, traceId)
         XCTAssertEqual(spanData.spanId, spanId)
         XCTAssertEqual(spanData.parentSpanId, parentSpanId)
+        XCTAssertEqual(spanData.hasRemoteParent, expectedHasRemoteParent)
         XCTAssertEqual(spanData.tracestate, Tracestate())
         XCTAssertEqual(spanData.resource, resource)
+        XCTAssertEqual(spanData.instrumentationLibraryInfo, instrumentationLibraryInfo)
         XCTAssertEqual(spanData.name, spanName)
         XCTAssertEqual(spanData.attributes, attributes)
         XCTAssertEqual(spanData.timedEvents, timedEvents)
         XCTAssert(spanData.links == links)
-        XCTAssertEqual(spanData.timestamp, startTime)
-        XCTAssertEqual(spanData.endTimestamp, endTime)
+        XCTAssertEqual(spanData.startEpochNanos, startEpochNanos)
+        XCTAssertEqual(spanData.endEpochNanos, endEpochNanos)
         XCTAssertEqual(spanData.status?.canonicalCode, status.canonicalCode)
-    }
-
-    private func nanoToTimestamp(nanotime: Int) -> Timestamp {
-        return Timestamp(seconds: nanotime / nanosPerSecond, nanos: nanotime % nanosPerSecond)
     }
 }
