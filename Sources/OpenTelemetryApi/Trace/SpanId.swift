@@ -1,7 +1,6 @@
 //
 //  SpanId.swift
 //
-//
 //  Created by Ignacio Bonafonte on 14/10/2019.
 //
 
@@ -10,16 +9,12 @@ import Foundation
 /// A struct that represents a span identifier. A valid span identifier is an 8-byte array with at
 /// least one non-zero byte.
 public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
-
     private static let size = 8
     public static let invalidId: UInt64 = 0
     public static let invalid = SpanId(id: invalidId)
 
     // The internal representation of the SpanId.
     var id: UInt64 = invalidId
-
-    public init() {
-    }
 
     /// Constructs a SpanId whose representation is specified by a long value.
     /// There is no restriction on the specified value, other than the already established validity
@@ -30,6 +25,10 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     /// - Parameter id: the UInt64 representation of the TraceId.
     public init(id: UInt64) {
         self.id = id
+    }
+
+    // Returns an invalid SpanId. All bytes are 0.
+    public init() {
     }
 
     /// Generates a new random SpanId.
@@ -52,7 +51,6 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     /// @throws IndexOutOfBoundsException if {@code srcOffset+SpanId.getSize()} is greater than {@code
     ///     src.length}.
     /// @since 0.1.0
-
 
     /// Returns a SpanId whose representation is copied from the data beginning at the offset.
     /// - Parameters:
@@ -99,7 +97,6 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     ///     dest.length}.
     /// @since 0.1.0
 
-
     /// Copies the byte array representations of the SpanId into the code dest beginning at the offset
     /// - Parameters:
     ///   - dest: the destination buffer.
@@ -137,7 +134,6 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     //  /// @since 0.1.0
     //   */
 
-
     /// Returns a SpanId built from a lowercase base16 representation.
     /// - Parameters:
     ///   - hex: the lowercase base16 representation.
@@ -153,7 +149,6 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
         }
         self.init(id: id)
     }
-
 
     ///  Returns the lowercase base16 encoding of this SpanId.
     public var hexString: String {

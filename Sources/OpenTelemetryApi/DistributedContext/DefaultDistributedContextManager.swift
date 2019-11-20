@@ -1,14 +1,15 @@
 //
 //  DefaultDistributedContextManager.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 14/11/2019.
 //
 
 import Foundation
 
+/// No-op implementations ofDistributedContextManager.
 public class DefaultDistributedContextManager: DistributedContextManager {
-
+    ///  Returns a DistributedContextManager singleton that is the default implementation for
+    ///  DistributedContextManager.
     static var instance = DefaultDistributedContextManager()
     static var binaryFormat = BinaryTraceContextFormat()
     static var httpTextFormat = HttpTraceContextFormat()
@@ -16,9 +17,8 @@ public class DefaultDistributedContextManager: DistributedContextManager {
     private init() {}
 
     public func contextBuilder() -> DistributedContextBuilder {
-        return NoopDistributedContextBuilder()
+        return EmptyDistributedContextBuilder()
     }
-
 
     public func getCurrentContext() -> DistributedContext {
         ContextUtils.getCurrentDistributedContext() ?? EmptyDistributedContext.instance

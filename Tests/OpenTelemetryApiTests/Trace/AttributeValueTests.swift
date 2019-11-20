@@ -1,6 +1,5 @@
 //
 //  AttributeValueTest.swift
-//  OpenTelemetrySwift Tests
 //
 //  Created by Ignacio Bonafonte on 23/10/2019.
 //

@@ -1,6 +1,5 @@
 //
 //  OpenTelemetrySdk.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 05/11/2019.
 //
@@ -21,8 +20,7 @@ class OpenTelemetrySDK {
      * @since 0.1.0
      */
 //    public static var meter: MeterSdkFactory  {
-//            return OpenTelemetry.instance.meterFactory as! MeterSdkFactory
-//
+//            return OpenTelemetry.instance.meterFactory as! MeterSdkFactory//
 //    }
 
     /**

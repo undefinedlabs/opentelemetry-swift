@@ -1,12 +1,15 @@
 //
 //  TraceContextFormat.swift
 //
-//
 //  Created by Ignacio Bonafonte on 16/10/2019.
 //
 
 import Foundation
 
+/**
+ * Implementation of the TraceContext propagation protocol. See
+ * https://github.com/w3c/trace-context
+ */
 public struct HttpTraceContextFormat: TextFormattable {
     private static let versionLength = "00".count
     private static let versionPrefixIdLength = "00-".count

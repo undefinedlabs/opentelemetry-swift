@@ -1,7 +1,6 @@
 //
 //  BinaryFormattable.swift
 //
-//
 //  Created by Ignacio Bonafonte on 15/10/2019.
 //
 

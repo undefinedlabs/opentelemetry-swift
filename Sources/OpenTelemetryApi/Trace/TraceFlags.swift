@@ -1,7 +1,6 @@
 //
 //  TraceFlags.swift
 //
-//
 //  Created by Ignacio Bonafonte on 14/10/2019.
 //
 

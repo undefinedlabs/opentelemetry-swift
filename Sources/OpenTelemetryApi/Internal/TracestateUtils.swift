@@ -1,7 +1,6 @@
 //
 //  TracestateUtils.swift
 //
-//
 //  Created by Ignacio Bonafonte on 17/10/2019.
 //
 
@@ -18,6 +17,12 @@ struct TracestateUtils {
     /// <param name="tracestateString">String with comma separated tracestate key value pairs.</param>
     /// <param name=TRACESTATE><see cref="List{T}"/> to set tracestate pairs on.</param>
     /// <returns>True if string was parsed successfully and tracestate was recognized, false otherwise.</returns>
+
+
+    /// Extracts tracestate pairs from the given string and appends it to provided tracestate list
+    /// - Parameters:
+    ///   - tracestateString: String with comma separated tracestate key value pairs.
+    ///   - tracestate: Array to set tracestate pairs on.
     static func appendTracestate(tracestateString: String, tracestate: inout [Tracestate.Entry]) -> Bool {
         guard !tracestate.isEmpty else { return false }
 
@@ -42,6 +47,8 @@ struct TracestateUtils {
         return true
     }
 
+    /// Returns Tracestate description as a string with the values
+    /// - Parameter tracestate: the tracestate to return description from
     static func getString(tracestate: Tracestate) -> String {
         let entries = tracestate.entries
         var result = ""
@@ -57,11 +64,10 @@ struct TracestateUtils {
         return result
     }
 
-    // Key is opaque string up to 256 characters printable. It MUST begin with a lowercase letter, and
-    // can only contain lowercase letters a-z, digits 0-9, underscores _, dashes -, asterisks *, and
-    // forward slashes /.  For multi-tenant vendor scenarios, an at sign (@) can be used to prefix the
-    // vendor name.
-    // todo: benchmark this implementation
+    /// Key is opaque string up to 256 characters printable. It MUST begin with a lowercase letter, and
+    /// can only contain lowercase letters a-z, digits 0-9, underscores _, dashes -, asterisks *, and
+    /// forward slashes /.  For multi-tenant vendor scenarios, an at sign (@) can be used to prefix the
+    /// vendor name.
     static func validateKey(key: String) -> Bool {
         let allowed = "abcdefghijklmnopqrstuvwxyz0123456789_-*/@"
         let characterSet = CharacterSet(charactersIn: allowed)
@@ -80,8 +86,8 @@ struct TracestateUtils {
         return true
     }
 
-    // Value is opaque string up to 256 characters printable ASCII RFC0020 characters (i.e., the range
-    // 0x20 to 0x7E) except comma , and =.
+    /// Value is opaque string up to 256 characters printable ASCII RFC0020 characters (i.e., the range
+    /// 0x20 to 0x7E) except comma , and =.
     static func validateValue(value: String) -> Bool {
         if value.count > TracestateUtils.valueMaxSize || value.last == " " {
             return false

@@ -1,6 +1,5 @@
 //
 //  RecordEventsReadableSpan.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 05/11/2019.
 //
@@ -279,15 +278,12 @@ public class RecordEventsReadableSpan: ReadableSpan {
 
 // struct AttributesWithCapacity {
 //    fileprivate var attributes = [(String, AttributeValue)]()
-//    fileprivate var capacity: Int = 0
-//
-//    init( attributes)
-//
+//    fileprivate var capacity: Int = 0//
+//    init( attributes)//
 //    mutating func setCapacity(capacity: Int) {
 //        self.capacity = capacity
 //        attributes.reserveCapacity(capacity + 1)
-//    }
-//
+//    }//
 //    subscript(name: String) -> AttributeValue {
 //        get {
 //            return attributes.first { $0.0 == name }!.1

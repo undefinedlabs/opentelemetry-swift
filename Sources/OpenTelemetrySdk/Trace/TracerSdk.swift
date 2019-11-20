@@ -1,6 +1,5 @@
 //
 //  TracerSdk.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 05/11/2019.
 //

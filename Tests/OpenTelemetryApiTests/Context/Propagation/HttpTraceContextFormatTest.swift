@@ -1,6 +1,5 @@
 //
 //  HttpTraceContextFormatTest.swift
-//  OpenTelemetrySwift iOSTests
 //
 //  Created by Ignacio Bonafonte on 04/11/2019.
 //
@@ -162,15 +161,13 @@ class HttpTraceContextFormatTest: XCTestCase {
 //        invalidHeaders[HttpTraceContextFormat.TRACEPARENT] = "00-" + traceId_base16 + "-" + spanId_base16 + "-01"
 //        invalidHeaders[HttpTraceContextFormat.TRACESTATE] = "foo=bar;test=test"
 //        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
-//    }
-//
+//    }//
 //    func testExtract_InvalidTracestate_KeyValueDelimiter() {
 //        var invalidHeaders = [String: String]()
 //        invalidHeaders[HttpTraceContextFormat.TRACEPARENT] = "00-" + traceId_base16 + "-" + spanId_base16 + "-01"
 //        invalidHeaders[HttpTraceContextFormat.TRACESTATE] = "foo=bar,test-test"
 //        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
-//    }
-//
+//    }//
 //    func testExtract_InvalidTracestate_OneString() {
 //        var invalidHeaders = [String: String]()
 //        invalidHeaders[HttpTraceContextFormat.TRACEPARENT] = "00-" + traceId_base16 + "-" + spanId_base16 + "-01"

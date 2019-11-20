@@ -1,6 +1,5 @@
 //
 //  SimpleSpansProcessorTests.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 08/11/2019.
 //
@@ -67,8 +66,7 @@ class SimpleSpansProcessorTests: XCTestCase {
 //        tracerSdk.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
 //        tracerSdk.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
 //        let span = tracerSdk.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.alwaysSample).startSpan()
-//        span.end()
-//
+//        span.end()//
 //        // Spans are recorded and exported in the same order as they are ended, we test that a non
 //        // sampled span is not exported by creating and ending a sampled span after a non sampled span
 //        // and checking that the first exported span is the sampled span (the non sampled did not get

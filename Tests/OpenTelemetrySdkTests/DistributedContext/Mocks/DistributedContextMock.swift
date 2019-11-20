@@ -1,19 +1,16 @@
 //
 //  DistributedContextMock.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 15/11/2019.
 //
 
-@testable import OpenTelemetrySdk
 import Foundation
 import OpenTelemetryApi
-
+@testable import OpenTelemetrySdk
 
 class DistributedContextMock: DistributedContext {
-
     static func contextBuilder() -> DistributedContextBuilder {
-        return NoopDistributedContextBuilder()
+        return EmptyDistributedContextBuilder()
     }
 
     func getEntries() -> [Entry] {
@@ -23,5 +20,4 @@ class DistributedContextMock: DistributedContext {
     func getEntryValue(key: EntryKey) -> EntryValue? {
         return nil
     }
-
 }

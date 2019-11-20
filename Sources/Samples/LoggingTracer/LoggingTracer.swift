@@ -1,7 +1,6 @@
 //
 //  LoggingTracer.swift
-//  
-//
+//  //
 //  Created by Ignacio Bonafonte on 19/11/2019.
 //
 

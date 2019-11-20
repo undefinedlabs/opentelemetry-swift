@@ -1,6 +1,5 @@
 //
 //  RecordEventsReadableSpanTest.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 06/11/2019.
 //
@@ -206,22 +205,19 @@ class RecordEventsReadableSpanTest: XCTestCase {
         // TODO: needs proper implementation of AttributesWithCapacity
 //        let maxNumberOfAttributes = 8
 //        let traceConfig = TraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttributes)
-//        let span = createTestSpan(config: traceConfig)
-//
+//        let span = createTestSpan(config: traceConfig)//
 //        for i in 0 ..< 2 * maxNumberOfAttributes {
 //            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
 //        }
 //        var spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)
-//
+//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)//
 //        for i in 0 ..< maxNumberOfAttributes {
 //            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
 //            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
 //        }
 //        span.end()
 //        spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)
-//
+//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)//
 //        for i in 0 ..< maxNumberOfAttributes {
 //            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
 //            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
@@ -237,13 +233,11 @@ class RecordEventsReadableSpanTest: XCTestCase {
 //            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
 //        }
 //        var spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)
-//
+//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)//
 //        for i in 0 ..< maxNumberOfAttributes {
 //            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
 //            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
-//        }
-//
+//        }//
 //        for i in 0 ..< maxNumberOfAttributes / 2 {
 //            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
 //        }
@@ -273,8 +267,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
 //            testClock.advanceMillis(millisPerSecond)
 //        }
 //        var spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)
-//
+//        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)//
 //        for i in 0 ..< maxNumberOfEvents {
 //            let expectedEvent = SpanData.TimedEvent(epochNanos: Int(maxNumberOfEvents + i) * nanosPerSecond,
 //                                                    name: "event2",

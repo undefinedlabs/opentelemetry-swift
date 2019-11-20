@@ -1,14 +1,13 @@
 //
-//  File.swift
-//  
+//  DefaultSpanBuilder.swift
 //
 //  Created by Ignacio Bonafonte on 20/11/2019.
 //
 
 import Foundation
 
+/// No-op implementation of the SpanBuilder
 public class DefaultSpanBuilder: SpanBuilder {
-
     private var tracer: Tracer
     private var isRootSpan: Bool = false
     private var spanContext: SpanContext?

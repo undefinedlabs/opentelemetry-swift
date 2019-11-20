@@ -1,46 +1,24 @@
 //
 //  DistributedContext.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 14/11/2019.
 //
 
 import Foundation
 
+/// A map from EntryKey to EntryValue and EntryMetadata that can be used to
+/// label anything that is associated with a specific operation.
+/// For example, DistributedContexts can be used to label stats, log messages, or
+/// debugging information.
 public protocol DistributedContext: AnyObject {
+    /// Builder for the DistributedContext class
     static func contextBuilder() -> DistributedContextBuilder
+
+    /// Returns an immutable collection of the entries in this {@code DistributedContext}. Order of
+    /// entries is not guaranteed.
     func getEntries() -> [Entry]
+
+    ///  Returns the EntryValue associated with the given EntryKey.
+    /// - Parameter key: entry key to return the value for.
     func getEntryValue(key: EntryKey) -> EntryValue?
-}
-
-public protocol DistributedContextBuilder: AnyObject  {
-    @discardableResult func setParent(_ parent: DistributedContext) -> Self
-    @discardableResult func setNoParent() -> Self
-    @discardableResult func put(key: EntryKey, value: EntryValue, metadata: EntryMetadata) -> Self
-    @discardableResult func remove(key: EntryKey) -> Self
-    func build() -> DistributedContext
-}
-
-public class NoopDistributedContextBuilder: DistributedContextBuilder {
-    public func setParent(_ parent: DistributedContext) -> Self {
-        return self
-    }
-
-    public func setNoParent() -> Self {
-        return self
-    }
-
-    public func put(key: EntryKey, value: EntryValue, metadata: EntryMetadata) -> Self {
-        return self
-    }
-
-    public func remove(key: EntryKey) -> Self {
-        return self
-    }
-
-    public func build() -> DistributedContext {
-        return EmptyDistributedContext.instance
-    }
-
-    public init() {}
 }

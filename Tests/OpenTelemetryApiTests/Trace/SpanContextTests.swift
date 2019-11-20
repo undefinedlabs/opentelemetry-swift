@@ -1,7 +1,6 @@
 //
 //  SpanContextTests.swift
 //
-//
 //  Created by Ignacio Bonafonte on 21/10/2019.
 //
 

@@ -1,6 +1,5 @@
 //
 //  EntryValueTests.swift
-//  OpenTelemetrySwift iOSTests
 //
 //  Created by Ignacio Bonafonte on 14/11/2019.
 //

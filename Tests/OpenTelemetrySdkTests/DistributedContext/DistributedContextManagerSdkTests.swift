@@ -1,6 +1,5 @@
 //
 //  DistributedContextManagerSdkTests.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 15/11/2019.
 //

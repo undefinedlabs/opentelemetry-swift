@@ -1,14 +1,13 @@
 //
 //  DefaultTracer.swift
 //
-//
 //  Created by Ignacio Bonafonte on 22/10/2019.
 //
 
 import Foundation
 
+/// No-op implementation of the Tracer
 public class DefaultTracer: Tracer {
-
     public static var instance = DefaultTracer()
     public var binaryFormat: BinaryFormattable = BinaryTraceContextFormat()
     public var textFormat: TextFormattable = HttpTraceContextFormat()

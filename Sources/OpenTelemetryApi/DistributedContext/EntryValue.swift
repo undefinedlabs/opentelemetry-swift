@@ -1,17 +1,25 @@
 //
 //  EntryValue.swift
-//  OpenTelemetrySwift iOS
 //
 //  Created by Ignacio Bonafonte on 14/11/2019.
 //
 
 import Foundation
 
+/// A validated entry value.
+/// Validation ensures that the String has a maximum length of 255 and
+/// contains only printable ASCII characters.
 public struct EntryValue: Equatable {
+    /// The maximum length for a entry value. The value is 255.
     static let maxLength = 255
 
+    /// The entry value as String
     public private(set) var string: String = ""
 
+    /// Constructs an EntryValue from the given string. The string must meet the following
+    /// requirements:
+    ///  - It cannot be longer than {255.
+    ///  - It can only contain printable ASCII characters.
     public init?(string: String) {
         if !EntryValue.isValid(value: string) {
             return nil
@@ -19,6 +27,8 @@ public struct EntryValue: Equatable {
         self.string = string
     }
 
+    /// Determines whether the given String is a valid entry value.
+    /// - Parameter value: value the entry value to be validated.
     private static func isValid(value: String) -> Bool {
         return value.count <= maxLength && StringUtils.isPrintableString(value)
     }

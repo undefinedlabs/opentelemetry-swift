@@ -1,7 +1,6 @@
 //
-//  File.swift
-//  
-//
+//  LoggingTracerFactory.swift
+//  //
 //  Created by Ignacio Bonafonte on 20/11/2019.
 //
 

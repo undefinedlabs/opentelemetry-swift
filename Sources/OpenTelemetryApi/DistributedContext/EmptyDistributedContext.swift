@@ -1,19 +1,20 @@
 //
 //  EmptyDistributedContext.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 14/11/2019.
 //
 
 import Foundation
 
+/// An immutable implementation of the DistributedContext that does not contain any entries.
 public class EmptyDistributedContext: DistributedContext {
+    /// Returns the single instance of the EmptyDistributedContext class.
     public static var instance = EmptyDistributedContext()
 
     public static func contextBuilder() -> DistributedContextBuilder {
-        return NoopDistributedContextBuilder()
+        return EmptyDistributedContextBuilder()
     }
-    
+
     private init() {}
 
     public func getEntries() -> [Entry] {
@@ -23,6 +24,4 @@ public class EmptyDistributedContext: DistributedContext {
     public func getEntryValue(key: EntryKey) -> EntryValue? {
         return nil
     }
-
-
 }

@@ -1,12 +1,10 @@
 //
 //  Link.swift
 //
-//
 //  Created by Ignacio Bonafonte on 15/10/2019.
 //
 
 import Foundation
-
 
 /// A link to a Span.
 /// Used (for example) in batching operations, where a single batch handler processes multiple

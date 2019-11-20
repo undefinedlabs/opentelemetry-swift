@@ -1,7 +1,6 @@
 //
 //  BinaryTraceContextFormat.swift
 //
-//
 //  Created by Ignacio Bonafonte on 16/10/2019.
 //
 
@@ -11,6 +10,7 @@ enum SpanContextParseError: Error {
     case UnsupportedVersion
 }
 
+/// Implementation of the binary propagation protocol on SpanContext.
 public struct BinaryTraceContextFormat: BinaryFormattable {
     private static let versionId: UInt8 = 0
     private static let versionIdOffset: Int = 0

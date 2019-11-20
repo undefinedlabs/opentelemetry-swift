@@ -1,7 +1,5 @@
 //
 //  TraceConfig.swift
-//  OpenTelemetrySwift
-//
 //  Created by Ignacio Bonafonte on 04/11/2019.
 //
 

@@ -1,7 +1,6 @@
 //
 //  DefaultTracerTests.swift
 //
-//
 //  Created by Ignacio Bonafonte on 22/10/2019.
 //
 

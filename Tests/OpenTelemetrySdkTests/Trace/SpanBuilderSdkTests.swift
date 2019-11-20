@@ -1,6 +1,5 @@
 //
 //  SpanBuilderSdkTest.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 07/11/2019.
 //

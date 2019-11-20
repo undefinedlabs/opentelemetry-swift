@@ -1,6 +1,5 @@
 //
 //  SpanExporterMock.swift
-//  OpenTelemetrySwift
 //
 //  Created by Ignacio Bonafonte on 08/11/2019.
 //
