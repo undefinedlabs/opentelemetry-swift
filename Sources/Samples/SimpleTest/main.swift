@@ -9,8 +9,6 @@ import Foundation
 import OpenTelemetryApi
 import OpenTelemetrySdk
 
-
-
 let sampleKey = "sampleKey"
 let sampleValue = "sampleValue"
 

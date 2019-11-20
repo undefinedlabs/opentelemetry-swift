@@ -38,7 +38,7 @@ public final class SpanContext: Equatable, CustomStringConvertible {
      *
      * @return the invalid {@code SpanContext}.
      */
-    static var invalid: SpanContext {
+    public static var invalid: SpanContext {
         return blank
     }
 

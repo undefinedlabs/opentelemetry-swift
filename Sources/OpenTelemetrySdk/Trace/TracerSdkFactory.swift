@@ -28,12 +28,8 @@ public class TracerSdkFactory: TracerFactory {
         sharedState = TracerSharedState(clock: clock, idsGenerator: idsGenerator, resource: resource)
     }
 
-    public func get(instrumentationName: String) -> Tracer {
-        return get(instrumentationName: instrumentationName, instrumentationVersion: "")
-    }
-
-    public func get(instrumentationName: String, instrumentationVersion: String) -> Tracer {
-        let instrumentationLibraryInfo = InstrumentationLibraryInfo(name: instrumentationName, version: instrumentationVersion)
+    public func get(instrumentationName: String, instrumentationVersion: String? = nil) -> Tracer {
+        let instrumentationLibraryInfo = InstrumentationLibraryInfo(name: instrumentationName, version: instrumentationVersion ?? "")
         if let tracer = tracerRegistry[instrumentationLibraryInfo] {
             return tracer
         } else {

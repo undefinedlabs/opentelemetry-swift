@@ -8,6 +8,5 @@
 import Foundation
 
 public protocol TracerFactory {
-    mutating func get(instrumentationName: String) -> Tracer
-    mutating func get(instrumentationName: String, instrumentationVersion: String) -> Tracer
+    mutating func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer
 }

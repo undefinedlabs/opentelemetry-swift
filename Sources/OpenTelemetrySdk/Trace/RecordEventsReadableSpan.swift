@@ -209,7 +209,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
     }
 
     public func end(endOptions: EndSpanOptions) {
-        endInternal(timestamp: endOptions.getEndTimestamp() == 0 ? clock.now: endOptions.getEndTimestamp())
+        endInternal(timestamp: endOptions.timestamp == 0 ? clock.now: endOptions.timestamp)
     }
 
     private func endInternal(timestamp: Int) {
