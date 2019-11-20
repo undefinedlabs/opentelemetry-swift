@@ -7,20 +7,12 @@
 
 import Foundation
 
+/// A text annotation with a set of attributes.
 public protocol Event {
-    /**
-     * Return the name of the {@code Event}.
-     *
-     * @return the name of the {@code Event}.
-     * @since 0.1.0
-     */
+
+    /// The name of the Event.
     var name: String { get }
 
-    /**
-     * Return the attributes of the {@code Event}.
-     *
-     * @return the attributes of the {@code Event}.
-     * @since 0.1.0
-     */
+    /// The attributes of the Event.
     var attributes: [String: AttributeValue] { get }
 }

@@ -109,7 +109,7 @@ public class SpanBuilderSdk: SpanBuilder {
         let spanContext = SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: TraceFlags().settingIsSampled(samplingDecision.isSampled), tracestate: tracestate)
 
         if !samplingDecision.isSampled {
-            return DefaultSpan(context: spanContext)
+            return DefaultSpan(context: spanContext, kind: spanKind)
         }
 
         return RecordEventsReadableSpan.startSpan(context: spanContext, name: spanName, instrumentationLibraryInfo: instrumentationLibraryInfo, kind: spanKind, parentSpanId: parentContext?.spanId, hasRemoteParent: parentContext?.isRemote ?? false,  traceConfig: traceConfig, spanProcessor: spanProcessor, clock: SpanBuilderSdk.getClock(parent: parent, clock: clock), resource: resource, attributes: samplingDecision.attributes, links: truncatedLinks, totalRecordedLinks: links.count, startEpochNanos: startEpochNanos)

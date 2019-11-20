@@ -39,7 +39,7 @@ public protocol DistributedContextManager: AnyObject {
     /**
      * Returns the {@link BinaryFormat} for this implementation.
      *
-     * <p>Example of usage on the client:
+     * Example of usage on the client:
      *
      * <pre>{@code
      * private static final DistributedContextManager contextManager =
@@ -54,7 +54,7 @@ public protocol DistributedContextManager: AnyObject {
      * }
      * }</pre>
      *
-     * <p>Example of usage on the server:
+     * Example of usage on the server:
      *
      * <pre>{@code
      * private static final DistributedContextManager contextManager =
@@ -78,10 +78,10 @@ public protocol DistributedContextManager: AnyObject {
     /**
      * Returns the {@link HttpTextFormat} for this implementation.
      *
-     * <p>Usually this will be the W3C Correlation Context as the HTTP text format. For more details,
+     * Usually this will be the W3C Correlation Context as the HTTP text format. For more details,
      * see <a href="https://github.com/w3c/correlation-context">correlation-context</a>.
      *
-     * <p>Example of usage on the client:
+     * Example of usage on the client:
      *
      * <pre>{@code
      * private static final DistributedContextManager contextManager =
@@ -103,7 +103,7 @@ public protocol DistributedContextManager: AnyObject {
      * }
      * }</pre>
      *
-     * <p>Example of usage on the server:
+     * Example of usage on the server:
      *
      * <pre>{@code
      * private static final DistributedContextManager contextManager =

@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Represents a change to the current context over a scope of code.
 public protocol Scope {
+    /// Closes the current context
     mutating func close()
 }

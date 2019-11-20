@@ -7,182 +7,146 @@
 
 import Foundation
 
+/// An interface that represents a span. It has an associated SpanContext.
+/// Spans are created by the SpanBuilder.startSpan method.
+/// Span must be ended by calling end().
 public protocol Span: AnyObject, CustomStringConvertible {
-    /// <summary>
-    /// Gets the span context.
-    /// </summary>
+    /// Type of span. Can be used to specify additional relationships between spans in addition to a parent/child relationship.
+    var kind: SpanKind { get }
+
+    /// The span context associated with this Span
     var context: SpanContext { get }
 
-    /// <summary>
-    /// Gets a value indicating whether this span will be recorded.
-    /// </summary>
+    /// Indicates whether this span will be recorded.
     var isRecordingEvents: Bool { get }
 
-    /// <summary>
-    /// Sets the status of the span execution.
-    /// </summary>
+    /// The status of the span execution.
     var status: Status? { get set }
 
-    /// <summary>
-    /// Updates the <see cref="ISpan"/> name.
+    /// Updates the Span name.
     ///
     /// If used, this will override the name provided via StartSpan method overload.
-    /// Upon this update, any sampling behavior based on <see cref="ISpan"/> name will depend on the
+    /// Upon this update, any sampling behavior based on Span name will depend on the
     /// implementation.
-    /// </summary>
-    /// <param name="name">Name of the span.</param>
+    /// - Parameter name: Name of the span.
     func updateName(name: String)
 
-    /// <summary>
     /// Puts a new attribute to the span.
-    /// </summary>
-    /// <param name="key">Key of the attribute.</param>
-    /// <param name="value">Attribute value.</param>
+    /// - Parameters:
+    ///   - key: Key of the attribute.
+    ///   - value: Attribute value.
     func setAttribute(key: String, value: String)
 
-    /// <summary>
     /// Puts a new attribute to the span.
-    /// </summary>
-    /// <param name="key">Key of the attribute.</param>
-    /// <param name="value">Attribute value.</param>
+    /// - Parameters:
+    ///   - key: Key of the attribute.
+    ///   - value: Attribute value.
     func setAttribute(key: String, value: Int)
 
-    /// <summary>
     /// Puts a new attribute to the span.
-    /// </summary>
-    /// <param name="key">Key of the attribute.</param>
-    /// <param name="value">Attribute value.</param>
+    /// - Parameters:
+    ///   - key: Key of the attribute.
+    ///   - value: Attribute value.
     func setAttribute(key: String, value: Double)
 
-    /// <summary>
     /// Puts a new attribute to the span.
-    /// </summary>
-    /// <param name="key">Key of the attribute.</param>
-    /// <param name="value">Attribute value.</param>
+    /// - Parameters:
+    ///   - key: Key of the attribute.
+    ///   - value: Attribute value.
     func setAttribute(key: String, value: Bool)
 
+    /// Puts a new attribute to the span.
+    /// - Parameters:
+    ///   - key: Key of the attribute.
+    ///   - value: Attribute value.
     func setAttribute(key: String, value: AttributeValue)
 
-    /// <summary>
-    /// Adds a single <see cref="Event"/> to the <see cref="ISpan"/>.
-    /// </summary>
-    /// <param name="name">Name of the <see cref="Event"/>.</param>
+    /// Adds an event to the Span
+    /// - Parameter name: the name of the event.
     func addEvent(name: String)
 
-    /**
-     * Adds an event to the {@code Span}.
-     *
-     * <p>Use this method to specify an explicit event timestamp. If not called, the implementation
-     * will use the current timestamp value, which should be the default case.
-     *
-     * <p>Important: this is NOT equivalent with System.nanoTime().
-     *
-     * @param name the name of the event.
-     * @param timestamp the explicit event timestamp in nanos since epoch.
-     * @since 0.1.0
-     */
-    func addEvent(name: String, timestamp: Int);
+    /// Adds an event to the Span
+    /// Use this method to specify an explicit event timestamp. If not called, the implementation
+    /// will use the current timestamp value, which should be the default case.
+    /// - Parameters:
+    ///   - name: the name of the even
+    ///   - timestamp: the explicit event timestamp in nanos since epoch
+    func addEvent(name: String, timestamp: Int)
 
-
-    /// <summary>
-    /// Adds a single <see cref="Event"/> with the <see cref="IDictionary{String, IAttributeValue}"/> attributes to the <see cref="ISpan"/>.
-    /// </summary>
-    /// <param name="name">Event name.</param>
-    /// <param name="attributes"><see cref="IDictionary{String, IAttributeValue}"/> of attributes name/value pairs associated with the <see cref="Event"/>.</param>
+    /// Adds a single Event with the attributes to the Span.
+    /// - Parameters:
+    ///   - name: Event name.
+    ///   - attributes: Dictionary of attributes name/value pairs associated with the Event
     func addEvent(name: String, attributes: [String: AttributeValue])
 
-    /**
-     * Adds an event to the {@code Span}.
-     *
-     * <p>Use this method to specify an explicit event timestamp. If not called, the implementation
-     * will use the current timestamp value, which should be the default case.
-     *
-     * <p>Important: this is NOT equivalent with System.nanoTime().
-     *
-     * @param name the name of the event.
-     * @param attributes the attributes that will be added; these are associated with this event, not
-     *     the {@code Span} as for {@code setAttribute()}.
-     * @param timestamp the explicit event timestamp in nanos since epoch.
-     * @since 0.1.0
-     */
-    func addEvent(name: String, attributes: [String: AttributeValue], timestamp: Int);
+    /// Adds an event to the Span
+    /// Use this method to specify an explicit event timestamp. If not called, the implementation
+    /// will use the current timestamp value, which should be the default case.
+    /// - Parameters:
+    ///   - name: the name of the even
+    ///   - attributes: Dictionary of attributes name/value pairs associated with the Event
+    ///   - timestamp: the explicit event timestamp in nanos since epoch
+    func addEvent(name: String, attributes: [String: AttributeValue], timestamp: Int)
 
-    /// <summary>
-    /// Adds an <see cref="Event"/> object to the <see cref="ISpan"/>.
-    /// </summary>
-    /// <param name="newEvent"><see cref="Event"/> to add to the span.</param>
+    ///  Adds an Event object to the Span.
+    /// - Parameter event: Event to add to the span.
     func addEvent<E: Event>(event: E)
 
-    /**
-     * Adds an event to the {@code Span}.
-     *
-     * <p>Use this method to specify an explicit event timestamp. If not alled, the implementation
-     * will use the current timestamp value, which should be the default case.
-     *
-     * <p>Important: this is NOT equivalent with System.nanoTime().
-     *
-     * @param event the event to add.
-     * @param timestamp the explicit event timestamp in nanos since epoch.
-     * @since 0.1.0
-     */
-    func addEvent<E: Event>(event: E, timestamp: Int);
+    /// Adds an event to the Span
+    /// Use this method to specify an explicit event timestamp. If not called, the implementation
+    /// will use the current timestamp value, which should be the default case.
+    /// - Parameters:
+    ///   event: Event to add to the span.
+    ///   - timestamp: the explicit event timestamp in nanos since epoch
+    func addEvent<E: Event>(event: E, timestamp: Int)
 
-
-    /// <summary>
     /// End the span.
-    /// </summary>
     func end()
 
-    /// <summary>
     /// End the span.
-    /// </summary>
-    /// <param name="endTimestamp">End timestamp.</param>
+    /// - Parameter endOptions: The explicit EndSpanOptions for this span
     func end(endOptions: EndSpanOptions)
 }
 
+public enum SpanAttributeConstants: String {
+    case httpMethodKey = "http.method"
+    case httpStatusCodeKey = "http.status_code"
+    case httpUserAgentKey = "http.user_agent"
+    case httpPathKey = "http.path"
+    case httpHostKey = "http.host"
+    case httpUrlKey = "http.url"
+    case httpRequestSizeKey = "http.request.size"
+    case httpResponseSizeKey = "http.response.size"
+    case httpRouteKey = "http.route"
+}
+
 extension Span {
-    /// <summary>
-    /// Helper method that populates span properties from http method according
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="method">Http method.</param>
-    /// <returns>Span with populated http method properties.</returns>
+    /// Helper methods according to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
+
+    /// Helper method that populates span properties from http method
+    /// - Parameter method: Http method.
     public func putHttpMethodAttribute(method: String) {
         setAttribute(key: SpanAttributeConstants.httpMethodKey.rawValue, value: method)
     }
 
-    /// <summary>
-    /// Helper method that populates span properties from http status code according
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="span">Span to fill out.</param>
-    /// <param name="statusCode">Http status code.</param>
-    /// <returns>Span with populated status code properties.</returns>
+    /// Helper method that populates span properties from http status code
+    /// - Parameter statusCode: Http status code.
     public func putHttpStatusCodeAttribute(statusCode: Int) {
         setAttribute(key: SpanAttributeConstants.httpStatusCodeKey.rawValue, value: statusCode)
     }
 
-    /// <summary>
-    /// Helper method that populates span properties from http user agent according
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="span">Span to fill out.</param>
-    /// <param name="userAgent">Http status code.</param>
-    /// <returns>Span with populated user agent code properties.</returns>
+    /// Helper method that populates span properties from http user agent
+    /// - Parameter userAgent: Http user agent.
     public func putHttpUserAgentAttribute(userAgent: String) {
         if userAgent != " " {
             setAttribute(key: SpanAttributeConstants.httpUserAgentKey.rawValue, value: userAgent)
         }
     }
 
-    /// <summary>
     /// Helper method that populates span properties from host and port
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="span">Span to fill out.</param>
-    /// <param name="hostName">Hostr name.</param>
-    /// <param name="port">Port number.</param>
-    /// <returns>Span with populated host properties.</returns>
+    /// - Parameters:
+    ///   - hostName: Hostr name.
+    ///   - port: Port number.
     public func putHttpHostAttribute(string hostName: String, int port: Int) {
         if port == 80 || port == 443 {
             setAttribute(key: SpanAttributeConstants.httpHostKey.rawValue, value: hostName)
@@ -191,13 +155,8 @@ extension Span {
         }
     }
 
-    /// <summary>
     /// Helper method that populates span properties from route
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="span">Span to fill out.</param>
-    /// <param name="route">Route used to resolve url to controller.</param>
-    /// <returns>Span with populated route properties.</returns>
+    /// - Parameter route: Route used to resolve url to controller.
     public func putHttpRouteAttribute(route: String) {
         if !route.isEmpty {
             setAttribute(key: SpanAttributeConstants.httpRouteKey.rawValue, value: route)
@@ -211,53 +170,37 @@ extension Span {
     /// <param name="span">Span to fill out.</param>
     /// <param name="rawUrl">Raw url.</param>
     /// <returns>Span with populated url properties.</returns>
+
+    /// Helper method that populates span properties from url
+    /// - Parameter rawUrl: string representing the URL
     public func putHttpRawUrlAttribute(rawUrl: String) {
         if !rawUrl.isEmpty {
             setAttribute(key: SpanAttributeConstants.httpUrlKey.rawValue, value: rawUrl)
         }
     }
 
-    /// <summary>
     /// Helper method that populates span properties from url path according
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="span">Span to fill out.</param>
-    /// <param name="path">Url path.</param>
-    /// <returns>Span with populated path properties.</returns>
+    /// - Parameter path: Url path.
     public func putHttpPathAttribute(path: String) {
         setAttribute(key: SpanAttributeConstants.httpPathKey.rawValue, value: path)
     }
 
-    /// <summary>
-    /// Helper method that populates span properties from size according
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="span">Span to fill out.</param>
-    /// <param name="size">Response size.</param>
-    /// <returns>Span with populated response size properties.</returns>
+    /// Helper method that populates span properties from size
+    /// - Parameter size: Response size.
     public func putHttpResponseSizeAttribute(size: Int) {
         setAttribute(key: SpanAttributeConstants.httpResponseSizeKey.rawValue, value: size)
     }
 
-    /// <summary>
-    /// Helper method that populates span properties from request size according
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="span">Span to fill out.</param>
-    /// <param name="size">Request size.</param>
-    /// <returns>Span with populated request size properties.</returns>
+    /// Helper method that populates span properties from request size
+    /// - Parameter size: Request size.
     public func putHttpRequestSizeAttribute(size: Int) {
         setAttribute(key: SpanAttributeConstants.httpRequestSizeKey.rawValue, value: size)
     }
 
-    /// <summary>
-    /// Helper method that populates span properties from http status code according
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="span">Span to fill out.</param>
-    /// <param name="statusCode">Http status code.</param>
-    /// <param name="reasonPhrase">Http reason phrase.</param>
-    /// <returns>Span with populated properties.</returns>
+    /// Helper method that populates span properties from http status code
+    /// - Parameters:
+    ///   - statusCode: Http status code.
+    ///   - reasonPhrase: Http reason phrase.
     public func putHttpStatusCode(statusCode: Int, reasonPhrase: String) {
         putHttpStatusCodeAttribute(statusCode: statusCode)
         var newStatus: Status = .ok

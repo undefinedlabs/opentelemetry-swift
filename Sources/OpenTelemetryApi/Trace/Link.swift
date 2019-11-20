@@ -7,21 +7,14 @@
 
 import Foundation
 
-public protocol Link: AnyObject {
-    /**
-     * Returns the {@code SpanContext}.
-     *
-     * @return the {@code SpanContext}.
-     * @since 0.1.0
-     */
-    var context: SpanContext { get }
 
-    /**
-     * Returns the set of attributes.
-     *
-     * @return the set of attributes.
-     * @since 0.1.0
-     */
+/// A link to a Span.
+/// Used (for example) in batching operations, where a single batch handler processes multiple
+/// requests from different traces. Link can be also used to reference spans from the same trace.
+public protocol Link: AnyObject {
+    /// The SpanContext
+    var context: SpanContext { get }
+    /// The set of attribute
     var attributes: [String: AttributeValue] { get }
 }
 

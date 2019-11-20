@@ -10,6 +10,11 @@ import OpenTelemetryApi
 @testable import OpenTelemetrySdk
 
 class ReadableSpanMock: ReadableSpan {
+
+    var kind: SpanKind {
+        return .client
+    }
+
     var instrumentationLibraryInfo: InstrumentationLibraryInfo = InstrumentationLibraryInfo()
 
     var name: String = "ReadableSpanMock"

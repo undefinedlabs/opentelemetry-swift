@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// An enum that represents all the possible values for an attribute.
 public enum AttributeValue: Equatable, CustomStringConvertible {
     case string(String)
     case bool(Bool)

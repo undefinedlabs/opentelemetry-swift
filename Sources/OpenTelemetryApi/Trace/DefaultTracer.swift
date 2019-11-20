@@ -24,6 +24,6 @@ public class DefaultTracer: Tracer {
     }
 
     public func spanBuilder(spanName: String) -> SpanBuilder {
-        return NoopSpanBuilder(tracer: self, spanName: spanName)
+        return DefaultSpanBuilder(tracer: self, spanName: spanName)
     }
 }

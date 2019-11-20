@@ -13,7 +13,7 @@ public protocol ReadableSpan: Span {
     /**
      * Returns the name of the {@code Span}.
      *
-     * <p>The name can be changed during the lifetime of the Span by using the {@link
+     * The name can be changed during the lifetime of the Span by using the {@link
      * Span#updateName(String)} so this value cannot be cached.
      *
      * @return the name of the {@code Span}.

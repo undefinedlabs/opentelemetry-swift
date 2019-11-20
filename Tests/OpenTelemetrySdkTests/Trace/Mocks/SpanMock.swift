@@ -10,6 +10,11 @@ import OpenTelemetryApi
 @testable import OpenTelemetrySdk
 
 class SpanMock: Span {
+
+    var kind: SpanKind {
+        return .client
+    }
+
     var context: SpanContext = SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate())
 
     var isRecordingEvents: Bool = false

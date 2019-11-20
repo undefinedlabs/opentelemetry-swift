@@ -7,15 +7,11 @@
 
 import Foundation
 
-/**
- * A class that represents a span identifier. A valid span identifier is an 8-byte array with at
- * least one non-zero byte.
- *
- * @since 0.1.0
- */
+/// A struct that represents a span identifier. A valid span identifier is an 8-byte array with at
+/// least one non-zero byte.
 public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
+
     private static let size = 8
-    private static let base16Size = 2 * size
     public static let invalidId: UInt64 = 0
     public static let invalid = SpanId(id: invalidId)
 
@@ -25,29 +21,18 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     public init() {
     }
 
-    /**
-     * Constructs a {@code SpanId} whose representation is specified by a long value.
-     *
-     * <p>There is no restriction on the specified value, other than the already established validity
-     * rules applying to {@code SpanId}. Specifying 0 for this value will effectively make the new
-     * {@code SpanId} invalid.
-     *
-     * <p>This is equivalent to calling {@link #fromBytes(byte[], int)} with the specified value
-     * stored as big-endian.
-     *
-     * @param id the long representation of the {@code TraceId}.
-     * @since 0.1.0
-     */
+    /// Constructs a SpanId whose representation is specified by a long value.
+    /// There is no restriction on the specified value, other than the already established validity
+    /// rules applying to SpanId. Specifying 0 for this value will effectively make the new
+    /// SpanId invalid.
+    /// This is equivalent to calling fromBytes with the specified value
+    /// stored as big-endian.
+    /// - Parameter id: the UInt64 representation of the TraceId.
     public init(id: UInt64) {
         self.id = id
     }
 
-    /**
-     * Generates a new random {@code SpanId}.
-     *
-     * @param random The random number generator.
-     * @return a valid new {@code SpanId}.
-     */
+    /// Generates a new random SpanId.
     public static func random() -> SpanId {
         var id: UInt64
         repeat {
@@ -57,20 +42,22 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
         return SpanId(id: id)
     }
 
-    /**
-     * Returns a {@code SpanId} whose representation is copied from the {@code src} beginning at the
-     * {@code srcOffset} offset.
-     *
-     * @param src the buffer where the representation of the {@code SpanId} is copied.
-     * @param srcOffset the offset in the buffer where the representation of the {@code SpanId}
-     *     begins.
-     * @return a {@code SpanId} whose representation is copied from the buffer.
-     * @throws NullPointerException if {@code src} is null.
-     * @throws IndexOutOfBoundsException if {@code srcOffset+SpanId.getSize()} is greater than {@code
-     *     src.length}.
-     * @since 0.1.0
-     */
+    /// Returns a {@code SpanId} whose representation is copied from the {@code src} beginning at the
+    /// {@code srcOffset} offset.
+    /// @param src the buffer where the representation of the {@code SpanId} is copied.
+    /// @param srcOffset the offset in the buffer where the representation of the {@code SpanId}
+    ///     begins.
+    /// @return a {@code SpanId} whose representation is copied from the buffer.
+    /// @throws NullPointerException if {@code src} is null.
+    /// @throws IndexOutOfBoundsException if {@code srcOffset+SpanId.getSize()} is greater than {@code
+    ///     src.length}.
+    /// @since 0.1.0
 
+
+    /// Returns a SpanId whose representation is copied from the data beginning at the offset.
+    /// - Parameters:
+    ///   - data: the buffer from where the representation of the SpanId is copied.
+    ///   - offset: the offset in the buffer where the representation of the SpanId begins.
     init(fromData data: Data, withOffset offset: Int = 0) {
         var id: UInt64 = 0
         data.withUnsafeBytes { rawPointer -> Void in
@@ -79,59 +66,82 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
         self.init(id: id)
     }
 
+    /// Returns a SpanId whose representation is copied from the data beginning at the offset.
+    /// - Parameters:
+    ///   - data: the buffer from where the representation of the SpanId is copied.
+    ///   - offset: the offset in the buffer where the representation of the SpanId begins.
     public init(fromBytes bytes: Array<UInt8>, withOffset offset: Int = 0) {
         self.init(fromData: Data(bytes), withOffset: offset)
     }
 
+    /// Returns a SpanId whose representation is copied from the data beginning at the offset.
+    /// - Parameters:
+    ///   - data: the byte array from where the representation of the SpanId is copied.
+    ///   - offset: the offset in the buffer where the representation of the SpanId begins.
     public init(fromBytes bytes: ArraySlice<UInt8>, withOffset offset: Int = 0) {
         self.init(fromData: Data(bytes), withOffset: offset)
     }
 
+    /// Returns a SpanId whose representation is copied from the data beginning at the offset.
+    /// - Parameters:
+    ///   - data: the  char array slice from where the representation of the SpanId is copied.
+    ///   - offset: the offset in the buffer where the representation of the SpanId begins.
     public init(fromBytes bytes: ArraySlice<Character>, withOffset offset: Int = 0) {
         self.init(fromData: Data(String(bytes).utf8.map { UInt8($0) }))
     }
 
-    /**
-     * Copies the byte array representations of the {@code SpanId} into the {@code dest} beginning at
-     * the {@code destOffset} offset.
-     *
-     * @param dest the destination buffer.
-     * @param destOffset the starting offset in the destination buffer.
-     * @throws NullPointerException if {@code dest} is null.
-     * @throws IndexOutOfBoundsException if {@code destOffset+SpanId.getSize()} is greater than {@code
-     *     dest.length}.
-     * @since 0.1.0
-     */
-//    public func copyBytesTo(dest: inout Slice<Data>, destOffset: Int) {
-//        dest.withUnsafeMutableBytes { rawPointer -> Void in
-//            rawPointer.storeBytes(of: id.bigEndian, toByteOffset: Int, as: UInt64)
-//        }
-//    }
-    // RangeReplaceableCollection
+    /// Copies the byte array representations of the {@code SpanId} into the {@code dest} beginning at
+    /// the {@code destOffset} offset.
+    /// @param dest the destination buffer.
+    /// @param destOffset the starting offset in the destination buffer.
+    /// @throws NullPointerException if {@code dest} is null.
+    /// @throws IndexOutOfBoundsException if {@code destOffset+SpanId.getSize()} is greater than {@code
+    ///     dest.length}.
+    /// @since 0.1.0
+
+
+    /// Copies the byte array representations of the SpanId into the code dest beginning at the offset
+    /// - Parameters:
+    ///   - dest: the destination buffer.
+    ///   - destOffset: the starting offset in the destination buffer.
     public func copyBytesTo(dest: inout Data, destOffset: Int) {
         dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
     }
 
+    /// Copies the byte array representations of the SpanId into the code dest beginning at the offset
+    /// - Parameters:
+    ///   - dest: the destination buffer.
+    ///   - destOffset: the starting offset in the destination buffer.
     public func copyBytesTo(dest: inout Array<UInt8>, destOffset: Int) {
         dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
     }
 
+    /// Copies the byte array representations of the SpanId into the code dest beginning at the offset
+    /// - Parameters:
+    ///   - dest: the destination buffer.
+    ///   - destOffset: the starting offset in the destination buffer.
     public func copyBytesTo(dest: inout ArraySlice<UInt8>, destOffset: Int) {
         dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
     }
 
     //  /**
-    //   * Returns a {@code SpanId} built from a lowercase base16 representation.
+    //  /// Returns a {@code SpanId} built from a lowercase base16 representation.
     //   *
-    //   * @param src the lowercase base16 representation.
-    //   * @param srcOffset the offset in the buffer where the representation of the {@code SpanId}
-    //   *     begins.
-    //   * @return a {@code SpanId} built from a lowercase base16 representation.
-    //   * @throws NullPointerException if {@code src} is null.
-    //   * @throws IllegalArgumentException if not enough characters in the {@code src} from the {@code
-    //   *     srcOffset}.
-    //   * @since 0.1.0
+    //  /// @param src the lowercase base16 representation.
+    //  /// @param srcOffset the offset in the buffer where the representation of the {@code SpanId}
+    //  ///     begins.
+    //  /// @return a {@code SpanId} built from a lowercase base16 representation.
+    //  /// @throws NullPointerException if {@code src} is null.
+    //  /// @throws IllegalArgumentException if not enough characters in the {@code src} from the {@code
+    //  ///     srcOffset}.
+    //  /// @since 0.1.0
     //   */
+
+
+    /// Returns a SpanId built from a lowercase base16 representation.
+    /// - Parameters:
+    ///   - hex: the lowercase base16 representation.
+    ///   - offset: srcOffset the offset in the buffer where the representation of the {@code SpanId} begins.
     public init(fromHexString hex: String, withOffset offset: Int = 0) {
         let firstIndex = hex.index(hex.startIndex, offsetBy: offset)
         let secondIndex = hex.index(firstIndex, offsetBy: 16)
@@ -144,17 +154,14 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
         self.init(id: id)
     }
 
+
+    ///  Returns the lowercase base16 encoding of this SpanId.
     public var hexString: String {
         return String(format: "%016llx", id)
     }
 
-    /**
-     * Returns whether the span identifier is valid. A valid span identifier is an 8-byte array with
-     * at least one non-zero byte.
-     *
-     * @return {@code true} if the span identifier is valid.
-     * @since 0.1.0
-     */
+    /// Returns whether the span identifier is valid. A valid span identifier is an 8-byte array with
+    /// at least one non-zero byte.
     public var isValid: Bool {
         return id != SpanId.invalidId
     }

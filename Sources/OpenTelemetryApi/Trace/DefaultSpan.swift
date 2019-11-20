@@ -9,18 +9,25 @@ import Foundation
 
 public class DefaultSpan: Span {
 
+    public var kind: SpanKind
+
     public var context: SpanContext
 
-    public init() {
-        context = SpanContext.invalid
+    public convenience init() {
+        self.init(context: SpanContext.invalid, kind: .client)
     }
 
-    public init(context: SpanContext) {
+    public convenience init(context: SpanContext) {
+        self.init(context: context, kind: .client)
+    }
+
+    public init(context: SpanContext, kind: SpanKind) {
         self.context = context
+        self.kind = kind
     }
 
     public static func random() -> DefaultSpan {
-        return DefaultSpan(context: SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate()))
+        return DefaultSpan(context: SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate()), kind: .client)
     }
 
     public var isRecordingEvents: Bool {

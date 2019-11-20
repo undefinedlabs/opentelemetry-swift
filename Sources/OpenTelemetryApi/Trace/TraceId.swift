@@ -9,7 +9,6 @@ import Foundation
 
 public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable {
     private static let size = 16
-    // private static let BASE16_SIZE = 2 * BigendianEncoding.LONG_BASE16;
     public static let invalidId: UInt64 = 0
     public static let invalid = TraceId()
 
@@ -24,11 +23,11 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
      * Constructs a {@code TraceId} whose representation is specified by two long values representing
      * the lower and higher parts.
      *
-     * <p>There is no restriction on the specified values, other than the already established validity
+     * There is no restriction on the specified values, other than the already established validity
      * rules applying to {@code TraceId}. Specifying 0 for both values will effectively make the new
      * {@code TraceId} invalid.
      *
-     * <p>This is equivalent to calling {@link #fromBytes(byte[], int)} with the specified values
+     * This is equivalent to calling {@link #fromBytes(byte[], int)} with the specified values
      * stored as big-endian.
      *
      * @param idHi the higher part of the {@code TraceId}.
@@ -170,7 +169,7 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
      * Returns the lower 8 bytes of the trace-id as a long value, assuming little-endian order. This
      * is used in ProbabilitySampler.
      *
-     * <p>This method is marked as internal and subject to change.
+     * This method is marked as internal and subject to change.
      *
      * @return the lower 8 bytes of the trace-id as a long value, assuming little-endian order.
      */

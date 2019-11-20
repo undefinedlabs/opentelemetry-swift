@@ -67,7 +67,7 @@ public class TracerSdkFactory: TracerFactory {
     /**
      * Adds a new {@code SpanProcessor} to this {@code Tracer}.
      *
-     * <p>Any registered processor cause overhead, consider to use an async/batch processor especially
+     * Any registered processor cause overhead, consider to use an async/batch processor especially
      * for span exporting, and export to multiple backends using the {@link
      * io.opentelemetry.sdk.trace.export.MultiSpanExporter}.
      *
@@ -81,10 +81,10 @@ public class TracerSdkFactory: TracerFactory {
      * Attempts to stop all the activity for this {@link Tracer}. Calls {@link
      * SpanProcessor#shutdown()} for all registered {@link SpanProcessor}s.
      *
-     * <p>This operation may block until all the Spans are processed. Must be called before turning
+     * This operation may block until all the Spans are processed. Must be called before turning
      * off the main application to ensure all data are processed and exported.
      *
-     * <p>After this is called all the newly created {@code Span}s will be no-op.
+     * After this is called all the newly created {@code Span}s will be no-op.
      */
     public func shutdown() {
         if sharedState.isStopped {

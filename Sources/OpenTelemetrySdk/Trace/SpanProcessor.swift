@@ -16,7 +16,7 @@ public protocol SpanProcessor {
      * Called when a {@link io.opentelemetry.trace.Span} is started, if the {@link Span#isRecording()}
      * returns true.
      *
-     * <p>This method is called synchronously on the execution thread, should not throw or block the
+     * This method is called synchronously on the execution thread, should not throw or block the
      * execution thread.
      *
      * @param span the {@code ReadableSpan} that just started.
@@ -27,7 +27,7 @@ public protocol SpanProcessor {
      * Called when a {@link io.opentelemetry.trace.Span} is ended, if the {@link Span#isRecording()}
      * returns true.
      *
-     * <p>This method is called synchronously on the execution thread, should not throw or block the
+     * This method is called synchronously on the execution thread, should not throw or block the
      * execution thread.
      *
      * @param span the {@code ReadableSpan} that just ended.

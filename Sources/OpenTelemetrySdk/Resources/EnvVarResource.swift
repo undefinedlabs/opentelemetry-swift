@@ -19,7 +19,7 @@ public struct EnvVarResource {
     /*
      * Creates a label map from the OC_RESOURCE_LABELS environment variable.
      *
-     * <p>OC_RESOURCE_LABELS: A comma-separated list of labels describing the source in more detail,
+     * OC_RESOURCE_LABELS: A comma-separated list of labels describing the source in more detail,
      * e.g. “key1=val1,key2=val2”. Domain names and paths are accepted as label keys. Values may be
      * quoted or unquoted in general. If a value contains whitespaces, =, or " characters, it must
      * always be quoted.

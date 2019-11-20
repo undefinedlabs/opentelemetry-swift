@@ -10,13 +10,13 @@ import Foundation
  * Carries tracing-system specific context in a list of key-value pairs. TraceState allows different
  * vendors propagate additional information and inter-operate with their legacy Id formats.
  *
- * <p>Implementation is optimized for a small list of key-value pairs.
+ * Implementation is optimized for a small list of key-value pairs.
  *
- * <p>Key is opaque string up to 256 characters printable. It MUST begin with a lowercase letter,
+ * Key is opaque string up to 256 characters printable. It MUST begin with a lowercase letter,
  * and can only contain lowercase letters a-z, digits 0-9, underscores _, dashes -, asterisks *, and
  * forward slashes /.
  *
- * <p>Value is opaque string up to 256 characters printable ASCII RFC0020 characters (i.e., the
+ * Value is opaque string up to 256 characters printable ASCII RFC0020 characters (i.e., the
  * range 0x20 to 0x7E) except comma , and =.
  *
  * @since 0.1.0

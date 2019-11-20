@@ -8,12 +8,13 @@
 import Foundation
 import os.activity
 
-struct ContextEntry {
-    var span: Span?
-    var distContext: DistributedContext?
-}
-
+/// Helper class to get the current Span and current distributedContext
 public struct ContextUtils {
+
+    struct ContextEntry {
+        var span: Span?
+        var distContext: DistributedContext?
+    }
     static let RTLD_DEFAULT = UnsafeMutableRawPointer(bitPattern: -2)
     static let sym = dlsym(RTLD_DEFAULT, "_os_activity_current")
     static let OS_ACTIVITY_CURRENT = unsafeBitCast(sym, to: os_activity_t.self)
@@ -42,7 +43,7 @@ public struct ContextUtils {
         if contextMap[activityId] != nil {
             contextMap[activityId]!.span = span
         } else {
-            contextMap[activityId] = ContextEntry(span: span, distContext: nil)
+            contextMap[activityId] = ContextEntry(span: span, distContext: getCurrentDistributedContext())
         }
     }
 
@@ -50,7 +51,7 @@ public struct ContextUtils {
         if contextMap[activityId] != nil {
             contextMap[activityId]!.distContext = distContext
         } else {
-            contextMap[activityId] = ContextEntry(span: nil, distContext: distContext)
+            contextMap[activityId] = ContextEntry(span: getCurrentSpan(), distContext: distContext)
         }
     }
 }
