@@ -26,7 +26,7 @@ public protocol SpanBuilder: class {
      * @see #setNoParent()
      * @since 0.1.0
      */
-    @discardableResult func setParent(_ parent: Span) -> SpanBuilder
+    @discardableResult func setParent(_ parent: Span) -> Self
 
     /**
      * Sets the parent {@link SpanContext} to use. If not set, the value of {@code
@@ -49,7 +49,7 @@ public protocol SpanBuilder: class {
      * @see #setNoParent()
      * @since 0.1.0
      */
-    @discardableResult func setParent(_ parent: SpanContext) -> SpanBuilder
+    @discardableResult func setParent(_ parent: SpanContext) -> Self
 
     /**
      * Sets the option to become a root {@code Span} for a new trace. If not set, the value of
@@ -60,7 +60,7 @@ public protocol SpanBuilder: class {
      * @return this.
      * @since 0.1.0
      */
-    @discardableResult func setNoParent() -> SpanBuilder
+    @discardableResult func setNoParent() -> Self
 
     /**
      * Adds a {@link Link} to the newly created {@code Span}.
@@ -71,7 +71,7 @@ public protocol SpanBuilder: class {
      * @see #addLink(Link)
      * @since 0.1.0
      */
-    @discardableResult func addLink(spanContext: SpanContext) -> SpanBuilder
+    @discardableResult func addLink(spanContext: SpanContext) -> Self
 
     /**
      * Adds a {@link Link} to the newly created {@code Span}.
@@ -84,7 +84,7 @@ public protocol SpanBuilder: class {
      * @see #addLink(Link)
      * @since 0.1.0
      */
-    @discardableResult func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> SpanBuilder
+    @discardableResult func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> Self
 
     /**
      * Adds a {@link Link} to the newly created {@code Span}.
@@ -98,7 +98,7 @@ public protocol SpanBuilder: class {
      * @throws NullPointerException if {@code link} is {@code null}.
      * @since 0.1.0
      */
-    @discardableResult func addLink(_ link: Link) -> SpanBuilder
+    @discardableResult func addLink(_ link: Link) -> Self
 
     /**
      * Sets the {@link Span.Kind} for the newly created {@code Span}. If not called, the
@@ -108,7 +108,7 @@ public protocol SpanBuilder: class {
      * @return this.
      * @since 0.1.0
      */
-    @discardableResult func setSpanKind(spanKind: SpanKind) -> SpanBuilder
+    @discardableResult func setSpanKind(spanKind: SpanKind) -> Self
 
      /**
         * Sets an explicit start timestamp for the newly created {@code Span}.
@@ -123,7 +123,7 @@ public protocol SpanBuilder: class {
         * @return this.
         * @since 0.1.0
         */
-    @discardableResult func setStartTimestamp(startTimestamp: Int) -> SpanBuilder
+    @discardableResult func setStartTimestamp(startTimestamp: Int) -> Self
 
     /**
      * Starts a new {@link Span}.

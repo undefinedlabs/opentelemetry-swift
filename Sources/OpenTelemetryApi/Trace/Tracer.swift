@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Tracer {
+public protocol Tracer: AnyObject {
     /**
      * Gets the current Span from the current Context.
      *

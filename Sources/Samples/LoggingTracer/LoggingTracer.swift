@@ -46,38 +46,38 @@ class LoggingTracer: Tracer {
             return spanContext != nil && spanContext != SpanContext.invalid ? LoggingSpan(name: name, kind: .client) : DefaultSpan.random()
         }
 
-        func setParent(_ parent: Span) -> SpanBuilder {
+        func setParent(_ parent: Span) -> Self {
             spanContext = parent.context
             return self
         }
 
-        func setParent(_ parent: SpanContext) -> SpanBuilder {
+        func setParent(_ parent: SpanContext) -> Self {
             spanContext = parent
             return self
         }
 
-        func setNoParent() -> SpanBuilder {
+        func setNoParent() -> Self {
             isRootSpan = true
             return self
         }
 
-        func addLink(spanContext: SpanContext) -> SpanBuilder {
+        func addLink(spanContext: SpanContext) -> Self {
             return self
         }
 
-        func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> SpanBuilder {
+        func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> Self {
             return self
         }
 
-        func addLink(_ link: Link) -> SpanBuilder {
+        func addLink(_ link: Link) -> Self {
             return self
         }
 
-        func setSpanKind(spanKind: SpanKind) -> SpanBuilder {
+        func setSpanKind(spanKind: SpanKind) -> Self {
             return self
         }
 
-        func setStartTimestamp(startTimestamp: Int) -> SpanBuilder {
+        func setStartTimestamp(startTimestamp: Int) -> Self {
             return self
         }
     }

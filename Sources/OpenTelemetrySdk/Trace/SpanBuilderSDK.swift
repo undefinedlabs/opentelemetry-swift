@@ -46,46 +46,46 @@ public class SpanBuilderSdk: SpanBuilder {
         self.clock = clock
     }
 
-    public func setParent(_ parent: Span) -> SpanBuilder {
+    public func setParent(_ parent: Span) -> Self {
         self.parent = parent
         remoteParent = nil
         parentType = .explicitParent
         return self
     }
 
-    public func setParent(_ parent: SpanContext) -> SpanBuilder {
+    public func setParent(_ parent: SpanContext) -> Self {
         remoteParent = parent
         self.parent = nil
         parentType = .explicitRemoteParent
         return self
     }
 
-    public func setNoParent() -> SpanBuilder {
+    public func setNoParent() -> Self {
         parentType = .noParent
         remoteParent = nil
         parent = nil
         return self
     }
 
-    public func addLink(spanContext: SpanContext) -> SpanBuilder {
+    public func addLink(spanContext: SpanContext) -> Self {
         return addLink(SpanData.Link(context: spanContext))
     }
 
-    public func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> SpanBuilder {
+    public func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> Self {
         return addLink(SpanData.Link(context: spanContext, attributes: attributes))
     }
 
-    public func addLink(_ link: Link) -> SpanBuilder {
+    public func addLink(_ link: Link) -> Self {
         links.append(link)
         return self
     }
 
-    public func setSpanKind(spanKind: SpanKind) -> SpanBuilder {
+    public func setSpanKind(spanKind: SpanKind) -> Self {
         self.spanKind = spanKind
         return self
     }
 
-    public func setStartTimestamp(startTimestamp: Int) -> SpanBuilder {
+    public func setStartTimestamp(startTimestamp: Int) -> Self {
         startEpochNanos = startTimestamp
         return self
     }

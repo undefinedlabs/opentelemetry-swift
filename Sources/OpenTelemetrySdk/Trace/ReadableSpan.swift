@@ -11,16 +11,6 @@ import OpenTelemetryApi
 /** The extend Span interface used by the SDK. */
 public protocol ReadableSpan: Span {
     /**
-     * Returns the {@link SpanContext} of the {@code Span}.
-     *
-     * <p>Equivalent with {@link Span#getContext()}.
-     *
-     * @return the {@link SpanContext} of the {@code Span}.
-     * @since 0.1.0
-     */
-//    var spanContext: SpanContext { get }
-
-    /**
      * Returns the name of the {@code Span}.
      *
      * <p>The name can be changed during the lifetime of the Span by using the {@link

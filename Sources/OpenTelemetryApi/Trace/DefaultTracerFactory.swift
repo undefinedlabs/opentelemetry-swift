@@ -11,7 +11,7 @@ public class DefaultTracerFactory: TracerFactory {
 
     public static let instance = DefaultTracerFactory();
 
-    public func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer {
+    public func get(instrumentationName: String, instrumentationVersion: String?) -> DefaultTracer {
         return DefaultTracer.instance
     }
 }

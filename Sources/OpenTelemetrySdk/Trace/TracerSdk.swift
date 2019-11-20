@@ -8,7 +8,8 @@
 import Foundation
 import OpenTelemetryApi
 
-public struct TracerSdk: Tracer {
+public class TracerSdk: Tracer {
+
 //    private static final Logger logger = Logger.getLogger(TracerSdk.class.getName());
 
     public let binaryFormat: BinaryFormattable = BinaryTraceContextFormat()
