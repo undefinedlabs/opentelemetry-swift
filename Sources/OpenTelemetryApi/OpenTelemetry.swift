@@ -8,6 +8,8 @@
 import Foundation
 
 public class OpenTelemetry {
+    public typealias TracerFactory = AnyObject
+
     public static var instance = OpenTelemetry()
 
     public private(set) var tracerFactory: TracerFactory

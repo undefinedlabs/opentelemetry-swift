@@ -144,25 +144,6 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
         self.init(id: id)
     }
 
-    //  public static SpanId fromLowerBase16(CharSequence src, int srcOffset) {
-//    Utils.checkNotNull(src, "src");
-//    return new SpanId(BigendianEncoding.longFromBase16String(src, srcOffset));
-    //  }
-//
-    //  /**
-    //   * Copies the lowercase base16 representations of the {@code SpanId} into the {@code dest}
-    //   * beginning at the {@code destOffset} offset.
-    //   *
-    //   * @param dest the destination buffer.
-    //   * @param destOffset the starting offset in the destination buffer.
-    //   * @throws IndexOutOfBoundsException if {@code destOffset + 2 * SpanId.getSize()} is greater than
-    //   *     {@code dest.length}.
-    //   * @since 0.1.0
-    //   */
-    //  public void copyLowerBase16To(char[] dest, int destOffset) {
-//    BigendianEncoding.longToBase16String(id, dest, destOffset);
-    //  }
-
     public var hexString: String {
         return String(format: "%016llx", id)
     }
@@ -177,24 +158,6 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
     public var isValid: Bool {
         return id != SpanId.invalidId
     }
-
-    //  /**
-    //   * Returns the lowercase base16 encoding of this {@code SpanId}.
-    //   *
-    //   * @return the lowercase base16 encoding of this {@code SpanId}.
-    //   * @since 0.1.0
-    //   */
-    //  public String toLowerBase16() {
-//    char[] chars = new char[BASE16_SIZE];
-//    copyLowerBase16To(chars, 0);
-//    return new String(chars);
-    //  }
-
-    //  @Override
-    //  public int hashCode() {
-//    // Copied from Long.hashCode in java8.
-//    return (int) (id ^ (id >>> 32));
-    //  }
 
     public var description: String {
         // return "SpanId{spanId=" + toLowerBase16() + "}";

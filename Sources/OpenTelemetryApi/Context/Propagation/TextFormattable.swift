@@ -13,6 +13,7 @@ public protocol TextFormattable {
     ///   * allow pre-allocation of fields, especially in systems like gRPC Metadata
     ///   * allow a single-pass over an iterator (ex OpenTracing has no getter in TextMap).
     /// </summary>
+    
     var fields: Set<String> { get }
 
     /// <summary>

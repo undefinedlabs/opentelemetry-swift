@@ -10,7 +10,7 @@ import OpenTelemetryApi
 
 class LoggingTracerFactory: TracerFactory {
 
-    func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer {
+    func get(instrumentationName: String, instrumentationVersion: String?) -> LoggingTracer {
         Logger.log("TracerFactory.get(\(instrumentationName), \(instrumentationVersion ?? ""))");
         var labels = [String: String]()
         labels["instrumentationName"] = instrumentationName

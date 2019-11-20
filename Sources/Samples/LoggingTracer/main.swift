@@ -11,7 +11,7 @@ import OpenTelemetrySdk
 
 Logger.printHeader()
 var tracerFactory = LoggingTracerFactory()
-var tracer: LoggingTracer = tracerFactory.get(instrumentationName: "ConsoleApp", instrumentationVersion: "semver:1.0.0") as! LoggingTracer
+var tracer = tracerFactory.get(instrumentationName: "ConsoleApp", instrumentationVersion: "semver:1.0.0")
 
 
 let scope = tracer.withSpan(tracer.spanBuilder(spanName: "Main (span1)").startSpan())

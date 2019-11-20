@@ -8,5 +8,6 @@
 import Foundation
 
 public protocol TracerFactory {
+    associatedtype Tracer
     mutating func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer
 }
