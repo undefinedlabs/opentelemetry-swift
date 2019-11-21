@@ -25,7 +25,11 @@ public struct Samplers {
 }
 
 class AlwaysOnSampler: Sampler {
-    func shouldSample(parentContext: SpanContext?, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision {
+    func shouldSample(parentContext: SpanContext?,
+                      traceId: TraceId,
+                      spanId: SpanId,
+                      name: String,
+                      parentLinks: [Link]) -> Decision {
         return Samplers.alwaysOnDecision
     }
 
@@ -35,7 +39,11 @@ class AlwaysOnSampler: Sampler {
 }
 
 class AlwaysOffSampler: Sampler {
-    func shouldSample(parentContext: SpanContext?, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision {
+    func shouldSample(parentContext: SpanContext?,
+                      traceId: TraceId,
+                      spanId: SpanId,
+                      name: String,
+                      parentLinks: [Link]) -> Decision {
         return Samplers.alwaysOffDecision
     }
 
@@ -64,7 +72,11 @@ class Probability: Sampler {
         }
     }
 
-    func shouldSample(parentContext: SpanContext?, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision {
+    func shouldSample(parentContext: SpanContext?,
+                      traceId: TraceId,
+                      spanId: SpanId,
+                      name: String,
+                      parentLinks: [Link]) -> Decision {
         /// If the parent is sampled keep the sampling decision.
         if parentContext?.traceFlags.sampled ?? false {
             return Samplers.alwaysOnDecision

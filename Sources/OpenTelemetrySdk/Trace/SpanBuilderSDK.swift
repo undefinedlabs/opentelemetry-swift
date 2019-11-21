@@ -35,7 +35,13 @@ public class SpanBuilderSdk: SpanBuilder {
 
     private var startEpochNanos: Int = 0
 
-    public init(spanName: String, instrumentationLibraryInfo: InstrumentationLibraryInfo, spanProcessor: SpanProcessor, traceConfig: TraceConfig, resource: Resource, idsGenerator: IdsGenerator, clock: Clock) {
+    public init(spanName: String,
+                instrumentationLibraryInfo: InstrumentationLibraryInfo,
+                spanProcessor: SpanProcessor,
+                traceConfig: TraceConfig,
+                resource: Resource,
+                idsGenerator: IdsGenerator,
+                clock: Clock) {
         self.spanName = spanName
         self.instrumentationLibraryInfo = instrumentationLibraryInfo
         self.spanProcessor = spanProcessor
@@ -103,15 +109,35 @@ public class SpanBuilderSdk: SpanBuilder {
             parentContext = nil
         }
 
-        let samplingDecision = traceConfig.sampler.shouldSample(parentContext: parentContext, traceId: traceId, spanId: spanId, name: spanName, parentLinks: links)
+        let samplingDecision = traceConfig.sampler.shouldSample(parentContext: parentContext,
+                                                                traceId: traceId,
+                                                                spanId: spanId,
+                                                                name: spanName,
+                                                                parentLinks: links)
 
-        let spanContext = SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: TraceFlags().settingIsSampled(samplingDecision.isSampled), tracestate: tracestate)
+        let spanContext = SpanContext.create(traceId: traceId,
+                                             spanId: spanId,
+                                             traceFlags: TraceFlags().settingIsSampled(samplingDecision.isSampled),
+                                             tracestate: tracestate)
 
         if !samplingDecision.isSampled {
             return DefaultSpan(context: spanContext, kind: spanKind)
         }
 
-        return RecordEventsReadableSpan.startSpan(context: spanContext, name: spanName, instrumentationLibraryInfo: instrumentationLibraryInfo, kind: spanKind, parentSpanId: parentContext?.spanId, hasRemoteParent: parentContext?.isRemote ?? false, traceConfig: traceConfig, spanProcessor: spanProcessor, clock: SpanBuilderSdk.getClock(parent: parent, clock: clock), resource: resource, attributes: samplingDecision.attributes, links: truncatedLinks, totalRecordedLinks: links.count, startEpochNanos: startEpochNanos)
+        return RecordEventsReadableSpan.startSpan(context: spanContext,
+                                                  name: spanName,
+                                                  instrumentationLibraryInfo: instrumentationLibraryInfo,
+                                                  kind: spanKind,
+                                                  parentSpanId: parentContext?.spanId,
+                                                  hasRemoteParent: parentContext?.isRemote ?? false,
+                                                  traceConfig: traceConfig,
+                                                  spanProcessor: spanProcessor,
+                                                  clock: SpanBuilderSdk.getClock(parent: parent, clock: clock),
+                                                  resource: resource,
+                                                  attributes: samplingDecision.attributes,
+                                                  links: truncatedLinks,
+                                                  totalRecordedLinks: links.count,
+                                                  startEpochNanos: startEpochNanos)
     }
 
     private var truncatedLinks: [Link] {

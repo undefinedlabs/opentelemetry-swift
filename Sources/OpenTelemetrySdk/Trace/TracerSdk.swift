@@ -27,7 +27,13 @@ public class TracerSdk: Tracer {
         if sharedState.isStopped {
             return DefaultTracer.instance.spanBuilder(spanName: spanName)
         }
-        return SpanBuilderSdk(spanName: spanName, instrumentationLibraryInfo: instrumentationLibraryInfo, spanProcessor: sharedState.activeSpanProcessor, traceConfig: sharedState.activeTraceConfig, resource: sharedState.resource, idsGenerator: sharedState.idsGenerator, clock: sharedState.clock)
+        return SpanBuilderSdk(spanName: spanName,
+                              instrumentationLibraryInfo: instrumentationLibraryInfo,
+                              spanProcessor: sharedState.activeSpanProcessor,
+                              traceConfig: sharedState.activeTraceConfig,
+                              resource: sharedState.resource,
+                              idsGenerator: sharedState.idsGenerator,
+                              clock: sharedState.clock)
     }
 
     public func withSpan(_ span: Span) -> Scope {

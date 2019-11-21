@@ -83,8 +83,10 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
     ///   - dest: the destination buffer.
     ///   - destOffset: the starting offset in the destination buffer.
     public func copyBytesTo(dest: inout Data, destOffset: Int) {
-        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
-        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size,
+                             with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2,
+                             with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
     }
 
     /// Copies the byte array representations of the TraceId into the dest beginning at
@@ -93,8 +95,10 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
     ///   - dest: the destination buffer.
     ///   - destOffset: the starting offset in the destination buffer.
     public func copyBytesTo(dest: inout Array<UInt8>, destOffset: Int) {
-        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
-        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size,
+                             with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2,
+                             with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
     }
 
     /// Copies the byte array representations of the TraceId into the dest beginning at
@@ -103,8 +107,10 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
     ///   - dest: the destination buffer.
     ///   - destOffset: the starting offset in the destination buffer.
     public func copyBytesTo(dest: inout ArraySlice<UInt8>, destOffset: Int) {
-        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
-        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size,
+                             with: withUnsafeBytes(of: idHi.bigEndian) { Array($0) })
+        dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2,
+                             with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
     }
 
     /// Returns a TraceId built from a lowercase base16 representation.

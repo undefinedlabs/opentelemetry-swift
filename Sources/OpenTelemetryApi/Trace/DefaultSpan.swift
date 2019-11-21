@@ -37,7 +37,11 @@ public class DefaultSpan: Span {
     }
 
     public static func random() -> DefaultSpan {
-        return DefaultSpan(context: SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate()), kind: .client)
+        return DefaultSpan(context: SpanContext.create(traceId: TraceId.random(),
+                                                       spanId: SpanId.random(),
+                                                       traceFlags: TraceFlags(),
+                                                       tracestate: Tracestate()),
+                           kind: .client)
     }
 
     public var isRecordingEvents: Bool {

@@ -10,7 +10,8 @@ import Foundation
 /// Spans are created by the SpanBuilder.startSpan method.
 /// Span must be ended by calling end().
 public protocol Span: AnyObject, CustomStringConvertible {
-    /// Type of span. Can be used to specify additional relationships between spans in addition to a parent/child relationship.
+    /// Type of span.
+    /// Can be used to specify additional relationships between spans in addition to a parent/child relationship.
     var kind: SpanKind { get }
 
     /// The span context associated with this Span
@@ -159,14 +160,6 @@ extension Span {
             setAttribute(key: SpanAttributeConstants.httpRouteKey.rawValue, value: route)
         }
     }
-
-    /// <summary>
-    /// Helper method that populates span properties from host and port
-    /// to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
-    /// </summary>
-    /// <param name="span">Span to fill out.</param>
-    /// <param name="rawUrl">Raw url.</param>
-    /// <returns>Span with populated url properties.</returns>
 
     /// Helper method that populates span properties from url
     /// - Parameter rawUrl: string representing the URL

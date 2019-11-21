@@ -55,7 +55,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
     /// Number of events recorded.
     public private(set) var totalRecordedEvents = 0
     /// The number of children.
-    public private(set) var numberOfChildren: Int
+    public private(set) var numberOfChildren: Int = 0
     /// The status of the span.
     public var status: Status? = Status.ok {
         didSet {
@@ -68,9 +68,21 @@ public class RecordEventsReadableSpan: ReadableSpan {
     /// The end time of the span.
     public private(set) var endEpochNanos: Int?
     /// True if the span is ended.
-    private(set) var hasBeenEnded: Bool
+    private(set) var hasBeenEnded: Bool = false
 
-    private init(context: SpanContext, name: String, instrumentationLibraryInfo: InstrumentationLibraryInfo, kind: SpanKind, parentSpanId: SpanId?, hasRemoteParent: Bool, spanProcessor: SpanProcessor, clock: Clock, resource: Resource, attributes: [String: AttributeValue], links: [Link], totalRecordedLinks: Int, startEpochNanos: Int) {
+    private init(context: SpanContext,
+                 name: String,
+                 instrumentationLibraryInfo: InstrumentationLibraryInfo,
+                 kind: SpanKind,
+                 parentSpanId: SpanId?,
+                 hasRemoteParent: Bool,
+                 spanProcessor: SpanProcessor,
+                 clock: Clock,
+                 resource: Resource,
+                 attributes: [String: AttributeValue],
+                 links: [Link],
+                 totalRecordedLinks: Int,
+                 startEpochNanos: Int) {
         self.context = context
         self.name = name
         self.instrumentationLibraryInfo = instrumentationLibraryInfo
@@ -82,8 +94,6 @@ public class RecordEventsReadableSpan: ReadableSpan {
         self.spanProcessor = spanProcessor
         self.clock = clock
         self.resource = resource
-        hasBeenEnded = false
-        numberOfChildren = 0
         self.startEpochNanos = (startEpochNanos == 0 ? clock.now : startEpochNanos)
         self.attributes = attributes
     }

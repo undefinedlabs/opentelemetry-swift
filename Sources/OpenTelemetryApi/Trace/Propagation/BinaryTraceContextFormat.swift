@@ -35,7 +35,8 @@ public struct BinaryTraceContextFormat: BinaryFormattable {
     public init() {}
 
     public func fromByteArray(bytes: [UInt8]) -> SpanContext? {
-        if bytes.count == 0 || bytes[0] != BinaryTraceContextFormat.versionId || bytes.count < BinaryTraceContextFormat.requiredFormatLength {
+        if bytes.count == 0 || bytes[0] != BinaryTraceContextFormat.versionId ||
+            bytes.count < BinaryTraceContextFormat.requiredFormatLength {
             return nil
         }
 
@@ -68,7 +69,10 @@ public struct BinaryTraceContextFormat: BinaryFormattable {
             traceOptions = TraceFlags(fromByte: bytes[pos + BinaryTraceContextFormat.idSize])
         }
 
-        return SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: traceOptions, tracestate: Tracestate())
+        return SpanContext.createFromRemoteParent(traceId: traceId,
+                                                  spanId: spanId,
+                                                  traceFlags: traceOptions,
+                                                  tracestate: Tracestate())
     }
 
     public func toByteArray(spanContext: SpanContext) -> [UInt8] {
