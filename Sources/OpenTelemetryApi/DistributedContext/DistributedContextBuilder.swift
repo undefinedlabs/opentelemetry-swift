@@ -9,10 +9,10 @@ import Foundation
 
 /// Builder for the DistributedContext class
 public protocol DistributedContextBuilder: AnyObject {
-    ///  Sets the parent {@link DistributedContext} to use. If no parent is provided, the value of
+    ///  Sets the parent DistributedContext to use. If no parent is provided, the value of
     ///  DistributedContextManager.getCurrentContext() at build() time will be used
-    ///  as parent, unless {@link #setNoParent()} was called.
-    ///  This must be used to create a {DistributedContext when manual Context
+    ///  as parent, unless setNoParent() was called.
+    ///  This must be used to create a DistributedContext when manual Context
     ///  propagation is used.
     ///  If called multiple times, only the last specified value will be used.
     /// - Parameter parent: the DistributedContext used as parent

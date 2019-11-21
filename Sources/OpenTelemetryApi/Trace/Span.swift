@@ -22,13 +22,11 @@ public protocol Span: AnyObject, CustomStringConvertible {
     /// The status of the span execution.
     var status: Status? { get set }
 
-    /// Updates the Span name.
-    ///
-    /// If used, this will override the name provided via StartSpan method overload.
+    /// The name of the Span.
+    /// If changed, this will override the name provided via StartSpan method overload.
     /// Upon this update, any sampling behavior based on Span name will depend on the
     /// implementation.
-    /// - Parameter name: Name of the span.
-    func updateName(name: String)
+    var name: String {get set}
 
     /// Puts a new attribute to the span.
     /// - Parameters:

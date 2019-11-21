@@ -6,34 +6,15 @@
 import Foundation
 import OpenTelemetryApi
 
-/** The extend Span interface used by the SDK. */
+/// The extend Span interface used by the SDK.
 public protocol ReadableSpan: Span {
-    /**
-     * Returns the name of the {@code Span}.
-     *
-     * The name can be changed during the lifetime of the Span by using the {@link
-     * Span#updateName(String)} so this value cannot be cached.
-     *
-     * @return the name of the {@code Span}.
-     * @since 0.1.0
-     */
-    var name: String { get }
+    /// The name of the Span.
+    /// The name can be changed during the lifetime of the Span so this value cannot be cached.
+    var name: String { get set }
 
-    /**
-     * Returns the instrumentation library specified when creating the tracer which produced this
-     * span.
-     *
-     * @return an instance of {@link InstrumentationLibraryInfo} describing the instrumentation
-     *     library
-     */
+    /// The instrumentation library specified when creating the tracer which produced this span.
     var instrumentationLibraryInfo: InstrumentationLibraryInfo { get }
-    
-    /**
-     * This converts this instance into an immutable SpanData instance, for use in export.
-     *
-     * @return an immutable {@link SpanData} instance.
-     * @since 0.1.0
-     */
-    func toSpanData() -> SpanData
 
+    /// This converts this instance into an immutable SpanData instance, for use in export.
+    func toSpanData() -> SpanData
 }

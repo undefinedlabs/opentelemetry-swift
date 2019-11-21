@@ -6,19 +6,12 @@
 
 import Foundation
 
-/**
- * The {@code DefaultSpan} is the default {@link Span} that is used when no {@code Span}
- * implementation is available. All operations are no-op except context propagation.
- *
- * <p>Used also to stop tracing, see {@link Tracer#withSpan}.
- *
- * @since 0.1.0
- */
-
 /// The DefaultSpan is the default Span that is used when no Span
 /// implementation is available. All operations are no-op except context propagation.
 /// Used also to stop tracing, see Tracer.withSpan()
 public class DefaultSpan: Span {
+    public var name: String = ""
+    
     public var kind: SpanKind
 
     public var context: SpanContext

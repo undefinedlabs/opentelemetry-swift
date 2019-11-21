@@ -29,7 +29,7 @@ public struct Tracestate: Equatable {
         self.entries = entries
     }
 
-    /// Returns the value to which the specified key is mapped, or null if this map contains no mapping
+    /// Returns the value to which the specified key is mapped, or nil if this map contains no mapping
     ///  for the key
     /// - Parameter key: key with which the specified value is to be associated
     public func get(key: String) -> String? {

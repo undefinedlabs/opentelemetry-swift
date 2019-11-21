@@ -154,7 +154,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
     func testGetAndUpdateSpanName() {
         let span = createTestRootSpan()
         XCTAssertEqual(span.name, spanName)
-        span.updateName(name: spanNewName)
+        span.name = spanNewName
         XCTAssertEqual(span.name, spanNewName)
         span.end()
     }
@@ -401,7 +401,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         span.addEvent(name: "event2", attributes: [String: AttributeValue]())
         testClock.advanceMillis(millisPerSecond)
         span.addChild()
-        span.updateName(name: spanNewName)
+        span.name = spanNewName
         span.status = status
     }
 

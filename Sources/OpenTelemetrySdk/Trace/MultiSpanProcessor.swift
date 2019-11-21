@@ -6,10 +6,8 @@
 
 import Foundation
 
-/**
- * Implementation of the {@code SpanProcessor} that simply forwards all received events to a list of
- * {@code SpanProcessor}s.
- */
+/// Implementation of the SpanProcessor that simply forwards all received events to a list of
+/// SpanProcessors.
 public struct MultiSpanProcessor: SpanProcessor {
     var spanProcessors = [SpanProcessor]()
 

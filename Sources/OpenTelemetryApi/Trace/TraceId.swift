@@ -107,19 +107,6 @@ public struct TraceId: Comparable, Hashable, CustomStringConvertible, Equatable 
         dest.replaceSubrange(destOffset + MemoryLayout<UInt64>.size ..< destOffset + MemoryLayout<UInt64>.size * 2, with: withUnsafeBytes(of: idLo.bigEndian) { Array($0) })
     }
 
-    /**
-     /// Returns a {@code TraceId} built from a lowercase base16 representation.
-      *
-     /// @param src the lowercase base16 representation.
-     /// @param srcOffset the offset in the buffer where the representation of the {@code TraceId}
-     ///     begins.
-     /// @return a {@code TraceId} built from a lowercase base16 representation.
-     /// @throws NullPointerException if {@code src} is null.
-     /// @throws IllegalArgumentException if not enough characters in the {@code src} from the {@code
-     ///     srcOffset}.
-     /// @since 0.1.0
-     */
-
     /// Returns a TraceId built from a lowercase base16 representation.
     /// - Parameters:
     ///   - hex: the lowercase base16 representation.

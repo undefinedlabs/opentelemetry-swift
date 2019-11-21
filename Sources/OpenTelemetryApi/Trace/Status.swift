@@ -139,7 +139,7 @@ public struct Status: Equatable {
         statusDescription = description
     }
 
-    /// Creates a derived instance of {@code Status} with the given description.
+    /// Creates a derived instance of Status with the given description.
     /// - Parameter description: the new description of the Status
     public func withDescription(description: String?) -> Status {
         if statusDescription == description {

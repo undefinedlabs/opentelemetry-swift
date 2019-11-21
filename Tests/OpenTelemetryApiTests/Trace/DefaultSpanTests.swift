@@ -51,7 +51,7 @@ final class DefaultSpanTest: XCTestCase {
         XCTAssertEqual(span.description, "DefaultSpan")
     }
 
-    func testDefaultSpan_NullEndSpanOptions() {
+    func testDefaultSpan_NilEndSpanOptions() {
         let span = DefaultSpan()
         span.end()
     }

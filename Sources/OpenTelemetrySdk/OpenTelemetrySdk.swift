@@ -7,29 +7,22 @@
 import Foundation
 import OpenTelemetryApi
 
+/// This class provides a static global accessor for SDK telemetry objects TracerSdkFactory,
+/// MeterSdkFactory DistributedContextManagerSdk.
+/// This is a convenience class getting and casting the telemetry objects from OpenTelemetry.
 class OpenTelemetrySDK {
-
+    /// TracerFactory returned by OpenTelemetry.getTracerFactory().
     public static var tracerFactory: TracerSdkFactory {
         return OpenTelemetry.instance.tracerFactory as! TracerSdkFactory
     }
 
-    /**
-     * Returns a {@link MeterSdk}.
-     *
-     * @return meter returned by {@link OpenTelemetry#getMeter()}.
-     * @since 0.1.0
-     */
+//    /// Meter returned by OpenTelemetry.getMeter().
 //    public static var meter: MeterSdkFactory  {
 //            return OpenTelemetry.instance.meterFactory as! MeterSdkFactory//
 //    }
 
-    /**
-     * Returns a {@link DistributedContextManagerSdk}.
-     *
-     * @return context manager returned by {@link OpenTelemetry#getDistributedContextManager()}.
-     * @since 0.1.0
-     */
+    /// Context manager returned by OpenTelemetry.getDistributedContextManager().
     public static var distributedContextManager: DistributedContextManagerSdk {
-      return OpenTelemetry.instance.distributedContextManager as! DistributedContextManagerSdk
+        return OpenTelemetry.instance.distributedContextManager as! DistributedContextManagerSdk
     }
 }

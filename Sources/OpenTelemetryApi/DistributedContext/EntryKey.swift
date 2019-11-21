@@ -12,15 +12,15 @@ import Foundation
 /// EntryKeys are designed to be used as constants. Declaring each key as a constant
 /// prevents key names from being validated multiple times.
 public struct EntryKey: Equatable, Comparable, Hashable {
-    /// The maximum length for an entry key name. The value is {@value #MAX_LENGTH}.
+    /// The maximum length for an entry key name. The value is 255.
     static let maxLength = 255
 
     /// The name of the key
     public private(set) var name: String = ""
 
-    /// Constructs an {@code EntryKey} with the given name.
+    /// Constructs an EntryKey with the given name.
     /// The name must meet the following requirements:
-    /// - It cannot be longer than {@link #MAX_LENGTH}.
+    /// - It cannot be longer than maxLength.
     /// - It can only contain printable ASCII characters.
     /// - Parameter name: the name of the key.
     public init?(name: String) {

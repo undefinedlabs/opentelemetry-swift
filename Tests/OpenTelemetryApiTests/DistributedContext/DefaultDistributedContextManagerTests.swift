@@ -13,7 +13,7 @@ fileprivate let value = EntryValue(string: "value")!
 class TestDistributedContext: DistributedContext {
 
     static func contextBuilder() -> DistributedContextBuilder {
-        NoopDistributedContextBuilder()
+        EmptyDistributedContextBuilder()
     }
 
     func getEntries() -> [Entry] {
@@ -38,7 +38,7 @@ class DefaultDistributedContextManagerTests: XCTestCase {
         XCTAssertTrue(defaultDistributedContextManager.getCurrentContext() === EmptyDistributedContext.instance)
     }
 
-    func testGetCurrentContext_ContextSetToNull() {
+    func testGetCurrentContext_ContextSetToNil() {
         let distContext = defaultDistributedContextManager.getCurrentContext()
         XCTAssertNotNil(distContext)
         XCTAssertEqual(distContext.getEntries().count, 0)

@@ -6,23 +6,24 @@
 
 import Foundation
 
+/// Provides a framework for detection of resource information from the environment variable "OC_RESOURCE_LABELS".
 public struct EnvVarResource {
     private static let ocResourceLabelsEnv = "OC_RESOURCE_LABELS"
     private static let labelListSplitter = Character(",")
     private static let labelKeyValueSplitter = Character("=")
 
+    ///  This resource information is loaded from the OC_RESOURCE_LABELS
+    ///  environment variable.
     public static let resource = Resource(labels: parseResourceLabels(rawEnvLabels: ProcessInfo.processInfo.environment["ocResourceLabelsEnv"]))
 
     private init() {}
 
-    /*
-     * Creates a label map from the OC_RESOURCE_LABELS environment variable.
-     *
-     * OC_RESOURCE_LABELS: A comma-separated list of labels describing the source in more detail,
-     * e.g. “key1=val1,key2=val2”. Domain names and paths are accepted as label keys. Values may be
-     * quoted or unquoted in general. If a value contains whitespaces, =, or " characters, it must
-     * always be quoted.
-     */
+    /// Creates a label map from the OC_RESOURCE_LABELS environment variable.
+    /// OC_RESOURCE_LABELS: A comma-separated list of labels describing the source in more detail,
+    /// e.g. “key1=val1,key2=val2”. Domain names and paths are accepted as label keys. Values may be
+    /// quoted or unquoted in general. If a value contains whitespaces, =, or " characters, it must
+    /// always be quoted.
+    /// - Parameter rawEnvLabels: the comma-separated list of labels
     private static func parseResourceLabels(rawEnvLabels: String?) -> [String: String] {
         guard let rawEnvLabels = rawEnvLabels else { return [String: String]() }
 

@@ -6,8 +6,11 @@
 
 import Foundation
 
+/// Implementation of the SpanExporter that simply forwards all received spans to a list of
+/// SpanExporter.
+/// Can be used to export to multiple backends using the same SpanProcessor} like a impleSampledSpansProcessor
+///  or a BatchSampledSpansProcessor.
 public class MultiSpanExporter: SpanExporter {
-//    private static final Logger logger = Logger.getLogger(MultiSpanExporter.class.getName());
     var spanExporters: [SpanExporter]
 
     public init(spanExporters: [SpanExporter]) {

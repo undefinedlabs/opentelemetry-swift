@@ -6,6 +6,7 @@
 import Foundation
 import OpenTelemetryApi
 
+/// SpanBuilderSdk is SDK implementation of SpanBuilder.
 public class SpanBuilderSdk: SpanBuilder {
     private enum ParentType {
         case currentSpan
@@ -110,7 +111,7 @@ public class SpanBuilderSdk: SpanBuilder {
             return DefaultSpan(context: spanContext, kind: spanKind)
         }
 
-        return RecordEventsReadableSpan.startSpan(context: spanContext, name: spanName, instrumentationLibraryInfo: instrumentationLibraryInfo, kind: spanKind, parentSpanId: parentContext?.spanId, hasRemoteParent: parentContext?.isRemote ?? false,  traceConfig: traceConfig, spanProcessor: spanProcessor, clock: SpanBuilderSdk.getClock(parent: parent, clock: clock), resource: resource, attributes: samplingDecision.attributes, links: truncatedLinks, totalRecordedLinks: links.count, startEpochNanos: startEpochNanos)
+        return RecordEventsReadableSpan.startSpan(context: spanContext, name: spanName, instrumentationLibraryInfo: instrumentationLibraryInfo, kind: spanKind, parentSpanId: parentContext?.spanId, hasRemoteParent: parentContext?.isRemote ?? false, traceConfig: traceConfig, spanProcessor: spanProcessor, clock: SpanBuilderSdk.getClock(parent: parent, clock: clock), resource: resource, attributes: samplingDecision.attributes, links: truncatedLinks, totalRecordedLinks: links.count, startEpochNanos: startEpochNanos)
     }
 
     private var truncatedLinks: [Link] {
@@ -122,7 +123,7 @@ public class SpanBuilderSdk: SpanBuilder {
             parentRecordEventSpan.addChild()
             return parentRecordEventSpan.clock
         } else {
-            return MonotonicClock(clock: clock);
+            return MonotonicClock(clock: clock)
         }
     }
 

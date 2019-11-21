@@ -7,16 +7,16 @@
 import Foundation
 import OpenTelemetryApi
 
+/// An implementation of the SpanProcessor that converts the ReadableSpan SpanData
+///  and passes it to the configured exporter.
 public struct SimpleSpanProcessor: SpanProcessor {
-//    private static final Logger logger = Logger.getLogger(SimpleSpansProcessor.class.getName());
-
     private var spanExporter: SpanExporter
     private var sampled: Bool = true
 
     public func onStart(span: ReadableSpan) {
     }
 
-    mutating public func onEnd(span: ReadableSpan) {
+    public mutating func onEnd(span: ReadableSpan) {
         if sampled && !span.context.traceFlags.sampled {
             return
         }
@@ -24,14 +24,19 @@ public struct SimpleSpanProcessor: SpanProcessor {
         spanExporter.export(spans: [span])
     }
 
-    mutating public func shutdown() {
+    public mutating func shutdown() {
         spanExporter.shutdown()
     }
 
+    /// Returns a new SimpleSpansProcessor that converts spans to proto and forwards them to
+    /// the given spanExporter.
+    /// - Parameter spanExporter: the SpanExporter to where the Spans are pushed.
     public init(spanExporter: SpanExporter) {
         self.spanExporter = spanExporter
     }
 
+    /// Set whether only sampled spans should be reported.
+    /// - Parameter sampled: report only sampled spans.
     public func reportingOnlySampled(sampled: Bool) -> Self {
         var processor = self
         processor.sampled = sampled

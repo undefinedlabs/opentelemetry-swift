@@ -7,17 +7,16 @@
 import Foundation
 import OpenTelemetryApi
 
+/// DistributedContextManagerSdk is SDK implementation of DistributedContextManager.
 public class DistributedContextManagerSdk: DistributedContextManager {
-
     public func contextBuilder() -> DistributedContextBuilder {
         return DistributedContextSdkBuilder()
     }
 
-
     public func getCurrentContext() -> DistributedContext {
         return ContextUtils.getCurrentDistributedContext() ?? EmptyDistributedContext.instance
     }
-    
+
     public func withContext(distContext: DistributedContext) -> Scope {
         return ContextUtils.withDistributedContext(distContext)
     }

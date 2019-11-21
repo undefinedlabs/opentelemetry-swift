@@ -9,6 +9,7 @@ import OpenTelemetryApi
 @testable import OpenTelemetrySdk
 
 class SpanMock: Span {
+    var name: String = ""
 
     var kind: SpanKind {
         return .client

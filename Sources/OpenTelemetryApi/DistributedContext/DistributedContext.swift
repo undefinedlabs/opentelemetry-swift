@@ -14,7 +14,7 @@ public protocol DistributedContext: AnyObject {
     /// Builder for the DistributedContext class
     static func contextBuilder() -> DistributedContextBuilder
 
-    /// Returns an immutable collection of the entries in this {@code DistributedContext}. Order of
+    /// Returns an immutable collection of the entries in this DistributedContext. Order of
     /// entries is not guaranteed.
     func getEntries() -> [Entry]
 

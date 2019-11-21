@@ -7,7 +7,7 @@
 import Foundation
 
 /// A struct that represents global trace options. These options are propagated to all child spans.
-/// These determine features such as whether a {@code Span} should be traced. It is
+/// These determine features such as whether a Span should be traced. It is
 /// implemented as a bitmask.
 public struct TraceFlags: Equatable, CustomStringConvertible {
     /// Default options. Nothing set.
@@ -23,7 +23,7 @@ public struct TraceFlags: Equatable, CustomStringConvertible {
     /// The set of enabled features is determined by all the enabled bits.
     private var options: UInt8 = 0
 
-    /// Returns the one byte representation of the {@code TraceFlags}.
+    /// Returns the one byte representation of the TraceFlags.
     var byte: UInt8 {
         return options
     }

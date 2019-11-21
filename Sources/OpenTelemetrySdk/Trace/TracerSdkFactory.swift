@@ -7,18 +7,12 @@
 import Foundation
 import OpenTelemetryApi
 
+/// This class is not intended to be used in application code and it is used only by OpenTelemetry.
 public class TracerSdkFactory: TracerFactory {
-//    let logger = Logger.getLogger(TracerFactory.class.getName());
-
     private var tracerRegistry = [InstrumentationLibraryInfo: TracerSdk]()
     private var sharedState: TracerSharedState
 
-    /**
-     * Returns a new {@link TracerSdkFactory} with default {@link Clock}, {@link IdsGenerator} and
-     * {@link Resource}.
-     *
-     * @return a new {@link TracerSdkFactory} with default configs.
-     */
+    /// Returns a new TracerSdkFactory with default Clock, IdsGenerator and Resource.
     public convenience init() {
         self.init(clock: MillisClock(), idsGenerator: RandomIdsGenerator(), resource: EnvVarResource.resource)
     }
@@ -45,49 +39,31 @@ public class TracerSdkFactory: TracerFactory {
         }
     }
 
-    /**
-     * Returns the active {@code TraceConfig}.
-     *
-     * @return the active {@code TraceConfig}.
-     */
+    /// Returns the active TraceConfig.
     public func getActiveTraceConfig() -> TraceConfig {
         sharedState.activeTraceConfig
     }
 
-    /**
-     * Updates the active {@link TraceConfig}.
-     *
-     * @param traceConfig the new active {@code TraceConfig}.
-     */
+    /// Updates the active TraceConfig.
     public func updateActiveTraceConfig(_ traceConfig: TraceConfig) {
         sharedState.setActiveTraceConfig(traceConfig)
     }
 
-    /**
-     * Adds a new {@code SpanProcessor} to this {@code Tracer}.
-     *
-     * Any registered processor cause overhead, consider to use an async/batch processor especially
-     * for span exporting, and export to multiple backends using the {@link
-     * io.opentelemetry.sdk.trace.export.MultiSpanExporter}.
-     *
-     * @param spanProcessor the new {@code SpanProcessor} to be added.
-     */
+    /// Adds a new SpanProcessor to this Tracer.
+    /// Any registered processor cause overhead, consider to use an async/batch processor especially
+    /// for span exporting, and export to multiple backends using the MultiSpanExporter
+    /// - Parameter spanProcessor: the new SpanProcessor to be added.
     public func addSpanProcessor(_ spanProcessor: SpanProcessor) {
         sharedState.addSpanProcessor(spanProcessor)
     }
 
-    /**
-     * Attempts to stop all the activity for this {@link Tracer}. Calls {@link
-     * SpanProcessor#shutdown()} for all registered {@link SpanProcessor}s.
-     *
-     * This operation may block until all the Spans are processed. Must be called before turning
-     * off the main application to ensure all data are processed and exported.
-     *
-     * After this is called all the newly created {@code Span}s will be no-op.
-     */
+     /// Attempts to stop all the activity for this Tracer. Calls SpanProcessor.shutdown()
+    /// for all registered SpanProcessors.
+     /// This operation may block until all the Spans are processed. Must be called before turning
+     /// off the main application to ensure all data are processed and exported.
+     /// After this is called all the newly created Spanss will be no-op.
     public func shutdown() {
         if sharedState.isStopped {
-//            logger.log(Level.WARNING, "Calling shutdown() multiple times.")
             return
         }
         sharedState.stop()

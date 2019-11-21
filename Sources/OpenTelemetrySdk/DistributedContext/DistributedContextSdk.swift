@@ -12,18 +12,16 @@ public class DistributedContextSdk: DistributedContext, Equatable {
     var entries: [EntryKey: Entry?]
     var parent: DistributedContextSdk?
 
-    /**
-     * Creates a new {@link DistributedContextSdk} with the given entries.
-     *
-     * @param entries the initial entries for this {@code DistributedContextSdk}.
-     * @param parent providing a default set of entries
-     */
+    /// Creates a new DistributedContextSdk with the given entries.
+    /// - Parameters:
+    ///   - entries: the initial entries for this DistributedContextSdk
+    ///   - parent: parent providing a default set of entries
     fileprivate init(entries: [EntryKey: Entry?], parent: DistributedContextSdk?) {
         self.entries = entries
         self.parent = parent
     }
 
-    static public func contextBuilder() -> DistributedContextBuilder {
+    public static func contextBuilder() -> DistributedContextBuilder {
         return DistributedContextSdkBuilder()
     }
 
@@ -42,7 +40,6 @@ public class DistributedContextSdk: DistributedContext, Equatable {
     public func getEntryValue(key: EntryKey) -> EntryValue? {
         return entries[key]??.value ?? parent?.getEntryValue(key: key)
     }
-
 
     public static func == (lhs: DistributedContextSdk, rhs: DistributedContextSdk) -> Bool {
         return lhs.parent == rhs.parent && lhs.entries == rhs.entries

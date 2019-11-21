@@ -6,150 +6,72 @@
 import Foundation
 import OpenTelemetryApi
 
+/// representation of all data collected by the Span.
 public struct SpanData: Equatable {
-
     public struct TimedEvent: Event, Equatable {
         public var epochNanos: Int
         public var name: String
-        public var attributes: [String : AttributeValue]
+        public var attributes: [String: AttributeValue]
     }
 
     public class Link: OpenTelemetryApi.Link {
         public var context: SpanContext
-        public var attributes: [String : AttributeValue]
+        public var attributes: [String: AttributeValue]
 
-        init(context: SpanContext, attributes: [String : AttributeValue] = [String : AttributeValue]()) {
+        init(context: SpanContext, attributes: [String: AttributeValue] = [String: AttributeValue]()) {
             self.context = context
             self.attributes = attributes
         }
     }
 
-    /**
-     * Gets the trace id for this span.
-     *
-     * @return the trace id.
-     */
+    /// The trace id for this span.
     public private(set) var traceId: TraceId
 
-    /**
-     * Gets the span id for this span.
-     *
-     * @return the span id.
-     */
+    /// The span id for this span.
     public private(set) var spanId: SpanId
 
-    /**
-     * Gets the trace flags for this span.
-     *
-     * @return the trace flags for this span.
-     */
+    /// The trace flags for this span.
     public private(set) var traceFlags: TraceFlags
 
-    /**
-     * Gets the Tracestate for this span.
-     *
-     * @return the Tracestate for this span.
-     */
+    /// The Tracestate for this span.
     public private(set) var tracestate: Tracestate
 
-    /**
-     * Returns the parent {@code SpanId}. If the {@code Span} is a root {@code Span}, the SpanId
-     * returned will be invalid..
-     *
-     * @return the parent {@code SpanId} or an invalid SpanId if this is a root {@code Span}.
-     * @since 0.1.0
-     */
+    /// The parent SpanId. If the  Span is a root Span, the SpanId
+    /// returned will be nil.
     public private(set) var parentSpanId: SpanId?
 
-    /**
-     * Returns the resource of this {@code Span}.
-     *
-     * @return the resource of this {@code Span}.
-     * @since 0.1.0
-     */
+    /// The resource of this Span.
     public private(set) var resource: Resource
 
-    /**
-     * Returns the instrumentation library specified when creating the tracer which produced this
-      * {@code Span}.
-      *
-      * @return an instance of {@link InstrumentationLibraryInfo}
-      */
+    /// The instrumentation library specified when creating the tracer which produced this Span
     public private(set) var instrumentationLibraryInfo: InstrumentationLibraryInfo
 
-    /**
-     * Returns the name of this {@code Span}.
-     *
-     * @return the name of this {@code Span}.
-     * @since 0.1.0
-     */
+    /// The name of this Span.
     public private(set) var name: String
 
-    /**
-     * Returns the kind of this {@code Span}.
-     *
-     * @return the kind of this {@code Span}.
-     * @since 0.1.0
-     */
+    /// The kind of this Span.
     public private(set) var kind: SpanKind
 
-    /**
-     * Returns the start epoch timestamp in nanos of this {@code Span}.
-     *
-     * @return the start epoch timestamp in nanos of this {@code Span}.
-     * @since 0.1.0
-     */
+    /// The start epoch timestamp in nanos of this Span.
     public private(set) var startEpochNanos: Int
 
-    /**
-     * Returns the attributes recorded for this {@code Span}.
-     *
-     * @return the attributes recorded for this {@code Span}.
-     * @since 0.1.0
-     */
+    /// The attributes recorded for this Span.
     public private(set) var attributes = [String: AttributeValue]()
 
-    /**
-     * Returns the timed events recorded for this {@code Span}.
-     *
-     * @return the timed events recorded for this {@code Span}.
-     * @since 0.1.0
-     */
+    /// The timed events recorded for this Span.
     public private(set) var timedEvents = [TimedEvent]()
 
-    /**
-     * Returns links recorded for this {@code Span}.
-     *
-     * @return links recorded for this {@code Span}.
-     * @since 0.1.0
-     */
+    /// The links recorded for this Span.
     public private(set) var links = [Link]()
 
-    /**
-     * Returns the {@code Status}.
-     *
-     * @return the {@code Status}.
-     * @since 0.1.0
-     */
+    /// The Status.
     public private(set) var status: Status?
 
-    /**
-     * Returns the end {@code Timestamp}.
-     *
-     * @return the end {@code Timestamp}.
-     * @since 0.1.0
-     */
+    /// The end epoch timestamp in nanos of this Span
     public private(set) var endEpochNanos: Int
 
-    /**
-     * Returns {@code true} if the parent is on a different process. {@code false} if this is a root
-     * span.
-     *
-     * @return {@code true} if the parent is on a different process. {@code false} if this is a root
-     *     span.
-     * @since 0.3.0
-     */
-    public private(set) var hasRemoteParent: Bool;
+    /// True if the parent is on a different process, false if this is a root span.
+    public private(set) var hasRemoteParent: Bool
 
     public static func == (lhs: SpanData, rhs: SpanData) -> Bool {
         return lhs.traceId == rhs.traceId &&
@@ -200,12 +122,12 @@ public struct SpanData: Equatable {
     }
 
     public mutating func settingStartEpochNanos(_ nanos: Int) -> SpanData {
-        self.startEpochNanos = nanos
+        startEpochNanos = nanos
         return self
     }
 
     public mutating func settingEndEpochNanos(_ nanos: Int) -> SpanData {
-        self.endEpochNanos = nanos
+        endEpochNanos = nanos
         return self
     }
 

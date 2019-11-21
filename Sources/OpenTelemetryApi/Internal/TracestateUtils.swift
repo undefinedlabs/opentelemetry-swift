@@ -11,14 +11,6 @@ struct TracestateUtils {
     private static let valueMaxSize = 256
     private static let maxKeyValuePairsCount = 32
 
-    /// <summary>
-    /// Extracts tracestate pairs from the given string and appends it to provided tracestate list"/>"/>.
-    /// </summary>
-    /// <param name="tracestateString">String with comma separated tracestate key value pairs.</param>
-    /// <param name=TRACESTATE><see cref="List{T}"/> to set tracestate pairs on.</param>
-    /// <returns>True if string was parsed successfully and tracestate was recognized, false otherwise.</returns>
-
-
     /// Extracts tracestate pairs from the given string and appends it to provided tracestate list
     /// - Parameters:
     ///   - tracestateString: String with comma separated tracestate key value pairs.

@@ -41,17 +41,6 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
         return SpanId(id: id)
     }
 
-    /// Returns a {@code SpanId} whose representation is copied from the {@code src} beginning at the
-    /// {@code srcOffset} offset.
-    /// @param src the buffer where the representation of the {@code SpanId} is copied.
-    /// @param srcOffset the offset in the buffer where the representation of the {@code SpanId}
-    ///     begins.
-    /// @return a {@code SpanId} whose representation is copied from the buffer.
-    /// @throws NullPointerException if {@code src} is null.
-    /// @throws IndexOutOfBoundsException if {@code srcOffset+SpanId.getSize()} is greater than {@code
-    ///     src.length}.
-    /// @since 0.1.0
-
     /// Returns a SpanId whose representation is copied from the data beginning at the offset.
     /// - Parameters:
     ///   - data: the buffer from where the representation of the SpanId is copied.
@@ -88,15 +77,6 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
         self.init(fromData: Data(String(bytes).utf8.map { UInt8($0) }))
     }
 
-    /// Copies the byte array representations of the {@code SpanId} into the {@code dest} beginning at
-    /// the {@code destOffset} offset.
-    /// @param dest the destination buffer.
-    /// @param destOffset the starting offset in the destination buffer.
-    /// @throws NullPointerException if {@code dest} is null.
-    /// @throws IndexOutOfBoundsException if {@code destOffset+SpanId.getSize()} is greater than {@code
-    ///     dest.length}.
-    /// @since 0.1.0
-
     /// Copies the byte array representations of the SpanId into the code dest beginning at the offset
     /// - Parameters:
     ///   - dest: the destination buffer.
@@ -121,23 +101,10 @@ public struct SpanId: Equatable, Comparable, Hashable, CustomStringConvertible {
         dest.replaceSubrange(destOffset ..< destOffset + MemoryLayout<UInt64>.size, with: withUnsafeBytes(of: id.bigEndian) { Array($0) })
     }
 
-    //  /**
-    //  /// Returns a {@code SpanId} built from a lowercase base16 representation.
-    //   *
-    //  /// @param src the lowercase base16 representation.
-    //  /// @param srcOffset the offset in the buffer where the representation of the {@code SpanId}
-    //  ///     begins.
-    //  /// @return a {@code SpanId} built from a lowercase base16 representation.
-    //  /// @throws NullPointerException if {@code src} is null.
-    //  /// @throws IllegalArgumentException if not enough characters in the {@code src} from the {@code
-    //  ///     srcOffset}.
-    //  /// @since 0.1.0
-    //   */
-
     /// Returns a SpanId built from a lowercase base16 representation.
     /// - Parameters:
     ///   - hex: the lowercase base16 representation.
-    ///   - offset: srcOffset the offset in the buffer where the representation of the {@code SpanId} begins.
+    ///   - offset: srcOffset the offset in the buffer where the representation of the SpanId begins.
     public init(fromHexString hex: String, withOffset offset: Int = 0) {
         let firstIndex = hex.index(hex.startIndex, offsetBy: offset)
         let secondIndex = hex.index(firstIndex, offsetBy: 16)

@@ -25,7 +25,7 @@ public final class SpanContext: Equatable, CustomStringConvertible {
     /// The tracestate associated with this SpanContext
     public let isRemote: Bool
 
-    /// The invalid {@code SpanContext} that can be used for no-op operations.
+    /// The invalid SpanContext that can be used for no-op operations.
     public static let invalid = SpanContext(traceId: TraceId.invalid, spanId: SpanId.invalid, traceFlags: TraceFlags(), tracestate: Tracestate(), isRemote: false)
 
     private init(traceId: TraceId, spanId: SpanId, traceFlags: TraceFlags, tracestate: Tracestate, isRemote: Bool) {
@@ -48,7 +48,6 @@ public final class SpanContext: Equatable, CustomStringConvertible {
 
     /// Creates a new SpanContext that was propagated from a remote parent, with the given
     /// identifiers and options.
-
     /// - Parameters:
     ///   - traceId: the trace identifier of the span context.
     ///   - spanId: the span identifier of the span context.

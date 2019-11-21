@@ -7,32 +7,26 @@
 import Foundation
 import OpenTelemetryApi
 
+/// Sampler is used to make decisions on Span sampling.
 public protocol Sampler: AnyObject, CustomStringConvertible {
-    /// <summary>
-    /// Checks whether span needs to be created and tracked.
-    /// </summary>
-    /// <param name="parentContext">Parent span context. Typically taken from the wire.</param>
-    /// <param name="traceId">Trace ID of a span to be created.</param>
-    /// <param name="spanId">Span ID of a span to be created.</param>
-    /// <param name="name"> Name of a span to be created. Note, that the name of the span is settable.
-    /// So this name can be changed later and <see cref="ISampler"/> implementation should assume that.
-    /// Typical example of a name change is when <see cref="ISpan"/> representing incoming http request
-    /// has a name of url path and then being updated with route name when routing complete.
-    /// </param>
-    /// <param name="links">Links associated with the span.</param>
-    /// <returns>Sampling decision on whether Span needs to be sampled or not.</returns>
+    /// Called during Span creation to make a sampling decision.
+    /// - Parameters:
+    ///   - parentContext: the parent span's SpanContext. nil if this is a root span
+    ///   - traceId: the TraceId for the new Span. This will be identical to that in
+    ///     the parentContext, unless this is a root span.
+    ///   - spanId: the SpanId for the new Span.
+    ///   - name: he name of the new Span.
+    ///   - parentLinks: the parentLinks associated with the new Span.
     func shouldSample(parentContext: SpanContext?, traceId: TraceId, spanId: SpanId, name: String, parentLinks: [Link]) -> Decision
 }
 
+/// Sampling decision returned by Sampler.shouldSample(SpanContext, TraceId, SpanId, String, Array).
 public protocol Decision {
-    /// <summary>
-    /// Gets a value indicating whether Span was sampled or not.
-    /// The value is not suppose to change over time and can be cached.
-    /// </summary>
+    /// The sampling decision whether span should be sampled or not.
     var isSampled: Bool { get }
 
-    /// <summary>
-    /// Gets a map of attributes associated with the sampling decision.
-    /// </summary>
+    /// Return tags which will be attached to the span.
+    /// These attributes should be added to the span only for root span or when sampling decision
+    /// changes from false to true.
     var attributes: [String: AttributeValue] { get }
 }

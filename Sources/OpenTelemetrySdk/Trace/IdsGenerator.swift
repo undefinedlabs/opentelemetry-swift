@@ -7,19 +7,11 @@
 import Foundation
 import OpenTelemetryApi
 
+/// Interface that is used by the TracerSdk to generate new SpanId and TraceId.
 public protocol IdsGenerator {
-    /**
-     * Generates a new valid {@code SpanId}.
-     *
-     * @return a new valid {@code SpanId}.
-     */
-    func generateSpanId() -> SpanId;
+    /// Generates a new valid SpanId
+    func generateSpanId() -> SpanId
 
-    /**
-     * Generates a new valid {@code TraceId}.
-     *
-     * @return a new valid {@code TraceId}.
-     */
+    /// Generates a new valid TraceId.
     func generateTraceId() -> TraceId
-
 }
