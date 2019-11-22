@@ -22,8 +22,8 @@ let package = Package(
     targets: [
         .target(  name: "OpenTelemetryApi", dependencies: []),
         .target(  name: "OpenTelemetrySdk", dependencies: ["OpenTelemetryApi"]),
-        .target(  name: "LoggingTracer", dependencies: ["OpenTelemetryApi"], path: "Sources/Examples/Logging Tracer"),
-        .target(  name: "SimpleExporter", dependencies: ["OpenTelemetrySdk"], path: "Sources/Examples/Simple Exporter"),
+        .target(  name: "LoggingTracer", dependencies: ["OpenTelemetryApi"], path: "Examples/Logging Tracer"),
+        .target(  name: "SimpleExporter", dependencies: ["OpenTelemetrySdk"], path: "Examples/Simple Exporter"),
         .testTarget( name: "OpenTelemetryApiTests", dependencies: ["OpenTelemetryApi"], path: "Tests/OpenTelemetryApiTests"),
         .testTarget( name: "OpenTelemetrySdkTests", dependencies: ["OpenTelemetryApi", "OpenTelemetrySdk"], path: "Tests/OpenTelemetrySdkTests"),
     ]
