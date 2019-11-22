@@ -9,7 +9,7 @@ import Foundation
 public class DefaultTracerFactory: TracerFactory {
     public static let instance = DefaultTracerFactory()
 
-    public func get(instrumentationName: String, instrumentationVersion: String?) -> DefaultTracer {
+    public override func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer {
         return DefaultTracer.instance
     }
 }

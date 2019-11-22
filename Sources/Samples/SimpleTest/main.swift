@@ -17,7 +17,7 @@ var instrumentationLibraryInfo = InstrumentationLibraryInfo(name: instrumentatio
 
 
 func simpleSpan() {
-    let tracer = TracerSdkFactory().get(instrumentationName: instrumentationLibraryName, instrumentationVersion: instrumentationLibraryVersion)
+    let tracer = OpenTelemetrySDK.instance.tracerFactory.get(instrumentationName: instrumentationLibraryName, instrumentationVersion: instrumentationLibraryVersion)
     let span = tracer.spanBuilder(spanName: "SimpleSpan").setSpanKind(spanKind: .client).startSpan()
     span.setAttribute(key: sampleKey, value: sampleValue)
     var scope = tracer.withSpan(span)

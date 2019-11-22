@@ -9,8 +9,10 @@ import OpenTelemetryApi
 import OpenTelemetrySdk
 
 Logger.printHeader()
-var tracerFactory = LoggingTracerFactory()
-var tracer = tracerFactory.get(instrumentationName: "ConsoleApp", instrumentationVersion: "semver:1.0.0")
+
+OpenTelemetry.registerTracerFactory(tracerFactory: LoggingTracerFactory())
+
+var tracer = OpenTelemetry.instance.tracerFactory.get(instrumentationName: "ConsoleApp", instrumentationVersion: "semver:1.0.0")
 
 
 let scope = tracer.withSpan(tracer.spanBuilder(spanName: "Main (span1)").startSpan())
