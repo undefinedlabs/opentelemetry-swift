@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -12,7 +12,7 @@ let package = Package(
     products: [
         .library( name: "OpenTelemetryApi", targets: ["OpenTelemetryApi"]),
         .library( name: "OpenTelemetrySdk", targets: ["OpenTelemetrySdk"]),
-        .executable(name: "simpleTest", targets: ["SimpleTest"]),
+        .executable(name: "simpleExporter", targets: ["SimpleExporter"]),
         .executable(name: "loggingTracer", targets: ["LoggingTracer"]),
     ],
     dependencies: [
@@ -22,8 +22,8 @@ let package = Package(
     targets: [
         .target(  name: "OpenTelemetryApi", dependencies: []),
         .target(  name: "OpenTelemetrySdk", dependencies: ["OpenTelemetryApi"]),
-        .target(  name: "SimpleTest", dependencies: ["OpenTelemetrySdk"], path: "Sources/Samples/SimpleTest"),
-        .target(  name: "LoggingTracer", dependencies: ["OpenTelemetrySdk"], path: "Sources/Samples/LoggingTracer"),
+        .target(  name: "LoggingTracer", dependencies: ["OpenTelemetryApi"], path: "Sources/Examples/Logging Tracer"),
+        .target(  name: "SimpleExporter", dependencies: ["OpenTelemetrySdk"], path: "Sources/Examples/Simple Exporter"),
         .testTarget( name: "OpenTelemetryApiTests", dependencies: ["OpenTelemetryApi"], path: "Tests/OpenTelemetryApiTests"),
         .testTarget( name: "OpenTelemetrySdkTests", dependencies: ["OpenTelemetryApi", "OpenTelemetrySdk"], path: "Tests/OpenTelemetrySdkTests"),
     ]

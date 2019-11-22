@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "simpleTest"
-               BuildableName = "simpleTest"
-               BlueprintName = "simpleTest"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OpenTelemetrySdkTests"
-               BuildableName = "OpenTelemetrySdkTests"
-               BlueprintName = "OpenTelemetrySdkTests"
+               BlueprintIdentifier = "simpleExporter"
+               BuildableName = "simpleExporter"
+               BlueprintName = "simpleExporter"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,6 +31,20 @@
                BlueprintIdentifier = "OpenTelemetryApiTests"
                BuildableName = "OpenTelemetryApiTests"
                BlueprintName = "OpenTelemetryApiTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OpenTelemetrySdkTests"
+               BuildableName = "OpenTelemetrySdkTests"
+               BlueprintName = "OpenTelemetrySdkTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -60,9 +60,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OpenTelemetrySdkTests"
-               BuildableName = "OpenTelemetrySdkTests"
-               BlueprintName = "OpenTelemetrySdkTests"
+               BlueprintIdentifier = "OpenTelemetryApiTests"
+               BuildableName = "OpenTelemetryApiTests"
+               BlueprintName = "OpenTelemetryApiTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -70,9 +70,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OpenTelemetryApiTests"
-               BuildableName = "OpenTelemetryApiTests"
-               BlueprintName = "OpenTelemetryApiTests"
+               BlueprintIdentifier = "OpenTelemetrySdkTests"
+               BuildableName = "OpenTelemetrySdkTests"
+               BlueprintName = "OpenTelemetrySdkTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -92,9 +92,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "simpleTest"
-            BuildableName = "simpleTest"
-            BlueprintName = "simpleTest"
+            BlueprintIdentifier = "simpleExporter"
+            BuildableName = "simpleExporter"
+            BlueprintName = "simpleExporter"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -109,9 +109,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "simpleTest"
-            BuildableName = "simpleTest"
-            BlueprintName = "simpleTest"
+            BlueprintIdentifier = "simpleExporter"
+            BuildableName = "simpleExporter"
+            BlueprintName = "simpleExporter"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
