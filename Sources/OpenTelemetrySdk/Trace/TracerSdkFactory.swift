@@ -1,8 +1,18 @@
-//
-//  TracerSdkFactory.swift
-//
-//  Created by Ignacio Bonafonte on 18/11/2019.
-//
+/*
+ * Copyright 2019, Undefined Labs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import Foundation
 import OpenTelemetryApi
@@ -58,11 +68,11 @@ public class TracerSdkFactory: TracerFactory {
         sharedState.addSpanProcessor(spanProcessor)
     }
 
-     /// Attempts to stop all the activity for this Tracer. Calls SpanProcessor.shutdown()
+    /// Attempts to stop all the activity for this Tracer. Calls SpanProcessor.shutdown()
     /// for all registered SpanProcessors.
-     /// This operation may block until all the Spans are processed. Must be called before turning
-     /// off the main application to ensure all data are processed and exported.
-     /// After this is called all the newly created Spanss will be no-op.
+    /// This operation may block until all the Spans are processed. Must be called before turning
+    /// off the main application to ensure all data are processed and exported.
+    /// After this is called all the newly created Spanss will be no-op.
     public func shutdown() {
         if sharedState.isStopped {
             return

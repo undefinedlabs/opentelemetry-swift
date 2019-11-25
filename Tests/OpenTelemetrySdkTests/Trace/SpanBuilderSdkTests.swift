@@ -1,8 +1,18 @@
-//
-//  SpanBuilderSdkTest.swift
-//
-//  Created by Ignacio Bonafonte on 07/11/2019.
-//
+/*
+ * Copyright 2019, Undefined Labs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 import OpenTelemetryApi
 @testable import OpenTelemetrySdk
@@ -72,14 +82,13 @@ class SpanBuilderSdkTest: XCTestCase {
     func testSampler() {
         let span = TestUtils.startSpanWithSampler(tracerSdkFactory: tracerSdkFactory,
                                                   tracer: tracerSdk, spanName: spanName,
-            sampler: Samplers.alwaysOff).startSpan()
+                                                  sampler: Samplers.alwaysOff).startSpan()
         XCTAssertFalse(span.context.traceFlags.sampled)
         span.end()
     }
 
     func testSampler_decisionAttributes() {
         class TestSampler: Sampler {
-
             var decision: Decision
             func shouldSample(parentContext: SpanContext?,
                               traceId: TraceId,
@@ -88,6 +97,7 @@ class SpanBuilderSdkTest: XCTestCase {
                               parentLinks: [Link]) -> Decision {
                 return decision
             }
+
             var description: String { return "TestSampler" }
             init(decision: Decision) { self.decision = decision }
         }
@@ -96,7 +106,8 @@ class SpanBuilderSdkTest: XCTestCase {
             var isSampled: Bool {
                 return true
             }
-            var attributes: [String : AttributeValue] {
+
+            var attributes: [String: AttributeValue] {
                 return ["sampler-attribute": AttributeValue.string("bar")]
             }
         }
@@ -105,8 +116,8 @@ class SpanBuilderSdkTest: XCTestCase {
         let sampler = TestSampler(decision: decision)
         let span = TestUtils.startSpanWithSampler(tracerSdkFactory: tracerSdkFactory,
                                                   tracer: tracerSdk,
-                                                  spanName:spanName,
-                                                  sampler:sampler).startSpan() as! RecordEventsReadableSpan
+                                                  spanName: spanName,
+                                                  sampler: sampler).startSpan() as! RecordEventsReadableSpan
         XCTAssertTrue(span.context.traceFlags.sampled)
         XCTAssertTrue(span.attributes.keys.contains("sampler-attribute"))
         span.end()
@@ -114,8 +125,8 @@ class SpanBuilderSdkTest: XCTestCase {
 
     func testSampledViaParentLinks() {
         let span = TestUtils.startSpanWithSampler(tracerSdkFactory: tracerSdkFactory,
-                                                  tracer: tracerSdk, spanName:spanName,
-                                                  sampler:Samplers.probability(probability: 0.0))
+                                                  tracer: tracerSdk, spanName: spanName,
+                                                  sampler: Samplers.probability(probability: 0.0))
             .addLink(spanContext: sampledSpanContext)
             .startSpan()
         XCTAssertTrue(span.context.traceFlags.sampled)
