@@ -17,7 +17,7 @@
 import Foundation
 import OpenTelemetryApi
 
-// TODO: needs proper implementation of AttributesWithCapacity
+// TODO: needs proper implementation of EvictingQueue
 public typealias EvictingQueue = [TimedEvent]
 // TODO: needs proper implementation of AttributesWithCapacity
 public typealias AttributesWithCapacity = [String: AttributeValue]
