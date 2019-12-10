@@ -18,7 +18,7 @@ opentelemetry-swift is designed for Swift 5. To depend on the  opentelemetry-swi
 .package(url: "https://github.com/undefinedlabs/opentelemetry-swift", from: "0.1.0"),
 ```
 
-and to your application/library target, add `"OpenTelemetryApi"` or  `OpenTelemetryApi`to your `dependencies`, e.g. like this:
+and to your application/library target, add `OpenTelemetryApi` or  `OpenTelemetrySdk`to your `dependencies`, e.g. like this:
 
 ```
 .target(name: "ExampleTelemetryProducerApp", dependencies: ["OpenTelemetryApi"]),
