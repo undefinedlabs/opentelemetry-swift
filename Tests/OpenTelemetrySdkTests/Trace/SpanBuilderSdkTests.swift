@@ -189,7 +189,7 @@ class SpanBuilderSdkTest: XCTestCase {
     func testParent_timestampConverter() {
         let parent = tracerSdk.spanBuilder(spanName: spanName).startSpan()
         let span = tracerSdk.spanBuilder(spanName: spanName).setParent(parent).startSpan() as! RecordEventsReadableSpan
-        XCTAssert(span.clock == (parent as! RecordEventsReadableSpan).clock)
+        XCTAssert(span.clock === (parent as! RecordEventsReadableSpan).clock)
         parent.end()
     }
 
@@ -197,7 +197,7 @@ class SpanBuilderSdkTest: XCTestCase {
         let parent = tracerSdk.spanBuilder(spanName: spanName).startSpan()
         var scope = tracerSdk.withSpan(parent)
         let span = tracerSdk.spanBuilder(spanName: spanName).startSpan() as! RecordEventsReadableSpan
-        XCTAssert(span.clock == (parent as! RecordEventsReadableSpan).clock)
+        XCTAssert(span.clock === (parent as! RecordEventsReadableSpan).clock)
         scope.close()
         parent.end()
     }

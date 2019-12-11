@@ -143,7 +143,7 @@ public class SpanBuilderSdk: SpanBuilder {
                                                   hasRemoteParent: parentContext?.isRemote ?? false,
                                                   traceConfig: traceConfig,
                                                   spanProcessor: spanProcessor,
-                                                  clock: SpanBuilderSdk.getClock(parent: parent, clock: clock),
+                                                  clock: SpanBuilderSdk.getClock(parent: SpanBuilderSdk.getParentSpan(parentType: parentType, explicitParent: parent), clock: clock),
                                                   resource: resource,
                                                   attributes: samplingDecision.attributes,
                                                   links: truncatedLinks,

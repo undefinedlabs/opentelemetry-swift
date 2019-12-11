@@ -18,7 +18,7 @@ import Foundation
 import OpenTelemetryApi
 
 /// Interface for getting the current time.
-public protocol Clock {
+public protocol Clock: AnyObject {
     /// Obtains the current epoch timestamp in nanos from this clock.
     var now: Int { get }
 
