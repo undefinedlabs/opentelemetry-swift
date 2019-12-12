@@ -19,6 +19,7 @@ import OpenTelemetryApi
 
 /// SpanBuilderSdk is SDK implementation of SpanBuilder.
 public class SpanBuilderSdk: SpanBuilder {
+
     private enum ParentType {
         case currentSpan
         case explicitParent
@@ -40,7 +41,7 @@ public class SpanBuilderSdk: SpanBuilder {
     private var parent: Span?
     private var remoteParent: SpanContext?
     private var spanKind = SpanKind.internal
-
+    private var attributes: AttributesWithCapacity
     private var links = [Link]()
     private var parentType: ParentType = .currentSpan
 
@@ -57,9 +58,11 @@ public class SpanBuilderSdk: SpanBuilder {
         self.instrumentationLibraryInfo = instrumentationLibraryInfo
         self.spanProcessor = spanProcessor
         self.traceConfig = traceConfig
+        self.attributes = AttributesWithCapacity(minimumCapacity: traceConfig.maxNumberOfLinks)
         self.resource = resource
         self.idsGenerator = idsGenerator
         self.clock = clock
+
     }
 
     public func setParent(_ parent: Span) -> Self {
@@ -93,6 +96,11 @@ public class SpanBuilderSdk: SpanBuilder {
 
     public func addLink(_ link: Link) -> Self {
         links.append(link)
+        return self
+    }
+
+    public func setAttribute(key: String, value: AttributeValue) -> Self {
+        attributes.updateValue(value, forKey: key)
         return self
     }
 
@@ -135,6 +143,8 @@ public class SpanBuilderSdk: SpanBuilder {
             return DefaultSpan(context: spanContext, kind: spanKind)
         }
 
+        attributes.merge(samplingDecision.attributes) { _, other in other }
+
         return RecordEventsReadableSpan.startSpan(context: spanContext,
                                                   name: spanName,
                                                   instrumentationLibraryInfo: instrumentationLibraryInfo,
@@ -145,7 +155,7 @@ public class SpanBuilderSdk: SpanBuilder {
                                                   spanProcessor: spanProcessor,
                                                   clock: SpanBuilderSdk.getClock(parent: SpanBuilderSdk.getParentSpan(parentType: parentType, explicitParent: parent), clock: clock),
                                                   resource: resource,
-                                                  attributes: samplingDecision.attributes,
+                                                  attributes: attributes,
                                                   links: truncatedLinks,
                                                   totalRecordedLinks: links.count,
                                                   startEpochNanos: startEpochNanos)

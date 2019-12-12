@@ -73,18 +73,6 @@ public class DefaultSpan: Span {
     public func updateName(name: String) {
     }
 
-    public func setAttribute(key: String, value: String) {
-    }
-
-    public func setAttribute(key: String, value: Int) {
-    }
-
-    public func setAttribute(key: String, value: Double) {
-    }
-
-    public func setAttribute(key: String, value: Bool) {
-    }
-
     public func setAttribute(key: String, value: AttributeValue) {
     }
 

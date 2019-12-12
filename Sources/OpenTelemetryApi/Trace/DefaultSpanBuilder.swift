@@ -67,4 +67,8 @@ public class DefaultSpanBuilder: SpanBuilder {
     @discardableResult public func setStartTimestamp(startTimestamp: Int) -> Self {
         return self
     }
+
+    public func setAttribute(key: String, value: AttributeValue) -> Self {
+        return self
+    }
 }

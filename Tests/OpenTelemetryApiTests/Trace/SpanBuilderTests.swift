@@ -39,6 +39,11 @@ class SpanBuilderTests: XCTestCase {
         spanBuilder.addLink(spanContext: DefaultSpan.random().context, attributes: [String: AttributeValue]())
         spanBuilder.addLink(spanContext: DefaultSpan.random().context, attributes: [String: AttributeValue]())
         spanBuilder.addLink(TestLink())
+        spanBuilder.setAttribute(key: "key", value: "value")
+        spanBuilder.setAttribute(key: "key", value: 12345)
+        spanBuilder.setAttribute(key: "key", value: 0.12345)
+        spanBuilder.setAttribute(key: "key", value: true)
+        spanBuilder.setAttribute(key: "key", value: AttributeValue.string("value"))
         spanBuilder.setStartTimestamp(startTimestamp: 12345)
         XCTAssert(spanBuilder.startSpan() is DefaultSpan)
     }

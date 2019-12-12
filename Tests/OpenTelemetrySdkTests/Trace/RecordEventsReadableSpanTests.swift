@@ -308,6 +308,9 @@ class RecordEventsReadableSpanTest: XCTestCase {
         labels["foo"] = "bar"
         let resource = Resource(labels: labels)
         let attributes = TestUtils.generateRandomAttributes()
+        var attributesWithCapacity = AttributesWithCapacity(minimumCapacity: 32)
+        attributesWithCapacity.merge(attributes) { _, other in other }
+
         let event1Attributes = TestUtils.generateRandomAttributes()
         let event2Attributes = TestUtils.generateRandomAttributes()
         let context = SpanContext.create(traceId: traceId,
@@ -327,7 +330,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
                                                               spanProcessor: spanProcessor,
                                                               clock: clock,
                                                               resource: resource,
-                                                              attributes: attributes,
+                                                              attributes: attributesWithCapacity,
                                                               links: links,
                                                               totalRecordedLinks: 1,
                                                               startEpochNanos: 0)
@@ -383,6 +386,9 @@ class RecordEventsReadableSpanTest: XCTestCase {
     }
 
     private func createTestSpan(kind: SpanKind, config: TraceConfig, parentSpanId: SpanId?, attributes: [String: AttributeValue]) -> RecordEventsReadableSpan {
+        var attributesWithCapacity = AttributesWithCapacity(minimumCapacity: config.maxNumberOfAttributes)
+        attributesWithCapacity.merge(attributes) { _, other in other }
+
         let span = RecordEventsReadableSpan.startSpan(context: spanContext,
                                                       name: spanName,
                                                       instrumentationLibraryInfo: instrumentationLibraryInfo,
@@ -393,7 +399,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
                                                       spanProcessor: spanProcessor,
                                                       clock: testClock,
                                                       resource: resource,
-                                                      attributes: attributes,
+                                                      attributes: attributesWithCapacity,
                                                       links: [link],
                                                       totalRecordedLinks: 1,
                                                       startEpochNanos: 0)

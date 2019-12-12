@@ -28,13 +28,31 @@ struct TestUtils {
     }
 
     static func makeBasicSpan() -> SpanData {
-        return SpanData(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate(), resource: Resource(), instrumentationLibraryInfo: InstrumentationLibraryInfo(), name: "spanName", kind: .server, startEpochNanos: 100000000000 + 100, endEpochNanos: 200000000000 + 200, hasRemoteParent: false)
+        return SpanData(traceId: TraceId(),
+                        spanId: SpanId(),
+                        traceFlags: TraceFlags(),
+                        tracestate: Tracestate(),
+                        resource: Resource(),
+                        instrumentationLibraryInfo: InstrumentationLibraryInfo(),
+                        name: "spanName",
+                        kind: .server,
+                        startEpochNanos: 100000000000 + 100,
+                        endEpochNanos: 200000000000 + 200,
+                        hasRemoteParent: false)
     }
 
     static func startSpanWithSampler(tracerSdkFactory: TracerSdkFactory, tracer: Tracer, spanName: String, sampler: Sampler) -> SpanBuilder {
+        return startSpanWithSampler(tracerSdkFactory: tracerSdkFactory, tracer: tracer, spanName: spanName, sampler: sampler, attributes: [String: AttributeValue]())
+    }
+
+    static func startSpanWithSampler(tracerSdkFactory: TracerSdkFactory, tracer: Tracer, spanName: String, sampler: Sampler, attributes: [String: AttributeValue]) -> SpanBuilder {
         let originalConfig = tracerSdkFactory.getActiveTraceConfig()
         tracerSdkFactory.updateActiveTraceConfig(originalConfig.settingSampler(sampler))
         defer { tracerSdkFactory.updateActiveTraceConfig(originalConfig) }
-        return tracer.spanBuilder(spanName: spanName)
+        let builder = tracer.spanBuilder(spanName: spanName)
+        for attribute in attributes {
+            builder.setAttribute(key: attribute.key, value: attribute.value)
+        }
+        return builder
     }
 }

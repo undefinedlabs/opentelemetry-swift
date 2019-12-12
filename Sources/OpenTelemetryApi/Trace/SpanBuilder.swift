@@ -63,7 +63,7 @@ public protocol SpanBuilder: class {
     ///   - attributes: the attributes of the Link
     @discardableResult func addLink(spanContext: SpanContext, attributes: [String: AttributeValue]) -> Self
 
-    /// Adds a Link to the newly created Span}.
+    /// Adds a Link to the newly created Span.
     ///
     /// Links are used to link Span}s in different traces. Used (for example) in batching
     /// operations, where a single batch handler processes multiple requests from different traces or
@@ -71,16 +71,51 @@ public protocol SpanBuilder: class {
     /// - Parameter link: the Link to be added.
     @discardableResult func addLink(_ link: Link) -> Self
 
-    /// Sets the Span.Kind} for the newly created Span}. If not called, the
-    /// implementation will provide a default value Span.Kind#INTERNAL}.
+    /// Sets an attribute to the newly created {@code Span}. If {@code Span.Builder} previously
+    /// contained a mapping for the key, the old value is replaced by the specified value.
+    /// - Parameters:
+    ///   - key: the key for this attribute
+    ///   - value: the value for this attribute
+    @discardableResult func setAttribute(key: String, value: String) -> Self
+
+    /// Sets an attribute to the newly created {@code Span}. If {@code Span.Builder} previously
+    /// contained a mapping for the key, the old value is replaced by the specified value.
+    /// - Parameters:
+    ///   - key: the key for this attribute
+    ///   - value: the value for this attribute
+    @discardableResult func setAttribute(key: String, value: Int) -> Self
+
+    /// Sets an attribute to the newly created {@code Span}. If {@code Span.Builder} previously
+    /// contained a mapping for the key, the old value is replaced by the specified value.
+    /// - Parameters:
+    ///   - key: the key for this attribute
+    ///   - value: the value for this attribute
+    @discardableResult func setAttribute(key: String, value: Double) -> Self
+
+    /// Sets an attribute to the newly created {@code Span}. If {@code Span.Builder} previously
+    /// contained a mapping for the key, the old value is replaced by the specified value.
+    /// - Parameters:
+    ///   - key: the key for this attribute
+    ///   - value: the value for this attribute
+    @discardableResult func setAttribute(key: String, value: Bool) -> Self
+
+    /// Sets an attribute to the newly created {@code Span}. If {@code Span.Builder} previously
+    /// contained a mapping for the key, the old value is replaced by the specified value.
+    /// - Parameters:
+    ///   - key: the key for this attribute
+    ///   - value: the value for this attribute
+    @discardableResult func setAttribute(key: String, value: AttributeValue) -> Self
+
+    /// Sets the Span.Kind for the newly created Span. If not called, the
+    /// implementation will provide a default value Span.Kind#INTERNAL.
     /// - Parameter spanKind: the kind of the newly created Span
     @discardableResult func setSpanKind(spanKind: SpanKind) -> Self
 
-    /// Sets an explicit start timestamp for the newly created Span}.
+    /// Sets an explicit start timestamp for the newly created Span.
     ///
     /// Use this method to specify an explicit start timestamp. If not called, the implementation
     /// will use the timestamp value at #startSpan() time, which should be the default case.
-    /// - Parameter startTimestamp: the explicit start timestamp of the newly created Span} in nanos since epoch.
+    /// - Parameter startTimestamp: the explicit start timestamp of the newly created Span in nanos since epoch.
     @discardableResult func setStartTimestamp(startTimestamp: Int) -> Self
 
     /// Starts a new Span.
@@ -89,4 +124,22 @@ public protocol SpanBuilder: class {
     ///
     /// Does not install the newly created Span to the current Context.
     func startSpan() -> Span
+}
+
+extension SpanBuilder {
+    public func setAttribute(key: String, value: String) -> Self {
+        return setAttribute(key: key, value: AttributeValue.string(value))
+    }
+
+    public func setAttribute(key: String, value: Int) -> Self {
+        return setAttribute(key: key, value: AttributeValue.int(value))
+    }
+
+    public func setAttribute(key: String, value: Double) -> Self {
+        return setAttribute(key: key, value: AttributeValue.double(value))
+    }
+
+    public func setAttribute(key: String, value: Bool) -> Self {
+        return setAttribute(key: key, value: AttributeValue.bool(value))
+    }
 }

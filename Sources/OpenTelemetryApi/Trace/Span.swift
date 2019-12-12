@@ -129,6 +129,24 @@ public enum SpanAttributeConstants: String {
 }
 
 extension Span {
+    public func setAttribute(key: String, value: String) {
+        return setAttribute(key: key, value: AttributeValue.string(value))
+    }
+
+    public func setAttribute(key: String, value: Int) {
+        return setAttribute(key: key, value: AttributeValue.int(value))
+    }
+
+    public func setAttribute(key: String, value: Double) {
+        return setAttribute(key: key, value: AttributeValue.double(value))
+    }
+
+    public func setAttribute(key: String, value: Bool) {
+        return setAttribute(key: key, value: AttributeValue.bool(value))
+    }
+}
+
+extension Span {
     /// Helper methods according to https://github.com/open-telemetry/OpenTelemetry-specs/blob/4954074adf815f437534457331178194f6847ff9/trace/HTTP.md.
 
     /// Helper method that populates span properties from http method
