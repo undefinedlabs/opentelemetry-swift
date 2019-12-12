@@ -19,7 +19,6 @@ import OpenTelemetryApi
 
 /// SpanBuilderSdk is SDK implementation of SpanBuilder.
 public class SpanBuilderSdk: SpanBuilder {
-
     private enum ParentType {
         case currentSpan
         case explicitParent
@@ -58,11 +57,10 @@ public class SpanBuilderSdk: SpanBuilder {
         self.instrumentationLibraryInfo = instrumentationLibraryInfo
         self.spanProcessor = spanProcessor
         self.traceConfig = traceConfig
-        self.attributes = AttributesWithCapacity(minimumCapacity: traceConfig.maxNumberOfLinks)
+        attributes = AttributesWithCapacity(capacity: traceConfig.maxNumberOfAttributes)
         self.resource = resource
         self.idsGenerator = idsGenerator
         self.clock = clock
-
     }
 
     public func setParent(_ parent: Span) -> Self {
@@ -100,7 +98,7 @@ public class SpanBuilderSdk: SpanBuilder {
     }
 
     public func setAttribute(key: String, value: AttributeValue) -> Self {
-        attributes.updateValue(value, forKey: key)
+        attributes.updateValue(value: value, forKey: key)
         return self
     }
 
@@ -143,7 +141,7 @@ public class SpanBuilderSdk: SpanBuilder {
             return DefaultSpan(context: spanContext, kind: spanKind)
         }
 
-        attributes.merge(samplingDecision.attributes) { _, other in other }
+        attributes.updateValues(attributes: samplingDecision.attributes)
 
         return RecordEventsReadableSpan.startSpan(context: spanContext,
                                                   name: spanName,

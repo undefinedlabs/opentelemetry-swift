@@ -17,11 +17,6 @@
 import Foundation
 import OpenTelemetryApi
 
-// TODO: needs proper implementation of EvictingQueue
-public typealias EvictingQueue = [TimedEvent]
-// TODO: needs proper implementation of AttributesWithCapacity
-public typealias AttributesWithCapacity = [String: AttributeValue]
-
 /// Implementation for the Span class that records trace events.
 public class RecordEventsReadableSpan: ReadableSpan {
     public var isRecordingEvents = true
@@ -59,9 +54,9 @@ public class RecordEventsReadableSpan: ReadableSpan {
     /// The resource associated with this span.
     public private(set) var startEpochNanos: Int
     /// Set of recorded attributes. DO NOT CALL any other method that changes the ordering of events.
-    public private(set) var attributes = AttributesWithCapacity()
+    public private(set) var attributes: AttributesWithCapacity
     /// List of recorded events.
-    public private(set) var timedEvents = EvictingQueue()
+    public private(set) var events: ArrayWithCapacity<TimedEvent>
     /// Number of events recorded.
     public private(set) var totalRecordedEvents = 0
     /// The number of children.
@@ -86,10 +81,11 @@ public class RecordEventsReadableSpan: ReadableSpan {
                  kind: SpanKind,
                  parentSpanId: SpanId?,
                  hasRemoteParent: Bool,
+                 traceConfig: TraceConfig,
                  spanProcessor: SpanProcessor,
                  clock: Clock,
                  resource: Resource,
-                 attributes: [String: AttributeValue],
+                 attributes: AttributesWithCapacity,
                  links: [Link],
                  totalRecordedLinks: Int,
                  startEpochNanos: Int) {
@@ -106,6 +102,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
         self.resource = resource
         self.startEpochNanos = (startEpochNanos == 0 ? clock.now : startEpochNanos)
         self.attributes = attributes
+        events = ArrayWithCapacity<TimedEvent>(capacity: traceConfig.maxNumberOfEvents)
     }
 
     /// Creates and starts a span with the given configuration.
@@ -134,7 +131,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
                                  spanProcessor: SpanProcessor,
                                  clock: Clock,
                                  resource: Resource,
-                                 attributes: [String: AttributeValue],
+                                 attributes: AttributesWithCapacity,
                                  links: [Link],
                                  totalRecordedLinks: Int,
                                  startEpochNanos: Int) -> RecordEventsReadableSpan {
@@ -143,6 +140,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
                                             instrumentationLibraryInfo: instrumentationLibraryInfo,
                                             kind: kind, parentSpanId: parentSpanId,
                                             hasRemoteParent: hasRemoteParent,
+                                            traceConfig: traceConfig,
                                             spanProcessor: spanProcessor,
                                             clock: clock,
                                             resource: resource,
@@ -165,7 +163,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
                         name: name,
                         kind: kind,
                         startEpochNanos: startEpochNanos,
-                        attributes: attributes,
+                        attributes: attributes.dictionary,
                         timedEvents: adaptTimedEvents(),
                         links: adaptLinks(),
                         status: status,
@@ -174,7 +172,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
     }
 
     private func adaptTimedEvents() -> [SpanData.TimedEvent] {
-        let sourceEvents = timedEvents
+        let sourceEvents = events
         var result = [SpanData.TimedEvent]()
         sourceEvents.forEach {
             result.append(SpanData.TimedEvent(epochNanos: $0.epochNanos, name: $0.name, attributes: $0.attributes))
@@ -257,7 +255,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
         if hasBeenEnded {
             return
         }
-        timedEvents.append(timedEvent)
+        events.append(timedEvent)
         totalRecordedEvents += 1
     }
 
@@ -306,24 +304,3 @@ public class RecordEventsReadableSpan: ReadableSpan {
         return totalRecordedEvents
     }
 }
-
-// struct AttributesWithCapacity {
-//    fileprivate var attributes = [(String, AttributeValue)]()
-//    fileprivate var capacity: Int = 0//
-//    init( attributes)//
-//    mutating func setCapacity(capacity: Int) {
-//        self.capacity = capacity
-//        attributes.reserveCapacity(capacity + 1)
-//    }//
-//    subscript(name: String) -> AttributeValue {
-//        get {
-//            return attributes.first { $0.0 == name }!.1
-//        }
-//        set(newValue) {
-//            attributes.append((name, newValue))
-//            if attributes.count > capacity {
-//                attributes.removeFirst()
-//            }
-//        }
-//    }
-// }

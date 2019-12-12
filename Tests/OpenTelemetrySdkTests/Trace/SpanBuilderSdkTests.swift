@@ -82,22 +82,21 @@ class SpanBuilderSdkTest: XCTestCase {
     }
 
     func testDroppingAttributes() {
-        // TODO: needs proper implementation of AttributesWithCapacity
-//        let maxNumberOfAttrs = 8
-//        let traceConfig = tracerSdkFactory.getActiveTraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttrs)
-//        tracerSdkFactory.updateActiveTraceConfig(traceConfig)
-//        let spanBuilder = tracerSdk.spanBuilder(spanName: spanName)
-//        for i in 0 ..< 2 * maxNumberOfAttrs {
-//            spanBuilder.setAttribute(key: "key\(i)", value: i)
-//        }
-//        let span = spanBuilder.startSpan() as! RecordEventsReadableSpan
-//        let attrs = span.attributes
-//        XCTAssertEqual(attrs.count, maxNumberOfAttrs)
-//        for i in 0 ..< maxNumberOfAttrs {
-//            XCTAssertEqual(attrs["key\(i + maxNumberOfAttrs)"], AttributeValue.int(i + maxNumberOfAttrs))
-//        }
-//        span.end()
-//        tracerSdkFactory.updateActiveTraceConfig(TraceConfig())
+        let maxNumberOfAttrs = 8
+        let traceConfig = tracerSdkFactory.getActiveTraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttrs)
+        tracerSdkFactory.updateActiveTraceConfig(traceConfig)
+        let spanBuilder = tracerSdk.spanBuilder(spanName: spanName)
+        for i in 0 ..< 2 * maxNumberOfAttrs {
+            spanBuilder.setAttribute(key: "key\(i)", value: i)
+        }
+        let span = spanBuilder.startSpan() as! RecordEventsReadableSpan
+        let attrs = span.attributes
+        XCTAssertEqual(attrs.count, maxNumberOfAttrs)
+        for i in 0 ..< maxNumberOfAttrs {
+            XCTAssertEqual(attrs["key\(i + maxNumberOfAttrs)"], AttributeValue.int(i + maxNumberOfAttrs))
+        }
+        span.end()
+        tracerSdkFactory.updateActiveTraceConfig(TraceConfig())
     }
 
     func testRecordEvents_default() {
