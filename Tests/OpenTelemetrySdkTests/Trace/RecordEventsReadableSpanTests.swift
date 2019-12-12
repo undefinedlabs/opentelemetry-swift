@@ -212,87 +212,84 @@ class RecordEventsReadableSpanTest: XCTestCase {
     }
 
     func testDroppingAttributes() {
-        // TODO: needs proper implementation of AttributesWithCapacity
-//        let maxNumberOfAttributes = 8
-//        let traceConfig = TraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttributes)
-//        let span = createTestSpan(config: traceConfig)//
-//        for i in 0 ..< 2 * maxNumberOfAttributes {
-//            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
-//        }
-//        var spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)//
-//        for i in 0 ..< maxNumberOfAttributes {
-//            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
-//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
-//        }
-//        span.end()
-//        spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)//
-//        for i in 0 ..< maxNumberOfAttributes {
-//            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
-//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
-//        }
+        let maxNumberOfAttributes = 8
+        let traceConfig = TraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttributes)
+        let span = createTestSpan(config: traceConfig) //
+        for i in 0 ..< 2 * maxNumberOfAttributes {
+            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
+        }
+        var spanData = span.toSpanData()
+        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes) //
+        for i in 0 ..< maxNumberOfAttributes {
+            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
+            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
+        }
+        span.end()
+        spanData = span.toSpanData()
+        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes) //
+        for i in 0 ..< maxNumberOfAttributes {
+            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
+            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
+        }
     }
 
     func testDroppingAndAddingAttributes() {
-        // TODO: needs proper implementation of AttributesWithCapacity
-//        let maxNumberOfAttributes = 8
-//        let traceConfig = TraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttributes)
-//        let span = createTestSpan(config: traceConfig)
-//        for i in 0 ..< 2 * maxNumberOfAttributes {
-//            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
-//        }
-//        var spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)//
-//        for i in 0 ..< maxNumberOfAttributes {
-//            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
-//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
-//        }//
-//        for i in 0 ..< maxNumberOfAttributes / 2 {
-//            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
-//        }
-//        spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)
-//        // Test that we still have in the attributes map the latest maxNumberOfAttributes / 2 entries.
-//        for i in 0 ..< maxNumberOfAttributes / 2 {
-//            let val = i + maxNumberOfAttributes * 3 / 2
-//            let expectedValue = AttributeValue.int(val)
-//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(val)"], expectedValue)
-//        }
-//        // Test that we have the newest re-added initial entries.
-//        for i in 0 ..< maxNumberOfAttributes / 2 {
-//            let expectedValue = AttributeValue.int(i)
-//            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i)"], expectedValue)
-//        }
-//        span.end()
+        let maxNumberOfAttributes = 8
+        let traceConfig = TraceConfig().settingMaxNumberOfAttributes(maxNumberOfAttributes)
+        let span = createTestSpan(config: traceConfig)
+        for i in 0 ..< 2 * maxNumberOfAttributes {
+            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
+        }
+        var spanData = span.toSpanData()
+        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes) //
+        for i in 0 ..< maxNumberOfAttributes {
+            let expectedValue = AttributeValue.int(i + maxNumberOfAttributes)
+            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i + maxNumberOfAttributes)"], expectedValue)
+        } //
+        for i in 0 ..< maxNumberOfAttributes / 2 {
+            span.setAttribute(key: "MyStringAttributeKey\(i)", value: AttributeValue.int(i))
+        }
+        spanData = span.toSpanData()
+        XCTAssertEqual(spanData.attributes.count, maxNumberOfAttributes)
+        // Test that we still have in the attributes map the latest maxNumberOfAttributes / 2 entries.
+        for i in 0 ..< maxNumberOfAttributes / 2 {
+            let val = i + maxNumberOfAttributes * 3 / 2
+            let expectedValue = AttributeValue.int(val)
+            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(val)"], expectedValue)
+        }
+        // Test that we have the newest re-added initial entries.
+        for i in 0 ..< maxNumberOfAttributes / 2 {
+            let expectedValue = AttributeValue.int(i)
+            XCTAssertEqual(spanData.attributes["MyStringAttributeKey\(i)"], expectedValue)
+        }
+        span.end()
     }
 
     func testDroppingEvents() {
-        // TODO: needs proper implementation of AttributesWithCapacity
-//        let maxNumberOfEvents = 8
-//        let traceConfig = TraceConfig().settingMaxNumberOfEvents(maxNumberOfEvents)
-//        let span = createTestSpan(config: traceConfig)
-//        for _ in 0 ..< 2 * maxNumberOfEvents {
-//            span.addEvent(name: "event2", attributes: [String: AttributeValue]())
-//            testClock.advanceMillis(millisPerSecond)
-//        }
-//        var spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)//
-//        for i in 0 ..< maxNumberOfEvents {
-//            let expectedEvent = SpanData.TimedEvent(epochNanos: Int(maxNumberOfEvents + i) * nanosPerSecond,
-//                                                    name: "event2",
-//                                                    attributes: [String: AttributeValue]())
-//            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
-//        }
-//        span.end()
-//        spanData = span.toSpanData()
-//        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)
-//        for i in 0 ..< maxNumberOfEvents {
-//            let expectedEvent = SpanData.TimedEvent(epochNanos: Int(maxNumberOfEvents + i) * nanosPerSecond,
-//                                                    name: "event2",
-//                                                    attributes: [String: AttributeValue]())
-//            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
-//        }
+        let maxNumberOfEvents = 8
+        let traceConfig = TraceConfig().settingMaxNumberOfEvents(maxNumberOfEvents)
+        let span = createTestSpan(config: traceConfig)
+        for _ in 0 ..< 2 * maxNumberOfEvents {
+            span.addEvent(name: "event2", attributes: [String: AttributeValue]())
+            testClock.advanceMillis(millisPerSecond)
+        }
+        var spanData = span.toSpanData()
+        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents) //
+        for i in 0 ..< maxNumberOfEvents {
+            let expectedEvent = SpanData.TimedEvent(epochNanos: startEpochNanos + Int(maxNumberOfEvents + i) * nanosPerSecond,
+                                                    name: "event2",
+                                                    attributes: [String: AttributeValue]())
+            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
+        }
+        span.end()
+        spanData = span.toSpanData()
+        XCTAssertEqual(spanData.timedEvents.count, maxNumberOfEvents)
+        for i in 0 ..< maxNumberOfEvents {
+            let expectedEvent = SpanData.TimedEvent(epochNanos: startEpochNanos + Int(maxNumberOfEvents + i) * nanosPerSecond,
+                                                    name: "event2",
+                                                    attributes: [String: AttributeValue]())
+            XCTAssertEqual(spanData.timedEvents[i], expectedEvent)
+        }
     }
 
     func testAsSpanData() {
@@ -308,8 +305,8 @@ class RecordEventsReadableSpanTest: XCTestCase {
         labels["foo"] = "bar"
         let resource = Resource(labels: labels)
         let attributes = TestUtils.generateRandomAttributes()
-        var attributesWithCapacity = AttributesWithCapacity(minimumCapacity: 32)
-        attributesWithCapacity.merge(attributes) { _, other in other }
+        var attributesWithCapacity = AttributesWithCapacity(capacity: 32)
+        attributesWithCapacity.updateValues(attributes: attributes)
 
         let event1Attributes = TestUtils.generateRandomAttributes()
         let event2Attributes = TestUtils.generateRandomAttributes()
@@ -386,8 +383,8 @@ class RecordEventsReadableSpanTest: XCTestCase {
     }
 
     private func createTestSpan(kind: SpanKind, config: TraceConfig, parentSpanId: SpanId?, attributes: [String: AttributeValue]) -> RecordEventsReadableSpan {
-        var attributesWithCapacity = AttributesWithCapacity(minimumCapacity: config.maxNumberOfAttributes)
-        attributesWithCapacity.merge(attributes) { _, other in other }
+        var attributesWithCapacity = AttributesWithCapacity(capacity: config.maxNumberOfAttributes)
+        attributesWithCapacity.updateValues(attributes: attributes)
 
         let span = RecordEventsReadableSpan.startSpan(context: spanContext,
                                                       name: spanName,
