@@ -33,3 +33,4 @@ let package = Package(
         .testTarget( name: "OpenTelemetrySdkTests", dependencies: ["OpenTelemetryApi", "OpenTelemetrySdk"], path: "Tests/OpenTelemetrySdkTests"),
     ]
 )
+
