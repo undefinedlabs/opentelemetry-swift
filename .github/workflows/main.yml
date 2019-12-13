@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Scope for iOS
-        uses: undefinedlabs/scope-for-ios-action@spm-projects
+        uses: undefinedlabs/scope-for-ios-action@v1
         with:
           dsn: ${{ secrets.SCOPE_DSN }}
           
