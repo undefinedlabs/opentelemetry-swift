@@ -1,0 +1,18 @@
+name: Scope Testing
+
+on: [push]
+
+jobs:
+  scope:
+    runs-on: macOS-latest
+    
+    steps:
+      - name: Check if SCOPE_DSN is set
+        run: if [ "${{secrets.SCOPE_DSN}}" = "" ]; then exit 1; fi
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Scope for iOS
+        uses: undefinedlabs/scope-for-ios-action@v1
+        with:
+          dsn: ${{ secrets.SCOPE_DSN }}
+          
