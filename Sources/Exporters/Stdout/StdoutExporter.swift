@@ -17,14 +17,17 @@
 import Foundation
 import OpenTelemetrySdk
 
-class SimpleStdoutExporter: SpanExporter {
-    func export(spans: [SpanData]) -> SpanExporterResultCode {
+public class StdoutExporter: SpanExporter {
+    public init() {
+    }
+
+    public func export(spans: [SpanData]) -> SpanExporterResultCode {
         for span in spans {
             print("__________________")
             print("Span \(span.name):")
             print("TraceId: \(span.traceId.hexString)")
-            print("kind: \(span.kind.rawValue)")
             print("SpanId: \(span.spanId.hexString)")
+            print("Span kind: \(span.kind.rawValue)")
             print("TraceFlags: \(span.traceFlags)")
             print("Tracestate: \(span.tracestate)")
             print("ParentSpanId: \(span.parentSpanId?.hexString ?? "no Parent")")
@@ -35,6 +38,6 @@ class SimpleStdoutExporter: SpanExporter {
         return .success
     }
 
-    func shutdown() {
+    public func shutdown() {
     }
 }

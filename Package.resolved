@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Thrift",
+        "repositoryURL": "https://github.com/undefinedlabs/Thrift-Swift",
+        "state": {
+          "branch": null,
+          "revision": "66a7338c7f14dc700f0dca4c29c51b800c222ee0",
+          "version": "1.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
