@@ -15,8 +15,9 @@
  */
 
 import Foundation
-import OpenTelemetryApi
+import JaegerExporter
 import OpenTelemetrySdk
+import StdoutExporter
 
 let sampleKey = "sampleKey"
 let sampleValue = "sampleValue"
@@ -25,7 +26,8 @@ let instrumentationLibraryName = "SimpleExporter"
 let instrumentationLibraryVersion = "semver:0.1.0"
 var instrumentationLibraryInfo = InstrumentationLibraryInfo(name: instrumentationLibraryName, version: instrumentationLibraryVersion)
 
-var tracer: Tracer!
+var tracer: TracerSdk
+tracer = OpenTelemetrySDK.instance.tracerFactory.get(instrumentationName: instrumentationLibraryName, instrumentationVersion: instrumentationLibraryVersion) as! TracerSdk
 
 func simpleSpan() {
     let span = tracer.spanBuilder(spanName: "SimpleSpan").setSpanKind(spanKind: .client).startSpan()
@@ -50,8 +52,13 @@ func childSpan() {
     span.end()
 }
 
-tracer = OpenTelemetrySDK.instance.tracerFactory.get(instrumentationName: instrumentationLibraryName, instrumentationVersion: instrumentationLibraryVersion)
-let spanProcessor = SimpleSpanProcessor(spanExporter: SimpleStdoutExporter())
+let jaegerCollectorAdress = "localhost"
+let jaegerExporter = JaegerSpanExporter(serviceName: "SimpleExporter", collectorAddress: jaegerCollectorAdress)
+let stdoutExporter = StdoutExporter()
+
+let spanExporter = MultiSpanExporter(spanExporters: [jaegerExporter, stdoutExporter])
+
+let spanProcessor = SimpleSpanProcessor(spanExporter: spanExporter)
 OpenTelemetrySDK.instance.tracerFactory.addSpanProcessor(spanProcessor)
 
 simpleSpan()

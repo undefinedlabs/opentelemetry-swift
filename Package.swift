@@ -12,19 +12,23 @@ let package = Package(
     products: [
         .library( name: "OpenTelemetryApi", targets: ["OpenTelemetryApi"]),
         .library( name: "OpenTelemetrySdk", targets: ["OpenTelemetrySdk"]),
+        .library( name: "JaegerExporter", targets: ["JaegerExporter"]),
+        .library( name: "StdoutExporter", targets: ["StdoutExporter"]),
         .executable(name: "simpleExporter", targets: ["SimpleExporter"]),
         .executable(name: "loggingTracer", targets: ["LoggingTracer"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(url:  "https://github.com/undefinedlabs/Thrift-Swift", from: "1.1.1") // Need custom fork because of SPM
     ],
     targets: [
         .target(  name: "OpenTelemetryApi", dependencies: []),
-        .target(  name: "OpenTelemetrySdk", dependencies: ["OpenTelemetryApi"]),
-        .target(  name: "LoggingTracer", dependencies: ["OpenTelemetryApi"], path: "Examples/Logging Tracer"),
-        .target(  name: "SimpleExporter", dependencies: ["OpenTelemetrySdk"], path: "Examples/Simple Exporter"),
         .testTarget( name: "OpenTelemetryApiTests", dependencies: ["OpenTelemetryApi"], path: "Tests/OpenTelemetryApiTests"),
+        .target(  name: "OpenTelemetrySdk", dependencies: ["OpenTelemetryApi"]),
         .testTarget( name: "OpenTelemetrySdkTests", dependencies: ["OpenTelemetryApi", "OpenTelemetrySdk"], path: "Tests/OpenTelemetrySdkTests"),
+        .target(  name: "JaegerExporter", dependencies: ["OpenTelemetrySdk", "Thrift"], path: "Sources/Exporters/Jaeger"),
+        .testTarget(  name: "JaegerExporterTests", dependencies: ["JaegerExporter"], path: "Tests/ExportersTests/Jaeger"),
+        .target(  name: "StdoutExporter", dependencies: ["OpenTelemetrySdk"], path: "Sources/Exporters/Stdout"),
+        .target(  name: "LoggingTracer", dependencies: ["OpenTelemetryApi"], path: "Examples/Logging Tracer"),
+        .target(  name: "SimpleExporter", dependencies: ["OpenTelemetrySdk", "JaegerExporter", "StdoutExporter"], path: "Examples/Simple Exporter"),
     ]
 )
