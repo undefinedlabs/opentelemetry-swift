@@ -96,7 +96,7 @@ private class BatchWorker: Thread {
             if spanList.count < maxExportBatchSize {
                 repeat {
                     cond.wait(until: Date().addingTimeInterval(scheduleDelay))
-                } while spanList.count == 0
+                } while spanList.isEmpty
             }
             spansCopy = spanList
             spanList.removeAll()
