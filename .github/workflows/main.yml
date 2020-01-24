@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Scope for iOS
-        uses: undefinedlabs/scope-for-swift-action@master
+        uses: undefinedlabs/scope-for-swift-action@v1
         with:
           dsn: ${{ secrets.SCOPE_DSN }}
           platform: macos
