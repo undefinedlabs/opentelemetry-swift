@@ -9,10 +9,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Scope for iOS
+      - name: Scope for Swift
         uses: undefinedlabs/scope-for-swift-action@v1
         with:
           dsn: ${{ secrets.SCOPE_DSN }}
-          platform: macos
           codePath: true
           
