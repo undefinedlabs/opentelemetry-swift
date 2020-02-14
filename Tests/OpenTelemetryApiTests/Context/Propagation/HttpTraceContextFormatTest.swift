@@ -31,7 +31,6 @@ class HttpTraceContextFormatTest: XCTestCase {
 
     let traceStateNotDefaultEncoding = "foo=bar,bar=baz"
     let httpTraceContext = HttpTraceContextFormat()
-    
 
     struct TestSetter: Setter {
         func set(carrier: inout [String: String], key: String, value: String) {
@@ -195,5 +194,10 @@ class HttpTraceContextFormatTest: XCTestCase {
     func testHeaderNames() {
         XCTAssertEqual(HttpTraceContextFormat.traceparent, "traceparent")
         XCTAssertEqual(HttpTraceContextFormat.traceState, "traceState")
+    }
+
+    func testExtract_EmptyCarrier() {
+        let emptyHeaders = [String: String]()
+        XCTAssertFalse(httpTraceContext.extract(carrier: emptyHeaders, getter: getter).isValid)
     }
 }
