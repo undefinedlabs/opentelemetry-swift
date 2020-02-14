@@ -31,6 +31,7 @@ class HttpTraceContextFormatTest: XCTestCase {
 
     let tracestateNotDefaultEncoding = "foo=bar,bar=baz"
     let httpTraceContext = HttpTraceContextFormat()
+    
 
     struct TestSetter: Setter {
         func set(carrier: inout [String: String], key: String, value: String) {
@@ -133,37 +134,37 @@ class HttpTraceContextFormatTest: XCTestCase {
     func testExtract_InvalidTraceId() {
         var invalidHeaders = [String: String]()
         invalidHeaders[HttpTraceContextFormat.traceparent] = "00-" + "abcdefghijklmnopabcdefghijklmnop" + "-" + spanId_base16 + "-01"
-        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
+        XCTAssertFalse(httpTraceContext.extract(carrier: invalidHeaders, getter: getter).isValid)
     }
 
     func testExtract_InvalidTraceId_Size() {
         var invalidHeaders = [String: String]()
         invalidHeaders[HttpTraceContextFormat.traceparent] = "00-" + traceId_base16 + "00-" + spanId_base16 + "-01"
-        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
+        XCTAssertFalse(httpTraceContext.extract(carrier: invalidHeaders, getter: getter).isValid)
     }
 
     func testExtract_InvalidSpanId() {
         var invalidHeaders = [String: String]()
         invalidHeaders[HttpTraceContextFormat.traceparent] = "00-" + traceId_base16 + "-" + "abcdefghijklmnop" + "-01"
-        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
+        XCTAssertFalse(httpTraceContext.extract(carrier: invalidHeaders, getter: getter).isValid)
     }
 
     func testExtract_InvalidSpanId_Size() {
         var invalidHeaders = [String: String]()
         invalidHeaders[HttpTraceContextFormat.traceparent] = "00-" + traceId_base16 + "-" + spanId_base16 + "00-01"
-        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
+        XCTAssertFalse(httpTraceContext.extract(carrier: invalidHeaders, getter: getter).isValid)
     }
 
     func testExtract_InvalidTraceFlags() {
         var invalidHeaders = [String: String]()
         invalidHeaders[HttpTraceContextFormat.traceparent] = "00-" + traceId_base16 + "-" + spanId_base16 + "-gh"
-        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
+        XCTAssertFalse(httpTraceContext.extract(carrier: invalidHeaders, getter: getter).isValid)
     }
 
     func testExtract_InvalidTraceFlags_Size() {
         var invalidHeaders = [String: String]()
         invalidHeaders[HttpTraceContextFormat.traceparent] = "00-" + traceId_base16 + "-" + spanId_base16 + "-0100"
-        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
+        XCTAssertFalse(httpTraceContext.extract(carrier: invalidHeaders, getter: getter).isValid)
     }
 
 //    func testExtract_InvalidTracestate_EntriesDelimiter() {

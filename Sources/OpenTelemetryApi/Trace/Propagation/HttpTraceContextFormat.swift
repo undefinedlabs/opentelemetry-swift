@@ -50,17 +50,17 @@ public struct HttpTraceContextFormat: TextFormattable {
         }
     }
 
-    public func extract<G>(carrier: [String: String], getter: G) -> SpanContext? where G: Getter {
+    public func extract<G>(carrier: [String: String], getter: G) -> SpanContext where G: Getter {
         guard let traceparentCollection = getter.get(carrier: carrier,
                                                      key: HttpTraceContextFormat.traceparent),
             traceparentCollection.count <= 1 else {
             // multiple traceparent are not allowed
-            return nil
+                return SpanContext.invalid
         }
         let traceparent = traceparentCollection.first
 
         guard let extractedTraceParent = extractTraceparent(traceparent: traceparent) else {
-            return nil
+            return SpanContext.invalid
         }
 
         let tracestateCollection = getter.get(carrier: carrier, key: HttpTraceContextFormat.tracestate)
