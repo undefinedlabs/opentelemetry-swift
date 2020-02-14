@@ -52,7 +52,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         traceId = idsGenerator.generateTraceId()
         spanId = idsGenerator.generateSpanId()
         parentSpanId = idsGenerator.generateSpanId()
-        spanContext = SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: Tracestate())
+        spanContext = SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), traceState: TraceState())
         testClock = TestClock(nanos: startEpochNanos)
         link = SpanData.Link(context: spanContext)
         attributes["MyStringAttributeKey"] = AttributeValue.string("MyStringAttributeValue")
@@ -313,7 +313,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         let context = SpanContext.create(traceId: traceId,
                                          spanId: spanId,
                                          traceFlags: TraceFlags(),
-                                         tracestate: Tracestate())
+                                         traceState: TraceState())
         let link1 = SpanData.Link(context: context, attributes: TestUtils.generateRandomAttributes())
         let links = [link1]
 
@@ -348,7 +348,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         let expected = SpanData(traceId: traceId,
                                 spanId: spanId,
                                 traceFlags: TraceFlags(),
-                                tracestate: Tracestate(),
+                                traceState: TraceState(),
                                 parentSpanId: parentSpanId,
                                 resource: resource,
                                 instrumentationLibraryInfo: instrumentationLibraryInfo,
@@ -429,7 +429,7 @@ class RecordEventsReadableSpanTest: XCTestCase {
         XCTAssertEqual(spanData.spanId, spanId)
         XCTAssertEqual(spanData.parentSpanId, parentSpanId)
         XCTAssertEqual(spanData.hasRemoteParent, expectedHasRemoteParent)
-        XCTAssertEqual(spanData.tracestate, Tracestate())
+        XCTAssertEqual(spanData.traceState, TraceState())
         XCTAssertEqual(spanData.resource, resource)
         XCTAssertEqual(spanData.instrumentationLibraryInfo, instrumentationLibraryInfo)
         XCTAssertEqual(spanData.name, spanName)

@@ -44,8 +44,8 @@ public struct SpanData: Equatable {
     /// The trace flags for this span.
     public private(set) var traceFlags: TraceFlags
 
-    /// The Tracestate for this span.
-    public private(set) var tracestate: Tracestate
+    /// The TraceState for this span.
+    public private(set) var traceState: TraceState
 
     /// The parent SpanId. If the  Span is a root Span, the SpanId
     /// returned will be nil.
@@ -88,7 +88,7 @@ public struct SpanData: Equatable {
         return lhs.traceId == rhs.traceId &&
             lhs.spanId == rhs.spanId &&
             lhs.traceFlags == rhs.traceFlags &&
-            lhs.tracestate == rhs.tracestate &&
+            lhs.traceState == rhs.traceState &&
             lhs.parentSpanId == rhs.parentSpanId &&
             lhs.name == rhs.name &&
             lhs.kind == rhs.kind &&
@@ -122,8 +122,8 @@ public struct SpanData: Equatable {
         return self
     }
 
-    public mutating func settingTracestate(_ tracestate: Tracestate) -> SpanData {
-        self.tracestate = tracestate
+    public mutating func settingTraceState(_ traceState: TraceState) -> SpanData {
+        self.traceState = traceState
         return self
     }
 

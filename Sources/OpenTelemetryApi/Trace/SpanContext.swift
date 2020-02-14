@@ -29,23 +29,23 @@ public final class SpanContext: Equatable, CustomStringConvertible {
     /// The traceFlags associated with this SpanContext
     public private(set) var traceFlags: TraceFlags
 
-    /// The tracestate associated with this SpanContext
-    public let tracestate: Tracestate
+    /// The traceState associated with this SpanContext
+    public let traceState: TraceState
 
-    /// The tracestate associated with this SpanContext
+    /// The traceState associated with this SpanContext
     public let isRemote: Bool
 
     /// The invalid SpanContext that can be used for no-op operations.
     public static let invalid = SpanContext(traceId: TraceId.invalid,
                                             spanId: SpanId.invalid,
                                             traceFlags: TraceFlags(),
-                                            tracestate: Tracestate(), isRemote: false)
+                                            traceState: TraceState(), isRemote: false)
 
-    private init(traceId: TraceId, spanId: SpanId, traceFlags: TraceFlags, tracestate: Tracestate, isRemote: Bool) {
+    private init(traceId: TraceId, spanId: SpanId, traceFlags: TraceFlags, traceState: TraceState, isRemote: Bool) {
         self.traceId = traceId
         self.spanId = spanId
         self.traceFlags = traceFlags
-        self.tracestate = tracestate
+        self.traceState = traceState
         self.isRemote = isRemote
     }
 
@@ -54,15 +54,15 @@ public final class SpanContext: Equatable, CustomStringConvertible {
     ///   - traceId: the trace identifier of the span context.
     ///   - spanId: the span identifier of the span context.
     ///   - traceFlags: he trace options for the span context.
-    ///   - tracestate: the trace state for the span context.
+    ///   - traceState: the trace state for the span context.
     public static func create(traceId: TraceId,
                               spanId: SpanId,
                               traceFlags: TraceFlags,
-                              tracestate: Tracestate) -> SpanContext {
+                              traceState: TraceState) -> SpanContext {
         return SpanContext(traceId: traceId,
                            spanId: spanId,
                            traceFlags: traceFlags,
-                           tracestate: tracestate,
+                           traceState: traceState,
                            isRemote: false)
     }
 
@@ -72,15 +72,15 @@ public final class SpanContext: Equatable, CustomStringConvertible {
     ///   - traceId: the trace identifier of the span context.
     ///   - spanId: the span identifier of the span context.
     ///   - traceFlags: he trace options for the span context.
-    ///   - tracestate: the trace state for the span context.
+    ///   - traceState: the trace state for the span context.
     public static func createFromRemoteParent(traceId: TraceId,
                                               spanId: SpanId,
                                               traceFlags: TraceFlags,
-                                              tracestate: Tracestate) -> SpanContext {
+                                              traceState: TraceState) -> SpanContext {
         return SpanContext(traceId: traceId,
                            spanId: spanId,
                            traceFlags: traceFlags,
-                           tracestate: tracestate,
+                           traceState: traceState,
                            isRemote: true)
     }
 

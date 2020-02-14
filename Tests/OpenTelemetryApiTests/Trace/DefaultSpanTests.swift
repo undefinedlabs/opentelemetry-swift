@@ -31,7 +31,7 @@ final class DefaultSpanTest: XCTestCase {
     func testHasInvalidContextAndDefaultSpanOptions() {
         let context = DefaultSpan.random().context
         XCTAssertEqual(context.traceFlags, TraceFlags())
-        XCTAssertEqual(context.tracestate, Tracestate())
+        XCTAssertEqual(context.traceState, TraceState())
     }
 
     func testHasUniqueTraceIdAndSpanId() {

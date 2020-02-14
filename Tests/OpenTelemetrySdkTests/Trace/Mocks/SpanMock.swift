@@ -25,7 +25,7 @@ class SpanMock: Span {
         return .client
     }
 
-    var context: SpanContext = SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate())
+    var context: SpanContext = SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), traceState: TraceState())
 
     var isRecordingEvents: Bool = false
 

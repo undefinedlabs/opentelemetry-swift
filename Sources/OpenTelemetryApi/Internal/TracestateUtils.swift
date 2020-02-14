@@ -16,50 +16,50 @@
 
 import Foundation
 
-struct TracestateUtils {
+struct TraceStateUtils {
     private static let keyMaxSize = 256
     private static let valueMaxSize = 256
     private static let maxKeyValuePairsCount = 32
 
-    /// Extracts tracestate pairs from the given string and appends it to provided tracestate list
+    /// Extracts traceState pairs from the given string and appends it to provided traceState list
     /// - Parameters:
-    ///   - tracestateString: String with comma separated tracestate key value pairs.
-    ///   - tracestate: Array to set tracestate pairs on.
-    static func appendTracestate(tracestateString: String, tracestate: inout [Tracestate.Entry]) -> Bool {
-        guard !tracestate.isEmpty else { return false }
+    ///   - traceStateString: String with comma separated traceState key value pairs.
+    ///   - traceState: Array to set traceState pairs on.
+    static func appendTraceState(traceStateString: String, traceState: inout [TraceState.Entry]) -> Bool {
+        guard !traceState.isEmpty else { return false }
 
         var names = Set<String>()
 
-        let tracestateString = tracestateString.trimmingCharacters(in: CharacterSet(charactersIn: " ,"))
+        let traceStateString = traceStateString.trimmingCharacters(in: CharacterSet(charactersIn: " ,"))
 
-        // tracestate: rojo=00-0af7651916cd43dd8448eb211c80319c-00f067aa0ba902b7-01,congo=BleGNlZWRzIHRohbCBwbGVhc3VyZS4
-        let pair = tracestateString.components(separatedBy: ",")
+        // traceState: rojo=00-0af7651916cd43dd8448eb211c80319c-00f067aa0ba902b7-01,congo=BleGNlZWRzIHRohbCBwbGVhc3VyZS4
+        let pair = traceStateString.components(separatedBy: ",")
         for entry in pair {
-            if let entry = TracestateUtils.parseKeyValue(pairString: entry), !names.contains(entry.key) {
+            if let entry = TraceStateUtils.parseKeyValue(pairString: entry), !names.contains(entry.key) {
                 names.update(with: entry.key)
-                tracestate.append(entry)
+                traceState.append(entry)
             } else {
                 return false
             }
 
-            if tracestate.count == maxKeyValuePairsCount {
+            if traceState.count == maxKeyValuePairsCount {
                 break
             }
         }
         return true
     }
 
-    /// Returns Tracestate description as a string with the values
-    /// - Parameter tracestate: the tracestate to return description from
-    static func getString(tracestate: Tracestate) -> String {
-        let entries = tracestate.entries
+    /// Returns TraceState description as a string with the values
+    /// - Parameter traceState: the traceState to return description from
+    static func getString(traceState: TraceState) -> String {
+        let entries = traceState.entries
         var result = ""
 
         if entries.isEmpty {
             return result
         }
 
-        for entry in tracestate.entries.prefix(maxKeyValuePairsCount) {
+        for entry in traceState.entries.prefix(maxKeyValuePairsCount) {
             result += "\(entry.key)=\(entry.value),"
         }
         result.removeLast()
@@ -74,7 +74,7 @@ struct TracestateUtils {
         let allowed = "abcdefghijklmnopqrstuvwxyz0123456789_-*/@"
         let characterSet = CharacterSet(charactersIn: allowed)
 
-        if key.count > TracestateUtils.keyMaxSize || key.isEmpty || key.unicodeScalars.first! > "z" {
+        if key.count > TraceStateUtils.keyMaxSize || key.isEmpty || key.unicodeScalars.first! > "z" {
             return false
         }
         guard key.rangeOfCharacter(from: characterSet.inverted) == nil else {
@@ -91,7 +91,7 @@ struct TracestateUtils {
     /// Value is opaque string up to 256 characters printable ASCII RFC0020 characters (i.e., the range
     /// 0x20 to 0x7E) except comma , and =.
     static func validateValue(value: String) -> Bool {
-        if value.count > TracestateUtils.valueMaxSize || value.last == " " {
+        if value.count > TraceStateUtils.valueMaxSize || value.last == " " {
             return false
         }
 
@@ -104,10 +104,10 @@ struct TracestateUtils {
         return true
     }
 
-    private static func parseKeyValue(pairString: String) -> Tracestate.Entry? {
+    private static func parseKeyValue(pairString: String) -> TraceState.Entry? {
         let pair = pairString.components(separatedBy: "=")
         guard pair.count == 2 else { return nil }
 
-        return Tracestate.Entry(key: pair[0], value: pair[1])
+        return TraceState.Entry(key: pair[0], value: pair[1])
     }
 }

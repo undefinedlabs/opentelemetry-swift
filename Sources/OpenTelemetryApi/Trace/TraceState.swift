@@ -24,7 +24,7 @@ import Foundation
 /// forward slashes /.
 /// Value is opaque string up to 256 characters printable ASCII RFC0020 characters (i.e., the
 /// range 0x20 to 0x7E) except comma , and =.
-public struct Tracestate: Equatable {
+public struct TraceState: Equatable {
     private static let maxKeyValuePairs = 32
 
     private(set) var entries = [Entry]()
@@ -34,7 +34,7 @@ public struct Tracestate: Equatable {
     }
 
     init?(entries: [Entry]) {
-        guard entries.count <= Tracestate.maxKeyValuePairs else { return nil }
+        guard entries.count <= TraceState.maxKeyValuePairs else { return nil }
 
         self.entries = entries
     }
@@ -60,16 +60,16 @@ public struct Tracestate: Equatable {
         entries.append(entry)
     }
 
-    /// Returns a copy the tracestate by appending the Entry that has the given key if it is present.
+    /// Returns a copy the traceState by appending the Entry that has the given key if it is present.
     /// The new Entry will always be added in the front of the existing list of entries.
     /// - Parameters:
     ///   - key: the key for the Entry to be added.
     ///   - value: the value for the Entry to be added.
     public func setting(key: String, value: String) -> Self {
         // Initially create the Entry to validate input.
-        var newTracestate = self
-        newTracestate.set(key: key, value: value)
-        return newTracestate
+        var newTraceState = self
+        newTraceState.set(key: key, value: value)
+        return newTraceState
     }
 
     /// Removes the Entry that has the given key if it is present.
@@ -80,16 +80,16 @@ public struct Tracestate: Equatable {
         }
     }
 
-    /// Returns a copy the tracestate by removinf the Entry that has the given key if it is present.
+    /// Returns a copy the traceState by removinf the Entry that has the given key if it is present.
     /// - Parameter key: the key for the Entry to be removed.
-    public func removing(key: String) -> Tracestate {
+    public func removing(key: String) -> TraceState {
         // Initially create the Entry to validate input.
-        var newTracestate = self
-        newTracestate.remove(key: key)
-        return newTracestate
+        var newTraceState = self
+        newTraceState.remove(key: key)
+        return newTraceState
     }
 
-    /// Immutable key-value pair for Tracestate
+    /// Immutable key-value pair for TraceState
     public struct Entry: Equatable {
         /// The key of the Entry
         public private(set) var key: String
@@ -97,12 +97,12 @@ public struct Tracestate: Equatable {
         /// The value of the Entry
         public private(set) var value: String
 
-        /// Creates a new Entry for the Tracestate.
+        /// Creates a new Entry for the TraceState.
         /// - Parameters:
         ///   - key: the Entry's key.
         ///   - value: the Entry's value.
         init?(key: String, value: String) {
-            if TracestateUtils.validateKey(key: key) && TracestateUtils.validateValue(value: value) {
+            if TraceStateUtils.validateKey(key: key) && TraceStateUtils.validateValue(value: value) {
                 self.key = key
                 self.value = value
                 return

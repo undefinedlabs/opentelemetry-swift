@@ -23,7 +23,7 @@ class SpanBuilderSdkTest: XCTestCase {
     let sampledSpanContext = SpanContext.create(traceId: TraceId(idHi: 1000, idLo: 1000),
                                                 spanId: SpanId(id: 3000),
                                                 traceFlags: TraceFlags().settingIsSampled(true),
-                                                tracestate: Tracestate())
+                                                traceState: TraceState())
     var tracerSdkFactory = TracerSdkRegistry()
     var tracerSdk: Tracer!
 

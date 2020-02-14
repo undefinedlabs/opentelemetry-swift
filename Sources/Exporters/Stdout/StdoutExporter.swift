@@ -29,7 +29,7 @@ public class StdoutExporter: SpanExporter {
             print("SpanId: \(span.spanId.hexString)")
             print("Span kind: \(span.kind.rawValue)")
             print("TraceFlags: \(span.traceFlags)")
-            print("Tracestate: \(span.tracestate)")
+            print("TraceState: \(span.traceState)")
             print("ParentSpanId: \(span.parentSpanId?.hexString ?? "no Parent")")
             print("Start: \(span.startEpochNanos)")
             print("Duration: \(span.endEpochNanos - span.startEpochNanos)")

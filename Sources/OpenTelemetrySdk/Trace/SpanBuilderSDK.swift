@@ -116,11 +116,11 @@ public class SpanBuilderSdk: SpanBuilder {
         var parentContext = getParentContext(parentType: parentType, explicitParent: parent, remoteParent: remoteParent)
         let traceId: TraceId
         let spanId = idsGenerator.generateSpanId()
-        var tracestate = Tracestate()
+        var traceState = TraceState()
 
         if parentContext?.isValid ?? false {
             traceId = parentContext!.traceId
-            tracestate = parentContext!.tracestate
+            traceState = parentContext!.traceState
         } else {
             traceId = idsGenerator.generateTraceId()
             parentContext = nil
@@ -135,7 +135,7 @@ public class SpanBuilderSdk: SpanBuilder {
         let spanContext = SpanContext.create(traceId: traceId,
                                              spanId: spanId,
                                              traceFlags: TraceFlags().settingIsSampled(samplingDecision.isSampled),
-                                             tracestate: tracestate)
+                                             traceState: traceState)
 
         if !samplingDecision.isSampled {
             return DefaultSpan(context: spanContext, kind: spanKind)

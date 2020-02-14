@@ -31,7 +31,7 @@ struct TestUtils {
         return SpanData(traceId: TraceId(),
                         spanId: SpanId(),
                         traceFlags: TraceFlags(),
-                        tracestate: Tracestate(),
+                        traceState: TraceState(),
                         resource: Resource(),
                         instrumentationLibraryInfo: InstrumentationLibraryInfo(),
                         name: "spanName",

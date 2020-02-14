@@ -43,7 +43,7 @@ public protocol Span: AnyObject, CustomStringConvertible {
     /// - Parameters:
     ///   - key: Key of the attribute.
     ///   - value: Attribute value.
-    func setAttribute(key: String, value: String)
+    func setAttribute(key: String, value: String?)
 
     /// Puts a new attribute to the span.
     /// - Parameters:
@@ -129,7 +129,7 @@ public enum SpanAttributeConstants: String {
 }
 
 extension Span {
-    public func setAttribute(key: String, value: String) {
+    public func setAttribute(key: String, value: String?) {
         return setAttribute(key: key, value: AttributeValue.string(value))
     }
 

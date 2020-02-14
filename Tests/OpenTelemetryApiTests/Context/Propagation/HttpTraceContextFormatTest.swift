@@ -18,8 +18,8 @@
 import XCTest
 
 class HttpTraceContextFormatTest: XCTestCase {
-    let tracestate_default = Tracestate()
-    let tracestate_not_default = Tracestate().setting(key: "foo", value: "bar").setting(key: "bar", value: "baz")
+    let traceState_default = TraceState()
+    let traceState_not_default = TraceState().setting(key: "foo", value: "bar").setting(key: "bar", value: "baz")
     let traceId_base16 = "ff000000000000000000000000000041"
     var traceId: TraceId!
     let spanId_base16 = "ff00000000000041"
@@ -29,7 +29,7 @@ class HttpTraceContextFormatTest: XCTestCase {
     var traceParentHeaderSampled: String!
     var traceParentHeaderNotSampled: String!
 
-    let tracestateNotDefaultEncoding = "foo=bar,bar=baz"
+    let traceStateNotDefaultEncoding = "foo=bar,bar=baz"
     let httpTraceContext = HttpTraceContextFormat()
     
 
@@ -61,74 +61,74 @@ class HttpTraceContextFormatTest: XCTestCase {
 
     func testInject_SampledContext() {
         var carrier = [String: String]()
-        httpTraceContext.inject(spanContext: SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: sampledTraceOptions, tracestate: tracestate_default), carrier: &carrier, setter: setter)
+        httpTraceContext.inject(spanContext: SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: sampledTraceOptions, traceState: traceState_default), carrier: &carrier, setter: setter)
         XCTAssertEqual(carrier[HttpTraceContextFormat.traceparent], traceParentHeaderSampled)
     }
 
     func testInject_NotSampledContext() {
         var carrier = [String: String]()
-        httpTraceContext.inject(spanContext: SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: tracestate_default), carrier: &carrier, setter: setter)
+        httpTraceContext.inject(spanContext: SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), traceState: traceState_default), carrier: &carrier, setter: setter)
         XCTAssertEqual(carrier[HttpTraceContextFormat.traceparent], traceParentHeaderNotSampled)
     }
 
     func testInject_SampledContext_WithTraceState() {
         var carrier = [String: String]()
-        httpTraceContext.inject(spanContext: SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: sampledTraceOptions, tracestate: tracestate_not_default), carrier: &carrier, setter: setter)
+        httpTraceContext.inject(spanContext: SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: sampledTraceOptions, traceState: traceState_not_default), carrier: &carrier, setter: setter)
         XCTAssertEqual(carrier[HttpTraceContextFormat.traceparent], traceParentHeaderSampled)
-        XCTAssertEqual(carrier[HttpTraceContextFormat.tracestate], tracestateNotDefaultEncoding)
+        XCTAssertEqual(carrier[HttpTraceContextFormat.traceState], traceStateNotDefaultEncoding)
     }
 
     func testInject_NotSampledContext_WithTraceState() {
         var carrier = [String: String]()
-        httpTraceContext.inject(spanContext: SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: tracestate_not_default), carrier: &carrier, setter: setter)
+        httpTraceContext.inject(spanContext: SpanContext.create(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), traceState: traceState_not_default), carrier: &carrier, setter: setter)
         XCTAssertEqual(carrier[HttpTraceContextFormat.traceparent], traceParentHeaderNotSampled)
-        XCTAssertEqual(carrier[HttpTraceContextFormat.tracestate], tracestateNotDefaultEncoding)
+        XCTAssertEqual(carrier[HttpTraceContextFormat.traceState], traceStateNotDefaultEncoding)
     }
 
     func testExtract_SampledContext() {
         var carrier = [String: String]()
         carrier[HttpTraceContextFormat.traceparent] = traceParentHeaderSampled
-        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: sampledTraceOptions, tracestate: tracestate_not_default))
+        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: sampledTraceOptions, traceState: traceState_not_default))
     }
 
     func testExtract_NotSampledContext() {
         var carrier = [String: String]()
         carrier[HttpTraceContextFormat.traceparent] = traceParentHeaderNotSampled
-        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: tracestate_default))
+        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), traceState: traceState_default))
     }
 
     func testExtract_SampledContext_WithTraceState() {
         var carrier = [String: String]()
         carrier[HttpTraceContextFormat.traceparent] = traceParentHeaderSampled
-        carrier[HttpTraceContextFormat.tracestate] = tracestateNotDefaultEncoding
-        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: sampledTraceOptions, tracestate: tracestate_not_default))
+        carrier[HttpTraceContextFormat.traceState] = traceStateNotDefaultEncoding
+        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: sampledTraceOptions, traceState: traceState_not_default))
     }
 
     func testExtract_NotSampledContext_WithTraceState() {
         var carrier = [String: String]()
         carrier[HttpTraceContextFormat.traceparent] = traceParentHeaderNotSampled
-        carrier[HttpTraceContextFormat.tracestate] = tracestateNotDefaultEncoding
-        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: tracestate_not_default))
+        carrier[HttpTraceContextFormat.traceState] = traceStateNotDefaultEncoding
+        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), traceState: traceState_not_default))
     }
 
     func testExtract_NotSampledContext_NextVersion() {
         var carrier = [String: String]()
         carrier[HttpTraceContextFormat.traceparent] = "01-" + traceId_base16 + "-" + spanId_base16 + "-00-02"
-        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: tracestate_default))
+        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), traceState: traceState_default))
     }
 
     func testExtract_NotSampledContext_EmptyTraceState() {
         var carrier = [String: String]()
         carrier[HttpTraceContextFormat.traceparent] = traceParentHeaderNotSampled
-        carrier[HttpTraceContextFormat.tracestate] = ""
-        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: tracestate_default))
+        carrier[HttpTraceContextFormat.traceState] = ""
+        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), traceState: traceState_default))
     }
 
     func testExtract_NotSampledContext_TraceStateWithSpaces() {
         var carrier = [String: String]()
         carrier[HttpTraceContextFormat.traceparent] = traceParentHeaderNotSampled
-        carrier[HttpTraceContextFormat.tracestate] = "foo=bar   ,    bar=baz"
-        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), tracestate: tracestate_not_default))
+        carrier[HttpTraceContextFormat.traceState] = "foo=bar   ,    bar=baz"
+        XCTAssertEqual(httpTraceContext.extract(carrier: carrier, getter: getter), SpanContext.createFromRemoteParent(traceId: traceId, spanId: spanId, traceFlags: TraceFlags(), traceState: traceState_not_default))
     }
 
     func testExtract_InvalidTraceId() {
@@ -167,22 +167,22 @@ class HttpTraceContextFormatTest: XCTestCase {
         XCTAssertFalse(httpTraceContext.extract(carrier: invalidHeaders, getter: getter).isValid)
     }
 
-//    func testExtract_InvalidTracestate_EntriesDelimiter() {
+//    func testExtract_InvalidTraceState_EntriesDelimiter() {
 //        var invalidHeaders = [String: String]()
 //        invalidHeaders[HttpTraceContextFormat.traceparent] = "00-" + traceId_base16 + "-" + spanId_base16 + "-01"
-//        invalidHeaders[HttpTraceContextFormat.tracestate] = "foo=bar;test=test"
+//        invalidHeaders[HttpTraceContextFormat.traceState] = "foo=bar;test=test"
 //        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
 //    }//
-//    func testExtract_InvalidTracestate_KeyValueDelimiter() {
+//    func testExtract_InvalidTraceState_KeyValueDelimiter() {
 //        var invalidHeaders = [String: String]()
 //        invalidHeaders[HttpTraceContextFormat.traceparent] = "00-" + traceId_base16 + "-" + spanId_base16 + "-01"
-//        invalidHeaders[HttpTraceContextFormat.tracestate] = "foo=bar,test-test"
+//        invalidHeaders[HttpTraceContextFormat.traceState] = "foo=bar,test-test"
 //        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
 //    }//
-//    func testExtract_InvalidTracestate_OneString() {
+//    func testExtract_InvalidTraceState_OneString() {
 //        var invalidHeaders = [String: String]()
 //        invalidHeaders[HttpTraceContextFormat.traceparent] = "00-" + traceId_base16 + "-" + spanId_base16 + "-01"
-//        invalidHeaders[HttpTraceContextFormat.tracestate] = "test-test"
+//        invalidHeaders[HttpTraceContextFormat.traceState] = "test-test"
 //        XCTAssertNil(httpTraceContext.extract(carrier: invalidHeaders, getter: getter))
 //    }
 
@@ -194,6 +194,6 @@ class HttpTraceContextFormatTest: XCTestCase {
 
     func testHeaderNames() {
         XCTAssertEqual(HttpTraceContextFormat.traceparent, "traceparent")
-        XCTAssertEqual(HttpTraceContextFormat.tracestate, "tracestate")
+        XCTAssertEqual(HttpTraceContextFormat.traceState, "traceState")
     }
 }

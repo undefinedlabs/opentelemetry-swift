@@ -25,7 +25,7 @@ class ProbabilitySamplerTest: XCTestCase {
     var traceId: TraceId!
     var spanId: SpanId!
     var parentSpanId: SpanId!
-    let tracestate = Tracestate()
+    let traceState = TraceState()
     var sampledSpanContext: SpanContext!
     var notSampledSpanContext: SpanContext!
     var sampledParentLink: SpanData.Link!
@@ -34,8 +34,8 @@ class ProbabilitySamplerTest: XCTestCase {
         traceId = idsGenerator.generateTraceId()
         spanId = idsGenerator.generateSpanId()
         parentSpanId = idsGenerator.generateSpanId()
-        sampledSpanContext = SpanContext.create(traceId: traceId, spanId: parentSpanId, traceFlags: TraceFlags().settingIsSampled(true), tracestate: tracestate)
-        notSampledSpanContext = SpanContext.create(traceId: traceId, spanId: parentSpanId, traceFlags: TraceFlags(), tracestate: tracestate)
+        sampledSpanContext = SpanContext.create(traceId: traceId, spanId: parentSpanId, traceFlags: TraceFlags().settingIsSampled(true), traceState: traceState)
+        notSampledSpanContext = SpanContext.create(traceId: traceId, spanId: parentSpanId, traceFlags: TraceFlags(), traceState: traceState)
         sampledParentLink = SpanData.Link(context: sampledSpanContext)
     }
 

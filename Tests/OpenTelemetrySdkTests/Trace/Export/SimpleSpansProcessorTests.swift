@@ -26,8 +26,8 @@ class SimpleSpansProcessorTests: XCTestCase {
     var tracerSdkFactory = TracerSdkRegistry()
     var tracer: Tracer!
     //   let waitingSpanExporter = WaitingSpanExporter();
-    let sampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags().settingIsSampled(true), tracestate: Tracestate())
-    let notSampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate())
+    let sampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags().settingIsSampled(true), traceState: TraceState())
+    let notSampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), traceState: TraceState())
 
     var simpleSampledSpansProcessor: SimpleSpanProcessor!
 

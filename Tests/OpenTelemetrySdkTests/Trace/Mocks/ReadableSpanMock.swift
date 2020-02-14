@@ -34,7 +34,7 @@ class ReadableSpanMock: ReadableSpan {
         return forcedReturnSpanData ?? SpanData(traceId: context.traceId,
                                                 spanId: context.spanId,
                                                 traceFlags: context.traceFlags,
-                                                tracestate: Tracestate(),
+                                                traceState: TraceState(),
                                                 resource: Resource(labels: [String: String]()),
                                                 instrumentationLibraryInfo: InstrumentationLibraryInfo(),
                                                 name: "ReadableSpanMock",
@@ -45,7 +45,7 @@ class ReadableSpanMock: ReadableSpan {
     }
 
     var context: SpanContext {
-        forcedReturnSpanContext ?? SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), tracestate: Tracestate())
+        forcedReturnSpanContext ?? SpanContext.create(traceId: TraceId.random(), spanId: SpanId.random(), traceFlags: TraceFlags(), traceState: TraceState())
     }
 
     var isRecordingEvents: Bool = false

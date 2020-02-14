@@ -156,7 +156,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
         return SpanData(traceId: context.traceId,
                         spanId: context.spanId,
                         traceFlags: context.traceFlags,
-                        tracestate: context.tracestate,
+                        traceState: context.traceState,
                         parentSpanId: parentSpanId,
                         resource: resource,
                         instrumentationLibraryInfo: instrumentationLibraryInfo,
