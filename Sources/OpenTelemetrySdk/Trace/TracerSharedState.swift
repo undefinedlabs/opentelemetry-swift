@@ -16,7 +16,7 @@
 
 import Foundation
 
-/// Represents the shared state/config between all Tracers created by the same TracerFactory.
+/// Represents the shared state/config between all Tracers created by the same TracerRegistry.
 public class TracerSharedState {
     public private(set) var clock: Clock
     public private(set) var idsGenerator: IdsGenerator

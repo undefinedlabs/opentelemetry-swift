@@ -23,7 +23,7 @@ class BatchSpansProcessorTests: XCTestCase {
     let spanName1 = "MySpanName/1"
     let spanName2 = "MySpanName/2"
     let maxScheduleDelay = 0.5
-    let tracerSdkFactory = TracerSdkFactory()
+    let tracerSdkFactory = TracerSdkRegistry()
     var tracer: Tracer!
     let waitingSpanExporter = WaitingSpanExporter()
     let blockingSpanExporter = BlockingSpanExporter()

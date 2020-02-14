@@ -17,7 +17,7 @@
 import Foundation
 
 /// A factory for creating named Tracers.
-open class TracerFactory {
+open class TracerRegistry {
     public init() {}
     /// Gets or creates a named tracer instance.
     /// - Parameters:

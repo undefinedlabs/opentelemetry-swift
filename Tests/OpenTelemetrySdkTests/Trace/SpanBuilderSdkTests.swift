@@ -24,7 +24,7 @@ class SpanBuilderSdkTest: XCTestCase {
                                                 spanId: SpanId(id: 3000),
                                                 traceFlags: TraceFlags().settingIsSampled(true),
                                                 tracestate: Tracestate())
-    var tracerSdkFactory = TracerSdkFactory()
+    var tracerSdkFactory = TracerSdkRegistry()
     var tracerSdk: Tracer!
 
     override func setUp() {

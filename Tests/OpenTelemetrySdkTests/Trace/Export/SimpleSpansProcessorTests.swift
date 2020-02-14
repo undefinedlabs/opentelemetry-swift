@@ -23,7 +23,7 @@ class SimpleSpansProcessorTests: XCTestCase {
     let spanName = "MySpanName"
     var readableSpan = ReadableSpanMock()
     var spanExporter = SpanExporterMock()
-    var tracerSdkFactory = TracerSdkFactory()
+    var tracerSdkFactory = TracerSdkRegistry()
     var tracer: Tracer!
     //   let waitingSpanExporter = WaitingSpanExporter();
     let sampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags().settingIsSampled(true), tracestate: Tracestate())

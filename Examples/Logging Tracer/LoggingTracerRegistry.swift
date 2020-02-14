@@ -15,11 +15,14 @@
  */
 
 import Foundation
+import OpenTelemetryApi
 
-public class DefaultTracerFactory: TracerFactory {
-    public static let instance = DefaultTracerFactory()
-
-    public override func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer {
-        return DefaultTracer.instance
+class LoggingTracerRegistry: TracerRegistry {
+    override func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer {
+        Logger.log("TracerFactory.get(\(instrumentationName), \(instrumentationVersion ?? ""))")
+        var labels = [String: String]()
+        labels["instrumentationName"] = instrumentationName
+        labels["instrumentationVersion"] = instrumentationVersion
+        return LoggingTracer()
     }
 }

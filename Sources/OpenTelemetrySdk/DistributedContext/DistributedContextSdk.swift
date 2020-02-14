@@ -89,7 +89,7 @@ public class CorrelationContextSdkBuilder: CorrelationContextBuilder {
     public func build() -> CorrelationContext {
         var parentCopy = parent
         if parent == nil && !noImplicitParent {
-            parentCopy = OpenTelemetry.instance.distributedContextManager.getCurrentContext()
+            parentCopy = OpenTelemetry.instance.contextManager.getCurrentContext()
         }
         return CorrelationContextSdk(entries: entries, parent: parentCopy as? CorrelationContextSdk)
     }
