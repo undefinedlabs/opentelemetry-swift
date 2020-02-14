@@ -16,7 +16,7 @@
 import Foundation
 
 /// This class provides a static global accessor for telemetry objects Tracer, Meter
-///  and DistributedContextManager.
+///  and CorrelationContextManager.
 ///  The telemetry objects are lazy-loaded singletons resolved via ServiceLoader mechanism.
 public struct OpenTelemetry {
     public static var instance = OpenTelemetry()
@@ -27,20 +27,20 @@ public struct OpenTelemetry {
 //    /// Registered MeterFactory or default via DefaultMeterFactory.instance.
 //    public private(set)  var meter: MeterFactory
 
-    /// registered manager or default via  DefaultDistributedContextManager.instance.
-    public private(set) var distributedContextManager: DistributedContextManager
+    /// registered manager or default via  DefaultCorrelationContextManager.instance.
+    public private(set) var distributedContextManager: CorrelationContextManager
 
     private init() {
         tracerFactory = DefaultTracerFactory.instance
 //        meter = DefaultMeterFactory.instance;
-        distributedContextManager = DefaultDistributedContextManager.instance
+        distributedContextManager = DefaultCorrelationContextManager.instance
     }
 
     public static func registerTracerFactory(tracerFactory: TracerFactory) {
         instance.tracerFactory = tracerFactory
     }
 
-    public static func registerDistributedContextManager(distributedContextManager: DistributedContextManager) {
+    public static func registerCorrelationContextManager(distributedContextManager: CorrelationContextManager) {
         instance.distributedContextManager = distributedContextManager
     }
 }

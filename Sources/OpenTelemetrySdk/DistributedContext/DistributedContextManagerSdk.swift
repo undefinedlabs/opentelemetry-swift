@@ -17,18 +17,18 @@
 import Foundation
 import OpenTelemetryApi
 
-/// DistributedContextManagerSdk is SDK implementation of DistributedContextManager.
-public class DistributedContextManagerSdk: DistributedContextManager {
-    public func contextBuilder() -> DistributedContextBuilder {
-        return DistributedContextSdkBuilder()
+/// CorrelationContextManagerSdk is SDK implementation of CorrelationContextManager.
+public class CorrelationContextManagerSdk: CorrelationContextManager {
+    public func contextBuilder() -> CorrelationContextBuilder {
+        return CorrelationContextSdkBuilder()
     }
 
-    public func getCurrentContext() -> DistributedContext {
-        return ContextUtils.getCurrentDistributedContext() ?? EmptyDistributedContext.instance
+    public func getCurrentContext() -> CorrelationContext {
+        return ContextUtils.getCurrentCorrelationContext() ?? EmptyCorrelationContext.instance
     }
 
-    public func withContext(distContext: DistributedContext) -> Scope {
-        return ContextUtils.withDistributedContext(distContext)
+    public func withContext(distContext: CorrelationContext) -> Scope {
+        return ContextUtils.withCorrelationContext(distContext)
     }
 
     public func getBinaryFormat() -> BinaryFormattable {

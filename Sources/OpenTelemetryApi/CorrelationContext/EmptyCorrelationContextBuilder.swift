@@ -15,22 +15,26 @@
  */
 import Foundation
 
-/// An immutable implementation of the DistributedContext that does not contain any entries.
-public class EmptyDistributedContext: DistributedContext {
-    /// Returns the single instance of the EmptyDistributedContext class.
-    public static var instance = EmptyDistributedContext()
-
-    public static func contextBuilder() -> DistributedContextBuilder {
-        return EmptyDistributedContextBuilder()
+public class EmptyCorrelationContextBuilder: CorrelationContextBuilder {
+    public func setParent(_ parent: CorrelationContext) -> Self {
+        return self
     }
 
-    private init() {}
-
-    public func getEntries() -> [Entry] {
-        return [Entry]()
+    public func setNoParent() -> Self {
+        return self
     }
 
-    public func getEntryValue(key: EntryKey) -> EntryValue? {
-        return nil
+    public func put(key: EntryKey, value: EntryValue, metadata: EntryMetadata) -> Self {
+        return self
     }
+
+    public func remove(key: EntryKey) -> Self {
+        return self
+    }
+
+    public func build() -> CorrelationContext {
+        return EmptyCorrelationContext.instance
+    }
+
+    public init() {}
 }

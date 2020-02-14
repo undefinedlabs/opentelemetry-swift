@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 import Foundation
-
 import ObjectiveC
 import os.activity
+
 
 // Bridging Obj-C variabled defined as c-macroses. See `activity.h` header.
 private let OS_ACTIVITY_CURRENT = unsafeBitCast(dlsym(UnsafeMutableRawPointer(bitPattern: -2), "_os_activity_current"),

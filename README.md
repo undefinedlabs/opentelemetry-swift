@@ -34,7 +34,7 @@ or
 
 Current code is an adaptation of the Java OpenTelemetry client (0.2.1), some Swift style still missing.
 
-Currently most of Tracing and Distributed Context implemented, missing all Metrics and exporters. Also missing OpenTracing shims.
+Currently most of Tracing and Correlation Context implemented, missing all Metrics and exporters. Also missing OpenTracing shims.
 
 ## Examples
 

@@ -18,7 +18,7 @@ import OpenTelemetryApi
 @testable import OpenTelemetrySdk
 import XCTest
 
-class ScopedDistributedContextTests: XCTestCase {
+class ScopedCorrelationContextTests: XCTestCase {
     let key1 = EntryKey(name: "key 1")!
     let key2 = EntryKey(name: "key 2")!
     let key3 = EntryKey(name: "key 3")!
@@ -31,7 +31,7 @@ class ScopedDistributedContextTests: XCTestCase {
     let metadataUnlimitedPropagation = EntryMetadata(entryTtl: .unlimitedPropagation)
     let metadataNoPropagation = EntryMetadata(entryTtl: .noPropagation)
 
-    var contextManager = DistributedContextManagerSdk()
+    var contextManager = CorrelationContextManagerSdk()
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -41,10 +41,10 @@ class ScopedDistributedContextTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testEmptyDistributedContext() {
-        let defaultDistributedContext = contextManager.getCurrentContext()
-        XCTAssertEqual(defaultDistributedContext.getEntries().count, 0)
-        XCTAssertTrue(defaultDistributedContext is EmptyDistributedContext)
+    func testEmptyCorrelationContext() {
+        let defaultCorrelationContext = contextManager.getCurrentContext()
+        XCTAssertEqual(defaultCorrelationContext.getEntries().count, 0)
+        XCTAssertTrue(defaultCorrelationContext is EmptyCorrelationContext)
     }
 
     func testWithContext() {
@@ -101,7 +101,7 @@ class ScopedDistributedContextTests: XCTestCase {
         }
     }
 
-    func testMultiScopeDistributedContextWithMetadata() {
+    func testMultiScopeCorrelationContextWithMetadata() {
         let scopedDistContext = contextManager.contextBuilder().put(key: key1, value: value1, metadata: metadataUnlimitedPropagation)
             .put(key: key2, value: value2, metadata: metadataUnlimitedPropagation)
             .build()

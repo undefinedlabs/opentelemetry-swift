@@ -16,20 +16,20 @@
 
 import Foundation
 
-/// Builder for the DistributedContext class
-public protocol DistributedContextBuilder: AnyObject {
-    ///  Sets the parent DistributedContext to use. If no parent is provided, the value of
-    ///  DistributedContextManager.getCurrentContext() at build() time will be used
+/// Builder for the CorrelationContext class
+public protocol CorrelationContextBuilder: AnyObject {
+    ///  Sets the parent CorrelationContext to use. If no parent is provided, the value of
+    ///  CorrelationContextManager.getCurrentContext() at build() time will be used
     ///  as parent, unless setNoParent() was called.
-    ///  This must be used to create a DistributedContext when manual Context
+    ///  This must be used to create a CorrelationContext when manual Context
     ///  propagation is used.
     ///  If called multiple times, only the last specified value will be used.
-    /// - Parameter parent: the DistributedContext used as parent
-    @discardableResult func setParent(_ parent: DistributedContext) -> Self
+    /// - Parameter parent: the CorrelationContext used as parent
+    @discardableResult func setParent(_ parent: CorrelationContext) -> Self
 
-    /// Sets the option to become a root DistributedContext with no parent. If not
-    /// called, the value provided using setParent(DistributedContext) or otherwise
-    /// DistributedContextManager.getCurrentContext()} at build() time will be used as
+    /// Sets the option to become a root CorrelationContext with no parent. If not
+    /// called, the value provided using setParent(CorrelationContext) or otherwise
+    /// CorrelationContextManager.getCurrentContext()} at build() time will be used as
     /// parent.
     @discardableResult func setNoParent() -> Self
 
@@ -44,6 +44,6 @@ public protocol DistributedContextBuilder: AnyObject {
     /// - Parameter key: the EntryKey which will be removed.
     @discardableResult func remove(key: EntryKey) -> Self
 
-    /// Creates a DistributedContext from this builder.
-    func build() -> DistributedContext
+    /// Creates a CorrelationContext from this builder.
+    func build() -> CorrelationContext
 }

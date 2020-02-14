@@ -30,29 +30,29 @@ public struct HttpTraceContextFormat: TextFormattable {
     private static let optionsLength = "00".count
     private static let traceparentLengthV0 = "00-0af7651916cd43dd8448eb211c80319c-00f067aa0ba902b7-00".count
 
-    static let TRACEPARENT = "traceparent"
-    static let TRACESTATE = "tracestate"
+    static let traceparent = "traceparent"
+    static let tracestate = "tracestate"
 
     public init() {}
 
-    public var fields: Set<String> = [TRACESTATE, TRACEPARENT]
+    public var fields: Set<String> = [tracestate, traceparent]
 
     public func inject<S>(spanContext: SpanContext, carrier: inout [String: String], setter: S) where S: Setter {
         var traceparent = "00-\(spanContext.traceId.hexString)-\(spanContext.spanId.hexString)"
 
         traceparent += spanContext.traceFlags.sampled ? "-01" : "-00"
 
-        setter.set(carrier: &carrier, key: HttpTraceContextFormat.TRACEPARENT, value: traceparent)
+        setter.set(carrier: &carrier, key: HttpTraceContextFormat.traceparent, value: traceparent)
 
         let tracestateStr = TracestateUtils.getString(tracestate: spanContext.tracestate)
         if !tracestateStr.isEmpty {
-            setter.set(carrier: &carrier, key: HttpTraceContextFormat.TRACESTATE, value: tracestateStr)
+            setter.set(carrier: &carrier, key: HttpTraceContextFormat.tracestate, value: tracestateStr)
         }
     }
 
     public func extract<G>(carrier: [String: String], getter: G) -> SpanContext? where G: Getter {
         guard let traceparentCollection = getter.get(carrier: carrier,
-                                                     key: HttpTraceContextFormat.TRACEPARENT),
+                                                     key: HttpTraceContextFormat.traceparent),
             traceparentCollection.count <= 1 else {
             // multiple traceparent are not allowed
             return nil
@@ -63,7 +63,7 @@ public struct HttpTraceContextFormat: TextFormattable {
             return nil
         }
 
-        let tracestateCollection = getter.get(carrier: carrier, key: HttpTraceContextFormat.TRACESTATE)
+        let tracestateCollection = getter.get(carrier: carrier, key: HttpTraceContextFormat.tracestate)
 
         let tracestate = extractTracestate(tracestatecollection: tracestateCollection)
 
