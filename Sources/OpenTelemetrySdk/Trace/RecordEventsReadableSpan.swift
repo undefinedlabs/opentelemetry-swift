@@ -23,7 +23,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
     /// The displayed name of the span.
     public var name: String {
         didSet {
-            if hasBeenEnded {
+            if hasEnded {
                 name = oldValue
             }
         }
@@ -32,7 +32,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
     /// Contains the identifiers associated with this Span.
     public private(set) var context: SpanContext
     /// The parent SpanId of this span. Invalid if this is a root span.
-    public private(set) var parentSpanId: SpanId?
+    private(set) var parentSpanId: SpanId?
     /// True if the parent is on a different process.
     public private(set) var hasRemoteParent: Bool
     /// /Handler called when the span starts and ends.
@@ -54,7 +54,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
     /// The resource associated with this span.
     public private(set) var startEpochNanos: Int
     /// Set of recorded attributes. DO NOT CALL any other method that changes the ordering of events.
-    public private(set) var attributes: AttributesWithCapacity
+    private var attributes: AttributesWithCapacity
     /// List of recorded events.
     public private(set) var events: ArrayWithCapacity<TimedEvent>
     /// Number of events recorded.
@@ -64,16 +64,21 @@ public class RecordEventsReadableSpan: ReadableSpan {
     /// The status of the span.
     public var status: Status? = Status.ok {
         didSet {
-            if hasBeenEnded || status == nil {
+            if hasEnded || status == nil {
                 status = oldValue
             }
         }
     }
 
+    /// Returns the latency of the {@code Span} in nanos. If still active then returns now() - start time.
+    public var latencyNanos: Int {
+        return (hasEnded ? endEpochNanos! :  clock.now) - startEpochNanos
+    }
+
     /// The end time of the span.
     public private(set) var endEpochNanos: Int?
     /// True if the span is ended.
-    private(set) var hasBeenEnded: Bool = false
+    public private(set) var hasEnded: Bool = false
 
     private init(context: SpanContext,
                  name: String,
@@ -168,7 +173,10 @@ public class RecordEventsReadableSpan: ReadableSpan {
                         links: adaptLinks(),
                         status: status,
                         endEpochNanos: endEpochNanos ?? clock.now,
-                        hasRemoteParent: hasRemoteParent)
+                        hasRemoteParent: hasRemoteParent,
+                        hasEnded: hasEnded,
+                        totalRecordedEvents: totalRecordedEvents,
+                        totalRecordedLinks: totalRecordedLinks)
     }
 
     private func adaptTimedEvents() -> [SpanData.TimedEvent] {
@@ -188,23 +196,10 @@ public class RecordEventsReadableSpan: ReadableSpan {
         return result
     }
 
-    /// Returns the latency of the Span in nanos. If still active then returns now() - start time.
-    public func getLatencyNs() -> Int {
-        return getEndNanoTimeInternal() - startEpochNanos
-    }
-
-    /// Returns the end nano time (see System.nanoTime()). If the current Span is not
-    /// ended then returns Clock.nowNanos().
-    public func getEndNanoTime() -> Int {
-        return getEndNanoTimeInternal()
-    }
-
-    // Use getEndNanoTimeInternal to avoid over-locking.
-    private func getEndNanoTimeInternal() -> Int {
-        return hasBeenEnded ? endEpochNanos! : clock.now
-    }
-
     public func setAttribute(key: String, value: String) {
+        if value.isEmpty {
+            return
+        }
         setAttribute(key: key, value: AttributeValue.string(value))
     }
 
@@ -221,7 +216,12 @@ public class RecordEventsReadableSpan: ReadableSpan {
     }
 
     public func setAttribute(key: String, value: AttributeValue) {
-        if hasBeenEnded {
+        if case let .string(string) = value,
+            string?.isEmpty ?? true {
+            return
+        }
+
+        if hasEnded {
             return
         }
         attributes[key] = value
@@ -252,7 +252,7 @@ public class RecordEventsReadableSpan: ReadableSpan {
     }
 
     private func addTimedEvent(timedEvent: TimedEvent) {
-        if hasBeenEnded {
+        if hasEnded {
             return
         }
         events.append(timedEvent)
@@ -268,16 +268,16 @@ public class RecordEventsReadableSpan: ReadableSpan {
     }
 
     private func endInternal(timestamp: Int) {
-        if hasBeenEnded {
+        if hasEnded {
             return
         }
         endEpochNanos = timestamp
-        hasBeenEnded = true
+        hasEnded = true
         spanProcessor.onEnd(span: self)
     }
 
     public func addChild() {
-        if hasBeenEnded {
+        if hasEnded {
             return
         }
         numberOfChildren += 1

@@ -18,7 +18,6 @@ import OpenTelemetryApi
 @testable import OpenTelemetrySdk
 import XCTest
 
-// TODO: Missing all
 class BatchSpansProcessorTests: XCTestCase {
     let spanName1 = "MySpanName/1"
     let spanName2 = "MySpanName/2"

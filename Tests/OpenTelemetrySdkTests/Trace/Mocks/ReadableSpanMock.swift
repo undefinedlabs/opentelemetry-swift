@@ -19,6 +19,10 @@ import OpenTelemetryApi
 @testable import OpenTelemetrySdk
 
 class ReadableSpanMock: ReadableSpan {
+    
+    var hasEnded: Bool = false
+    var latencyNanos: Int = 0
+    
     var kind: SpanKind {
         return .client
     }

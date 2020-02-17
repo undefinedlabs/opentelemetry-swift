@@ -59,7 +59,6 @@ class TracerSdkTests: XCTestCase {
     }
 
     func testGetCurrentSpan_WithSpan() {
-        // TODO: Review, only works in isolation
         XCTAssertNil(tracer.currentSpan)
         var ws = tracer.withSpan(span)
         XCTAssertTrue(tracer.currentSpan === span)

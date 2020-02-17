@@ -38,7 +38,8 @@ struct TestUtils {
                         kind: .server,
                         startEpochNanos: 100000000000 + 100,
                         endEpochNanos: 200000000000 + 200,
-                        hasRemoteParent: false)
+                        hasRemoteParent: false,
+                        hasEnded: true)
     }
 
     static func startSpanWithSampler(tracerSdkFactory: TracerSdkRegistry, tracer: Tracer, spanName: String, sampler: Sampler) -> SpanBuilder {

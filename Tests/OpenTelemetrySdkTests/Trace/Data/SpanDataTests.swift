@@ -24,7 +24,7 @@ class SpanDataTests: XCTestCase {
 
     func testdefaultValues() {
         let spanData = createBasicSpan()
-        XCTAssertNil(spanData.parentSpanId)
+        XCTAssertFalse(spanData.parentSpanId?.isValid ?? true)
         XCTAssertEqual(spanData.attributes, [String: AttributeValue]())
         XCTAssertEqual(spanData.timedEvents, [SpanData.TimedEvent]())
         XCTAssertEqual(spanData.links.count, 0)
