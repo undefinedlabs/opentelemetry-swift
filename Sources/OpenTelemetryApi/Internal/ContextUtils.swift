@@ -17,13 +17,14 @@
 import Foundation
 import os.activity
 
+
 /// Helper class to get the current Span and current distributedContext
 /// Users must interact with the current Context via the public APIs in Tracer and avoid
 /// accessing this class directly.
 public struct ContextUtils {
     struct ContextEntry {
         var span: Span?
-        var distContext: DistributedContext?
+        var distContext: CorrelationContext?
     }
 
     static let RTLD_DEFAULT = UnsafeMutableRawPointer(bitPattern: -2)
@@ -38,8 +39,8 @@ public struct ContextUtils {
         return contextMap[activityIdent]?.span
     }
 
-    /// Returns the DistributedContext from the current context
-    public static func getCurrentDistributedContext() -> DistributedContext? {
+    /// Returns the CorrelationContext from the current context
+    public static func getCurrentCorrelationContext() -> CorrelationContext? {
         let activityIdent = os_activity_get_identifier(OS_ACTIVITY_CURRENT, nil)
         return contextMap[activityIdent]?.distContext
     }
@@ -50,21 +51,21 @@ public struct ContextUtils {
         return SpanInScope(span: span)
     }
 
-    /// Returns a new Scope encapsulating the provided Distributed Context added to the current context
-    /// - Parameter distContext: the Distributed Context to be added to the current contex
-    public static func withDistributedContext(_ distContext: DistributedContext) -> Scope {
-        return DistributedContextInScope(distContext: distContext)
+    /// Returns a new Scope encapsulating the provided Correlation Context added to the current context
+    /// - Parameter distContext: the Correlation Context to be added to the current contex
+    public static func withCorrelationContext(_ distContext: CorrelationContext) -> Scope {
+        return CorrelationContextInScope(distContext: distContext)
     }
 
     static func setContext(activityId: os_activity_id_t, forSpan span: Span) {
         if contextMap[activityId] != nil {
             contextMap[activityId]!.span = span
         } else {
-            contextMap[activityId] = ContextEntry(span: span, distContext: getCurrentDistributedContext())
+            contextMap[activityId] = ContextEntry(span: span, distContext: getCurrentCorrelationContext())
         }
     }
 
-    static func setContext(activityId: os_activity_id_t, forDistributedContext distContext: DistributedContext) {
+    static func setContext(activityId: os_activity_id_t, forCorrelationContext distContext: CorrelationContext) {
         if contextMap[activityId] != nil {
             contextMap[activityId]!.distContext = distContext
         } else {

@@ -27,7 +27,7 @@ final class DefaultTracerTests: XCTestCase {
     var spanContext: SpanContext!
 
     override func setUp() {
-        spanContext = SpanContext.create(traceId: TraceId(fromBytes: firstBytes), spanId: SpanId(fromBytes: firstBytes, withOffset: 8), traceFlags: TraceFlags(), tracestate: Tracestate())
+        spanContext = SpanContext.create(traceId: TraceId(fromBytes: firstBytes), spanId: SpanId(fromBytes: firstBytes, withOffset: 8), traceFlags: TraceFlags(), traceState: TraceState())
     }
 
     func testDefaultGetCurrentSpan() {

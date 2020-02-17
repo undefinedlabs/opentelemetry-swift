@@ -31,21 +31,22 @@ struct TestUtils {
         return SpanData(traceId: TraceId(),
                         spanId: SpanId(),
                         traceFlags: TraceFlags(),
-                        tracestate: Tracestate(),
+                        traceState: TraceState(),
                         resource: Resource(),
                         instrumentationLibraryInfo: InstrumentationLibraryInfo(),
                         name: "spanName",
                         kind: .server,
                         startEpochNanos: 100000000000 + 100,
                         endEpochNanos: 200000000000 + 200,
-                        hasRemoteParent: false)
+                        hasRemoteParent: false,
+                        hasEnded: true)
     }
 
-    static func startSpanWithSampler(tracerSdkFactory: TracerSdkFactory, tracer: Tracer, spanName: String, sampler: Sampler) -> SpanBuilder {
+    static func startSpanWithSampler(tracerSdkFactory: TracerSdkRegistry, tracer: Tracer, spanName: String, sampler: Sampler) -> SpanBuilder {
         return startSpanWithSampler(tracerSdkFactory: tracerSdkFactory, tracer: tracer, spanName: spanName, sampler: sampler, attributes: [String: AttributeValue]())
     }
 
-    static func startSpanWithSampler(tracerSdkFactory: TracerSdkFactory, tracer: Tracer, spanName: String, sampler: Sampler, attributes: [String: AttributeValue]) -> SpanBuilder {
+    static func startSpanWithSampler(tracerSdkFactory: TracerSdkRegistry, tracer: Tracer, spanName: String, sampler: Sampler, attributes: [String: AttributeValue]) -> SpanBuilder {
         let originalConfig = tracerSdkFactory.getActiveTraceConfig()
         tracerSdkFactory.updateActiveTraceConfig(originalConfig.settingSampler(sampler))
         defer { tracerSdkFactory.updateActiveTraceConfig(originalConfig) }

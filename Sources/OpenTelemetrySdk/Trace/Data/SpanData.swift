@@ -42,20 +42,20 @@ public struct SpanData: Equatable {
     public private(set) var spanId: SpanId
 
     /// The trace flags for this span.
-    public private(set) var traceFlags: TraceFlags
+    public private(set) var traceFlags: TraceFlags = TraceFlags()
 
-    /// The Tracestate for this span.
-    public private(set) var tracestate: Tracestate
+    /// The TraceState for this span.
+    public private(set) var traceState: TraceState = TraceState()
 
     /// The parent SpanId. If the  Span is a root Span, the SpanId
     /// returned will be nil.
-    public private(set) var parentSpanId: SpanId?
+    public private(set) var parentSpanId: SpanId? = SpanId.invalid
 
     /// The resource of this Span.
-    public private(set) var resource: Resource
+    public private(set) var resource: Resource = Resource()
 
     /// The instrumentation library specified when creating the tracer which produced this Span
-    public private(set) var instrumentationLibraryInfo: InstrumentationLibraryInfo
+    public private(set) var instrumentationLibraryInfo: InstrumentationLibraryInfo = InstrumentationLibraryInfo()
 
     /// The name of this Span.
     public private(set) var name: String
@@ -82,13 +82,30 @@ public struct SpanData: Equatable {
     public private(set) var endEpochNanos: Int
 
     /// True if the parent is on a different process, false if this is a root span.
-    public private(set) var hasRemoteParent: Bool
+    public private(set) var hasRemoteParent: Bool = false
 
+    /// True if the span has already been ended, false if not.
+    public private(set) var hasEnded: Bool = false
+
+    /// The total number of {@link SpanData.TimedEvent} events that were recorded on this span. This
+    /// number may be larger than the number of events that are attached to this span, if the total
+    /// number recorded was greater than the configured maximum value. See TraceConfig.maxNumberOfEvents
+    public private(set) var totalRecordedEvents: Int = 0
+
+    /// The total number of child spans that were created for this span.
+    public private(set) var numberOfChildren: Int = 0
+
+    /// The total number of  links that were recorded on this span. This number
+    /// may be larger than the number of links that are attached to this span, if the total number
+    /// recorded was greater than the configured maximum value. See TraceConfig.maxNumberOfLinks
+    public private(set) var totalRecordedLinks: Int = 0
+
+    
     public static func == (lhs: SpanData, rhs: SpanData) -> Bool {
         return lhs.traceId == rhs.traceId &&
             lhs.spanId == rhs.spanId &&
             lhs.traceFlags == rhs.traceFlags &&
-            lhs.tracestate == rhs.tracestate &&
+            lhs.traceState == rhs.traceState &&
             lhs.parentSpanId == rhs.parentSpanId &&
             lhs.name == rhs.name &&
             lhs.kind == rhs.kind &&
@@ -99,7 +116,11 @@ public struct SpanData: Equatable {
             lhs.resource == rhs.resource &&
             lhs.attributes == rhs.attributes &&
             lhs.timedEvents == rhs.timedEvents &&
-            lhs.links == rhs.links
+            lhs.links == rhs.links &&
+            lhs.hasEnded == rhs.hasEnded &&
+            lhs.totalRecordedEvents == rhs.totalRecordedEvents &&
+            lhs.numberOfChildren == rhs.numberOfChildren &&
+            lhs.totalRecordedLinks == rhs.totalRecordedLinks
     }
 
     public mutating func settingName(_ name: String) -> SpanData {
@@ -122,8 +143,8 @@ public struct SpanData: Equatable {
         return self
     }
 
-    public mutating func settingTracestate(_ tracestate: Tracestate) -> SpanData {
-        self.tracestate = tracestate
+    public mutating func settingTraceState(_ traceState: TraceState) -> SpanData {
+        self.traceState = traceState
         return self
     }
 
@@ -174,6 +195,27 @@ public struct SpanData: Equatable {
 
     public mutating func settingHasRemoteParent(_ hasRemoteParent: Bool) -> SpanData {
         self.hasRemoteParent = hasRemoteParent
+        return self
+    }
+    
+    public mutating func settingHasEnded(_ hasEnded: Bool) -> SpanData {
+        self.hasEnded = hasEnded
+        return self
+    }
+    
+    
+    public mutating func settingTotalRecordedEvents(_ totalRecordedEvents: Int) -> SpanData {
+        self.totalRecordedEvents = totalRecordedEvents
+        return self
+    }
+    
+    public mutating func settingNumberOfChildren(_ numberOfChildren: Int) -> SpanData {
+        self.numberOfChildren = numberOfChildren
+        return self
+    }
+    
+    public mutating func settingTotalRecordedLinks(_ totalRecordedLinks: Int) -> SpanData {
+        self.totalRecordedLinks = totalRecordedLinks
         return self
     }
 }

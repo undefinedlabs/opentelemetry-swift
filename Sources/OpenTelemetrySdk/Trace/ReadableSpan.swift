@@ -28,4 +28,10 @@ public protocol ReadableSpan: Span {
 
     /// This converts this instance into an immutable SpanData instance, for use in export.
     func toSpanData() -> SpanData
+    
+    ///Returns whether this Span has already been ended.
+    var hasEnded: Bool { get }
+
+    ///Returns the latecy of the {@code Span} in nanos. If still active then returns now() - start time.
+    var latencyNanos: Int { get }
 }

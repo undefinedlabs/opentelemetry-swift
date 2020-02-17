@@ -23,11 +23,11 @@ class SimpleSpansProcessorTests: XCTestCase {
     let spanName = "MySpanName"
     var readableSpan = ReadableSpanMock()
     var spanExporter = SpanExporterMock()
-    var tracerSdkFactory = TracerSdkFactory()
+    var tracerSdkFactory = TracerSdkRegistry()
     var tracer: Tracer!
-    //   let waitingSpanExporter = WaitingSpanExporter();
-    let sampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags().settingIsSampled(true), tracestate: Tracestate())
-    let notSampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), tracestate: Tracestate())
+    let waitingSpanExporter = WaitingSpanExporter();
+    let sampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags().settingIsSampled(true), traceState: TraceState())
+    let notSampledSpanContext = SpanContext.create(traceId: TraceId(), spanId: SpanId(), traceFlags: TraceFlags(), traceState: TraceState())
 
     var simpleSampledSpansProcessor: SimpleSpanProcessor!
 
@@ -73,11 +73,11 @@ class SimpleSpansProcessorTests: XCTestCase {
 
     func testTracerSdk_NotSampled_Span() {
         // TODO: Needs BatchSpansProcessor
-//        tracerSdk.addSpanProcessor(BatchSpansProcessor(waitingSpanExporter).setScheduleDelayMillis(maxScheduleDelayMillis))
-//        tracerSdk.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
-//        tracerSdk.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
-//        let span = tracerSdk.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.alwaysSample).startSpan()
-//        span.end()//
+//        tracer.addSpanProcessor(BatchSpanProcessor(spanExporter: waitingSpanExporter).setScheduleDelayMillis(maxScheduleDelayMillis))
+//        tracer.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
+//        tracer.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
+//        let span = tracer.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.alwaysSample).startSpan()
+//        span.end() //
 //        // Spans are recorded and exported in the same order as they are ended, we test that a non
 //        // sampled span is not exported by creating and ending a sampled span after a non sampled span
 //        // and checking that the first exported span is the sampled span (the non sampled did not get

@@ -17,22 +17,22 @@
 import Foundation
 import OpenTelemetryApi
 
-public class DistributedContextSdk: DistributedContext, Equatable {
+public class CorrelationContextSdk: CorrelationContext, Equatable {
     // The types of the EntryKey and Entry must match for each entry.
     var entries: [EntryKey: Entry?]
-    var parent: DistributedContextSdk?
+    var parent: CorrelationContextSdk?
 
-    /// Creates a new DistributedContextSdk with the given entries.
+    /// Creates a new CorrelationContextSdk with the given entries.
     /// - Parameters:
-    ///   - entries: the initial entries for this DistributedContextSdk
+    ///   - entries: the initial entries for this CorrelationContextSdk
     ///   - parent: parent providing a default set of entries
-    fileprivate init(entries: [EntryKey: Entry?], parent: DistributedContextSdk?) {
+    fileprivate init(entries: [EntryKey: Entry?], parent: CorrelationContextSdk?) {
         self.entries = entries
         self.parent = parent
     }
 
-    public static func contextBuilder() -> DistributedContextBuilder {
-        return DistributedContextSdkBuilder()
+    public static func contextBuilder() -> CorrelationContextBuilder {
+        return CorrelationContextSdkBuilder()
     }
 
     public func getEntries() -> [Entry] {
@@ -51,17 +51,17 @@ public class DistributedContextSdk: DistributedContext, Equatable {
         return entries[key]??.value ?? parent?.getEntryValue(key: key)
     }
 
-    public static func == (lhs: DistributedContextSdk, rhs: DistributedContextSdk) -> Bool {
+    public static func == (lhs: CorrelationContextSdk, rhs: CorrelationContextSdk) -> Bool {
         return lhs.parent == rhs.parent && lhs.entries == rhs.entries
     }
 }
 
-public class DistributedContextSdkBuilder: DistributedContextBuilder {
-    var parent: DistributedContext?
+public class CorrelationContextSdkBuilder: CorrelationContextBuilder {
+    var parent: CorrelationContext?
     var noImplicitParent: Bool = false
     var entries = [EntryKey: Entry?]()
 
-    @discardableResult public func setParent(_ parent: DistributedContext) -> Self {
+    @discardableResult public func setParent(_ parent: CorrelationContext) -> Self {
         self.parent = parent
         return self
     }
@@ -86,11 +86,11 @@ public class DistributedContextSdkBuilder: DistributedContextBuilder {
         return self
     }
 
-    public func build() -> DistributedContext {
+    public func build() -> CorrelationContext {
         var parentCopy = parent
         if parent == nil && !noImplicitParent {
-            parentCopy = OpenTelemetry.instance.distributedContextManager.getCurrentContext()
+            parentCopy = OpenTelemetry.instance.contextManager.getCurrentContext()
         }
-        return DistributedContextSdk(entries: entries, parent: parentCopy as? DistributedContextSdk)
+        return CorrelationContextSdk(entries: entries, parent: parentCopy as? CorrelationContextSdk)
     }
 }

@@ -182,7 +182,7 @@ class AdapterTests: XCTestCase {
         let span = SpanData(traceId: TraceId(fromHexString: AdapterTests.traceId),
                             spanId: SpanId(fromHexString: AdapterTests.spanId),
                             traceFlags: TraceFlags(),
-                            tracestate: Tracestate(),
+                            traceState: TraceState(),
                             resource: Resource(),
                             instrumentationLibraryInfo: InstrumentationLibraryInfo(),
                             name: "GET /api/endpoint",
@@ -211,7 +211,7 @@ class AdapterTests: XCTestCase {
         return SpanData(traceId: TraceId(fromHexString: AdapterTests.traceId),
                         spanId: SpanId(fromHexString: AdapterTests.spanId),
                         traceFlags: TraceFlags(),
-                        tracestate: Tracestate(),
+                        traceState: TraceState(),
                         parentSpanId: SpanId(fromHexString: AdapterTests.parentSpanId),
                         resource: Resource(),
                         instrumentationLibraryInfo: InstrumentationLibraryInfo(),
@@ -227,7 +227,7 @@ class AdapterTests: XCTestCase {
     }
 
     private func createSpanContext(traceId: String, spanId: String) -> SpanContext {
-        return SpanContext.create(traceId: TraceId(fromHexString: traceId), spanId: SpanId(fromHexString: spanId), traceFlags: TraceFlags(), tracestate: Tracestate())
+        return SpanContext.create(traceId: TraceId(fromHexString: traceId), spanId: SpanId(fromHexString: spanId), traceFlags: TraceFlags(), traceState: TraceState())
     }
 
     private func getTag(tagsList: TList<Tag>?, key: String) -> Tag? {

@@ -18,12 +18,12 @@ import Foundation
 import OpenTelemetryApi
 @testable import OpenTelemetrySdk
 
-struct DistributedContextTestUtil {
-    static func listToDistributedContext(entries: [Entry]) -> DistributedContextSdk {
-        let builder = DistributedContextSdk.contextBuilder()
+struct CorrelationContextTestUtil {
+    static func listToCorrelationContext(entries: [Entry]) -> CorrelationContextSdk {
+        let builder = CorrelationContextSdk.contextBuilder()
         for entry in entries {
             builder.put(key: entry.key, value: entry.value, metadata: entry.metadata)
         }
-        return builder.build() as! DistributedContextSdk
+        return builder.build() as! CorrelationContextSdk
     }
 }

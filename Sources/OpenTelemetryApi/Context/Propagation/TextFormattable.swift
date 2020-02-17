@@ -31,7 +31,7 @@ public protocol TextFormattable {
     /// - Parameters:
     ///   - carrier: Object to extract context from. Instance of this object will be passed to the getter.
     ///   - getter: Function that will return string value of a key with the specified name.
-    func extract<G: Getter>(carrier: [String: String], getter: G) -> SpanContext?
+    func extract<G: Getter>(carrier: [String: String], getter: G) -> SpanContext
 }
 
 public protocol Setter {

@@ -13,24 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import Foundation
 
-/// An immutable implementation of the DistributedContext that does not contain any entries.
-public class EmptyDistributedContext: DistributedContext {
-    /// Returns the single instance of the EmptyDistributedContext class.
-    public static var instance = EmptyDistributedContext()
+public class DefaultTracerRegistry: TracerRegistry {
+    public static let instance = DefaultTracerRegistry()
 
-    public static func contextBuilder() -> DistributedContextBuilder {
-        return EmptyDistributedContextBuilder()
-    }
-
-    private init() {}
-
-    public func getEntries() -> [Entry] {
-        return [Entry]()
-    }
-
-    public func getEntryValue(key: EntryKey) -> EntryValue? {
-        return nil
+    public override func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer {
+        return DefaultTracer.instance
     }
 }

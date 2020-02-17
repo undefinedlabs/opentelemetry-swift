@@ -42,6 +42,7 @@ public class SpanBuilderSdk: SpanBuilder {
     private var spanKind = SpanKind.internal
     private var attributes: AttributesWithCapacity
     private var links = [Link]()
+    private var totalNumberOfLinksAdded: Int = 0
     private var parentType: ParentType = .currentSpan
 
     private var startEpochNanos: Int = 0
@@ -93,11 +94,19 @@ public class SpanBuilderSdk: SpanBuilder {
     }
 
     public func addLink(_ link: Link) -> Self {
+        totalNumberOfLinksAdded += 1
+        if links.count >= traceConfig.maxNumberOfLinks {
+            return self
+        }
         links.append(link)
         return self
     }
 
     public func setAttribute(key: String, value: AttributeValue) -> Self {
+        if case let .string(string) = value,
+            string?.isEmpty ?? true {
+            return self
+        }
         attributes.updateValue(value: value, forKey: key)
         return self
     }
@@ -116,11 +125,11 @@ public class SpanBuilderSdk: SpanBuilder {
         var parentContext = getParentContext(parentType: parentType, explicitParent: parent, remoteParent: remoteParent)
         let traceId: TraceId
         let spanId = idsGenerator.generateSpanId()
-        var tracestate = Tracestate()
+        var traceState = TraceState()
 
         if parentContext?.isValid ?? false {
             traceId = parentContext!.traceId
-            tracestate = parentContext!.tracestate
+            traceState = parentContext!.traceState
         } else {
             traceId = idsGenerator.generateTraceId()
             parentContext = nil
@@ -135,7 +144,7 @@ public class SpanBuilderSdk: SpanBuilder {
         let spanContext = SpanContext.create(traceId: traceId,
                                              spanId: spanId,
                                              traceFlags: TraceFlags().settingIsSampled(samplingDecision.isSampled),
-                                             tracestate: tracestate)
+                                             traceState: traceState)
 
         if !samplingDecision.isSampled {
             return DefaultSpan(context: spanContext, kind: spanKind)
@@ -154,13 +163,9 @@ public class SpanBuilderSdk: SpanBuilder {
                                                   clock: SpanBuilderSdk.getClock(parent: SpanBuilderSdk.getParentSpan(parentType: parentType, explicitParent: parent), clock: clock),
                                                   resource: resource,
                                                   attributes: attributes,
-                                                  links: truncatedLinks,
-                                                  totalRecordedLinks: links.count,
+                                                  links: links,
+                                                  totalRecordedLinks: totalNumberOfLinksAdded,
                                                   startEpochNanos: startEpochNanos)
-    }
-
-    private var truncatedLinks: [Link] {
-        return links.suffix(Int(traceConfig.maxNumberOfLinks))
     }
 
     private static func getClock(parent: Span?, clock: Clock) -> Clock {

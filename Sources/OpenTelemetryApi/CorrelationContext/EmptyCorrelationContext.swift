@@ -13,17 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import Foundation
 
-/// A factory for creating named Tracers.
-open class TracerFactory {
-    public init() {}
-    /// Gets or creates a named tracer instance.
-    /// - Parameters:
-    ///   - instrumentationName: the name of the instrumentation library, not the name of the instrumented library
-    ///   - instrumentationVersion:  The version of the instrumentation library (e.g., "semver:1.0.0"). Optional
-    open func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer {
-        return DefaultTracer.instance
+/// An immutable implementation of the CorrelationContext that does not contain any entries.
+public class EmptyCorrelationContext: CorrelationContext {
+    /// Returns the single instance of the EmptyCorrelationContext class.
+    public static var instance = EmptyCorrelationContext()
+
+    public static func contextBuilder() -> CorrelationContextBuilder {
+        return EmptyCorrelationContextBuilder()
+    }
+
+    private init() {}
+
+    public func getEntries() -> [Entry] {
+        return [Entry]()
+    }
+
+    public func getEntryValue(key: EntryKey) -> EntryValue? {
+        return nil
     }
 }

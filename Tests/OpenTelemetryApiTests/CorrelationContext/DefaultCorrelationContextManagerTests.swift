@@ -20,9 +20,9 @@ import XCTest
 fileprivate let key = EntryKey(name: "key")!
 fileprivate let value = EntryValue(string: "value")!
 
-class TestDistributedContext: DistributedContext {
-    static func contextBuilder() -> DistributedContextBuilder {
-        EmptyDistributedContextBuilder()
+class TestCorrelationContext: CorrelationContext {
+    static func contextBuilder() -> CorrelationContextBuilder {
+        EmptyCorrelationContextBuilder()
     }
 
     func getEntries() -> [Entry] {
@@ -34,45 +34,45 @@ class TestDistributedContext: DistributedContext {
     }
 }
 
-class DefaultDistributedContextManagerTests: XCTestCase {
-    let defaultDistributedContextManager = DefaultDistributedContextManager.instance
-    let distContext = TestDistributedContext()
+class DefaultCorrelationContextManagerTests: XCTestCase {
+    let defaultCorrelationContextManager = DefaultCorrelationContextManager.instance
+    let distContext = TestCorrelationContext()
 
     func testBuilderMethod() {
-        let builder = defaultDistributedContextManager.contextBuilder()
+        let builder = defaultCorrelationContextManager.contextBuilder()
         XCTAssertEqual(builder.build().getEntries().count, 0)
     }
 
     func testGetCurrentContext_DefaultContext() {
-        XCTAssertTrue(defaultDistributedContextManager.getCurrentContext() === EmptyDistributedContext.instance)
+        XCTAssertTrue(defaultCorrelationContextManager.getCurrentContext() === EmptyCorrelationContext.instance)
     }
 
     func testGetCurrentContext_ContextSetToNil() {
-        let distContext = defaultDistributedContextManager.getCurrentContext()
+        let distContext = defaultCorrelationContextManager.getCurrentContext()
         XCTAssertNotNil(distContext)
         XCTAssertEqual(distContext.getEntries().count, 0)
     }
 
     func testWithContext() {
-        XCTAssertTrue(defaultDistributedContextManager.getCurrentContext() === EmptyDistributedContext.instance)
-        var wtm = defaultDistributedContextManager.withContext(distContext: distContext)
-        XCTAssertTrue(defaultDistributedContextManager.getCurrentContext() === distContext)
+        XCTAssertTrue(defaultCorrelationContextManager.getCurrentContext() === EmptyCorrelationContext.instance)
+        var wtm = defaultCorrelationContextManager.withContext(distContext: distContext)
+        XCTAssertTrue(defaultCorrelationContextManager.getCurrentContext() === distContext)
         wtm.close()
-        XCTAssertTrue(defaultDistributedContextManager.getCurrentContext() === EmptyDistributedContext.instance)
+        XCTAssertTrue(defaultCorrelationContextManager.getCurrentContext() === EmptyCorrelationContext.instance)
     }
 
     func testWithContextUsingWrap() {
         let expec = expectation(description: "testWithContextUsingWrap")
-        var wtm = defaultDistributedContextManager.withContext(distContext: distContext)
-        XCTAssertTrue(defaultDistributedContextManager.getCurrentContext() === distContext)
+        var wtm = defaultCorrelationContextManager.withContext(distContext: distContext)
+        XCTAssertTrue(defaultCorrelationContextManager.getCurrentContext() === distContext)
         let semaphore = DispatchSemaphore(value: 0)
         DispatchQueue.global().async {
             semaphore.wait()
-            XCTAssertTrue(self.defaultDistributedContextManager.getCurrentContext() === self.distContext)
+            XCTAssertTrue(self.defaultCorrelationContextManager.getCurrentContext() === self.distContext)
             expec.fulfill()
         }
         wtm.close()
-        XCTAssertTrue(defaultDistributedContextManager.getCurrentContext() === EmptyDistributedContext.instance)
+        XCTAssertTrue(defaultCorrelationContextManager.getCurrentContext() === EmptyCorrelationContext.instance)
         semaphore.signal()
         waitForExpectations(timeout: 30) { error in
             if let error = error {

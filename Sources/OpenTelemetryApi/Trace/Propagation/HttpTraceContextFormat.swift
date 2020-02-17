@@ -30,47 +30,47 @@ public struct HttpTraceContextFormat: TextFormattable {
     private static let optionsLength = "00".count
     private static let traceparentLengthV0 = "00-0af7651916cd43dd8448eb211c80319c-00f067aa0ba902b7-00".count
 
-    static let TRACEPARENT = "traceparent"
-    static let TRACESTATE = "tracestate"
+    static let traceparent = "traceparent"
+    static let traceState = "traceState"
 
     public init() {}
 
-    public var fields: Set<String> = [TRACESTATE, TRACEPARENT]
+    public var fields: Set<String> = [traceState, traceparent]
 
     public func inject<S>(spanContext: SpanContext, carrier: inout [String: String], setter: S) where S: Setter {
         var traceparent = "00-\(spanContext.traceId.hexString)-\(spanContext.spanId.hexString)"
 
         traceparent += spanContext.traceFlags.sampled ? "-01" : "-00"
 
-        setter.set(carrier: &carrier, key: HttpTraceContextFormat.TRACEPARENT, value: traceparent)
+        setter.set(carrier: &carrier, key: HttpTraceContextFormat.traceparent, value: traceparent)
 
-        let tracestateStr = TracestateUtils.getString(tracestate: spanContext.tracestate)
-        if !tracestateStr.isEmpty {
-            setter.set(carrier: &carrier, key: HttpTraceContextFormat.TRACESTATE, value: tracestateStr)
+        let traceStateStr = TraceStateUtils.getString(traceState: spanContext.traceState)
+        if !traceStateStr.isEmpty {
+            setter.set(carrier: &carrier, key: HttpTraceContextFormat.traceState, value: traceStateStr)
         }
     }
 
-    public func extract<G>(carrier: [String: String], getter: G) -> SpanContext? where G: Getter {
+    public func extract<G>(carrier: [String: String], getter: G) -> SpanContext where G: Getter {
         guard let traceparentCollection = getter.get(carrier: carrier,
-                                                     key: HttpTraceContextFormat.TRACEPARENT),
+                                                     key: HttpTraceContextFormat.traceparent),
             traceparentCollection.count <= 1 else {
             // multiple traceparent are not allowed
-            return nil
+                return SpanContext.invalid
         }
         let traceparent = traceparentCollection.first
 
         guard let extractedTraceParent = extractTraceparent(traceparent: traceparent) else {
-            return nil
+            return SpanContext.invalid
         }
 
-        let tracestateCollection = getter.get(carrier: carrier, key: HttpTraceContextFormat.TRACESTATE)
+        let traceStateCollection = getter.get(carrier: carrier, key: HttpTraceContextFormat.traceState)
 
-        let tracestate = extractTracestate(tracestatecollection: tracestateCollection)
+        let traceState = extractTraceState(traceStatecollection: traceStateCollection)
 
         return SpanContext.createFromRemoteParent(traceId: extractedTraceParent.traceId,
                                                   spanId: extractedTraceParent.spanId,
                                                   traceFlags: extractedTraceParent.traceOptions,
-                                                  tracestate: tracestate ?? Tracestate())
+                                                  traceState: traceState ?? TraceState())
     }
 
     private func extractTraceparent(traceparent: String?) -> (traceId: TraceId, spanId: SpanId, traceOptions: TraceFlags)? {
@@ -146,17 +146,17 @@ public struct HttpTraceContextFormat: TextFormattable {
         return (traceId, spanId, traceOptions)
     }
 
-    private func extractTracestate(tracestatecollection: [String]?) -> Tracestate? {
-        guard let tracestatecollection = tracestatecollection,
-            !tracestatecollection.isEmpty else { return nil }
+    private func extractTraceState(traceStatecollection: [String]?) -> TraceState? {
+        guard let traceStatecollection = traceStatecollection,
+            !traceStatecollection.isEmpty else { return nil }
 
-        var entries = [Tracestate.Entry]()
+        var entries = [TraceState.Entry]()
 
-        for tracestate in tracestatecollection.reversed() {
-            if !TracestateUtils.appendTracestate(tracestateString: tracestate, tracestate: &entries) {
+        for traceState in traceStatecollection.reversed() {
+            if !TraceStateUtils.appendTraceState(traceStateString: traceState, traceState: &entries) {
                 return nil
             }
         }
-        return Tracestate(entries: entries)
+        return TraceState(entries: entries)
     }
 }

@@ -15,8 +15,8 @@
  */
 import Foundation
 
-public class EmptyDistributedContextBuilder: DistributedContextBuilder {
-    public func setParent(_ parent: DistributedContext) -> Self {
+public class EmptyCorrelationContextBuilder: CorrelationContextBuilder {
+    public func setParent(_ parent: CorrelationContext) -> Self {
         return self
     }
 
@@ -32,8 +32,8 @@ public class EmptyDistributedContextBuilder: DistributedContextBuilder {
         return self
     }
 
-    public func build() -> DistributedContext {
-        return EmptyDistributedContext.instance
+    public func build() -> CorrelationContext {
+        return EmptyCorrelationContext.instance
     }
 
     public init() {}

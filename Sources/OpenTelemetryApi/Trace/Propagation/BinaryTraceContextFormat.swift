@@ -82,7 +82,7 @@ public struct BinaryTraceContextFormat: BinaryFormattable {
         return SpanContext.createFromRemoteParent(traceId: traceId,
                                                   spanId: spanId,
                                                   traceFlags: traceOptions,
-                                                  tracestate: Tracestate())
+                                                  traceState: TraceState())
     }
 
     public func toByteArray(spanContext: SpanContext) -> [UInt8] {

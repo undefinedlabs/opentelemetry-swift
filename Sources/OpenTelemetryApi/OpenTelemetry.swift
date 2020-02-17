@@ -16,31 +16,31 @@
 import Foundation
 
 /// This class provides a static global accessor for telemetry objects Tracer, Meter
-///  and DistributedContextManager.
+///  and CorrelationContextManager.
 ///  The telemetry objects are lazy-loaded singletons resolved via ServiceLoader mechanism.
 public struct OpenTelemetry {
     public static var instance = OpenTelemetry()
 
     /// Registered TracerFactory or default via DefaultTracerFactory.instance.
-    public private(set) var tracerFactory: TracerFactory
+    public private(set) var tracerRegistry: TracerRegistry
 
 //    /// Registered MeterFactory or default via DefaultMeterFactory.instance.
-//    public private(set)  var meter: MeterFactory
+//    public private(set)  var meter: MeterRegistry
 
-    /// registered manager or default via  DefaultDistributedContextManager.instance.
-    public private(set) var distributedContextManager: DistributedContextManager
+    /// registered manager or default via  DefaultCorrelationContextManager.instance.
+    public private(set) var contextManager: CorrelationContextManager
 
     private init() {
-        tracerFactory = DefaultTracerFactory.instance
+        tracerRegistry = DefaultTracerRegistry.instance
 //        meter = DefaultMeterFactory.instance;
-        distributedContextManager = DefaultDistributedContextManager.instance
+        contextManager = DefaultCorrelationContextManager.instance
     }
 
-    public static func registerTracerFactory(tracerFactory: TracerFactory) {
-        instance.tracerFactory = tracerFactory
+    public static func registerTracerRegistry(tracerRegistry: TracerRegistry) {
+        instance.tracerRegistry = tracerRegistry
     }
 
-    public static func registerDistributedContextManager(distributedContextManager: DistributedContextManager) {
-        instance.distributedContextManager = distributedContextManager
+    public static func registerCorrelationContextManager(correlationContextManager: CorrelationContextManager) {
+        instance.contextManager = correlationContextManager
     }
 }

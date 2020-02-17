@@ -18,9 +18,9 @@ import Foundation
 import OpenTelemetryApi
 @testable import OpenTelemetrySdk
 
-class DistributedContextMock: DistributedContext {
-    static func contextBuilder() -> DistributedContextBuilder {
-        return EmptyDistributedContextBuilder()
+class CorrelationContextMock: CorrelationContext {
+    static func contextBuilder() -> CorrelationContextBuilder {
+        return EmptyCorrelationContextBuilder()
     }
 
     func getEntries() -> [Entry] {

@@ -50,7 +50,7 @@ public class DefaultSpan: Span {
         return DefaultSpan(context: SpanContext.create(traceId: TraceId.random(),
                                                        spanId: SpanId.random(),
                                                        traceFlags: TraceFlags(),
-                                                       tracestate: Tracestate()),
+                                                       traceState: TraceState()),
                            kind: .client)
     }
 

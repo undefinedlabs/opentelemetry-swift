@@ -18,13 +18,13 @@ import Foundation
 
 /// A map from EntryKey to EntryValue and EntryMetadata that can be used to
 /// label anything that is associated with a specific operation.
-/// For example, DistributedContexts can be used to label stats, log messages, or
+/// For example, CorrelationContexts can be used to label stats, log messages, or
 /// debugging information.
-public protocol DistributedContext: AnyObject {
-    /// Builder for the DistributedContext class
-    static func contextBuilder() -> DistributedContextBuilder
+public protocol CorrelationContext: AnyObject {
+    /// Builder for the CorrelationContext class
+    static func contextBuilder() -> CorrelationContextBuilder
 
-    /// Returns an immutable collection of the entries in this DistributedContext. Order of
+    /// Returns an immutable collection of the entries in this CorrelationContext. Order of
     /// entries is not guaranteed.
     func getEntries() -> [Entry]
 

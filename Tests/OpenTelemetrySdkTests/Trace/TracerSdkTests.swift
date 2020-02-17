@@ -25,7 +25,7 @@ class TracerSdkTests: XCTestCase {
     var instrumentationLibraryInfo: InstrumentationLibraryInfo!
     var span = SpanMock()
     var spanProcessor = SpanProcessorMock()
-    var tracerSdkFactory = TracerSdkFactory()
+    var tracerSdkFactory = TracerSdkRegistry()
     var tracer: TracerSdk!
 
     override func setUp() {
@@ -59,7 +59,6 @@ class TracerSdkTests: XCTestCase {
     }
 
     func testGetCurrentSpan_WithSpan() {
-        // TODO: Review, only works in isolation
         XCTAssertNil(tracer.currentSpan)
         var ws = tracer.withSpan(span)
         XCTAssertTrue(tracer.currentSpan === span)

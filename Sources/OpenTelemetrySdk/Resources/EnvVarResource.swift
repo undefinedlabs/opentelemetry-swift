@@ -17,13 +17,13 @@ import Foundation
 
 /// Provides a framework for detection of resource information from the environment variable "OC_RESOURCE_LABELS".
 public struct EnvVarResource {
-    private static let ocResourceLabelsEnv = "OC_RESOURCE_LABELS"
+    private static let otelResourceLabelsEnv = "OTEL_RESOURCE_LABELS"
     private static let labelListSplitter = Character(",")
     private static let labelKeyValueSplitter = Character("=")
 
     ///  This resource information is loaded from the OC_RESOURCE_LABELS
     ///  environment variable.
-    public static let resource = Resource(labels: parseResourceLabels(rawEnvLabels: ProcessInfo.processInfo.environment["ocResourceLabelsEnv"]))
+    public static let resource = Resource(labels: parseResourceLabels(rawEnvLabels: ProcessInfo.processInfo.environment[otelResourceLabelsEnv]))
 
     private init() {}
 

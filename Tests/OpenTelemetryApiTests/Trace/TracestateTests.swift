@@ -17,89 +17,89 @@
 @testable import OpenTelemetryApi
 import XCTest
 
-final class TracestateTests: XCTestCase {
+final class TraceStateTests: XCTestCase {
     let first_key = "key_1"
     let second_key = "key_2"
     let first_value = "value_1"
     let second_value = "value_2"
 
-    var empty: Tracestate!
-    var firstTracestate: Tracestate!
-    var secondTracestate: Tracestate!
-    var multiValueTracestate: Tracestate!
+    var empty: TraceState!
+    var firstTraceState: TraceState!
+    var secondTraceState: TraceState!
+    var multiValueTraceState: TraceState!
 
     override func setUp() {
-        empty = Tracestate()
-        firstTracestate = empty.setting(key: first_key, value: first_value)
-        secondTracestate = empty.setting(key: second_key, value: second_value)
-        multiValueTracestate = empty.setting(key: first_key, value: first_value).setting(key: second_key, value: second_value)
+        empty = TraceState()
+        firstTraceState = empty.setting(key: first_key, value: first_value)
+        secondTraceState = empty.setting(key: second_key, value: second_value)
+        multiValueTraceState = empty.setting(key: first_key, value: first_value).setting(key: second_key, value: second_value)
     }
 
     func testGet() {
-        XCTAssertEqual(firstTracestate.get(key: first_key), first_value)
-        XCTAssertEqual(secondTracestate.get(key: second_key), second_value)
-        XCTAssertEqual(multiValueTracestate.get(key: first_key), first_value)
-        XCTAssertEqual(multiValueTracestate.get(key: second_key), second_value)
+        XCTAssertEqual(firstTraceState.get(key: first_key), first_value)
+        XCTAssertEqual(secondTraceState.get(key: second_key), second_value)
+        XCTAssertEqual(multiValueTraceState.get(key: first_key), first_value)
+        XCTAssertEqual(multiValueTraceState.get(key: second_key), second_value)
     }
 
     func testGetEntries() {
-        XCTAssertEqual(firstTracestate.entries, [Tracestate.Entry(key: first_key, value: first_value)!])
-        XCTAssertEqual(secondTracestate.entries, [Tracestate.Entry(key: second_key, value: second_value)!])
-        XCTAssertEqual(multiValueTracestate.entries, [Tracestate.Entry(key: first_key, value: first_value)!, Tracestate.Entry(key: second_key, value: second_value)!])
+        XCTAssertEqual(firstTraceState.entries, [TraceState.Entry(key: first_key, value: first_value)!])
+        XCTAssertEqual(secondTraceState.entries, [TraceState.Entry(key: second_key, value: second_value)!])
+        XCTAssertEqual(multiValueTraceState.entries, [TraceState.Entry(key: first_key, value: first_value)!, TraceState.Entry(key: second_key, value: second_value)!])
     }
 
     func testDisallowsEmptyKey() {
-        XCTAssertNil(Tracestate.Entry(key: "", value: first_value))
+        XCTAssertNil(TraceState.Entry(key: "", value: first_value))
     }
 
     func testInvalidFirstKeyCharacter() {
-        XCTAssertNil(Tracestate.Entry(key: "$_key", value: first_value))
+        XCTAssertNil(TraceState.Entry(key: "$_key", value: first_value))
     }
 
     func testFirstKeyCharacterDigitIsAllowed() {
-        let result = Tracestate().setting(key: "1_key", value: first_value)
+        let result = TraceState().setting(key: "1_key", value: first_value)
         XCTAssertEqual(result.get(key: "1_key"), first_value)
     }
 
     func testInvalidKeyCharacters() {
-        XCTAssertNil(Tracestate.Entry(key: "kEy_1", value: first_value))
+        XCTAssertNil(TraceState.Entry(key: "kEy_1", value: first_value))
     }
 
     func testValidAtSignVendorNamePrefix() {
-        let result = Tracestate().setting(key: "1@nr", value: first_value)
+        let result = TraceState().setting(key: "1@nr", value: first_value)
         XCTAssertEqual(result.get(key: "1@nr"), first_value)
     }
 
     func testMultipleAtSignNotAllowed() {
-        XCTAssertNil(Tracestate.Entry(key: "1@n@r@", value: first_value))
+        XCTAssertNil(TraceState.Entry(key: "1@n@r@", value: first_value))
     }
 
     func testInvalidKeySize() {
         let bigString = String(repeating: "a", count: 257)
-        XCTAssertNil(Tracestate.Entry(key: bigString, value: first_value))
+        XCTAssertNil(TraceState.Entry(key: bigString, value: first_value))
     }
 
     func testAllAllowedKeyCharacters() {
         let allowedChars = "abcdefghijklmnopqrstuvwxyz0123456789_-*/"
-        let result = Tracestate().setting(key: allowedChars, value: first_value)
+        let result = TraceState().setting(key: allowedChars, value: first_value)
         XCTAssertEqual(result.get(key: allowedChars), first_value)
     }
 
     func testValueCannotContainEqual() {
-        XCTAssertNil(Tracestate.Entry(key: first_key, value: "my_value=5"))
+        XCTAssertNil(TraceState.Entry(key: first_key, value: "my_value=5"))
     }
 
     func testValueCannotContainComma() {
-        XCTAssertNil(Tracestate.Entry(key: first_key, value: "first,second"))
+        XCTAssertNil(TraceState.Entry(key: first_key, value: "first,second"))
     }
 
     func testValueCannotContainTrailingSpaces() {
-        XCTAssertNil(Tracestate.Entry(key: first_key, value: "first "))
+        XCTAssertNil(TraceState.Entry(key: first_key, value: "first "))
     }
 
     func testInvalidValueSize() {
         let bigString = String(repeating: "a", count: 257)
-        XCTAssertNil(Tracestate.Entry(key: first_key, value: bigString))
+        XCTAssertNil(TraceState.Entry(key: first_key, value: bigString))
     }
 
     func testAllAllowedValueCharacters() {
@@ -111,54 +111,54 @@ final class TracestateTests: XCTestCase {
             }
             validCharacters.append(Character(UnicodeScalar(i)!))
         }
-        let result = Tracestate().setting(key: first_key, value: validCharacters)
+        let result = TraceState().setting(key: first_key, value: validCharacters)
         XCTAssertEqual(result.get(key: first_key), validCharacters)
     }
 
     func testAddEntry() {
-        XCTAssertEqual(firstTracestate.setting(key: second_key, value: second_value), multiValueTracestate)
+        XCTAssertEqual(firstTraceState.setting(key: second_key, value: second_value), multiValueTraceState)
     }
 
     func testUpdateEntry() {
-        XCTAssertEqual(firstTracestate.setting(key: first_key, value: second_value).get(key: first_key), second_value)
+        XCTAssertEqual(firstTraceState.setting(key: first_key, value: second_value).get(key: first_key), second_value)
 
-        let updatedMultiValueTracestate = multiValueTracestate.setting(key: first_key, value: second_value)
-        XCTAssertEqual(updatedMultiValueTracestate.get(key: first_key), second_value)
-        XCTAssertEqual(updatedMultiValueTracestate.get(key: second_key), second_value)
+        let updatedMultiValueTraceState = multiValueTraceState.setting(key: first_key, value: second_value)
+        XCTAssertEqual(updatedMultiValueTraceState.get(key: first_key), second_value)
+        XCTAssertEqual(updatedMultiValueTraceState.get(key: second_key), second_value)
     }
 
     func testAddAndUpdateEntry() {
-        XCTAssertEqual(firstTracestate.setting(key: first_key, value: second_value).setting(key: second_key, value: first_value).entries,
-                       [Tracestate.Entry(key: first_key, value: second_value)!, Tracestate.Entry(key: second_key, value: first_value)!])
+        XCTAssertEqual(firstTraceState.setting(key: first_key, value: second_value).setting(key: second_key, value: first_value).entries,
+                       [TraceState.Entry(key: first_key, value: second_value)!, TraceState.Entry(key: second_key, value: first_value)!])
     }
 
     func testAddSameKey() {
-        XCTAssertEqual(firstTracestate.setting(key: first_key, value: second_value).setting(key: first_key, value: first_value).entries,
-                       [Tracestate.Entry(key: first_key, value: first_value)!])
+        XCTAssertEqual(firstTraceState.setting(key: first_key, value: second_value).setting(key: first_key, value: first_value).entries,
+                       [TraceState.Entry(key: first_key, value: first_value)!])
     }
 
     func testRemove() {
-        XCTAssertEqual(multiValueTracestate.removing(key: second_key), firstTracestate)
+        XCTAssertEqual(multiValueTraceState.removing(key: second_key), firstTraceState)
     }
 
     func testAddAndRemoveEntry() {
-        XCTAssertEqual(Tracestate().setting(key: first_key, value: second_value).removing(key: first_key), Tracestate())
+        XCTAssertEqual(TraceState().setting(key: first_key, value: second_value).removing(key: first_key), TraceState())
     }
 
-    func testTracestate_EqualsAndHashCode() {
-        XCTAssertEqual(Tracestate(), Tracestate())
-        XCTAssertNotEqual(Tracestate(), firstTracestate)
-        XCTAssertNotEqual(Tracestate(), Tracestate().setting(key: first_key, value: first_value))
-        XCTAssertNotEqual(Tracestate(), secondTracestate)
-        XCTAssertNotEqual(Tracestate(), Tracestate().setting(key: second_key, value: second_value))
-        XCTAssertEqual(firstTracestate, Tracestate().setting(key: first_key, value: first_value))
-        XCTAssertNotEqual(firstTracestate, secondTracestate)
-        XCTAssertNotEqual(firstTracestate, Tracestate().setting(key: second_key, value: second_value))
-        XCTAssertEqual(secondTracestate, Tracestate().setting(key: second_key, value: second_value))
+    func testTraceState_EqualsAndHashCode() {
+        XCTAssertEqual(TraceState(), TraceState())
+        XCTAssertNotEqual(TraceState(), firstTraceState)
+        XCTAssertNotEqual(TraceState(), TraceState().setting(key: first_key, value: first_value))
+        XCTAssertNotEqual(TraceState(), secondTraceState)
+        XCTAssertNotEqual(TraceState(), TraceState().setting(key: second_key, value: second_value))
+        XCTAssertEqual(firstTraceState, TraceState().setting(key: first_key, value: first_value))
+        XCTAssertNotEqual(firstTraceState, secondTraceState)
+        XCTAssertNotEqual(firstTraceState, TraceState().setting(key: second_key, value: second_value))
+        XCTAssertEqual(secondTraceState, TraceState().setting(key: second_key, value: second_value))
     }
 
-    func testTracestate_ToString() {
-        XCTAssertEqual("\(Tracestate())", "Tracestate(entries: [])")
+    func testTraceState_ToString() {
+        XCTAssertEqual("\(TraceState())", "TraceState(entries: [])")
     }
 
     static var allTests = [
@@ -183,7 +183,7 @@ final class TracestateTests: XCTestCase {
         ("testAddSameKey", testAddSameKey),
         ("testRemove", testRemove),
         ("testAddAndRemoveEntry", testAddAndRemoveEntry),
-        ("testTracestate_EqualsAndHashCode", testTracestate_EqualsAndHashCode),
-        ("testTracestate_ToString", testTracestate_ToString),
+        ("testTraceState_EqualsAndHashCode", testTraceState_EqualsAndHashCode),
+        ("testTraceState_ToString", testTraceState_ToString),
     ]
 }

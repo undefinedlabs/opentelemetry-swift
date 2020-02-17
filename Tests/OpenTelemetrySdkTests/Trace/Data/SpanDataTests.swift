@@ -24,7 +24,7 @@ class SpanDataTests: XCTestCase {
 
     func testdefaultValues() {
         let spanData = createBasicSpan()
-        XCTAssertNil(spanData.parentSpanId)
+        XCTAssertFalse(spanData.parentSpanId?.isValid ?? true)
         XCTAssertEqual(spanData.attributes, [String: AttributeValue]())
         XCTAssertEqual(spanData.timedEvents, [SpanData.TimedEvent]())
         XCTAssertEqual(spanData.links.count, 0)
@@ -36,7 +36,7 @@ class SpanDataTests: XCTestCase {
         return SpanData(traceId: TraceId(),
                         spanId: SpanId(),
                         traceFlags: TraceFlags(),
-                        tracestate: Tracestate(),
+                        traceState: TraceState(),
                         resource: Resource(),
                         instrumentationLibraryInfo: InstrumentationLibraryInfo(),
                         name: "spanName",

@@ -17,7 +17,7 @@
 import Foundation
 import OpenTelemetryApi
 
-class LoggingTracerFactory: TracerFactory {
+class LoggingTracerRegistry: TracerRegistry {
     override func get(instrumentationName: String, instrumentationVersion: String?) -> Tracer {
         Logger.log("TracerFactory.get(\(instrumentationName), \(instrumentationVersion ?? ""))")
         var labels = [String: String]()

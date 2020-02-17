@@ -23,8 +23,8 @@ class SpanBuilderSdkTest: XCTestCase {
     let sampledSpanContext = SpanContext.create(traceId: TraceId(idHi: 1000, idLo: 1000),
                                                 spanId: SpanId(id: 3000),
                                                 traceFlags: TraceFlags().settingIsSampled(true),
-                                                tracestate: Tracestate())
-    var tracerSdkFactory = TracerSdkFactory()
+                                                traceState: TraceState())
+    var tracerSdkFactory = TracerSdkRegistry()
     var tracerSdk: Tracer!
 
     override func setUp() {
@@ -38,28 +38,29 @@ class SpanBuilderSdkTest: XCTestCase {
         spanBuilder.addLink(spanContext: DefaultSpan().context)
         spanBuilder.addLink(spanContext: DefaultSpan().context, attributes: [String: AttributeValue]())
         let span = spanBuilder.startSpan() as! RecordEventsReadableSpan
-        XCTAssertEqual(span.links.count, 3)
+        XCTAssertEqual(span.toSpanData().links.count, 3)
         span.end()
     }
 
     func testTruncateLink() {
-        // TODO: review this test and functionality, needs dropping containers
-//        let maxNumberOfLinks = 8
-//        let traceConfig = tracerSdkFactory.getActiveTraceConfig().settingMaxNumberOfLinks(maxNumberOfLinks)
-//        tracerSdkFactory.updateActiveTraceConfig(traceConfig)
-//        // Verify methods do not crash.
-//        let spanBuilder = tracerSdk.spanBuilder(spanName: spanName)
-//        for _ in 0 ..< 2 * maxNumberOfLinks {
-//            spanBuilder.addLink(spanContext:sampledSpanContext)
-//        }
-//        let span = spanBuilder.startSpan() as! RecordEventsReadableSpan
-//        XCTAssertEqual(span.getDroppedLinksCount(), 3)
-//        XCTAssertEqual(span.links.count, maxNumberOfLinks)
-//        for i in 0 ..< maxNumberOfLinks {
-//            XCTAssert(span.links[i] == SpanData.Link(context: sampledSpanContext))
-//        }
-//        span.end()
-//        tracerSdkFactory.updateActiveTraceConfig(TraceConfig())
+        let maxNumberOfLinks = 8
+        let traceConfig = tracerSdkFactory.getActiveTraceConfig().settingMaxNumberOfLinks(maxNumberOfLinks)
+        tracerSdkFactory.updateActiveTraceConfig(traceConfig)
+        // Verify methods do not crash.
+        let spanBuilder = tracerSdk.spanBuilder(spanName: spanName)
+        for _ in 0 ..< 2 * maxNumberOfLinks {
+            spanBuilder.addLink(spanContext: sampledSpanContext)
+        }
+        let span = spanBuilder.startSpan() as! RecordEventsReadableSpan
+        let spanData = span.toSpanData()
+        let links = spanData.links
+        XCTAssertEqual(links.count, maxNumberOfLinks)
+        for i in 0 ..< maxNumberOfLinks {
+            XCTAssert(span.links[i] == SpanData.Link(context: sampledSpanContext))
+            XCTAssertEqual(spanData.totalRecordedLinks, 2 * maxNumberOfLinks)
+        }
+        span.end()
+        tracerSdkFactory.updateActiveTraceConfig(TraceConfig())
     }
 
     func testSetAttribute() {
@@ -71,13 +72,24 @@ class SpanBuilderSdkTest: XCTestCase {
         spanBuilder.setAttribute(key: "stringAttribute", value: AttributeValue.string("attrvalue"))
 
         let span = spanBuilder.startSpan() as! RecordEventsReadableSpan
-        let attrs = span.attributes
+        let attrs = span.toSpanData().attributes
         XCTAssertEqual(attrs.count, 5)
         XCTAssertEqual(attrs["string"], AttributeValue.string("value"))
         XCTAssertEqual(attrs["long"], AttributeValue.int(12345))
         XCTAssertEqual(attrs["double"], AttributeValue.double(0.12345))
         XCTAssertEqual(attrs["boolean"], AttributeValue.bool(true))
         XCTAssertEqual(attrs["stringAttribute"], AttributeValue.string("attrvalue"))
+        span.end()
+    }
+    
+    func testSetAttribute_nilStringValue() {
+        let spanBuilder = tracerSdk.spanBuilder(spanName: spanName)
+        spanBuilder.setAttribute(key: "emptyString", value: "")
+        spanBuilder.setAttribute(key: "nilStringAttributeValue", value: AttributeValue.string(nil))
+        spanBuilder.setAttribute(key: "emptyStringAttributeValue", value: AttributeValue.string(""))
+
+        let span = spanBuilder.startSpan() as! RecordEventsReadableSpan
+        XCTAssertTrue(span.toSpanData().attributes.isEmpty)
         span.end()
     }
 
@@ -90,7 +102,7 @@ class SpanBuilderSdkTest: XCTestCase {
             spanBuilder.setAttribute(key: "key\(i)", value: i)
         }
         let span = spanBuilder.startSpan() as! RecordEventsReadableSpan
-        let attrs = span.attributes
+        let attrs = span.toSpanData().attributes
         XCTAssertEqual(attrs.count, maxNumberOfAttrs)
         for i in 0 ..< maxNumberOfAttrs {
             XCTAssertEqual(attrs["key\(i + maxNumberOfAttrs)"], AttributeValue.int(i + maxNumberOfAttrs))
@@ -160,7 +172,7 @@ class SpanBuilderSdkTest: XCTestCase {
                                                   attributes: [SpanBuilderSdkTest.samplerAttributeName: AttributeValue.string("none")])
             .startSpan() as! RecordEventsReadableSpan
         XCTAssertTrue(span.context.traceFlags.sampled)
-        XCTAssertTrue(span.attributes.keys.contains(SpanBuilderSdkTest.samplerAttributeName))
+        XCTAssertTrue(span.toSpanData().attributes.keys.contains(SpanBuilderSdkTest.samplerAttributeName))
         span.end()
     }
 

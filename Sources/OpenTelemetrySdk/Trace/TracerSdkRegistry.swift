@@ -18,11 +18,11 @@ import Foundation
 import OpenTelemetryApi
 
 /// This class is not intended to be used in application code and it is used only by OpenTelemetry.
-public class TracerSdkFactory: TracerFactory {
+public class TracerSdkRegistry: TracerRegistry {
     private var tracerRegistry = [InstrumentationLibraryInfo: TracerSdk]()
     private var sharedState: TracerSharedState
 
-    /// Returns a new TracerSdkFactory with default Clock, IdsGenerator and Resource.
+    /// Returns a new TracerSdkRegistry with default Clock, IdsGenerator and Resource.
     public convenience override init() {
         self.init(clock: MillisClock(), idsGenerator: RandomIdsGenerator(), resource: EnvVarResource.resource)
     }
