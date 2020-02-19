@@ -50,11 +50,9 @@ class TracerSdkTests: XCTestCase {
 
     func testGetCurrentSpan() {
         XCTAssertNil(tracer.currentSpan)
-        // Make sure context is detached even if test fails.
-        // TODO: Check context bahaviour
-//        let origContext = ContextUtils.withSpan(span)
-//        XCTAssertTrue(tracer.currentSpan === span)
-//        XCTAssertTrue(tracer.currentSpan is DefaultSpan)
+        var origContext = ContextUtils.withSpan(span)
+        defer { origContext.close() }
+        XCTAssertTrue(tracer.currentSpan === span)
     }
 
     func testGetCurrentSpan_WithSpan() {
