@@ -18,7 +18,7 @@ import OpenTelemetryApi
 import XCTest
 
 class SimpleSpansProcessorTests: XCTestCase {
-    let maxScheduleDelayMillis = 500
+    let maxScheduleDelayMillis = TimeInterval(0.5)
     let spanName = "MySpanName"
     var readableSpan = ReadableSpanMock()
     var spanExporter = SpanExporterMock()
@@ -71,20 +71,31 @@ class SimpleSpansProcessorTests: XCTestCase {
     }
 
     func testTracerSdk_NotSampled_Span() {
-        // TODO: Needs BatchSpansProcessor
-//        tracer.addSpanProcessor(BatchSpanProcessor(spanExporter: waitingSpanExporter).setScheduleDelayMillis(maxScheduleDelayMillis))
-//        tracer.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
-//        tracer.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.neverSample).startSpan().end()
-//        let span = tracer.spanBuilder(spanName: spanName).setSampler(sampler: Samplers.alwaysSample).startSpan()
-//        span.end() //
-//        // Spans are recorded and exported in the same order as they are ended, we test that a non
-//        // sampled span is not exported by creating and ending a sampled span after a non sampled span
-//        // and checking that the first exported span is the sampled span (the non sampled did not get
-//        // exported).
-//        let exported = waitingSpanExporter.waitForExport(1)
-//        // Need to check this because otherwise the variable span1 is unused, other option is to not
-//        // have a span1 variable.
-//        XCTAssertEqual(exported, (span as! ReadableSpan).toSpanData())
+        let waitingSpanExporter = WaitingSpanExporter()
+        tracerSdkFactory.addSpanProcessor(BatchSpanProcessor(spanExporter: waitingSpanExporter, scheduleDelay: maxScheduleDelayMillis))
+        TestUtils.startSpanWithSampler(tracerSdkFactory: tracerSdkFactory,
+                                       tracer: tracer,
+                                       spanName: spanName,
+                                       sampler: Samplers.alwaysOff)
+            .startSpan()
+            .end()
+        TestUtils.startSpanWithSampler(tracerSdkFactory: tracerSdkFactory,
+                                       tracer: tracer,
+                                       spanName: spanName,
+                                       sampler: Samplers.alwaysOff)
+            .startSpan()
+            .end()
+        
+        let span = tracer.spanBuilder(spanName: spanName).startSpan()
+        span.end() //
+        // Spans are recorded and exported in the same order as they are ended, we test that a non
+        // sampled span is not exported by creating and ending a sampled span after a non sampled span
+        // and checking that the first exported span is the sampled span (the non sampled did not get
+        // exported).
+        let exported = waitingSpanExporter.waitForExport(numberOfSpans: 1)
+        // Need to check this because otherwise the variable span1 is unused, other option is to not
+        // have a span1 variable.
+        XCTAssertEqual(exported, [(span as! ReadableSpan).toSpanData()])
     }
 
     func testTracerSdk_NotSampled_RecordingEventsSpan() {
