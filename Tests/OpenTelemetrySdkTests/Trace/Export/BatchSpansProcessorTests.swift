@@ -1,18 +1,17 @@
-/*
- * Copyright 2019, Undefined Labs
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2020, OpenTelemetry Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
 
 import OpenTelemetryApi
 @testable import OpenTelemetrySdk
@@ -146,38 +145,34 @@ class BatchSpansProcessorTests: XCTestCase {
         XCTAssertEqual(exported, spansToExport)
     }
 
+    func testExportNotSampledSpans() {
+        tracerSdkFactory.addSpanProcessor(BatchSpanProcessor(spanExporter: waitingSpanExporter, scheduleDelay: maxScheduleDelay))
 
-
-     func testExportNotSampledSpans() {
-       tracerSdkFactory.addSpanProcessor(BatchSpanProcessor(spanExporter: waitingSpanExporter, scheduleDelay: maxScheduleDelay))
-
-        createNotSampledEndedSpan(spanName: spanName1);
-        createNotSampledEndedSpan(spanName: spanName2);
-        let span2 = createSampledEndedSpan(spanName: spanName2);
-       // Spans are recorded and exported in the same order as they are ended, we test that a non
-       // sampled span is not exported by creating and ending a sampled span after a non sampled span
-       // and checking that the first exported span is the sampled span (the non sampled did not get
-       // exported).
-        let exported = waitingSpanExporter.waitForExport(numberOfSpans: 1);
-       // Need to check this because otherwise the variable span1 is unused, other option is to not
-       // have a span1 variable.
+        createNotSampledEndedSpan(spanName: spanName1)
+        createNotSampledEndedSpan(spanName: spanName2)
+        let span2 = createSampledEndedSpan(spanName: spanName2)
+        // Spans are recorded and exported in the same order as they are ended, we test that a non
+        // sampled span is not exported by creating and ending a sampled span after a non sampled span
+        // and checking that the first exported span is the sampled span (the non sampled did not get
+        // exported).
+        let exported = waitingSpanExporter.waitForExport(numberOfSpans: 1)
+        // Need to check this because otherwise the variable span1 is unused, other option is to not
+        // have a span1 variable.
         XCTAssertEqual(exported, [span2.toSpanData()])
-     }
+    }
 
+    func testShutdownFlushes() {
+        // Set the export delay to zero, for no timeout, in order to confirm the #flush() below works
+        tracerSdkFactory.addSpanProcessor(BatchSpanProcessor(spanExporter: waitingSpanExporter, scheduleDelay: 0))
 
-     func testShutdownFlushes() {
-       // Set the export delay to zero, for no timeout, in order to confirm the #flush() below works
-       tracerSdkFactory.addSpanProcessor(BatchSpanProcessor(spanExporter: waitingSpanExporter, scheduleDelay: 0))
+        let span2 = createSampledEndedSpan(spanName: spanName2)
 
-        let span2 = createSampledEndedSpan(spanName: spanName2);
+        // Force a shutdown, without this, the waitForExport() call below would block indefinitely.
+        tracerSdkFactory.shutdown()
 
-       // Force a shutdown, without this, the waitForExport() call below would block indefinitely.
-       tracerSdkFactory.shutdown();
-
-        let exported = waitingSpanExporter.waitForExport(numberOfSpans: 1);
+        let exported = waitingSpanExporter.waitForExport(numberOfSpans: 1)
         XCTAssertEqual(exported, [span2.toSpanData()])
-
-     }
+    }
 }
 
 class BlockingSpanExporter: SpanExporter {
