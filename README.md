@@ -32,13 +32,18 @@ or
 
 ## Current status
 
-Current code is an adaptation of the Java OpenTelemetry client (0.2.1), some Swift style still missing.
+Current code started as an adaptation of the Java OpenTelemetry client (0.2.0), some Swift style still missing in some areas.
 
-Currently most of Tracing and Correlation Context implemented, missing all Metrics and exporters. Also missing OpenTracing shims.
+Currently Tracing and Correlation Context API's are implemented. 
+
+Implemented also a Jaeger Exporter and a simple stdout exporter
+
+**Missing Metrics API**. Also missing OpenTracing shims and more exporters.
 
 ## Examples
 
 The package includes some example projects with basic functionality:
 
 - `Logging Tracer` -  Simple api implementation of a Tracer that logs every api call
-- `Simple Exporter` - Simple Stdout exporter for spans using sdk
+- `Simple Exporter` - Shows the Jaeger an Stdout exporters in action using a MultiSpanExporter
+
