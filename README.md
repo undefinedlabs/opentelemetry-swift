@@ -1,3 +1,7 @@
+**This repository is now obsolete. It was donated to Opentelemetry organization to be the seed of the official OpenTelemetry Swift Client and development continues under OpenTelemetry control:**
+
+**[https://github.com/open-telemetry/opentelemetry-swift](https://github.com/open-telemetry/opentelemetry-swift)**
+
 # opentelemetry-swift
 
 A swift [OpenTelemetry](https://opentelemetry.io/) client
